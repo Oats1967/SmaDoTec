@@ -19,8 +19,8 @@
 #include "BASE/Task/public/ThreadModul.h"
 #include "BASE/include/RemoteState.h"
 #include "remote/include/RemoteServiceInterface.h"
-#include "MbusTcpSlaveProtocol.hpp"
-#include "MbusDataTableImpl.h"
+#include "remote/ModbusKernel/include/MbusTcpSlaveProtocol.hpp"
+#include "include/MbusDataTableImpl.h"
 
 
 

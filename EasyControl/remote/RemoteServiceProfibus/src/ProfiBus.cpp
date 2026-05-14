@@ -18,7 +18,7 @@
 #include <cassert>
 #include "BASE/Task/public/Task.h"
 #include "Logger/include/Logger.h"
-#include "Profibus.h"
+#include "include/Profibus.h"
 
 
 namespace remote

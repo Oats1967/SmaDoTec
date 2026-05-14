@@ -28,8 +28,8 @@
 #pragma once
 
 // Package header
-#include "hmlib/include/hmtcpip.h"
-#include "MbusSlaveServer.hpp"
+#include "remote/ModBusKernel/hmlib/include/hmtcpip.h"
+#include "remote/ModBusKernel/include/MbusSlaveServer.hpp"
 
 
 /*****************************************************************************

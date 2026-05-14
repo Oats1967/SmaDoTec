@@ -21,7 +21,7 @@
 #include "BASE/types.h"
 #include "remote/include/RemoteInterface.h"
 #include "remote/RemoteHandler/include/RemoteHandler.h"
-#include "remote/ModbusKernel/include/MbusDataTableInterface.hpp"
+#include "remote/ModBusKernel/include/MbusDataTableInterface.hpp"
 
 
 class MbusDataTableImpl : public MbusDataTableInterface, public remote::CRemoteHandler

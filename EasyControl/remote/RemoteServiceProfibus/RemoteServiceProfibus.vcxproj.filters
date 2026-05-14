@@ -30,9 +30,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Profibus.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="include\RemoteServiceProfibus.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>

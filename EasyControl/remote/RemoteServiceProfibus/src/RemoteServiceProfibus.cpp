@@ -15,8 +15,8 @@
 /// @author        Detlef Hafer
 ///
 //------------------------------------------------------------------------------------
-#include "RemoteServiceProfibus.h"
-#include "Profibus.h"
+#include "include/RemoteServiceProfibus.h"
+#include "include/Profibus.h"
 
 static remote::CProfibus* g_pRemoteServerImpl = nullptr;
 

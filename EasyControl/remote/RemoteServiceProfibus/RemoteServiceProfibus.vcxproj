@@ -78,6 +78,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\DEVELOP\Cplusplus\SmaDoTec;C:\DEVELOP\Cplusplus\SmaDoTec\EasyControl;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -124,7 +125,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\DEVELOP\Cplusplus\EasyControl;C:\DEVELOP\Cplusplus\EasyControl\remote\RemoteHandler\include;C:\DEVELOP\Cplusplus\EasyControl\remote\RemoteServiceProfibus\include;C:\DEVELOP\Cplusplus\EasyControl\remote\RemoteServiceProfibus\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\DEVELOP\Cplusplus\SmaDoTec\EasyControl\remote\RemoteServiceProfibus;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -155,14 +156,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\BASE\BASE.vcxproj">
-      <Project>{ab592a6e-7b7f-4f77-9d9d-618f24d8c87d}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\RemoteHandler\RemoteHandler.vcxproj">
-      <Project>{43cf3dc6-9aff-49b8-ba3e-ac1089942d1c}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="src\ProfiBus.cpp" />
     <ClCompile Include="src\RemoteServiceProfibus.cpp" />
   </ItemGroup>
@@ -171,7 +164,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\RemoteServiceProfibus.h" />
-    <ClInclude Include="src\Profibus.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\BASE\BASE.vcxproj">
+      <Project>{ab592a6e-7b7f-4f77-9d9d-618f24d8c87d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\RemoteHandler\RemoteHandler.vcxproj">
+      <Project>{43cf3dc6-9aff-49b8-ba3e-ac1089942d1c}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

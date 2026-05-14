@@ -15,7 +15,7 @@
 /// @author        Detlef Hafer
 ///
 //------------------------------------------------------------------------------------
-#include "RemoteServiceModbusStandard.h"
+#include "remote/RemoteServiceModbusStandard/include/RemoteServiceModbusStandard.h"
 #include "RemoteModbusStandard.h"
 
 static CRemoteModbusStandard* g_pRemoteServerImpl = nullptr;

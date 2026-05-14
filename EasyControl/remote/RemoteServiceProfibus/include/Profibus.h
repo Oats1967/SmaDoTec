@@ -17,7 +17,7 @@
 //------------------------------------------------------------------------------------
 #pragma once
 
-#include "RemoteServiceImpl.h"
+#include "remote/RemoteHandler/include/RemoteServiceImpl.h"
 
 namespace remote
 {
