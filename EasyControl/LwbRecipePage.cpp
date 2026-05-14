@@ -419,7 +419,7 @@ void CLwbRecipePage::OnStnClickedDosiererScale()
 //***************************************************************************************
 void CLwbRecipePage::OnStnClickedDosiererName()
 {
-	CEditCtrl::CreateFromDlgItem(this, IDC_LWB_RECIPE_NAME);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LWB_RECIPE_NAME, FALSE);
 }
 //***************************************************************************************
 //***************************************************************************************

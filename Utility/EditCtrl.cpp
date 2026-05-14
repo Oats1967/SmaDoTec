@@ -27,10 +27,12 @@
 #define RANGE(a, b,c)			(min(max(a,b),c))
 #endif
 
+#define BUFFERSIZE(a) (sizeof(a)/sizeof(a[0]))
+
 // CEditCtrl
 #define VALIDPARENT(p) ((p) && (p)->GetSafeHwnd())
 
-CEditCtrl* CEditCtrl  :: m_pEdit = NULL;
+CEditCtrl* CEditCtrl::m_pEdit = NULL;
 
 TCHAR CEditCtrl::g_buffer[100];
 
@@ -39,6 +41,7 @@ IMPLEMENT_DYNAMIC(CEditCtrl, CEdit)
 
 BEGIN_MESSAGE_MAP(CEditCtrl, CEdit)
 	ON_WM_KILLFOCUS()
+	ON_MESSAGE(WM_NOTIFYEDITKEYBOARD, OnShowKeyboard)
 END_MESSAGE_MAP()
 
 
@@ -52,34 +55,31 @@ void CEditCtrl::ShowAlphaKeyboard()
 //**********************************************************************************************************************
 void CEditCtrl::ShowNumericKeyboard()
 {
-	if (m_pEdit)
-	{
-		CRect aRect;
-		m_pEdit->GetWindowRect(aRect);
+	CRect aRect;
+	GetWindowRect(aRect);
 
-		auto cx = GetSystemMetrics(SM_CXSCREEN);
-		auto cy = GetSystemMetrics(SM_CYSCREEN);
+	auto cx = GetSystemMetrics(SM_CXSCREEN);
+	auto cy = GetSystemMetrics(SM_CYSCREEN);
 
-		ITKBoardInterface::eLayout nLayout = TKB.TK_GetNumericLayout();
-		ITKBoardInterface::TKSize aTKSize;
-		TKB.TK_GetSize(nLayout, aTKSize);
+	ITKBoardInterface::eLayout nLayout = TKB.TK_GetNumericLayout();
+	ITKBoardInterface::TKSize aTKSize;
+	TKB.TK_GetSize(nLayout, aTKSize);
 
-		const int32_t left = aRect.left;
-		const int32_t top = aRect.top;
-		const int32_t right = aRect.right;
-		const int32_t bottom = aRect.bottom;
-		int32_t x = (right > cx - aTKSize.Width() - 10) ? left - aTKSize.Width() - 10 : right + 10;
-		int32_t y = (bottom > cy - aTKSize.Height() - 10) ? top - aTKSize.Height() - 10 : top;
+	const int32_t left = aRect.left;
+	const int32_t top = aRect.top;
+	const int32_t right = aRect.right;
+	const int32_t bottom = aRect.bottom;
+	int32_t x = (right > cx - aTKSize.Width() - 10) ? left - aTKSize.Width() - 10 : right + 10;
+	int32_t y = (bottom > cy - aTKSize.Height() - 10) ? top - aTKSize.Height() - 10 : top;
 
-		x = RANGE(x, 0, cx);
-		y = RANGE(y, 0, cy);
+	x = RANGE(x, 0, cx);
+	y = RANGE(y, 0, cy);
 
-		TKB.TK_ShowLayout(nLayout, ITKBoardInterface::TKPoint(x, y));
-	}
+	TKB.TK_ShowLayout(nLayout, ITKBoardInterface::TKPoint(x, y));
 }
 //**********************************************************************************************************************
 //**********************************************************************************************************************
-void CEditCtrl::Create(CWnd* pParent, int32_t id, const CRect& aRect, const CString& aText)
+void CEditCtrl::Create(CWnd* pParent, int32_t id, const CRect& aRect, const CString& aText, BOOL bNumericKeyboard)
 {
 	// ASSERT(m_pEdit == NULL);
 	if (m_pEdit)
@@ -92,23 +92,16 @@ void CEditCtrl::Create(CWnd* pParent, int32_t id, const CRect& aRect, const CStr
 	{
 		mfcmacros::SendMessage(pParent, WM_NOTIFYEDITBOX);
 		m_pEdit = new CEditCtrl(pParent, id);
-		m_pEdit->Create(aRect, aText);
+		m_pEdit->Create(aRect, aText, bNumericKeyboard);
 	}
 }
 //**********************************************************************************************************************
 //**********************************************************************************************************************
-void CEditCtrl::CreateFromDlgItem(CWnd* pParent, int32_t id)
+void CEditCtrl::CreateFromDlgItem(CWnd* pParent, int32_t id, BOOL bNumericKeyboard)
 {
-	// ASSERT(m_pEdit == NULL);
-	if (m_pEdit)
-	{
-		delete m_pEdit;
-		m_pEdit = NULL;
-	}
 	ASSERT(VALIDPARENT(pParent));
 	if (VALIDPARENT(pParent))
 	{
-		mfcmacros::SendMessage(pParent, WM_NOTIFYEDITBOX);
 		CDialog* pDlg = (CDialog*)pParent;
 		ASSERT(pDlg);
 		CWnd* pStatic = pDlg->GetDlgItem(id);
@@ -119,19 +112,36 @@ void CEditCtrl::CreateFromDlgItem(CWnd* pParent, int32_t id)
 		CString aText;
 		pStatic->GetWindowText(aText);
 
-		m_pEdit = new CEditCtrl(pParent, id);
-		m_pEdit->Create(aRect, aText);
+		Create(pParent, id, aRect, aText, bNumericKeyboard);
 	}
 }
 //**********************************************************************************************************************
 //**********************************************************************************************************************
-void CEditCtrl::Create(const CRect& aRect, const CString& aText)
+LRESULT CEditCtrl::OnShowKeyboard ( WPARAM bValue, LPARAM)
+{
+	BOOL bNumericKeyboard = BOOL(bValue);
+	if (bNumericKeyboard)
+	{
+		ShowNumericKeyboard();
+	}
+	else
+	{
+		ShowAlphaKeyboard();
+	}
+	return 0L;
+}
+//**********************************************************************************************************************
+//**********************************************************************************************************************
+void CEditCtrl::Create(const CRect& aRect, const CString& aText, BOOL bNumericKeyboard)
 {
 	CEdit::Create(WS_CHILD | WS_BORDER | ES_AUTOHSCROLL, aRect, m_pParent, 1);
 	SetWindowText(aText);
+	_tcscpy_s(g_buffer, BUFFERSIZE(g_buffer) - 1, LPCTSTR(aText));
+	g_buffer[BUFFERSIZE(g_buffer) - 1] = 0;
 	SetSel(0, -1);
 	ShowWindow(TRUE);
 	SetFocus();
+	PostMessage(WM_NOTIFYEDITKEYBOARD, WPARAM(bNumericKeyboard));
 }
 //**********************************************************************************************************************
 //**********************************************************************************************************************
@@ -161,7 +171,6 @@ uint64_t	CEditCtrl::GetUint64(void)
 CEditCtrl::~CEditCtrl()
 {
 	m_pEdit = NULL;
-	g_buffer[0] = 0;
 }
 //**********************************************************************************************************************
 //**********************************************************************************************************************
@@ -196,14 +205,18 @@ BOOL CEditCtrl::PreTranslateMessage(MSG* pMsg)
 	{
 		if ( pMsg->wParam == VK_RETURN || pMsg->wParam == VK_ESCAPE)
 		{
+
 			if ( pMsg->wParam == VK_RETURN )
 			{
 				ASSERT(m_bValidValue == FALSE);
 				CString szBuff;
 				GetWindowText(szBuff);
-				_tcscpy_s(g_buffer, sizeof(g_buffer) - 1, LPCTSTR(szBuff));
-				g_buffer[sizeof(g_buffer) - 1] = 0;
-				m_bValidValue = TRUE;
+				m_bValidValue = (! szBuff.IsEmpty());
+				if (m_bValidValue)
+				{
+					_tcscpy_s(g_buffer, BUFFERSIZE(g_buffer) - 1, LPCTSTR(szBuff));
+					g_buffer[BUFFERSIZE(g_buffer) - 1] = 0;
+				}
 			}
             ShowWindow(SW_HIDE);
 			return TRUE;

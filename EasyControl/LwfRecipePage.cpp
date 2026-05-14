@@ -430,7 +430,7 @@ void CLwfRecipePage::OnBnClickedDosiererTotalizerReset()
 //***************************************************************************************
 void CLwfRecipePage::OnStnClickedDosiererName()
 {
-	CEditCtrl::CreateFromDlgItem(this, IDC_LWF_RECIPE_NAME);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LWF_RECIPE_NAME, FALSE);
 }
 //***************************************************************************************
 //***************************************************************************************

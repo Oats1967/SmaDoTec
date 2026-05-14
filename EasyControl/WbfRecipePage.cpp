@@ -286,7 +286,7 @@ void CWbfRecipePage::OnBnClickedWbfTotalizerReset()
 //******************************************************************************************************
 void CWbfRecipePage::OnStnClickedWbfRecipeName()
 {
-	CEditCtrl::CreateFromDlgItem(this, IDC_WBF_RECIPE_NAME);
+	CEditCtrl::CreateFromDlgItem(this, IDC_WBF_RECIPE_NAME, FALSE);
 }
 //******************************************************************************************************
 //******************************************************************************************************

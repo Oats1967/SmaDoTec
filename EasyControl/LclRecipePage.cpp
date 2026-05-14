@@ -157,7 +157,7 @@ BOOL CLclRecipePage::OnSetActive()
 //*****************************************************************************************************
 void CLclRecipePage::OnBnClickedLclName()
 {
-	CEditCtrl::CreateFromDlgItem(this, IDC_LCL_RECIPE_NAME);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LCL_RECIPE_NAME, FALSE);
 }
 //*****************************************************************************************************
 //*****************************************************************************************************

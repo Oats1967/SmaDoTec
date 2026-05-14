@@ -74,9 +74,10 @@
 
 
 #define WM_NOTIFYEDIT			                (WM_EASYCONTROL + 55)	// Message to incicate the path changed
-#define WM_LICENCECHECK			                (WM_EASYCONTROL + 56)	// Message to incicate the path changed
-#define MYWM_POSTINIT                           (WM_EASYCONTROL + 57)	// Message to incicate the path changed
-#define WM_DESTROYSCALEBOX                      (WM_EASYCONTROL + 58) 
+#define WM_NOTIFYEDITKEYBOARD			        (WM_EASYCONTROL + 56)	// Message to incicate the path changed
+#define WM_LICENCECHECK			                (WM_EASYCONTROL + 57)	// Message to incicate the path changed
+#define MYWM_POSTINIT                           (WM_EASYCONTROL + 58)	// Message to incicate the path changed
+#define WM_DESTROYSCALEBOX                      (WM_EASYCONTROL + 59) 
 #define WM_DOSESERVERMESSAGE                    (WM_EASYCONTROL + 60)
 
 

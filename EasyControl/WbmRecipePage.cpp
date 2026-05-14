@@ -225,13 +225,13 @@ void CWbmRecipePage::OnBnClickedWbfRecipeDoseTotalizerReset()
 //******************************************************************************************************
 void CWbmRecipePage::OnStnClickedWbfRecipeName()
 {
-	CEditCtrl::CreateFromDlgItem(this, IDC_WBM_RECIPE_NAME);
+	CEditCtrl::CreateFromDlgItem(this, IDC_WBM_RECIPE_NAME, FALSE);
 }
 //******************************************************************************************************
 //******************************************************************************************************
 void CWbmRecipePage::OnStnClickedWbfRecipeQmnummer()
 {
-	CEditCtrl::CreateFromDlgItem(this, IDC_WBM_RECIPE_QMNUMMER);
+	CEditCtrl::CreateFromDlgItem(this, IDC_WBM_RECIPE_QMNUMMER, FALSE);
 }
 //******************************************************************************************************
 //******************************************************************************************************

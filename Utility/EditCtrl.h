@@ -59,8 +59,14 @@ protected:
 	//------------------------------------------------------------------------------------
 	BOOL PreTranslateMessage(MSG* pMsg) override;
 
+	void			ShowNumericKeyboard();
+	void			ShowAlphaKeyboard();
+
+	LRESULT OnShowKeyboard ( WPARAM, LPARAM);
+
+
 public:
-	void Create(const CRect& aRect, const CString& aText);
+	void Create(const CRect& aRect, const CString& aText, BOOL bNumericKeyboard);
 	BOOL IsValidValue() const
 	{	return m_bValidValue;	}
 
@@ -131,11 +137,9 @@ public:
 	static uint64_t		GetUint64(void);
 	static BOOL			GetUint64Modified(uint64_t& rValue);
 
-	static void			ShowNumericKeyboard();
-	static void			ShowAlphaKeyboard();
 
-	static void Create(CWnd* pParent, int32_t id, const CRect& aRect, const CString& aText);
-	static void CreateFromDlgItem(CWnd* pParent, int32_t id);
+	static void Create(CWnd* pParent, int32_t id, const CRect& aRect, const CString& aText, BOOL bNumericKeyBoard = TRUE);
+	static void CreateFromDlgItem(CWnd* pParent, int32_t id, BOOL bNumericKeyBoard = TRUE);
 
 
 	static void Destroy();

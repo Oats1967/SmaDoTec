@@ -722,13 +722,13 @@ void CRecipeView::Dump(CDumpContext& dc) const
 //************************************************************************************
 void CRecipeView::OnStnClickedRecipeLineName()
 {
-	CEditCtrl::CreateFromDlgItem(this, IDC_RECIPE_LINE_NAME);
+	CEditCtrl::CreateFromDlgItem(this, IDC_RECIPE_LINE_NAME, FALSE);
 }
 //************************************************************************************
 //************************************************************************************
 void CRecipeView::OnStnClickedRecipeLineQMNumber()
 {
-	CEditCtrl::CreateFromDlgItem(this, IDC_RECIPE_LINE_QMNUMMER);
+	CEditCtrl::CreateFromDlgItem(this, IDC_RECIPE_LINE_QMNUMMER, FALSE);
 }
 //************************************************************************************
 //************************************************************************************

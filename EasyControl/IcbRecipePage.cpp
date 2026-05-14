@@ -268,7 +268,7 @@ void CIcbRecipePage::OnBnClickedDosiererTotalizerReset()
 //***************************************************************************************
 void CIcbRecipePage::OnStnClickedDosiererName()
 {
-	CEditCtrl::CreateFromDlgItem(this, IDC_ICB_RECIPE_NAME);
+	CEditCtrl::CreateFromDlgItem(this, IDC_ICB_RECIPE_NAME, FALSE);
 }
 //***************************************************************************************
 //***************************************************************************************

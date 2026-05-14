@@ -201,7 +201,7 @@ void CIfsRecipePage::OnStnClickedIfsSetting()
 //*****************************************************************************************************
 void CIfsRecipePage::OnStnClickedIfsName()
 {
-	CEditCtrl::CreateFromDlgItem(this, IDC_IFS_RECIPE_NAME);
+	CEditCtrl::CreateFromDlgItem(this, IDC_IFS_RECIPE_NAME, FALSE);
 }
 //*****************************************************************************************************
 //*****************************************************************************************************

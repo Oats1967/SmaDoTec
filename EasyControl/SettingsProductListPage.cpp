@@ -332,7 +332,7 @@ BOOL CSettingsProductListPage::OnSetActive()
 //*********************************************************************************************************
 void  CSettingsProductListPage::OnStnClickedProductName()
 {
-	CEditCtrl::CreateFromDlgItem(this, IDC_SETTINGS_PRODUCTLIST_NAME);
+	CEditCtrl::CreateFromDlgItem(this, IDC_SETTINGS_PRODUCTLIST_NAME, FALSE);
 }
 //*********************************************************************************************************
 //*********************************************************************************************************

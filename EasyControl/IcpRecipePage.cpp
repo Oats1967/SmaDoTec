@@ -238,7 +238,7 @@ void CIcpRecipePage::OnBnClickedIcpTotalizerReset()
 //****************************************************************************************
 void CIcpRecipePage::OnStnClickedIcpName()
 {
-	CEditCtrl::CreateFromDlgItem(this, IDC_ICP_RECIPE_NAME);
+	CEditCtrl::CreateFromDlgItem(this, IDC_ICP_RECIPE_NAME, FALSE);
 }
 //****************************************************************************************
 //****************************************************************************************

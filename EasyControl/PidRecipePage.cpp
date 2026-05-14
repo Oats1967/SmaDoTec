@@ -287,7 +287,7 @@ void CPidRecipePage::OnBnClickedPidTotalizerReset()
 //*****************************************************************************************************
 void CPidRecipePage::OnStnClickedPidName()
 {
-	CEditCtrl::CreateFromDlgItem(this, IDC_PID_RECIPE_NAME);
+	CEditCtrl::CreateFromDlgItem(this, IDC_PID_RECIPE_NAME, FALSE);
 }
 //*****************************************************************************************************
 //*****************************************************************************************************

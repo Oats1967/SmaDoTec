@@ -364,7 +364,7 @@ void CVolRecipePage::OnBnClickedRefillRelease()
 //*************************************************************************************
 void CVolRecipePage::OnBnClickedVolName()
 {
-	CEditCtrl::CreateFromDlgItem(this, IDC_VOL_RECIPE_NAME);
+	CEditCtrl::CreateFromDlgItem(this, IDC_VOL_RECIPE_NAME, FALSE);
 }
 //*****************************************************************************************************
 //*****************************************************************************************************

@@ -337,7 +337,7 @@ BOOL CIflRecipePage::OnSetActive()
 //*****************************************************************************************************
 void CIflRecipePage::OnStnClickedIflName()
 {
-	CEditCtrl::CreateFromDlgItem(this, IDC_IFL_RECIPE_NAME);
+	CEditCtrl::CreateFromDlgItem(this, IDC_IFL_RECIPE_NAME, FALSE);
 }
 //*****************************************************************************************************
 //*****************************************************************************************************
