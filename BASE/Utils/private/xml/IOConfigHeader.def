@@ -1,0 +1,186 @@
+        "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\
+        LineBlock\n\
+        +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\
+        Digital input DI\n\
+        \t\tNotUsed : digital input not used\n\
+        \t\tStart : start/stop line\n\
+        \t\tShutDown : shut down line\n\
+        \t\tExtSetpoint : Use analog input for external setpoint\n\
+        \t\tInvExtSetpoint : Invert external setpoint\n\
+        \t\tSetpointRampUp : Ramp setpoint up\n\
+        \t\tSetpointRampDown : Ramp setpoint down\n\
+        \t\tMF : digital input signal main feeder release\n\
+        \t\tSF1 : digital input signal side feeder 1 release\n\
+        \t\tSF2 : digital input signal side feeder 2 release\n\
+        \t\tCustomerAlarm : digital input CustomerAlarm\n\
+        \t\tExtAlarm : External alarm\n\
+        \t\tUPSAlarm : UPS alarm\n\
+        \t\tAlarmQuit1 : Alarm quit , (flash light) \n\
+        \t\tAlarmQuit03 : Alarm quit line\n\
+        \t\tWindowsShutDown : Windows shut down\n\
+        \t\tOperateAuto : Automatic operation mode\n\
+        \t\tOperateManual : Manual operation mode\n\
+        -------------------------------------------------------------------\n\
+        Digital output DO\n\
+        \t\tNotUsed : digital output not used\n\
+        \t\tAlarm0 : alarm 0 output\n\
+        \t\tAlarm1 : alarm 1 output\n\
+        \t\tAlarm2 : alarm 2 output\n\
+        \t\tAlarm3 : alarm 3 output\n\
+        \t\tTotalizerPulse   : set pulse every step in kg\n\
+        \t\tOperateAuto      : automatic operate mode\n\
+        \t\tOperateService   : service operate mode\n\
+        -------------------------------------------------------------------\n\
+        Analog input AI\n\
+        \t\tNotUsed : analog input not used\n\
+        \t\tSetpoint : analog setpoint\n\
+        -------------------------------------------------------------------\n\
+        Analog output AI\n\
+        \t\tNotUsed : analog output not used\n\
+        \t\tMassflow : analog massflow\n\
+        +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\
+        Dosing units\n\
+        +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\
+        Digital input DI\n\
+        \t\tNotUsed : digital input not used\n\
+        \t\tStart   : start feeder\n\
+        \t\tGravVol : set volumetric mode ( HIGH ) or gravimetric mode ( LOW )\n\
+        \t\tRelease : release ( HIGH )\n\
+        \t\tRefill  : refill start ( HIGH ) / refill stop ( LOW )\n\
+        \t\tRefillStop : stop refill action ( HIGH )\n\
+        \t\tRefillRequest : request refill ( HIGH )\n\
+        \t\tRefillRelease : enable ( HIGH )  / disable ( LOW ) refill\n\
+        \t\tRefillMinSensor : enable ( HIGH )  / disable ( LOW ) refill\n\
+        \t\tRefillMaxSensor : enable ( HIGH )  / disable ( LOW ) refill\n\
+        \t\tRefillExtAlarm : external refill alarm ( HIGH )\n\
+        \t\tEmptyFeederStart : start empty feeder ( HIGH )\n\
+        \t\tEmptyFeederStop : stop empty feeder ( HIGH )\n\
+        \t\tExtAlarm : external alarm ( HIGH )\n\
+        \t\tRunControl : RunControl ( HIGH )\n\
+        \t\tIfsSwitchHigh : IfsSwitchHigh overfill reached\n\
+        \t\tIfsSwitchLow  : IfsSwitchLow underfill reached\n\
+        \t\tIfsSwitchMax  : IfsSwitchMax upper turning point reached\n\
+        \t\tIfsSwitchMin  : IfsSwitchMin lower turning point reached\n\
+        \t\tDriveError    : Drive error on frequency converter\n\
+        \t\tDriveErrorPaddle : Drive error on frequency converter paddle\n\
+        \t\tDriveErrorRefillFeeder : Drive error on frequency converter refill feeder\n\
+        \t\tMotorLoad     : Error motor load\n\
+        -------------------------------------------------------------------\n\
+        Digital output DO\n\
+        \t\tNotUsed : digital output not used\n\
+        \t\tOperate : feeder is running ( HIGH )\n\
+        \t\tAlarm : alarm activated ( HIGH )\n\
+        \t\tRefillRequest : refill requested by control unit ( HIGH )\n\
+        \t\tDriveRelease : drive release  ( HIGH )\n\
+        \t\tEmptyFeeder : empty feeder ( HIGH )\n\
+        \t\tStart : start feeder ( HIGH )\n\
+        \t\tBeltLoadLimit : belt load limt reached ( HIGH )\n\
+        \t\tBatchFinished : batch is finished (HIGH)\n\
+        -------------------------------------------------------------------\n\
+        Analog input AI\n\
+        \t\tNotUsed : analog input not used\n\
+        \t\tEncoder : encoder input ( REAL )\n\
+        \t\tMassflow : massflow kg/h ( REAL )\n\
+        -------------------------------------------------------------------\n\
+        Analog output AO\n\
+        \t\tNotUsed : analog output not used\n\
+        \t\tDriveCommand : drive command ( REAL )\n\
+        \t\tAgitator : agitator drive command ( REAL )\n\
+        \t\tMassflow : massflow kg/h ( REAL )\n\
+        \t\tRefillFeeder : refill feeder screw speed ( REAL )\n\
+        -------------------------------------------------------------------\n\
+        LWS/LWP/LWV\n\
+        \t\t<DI0>Start</DI0>\n\
+        \t\t<DI1>GravVol</DI1>\n\
+        \t\t<DI2>RefillStop</DI2>\n\
+        \t\t<DI3>Release</DI3>\n\
+        :\n\
+        \t\t<DO0>Operate</DO0>\n\
+        \t\t<DO1>Alarm</DO1>\n\
+        \t\t<DO2>RefillRequest</DO2>\n\
+        \t\t<DO3>DriveRelease</DO3>\n\
+        :\n\
+        \t\t<AI0>NotUsed</AI0>\n\
+        :\n\
+        \t\t<AO0>DriveCommand</AO0>\n\
+        \t\t<AO1>Agitator</AO1>\n\
+        -------------------------------------------------------------------\n\
+        ICP\n\
+        \t\t<DI0>Start</DI0>\n\
+        \t\t<DI1>RefillRequest</DI1>\n\
+        \t\t<DI2>ExtAlarm</DI2>\n\
+        \t\t<DI3>Release</DI3>\n\
+        :\n\
+        \t\t<DO0>Operate</DO0>\n\
+        \t\t<DO1>Alarm</DO1>\n\
+        \t\t<DO2>RefillRequest</DO2>\n\
+        \t\t<DO3>Start</DO3>\n\
+        :\n\
+        \t\t<AI0>Massflow</AI0>\n\
+        :\n\
+        \t\t<AO0>DriveCommand</AO0>\n\
+        \t\t<AO1>NotUsed</AO1>\n\
+        ------------------------------------------------------------------ - \n\
+        PID\n\
+        \t\t<DI0>Start</DI0>\n\
+        \t\t<DI1>GravVol</DI1>\n\
+        \t\t<DI2>NotUsed</DI2>\n\
+        \t\t<DI3>Release</DI3>\n\
+        :\n\
+        \t\t<DO0>Operate</DO0>\n\
+        \t\t<DO1>Alarm</DO1>\n\
+        \t\t<DO2>NotUsed</DO2>\n\
+        \t\t<DO3>Release</DO3>\n\
+        :\n\
+        \t\t<AI0>Massflow</AI0>\n\
+        :\n\
+        \t\t<AO0>DriveCommand</AO0>\n\
+        \t\t<AO1>NotUsed</AO1>\n\
+        ------------------------------------------------------------------ - \n\
+        WBF\n\
+        \t\t<DI0>Start</DI0>\n\
+        \t\t<DI1>GravVol</DI1>\n\
+        \t\t<DI2>ExtAlarm</DI2>\n\
+        \t\t<DI3>Release</DI3>\n\
+        :\n\
+        \t\t<DO0>Operate</DO0>\n\
+        \t\t<DO1>Alarm</DO1>\n\
+        \t\t<DO2>BeltLoadLimit</DO2>\n\
+        \t\t<DO3>Release</DO3>\n\
+        :\n\
+        \t\t<AI0>Encoder</AI0>\n\
+        :\n\
+        \t\t<AO0>DriveCommand</AO0>\n\
+        \t\t<AO1>NotUsed</AO1>\n\
+        ------------------------------------------------------------------ - \n\
+        WBM\n\
+        \t\t<DI0>Start</DI0>\n\
+        \t\t<DI1>NotUsed</DI1>\n\
+        \t\t<DI2>ExtAlarm</DI2>\n\
+        \t\t<DI3>Release</DI3>\n\
+        :\n\
+        \t\t<DO0>Operate</DO0>\n\
+        \t\t<DO1>Alarm</DO1>\n\
+        \t\t<DO2>BeltLoadLimit</DO2>\n\
+        \t\t<DO3>Release</DO3>\n\
+        :\n\
+        \t\t<AI0>Encoder</AI0>\n\
+        :\n\
+        \t\t<AO0>NotUsed</AO0>\n\
+        \t\t<AO1>NotUsed</AO1>\n\
+        ------------------------------------------------------------------ - \n\
+        VOL\n\
+        \t\t<DI0>Start</DI0>\n\
+        \t\t<DI1>ExtAlarm</DI1>\n\
+        \t\t<DI2>RefillStop</DI2>\n\
+        \t\t<DI3>Release</DI3>\n\
+        :\n\
+        \t\t<DO0>Operate</DO0>\n\
+        \t\t<DO1>Alarm</DO1>\n\
+        \t\t<DO2>RefillRequest</DO2>\n\
+        \t\t<DO3>Release</DO3>\n\
+        :\n\
+        \t\t<AI0>Encoder</AI0>\n\
+        :\n\
+        \t\t<AO0>DriveCommand</AO0>\n\
+        \t\t<AO1>NotUsed</AO1>\n"

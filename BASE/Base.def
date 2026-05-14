@@ -1,0 +1,82 @@
+//------------------------------------------------------------------------------------
+///
+///                           <<<   E A S Y C O N T R O L   >>>
+///
+///
+/// @brief  Declaration of module Base.def
+///
+/// @file   Base.def
+///
+///
+/// @coypright Ing.büro Hafer
+///            Branderweg 8A
+///            D-91058 Erlangen
+///
+/// @author    Detlef Hafer
+///
+//------------------------------------------------------------------------------------
+/// @ingroup BASE
+/// \addtogroup BASE
+/// @{
+#pragma once
+
+#define BASE_UNUSED_VARIABLE(x) ((void)(x))
+
+
+#define GLOBALEXTRUDERANZAHL 1
+
+#define GLOBALDOSEMAXCOUNT 32
+#define GLOBALLCMAXCOUNT   (2*GLOBALDOSEMAXCOUNT)
+
+
+
+#ifndef RANGE
+#define RANGE(a, b,c)			(__min(__max(a,b),c))
+#endif
+
+
+#ifndef FDIV0
+#define FDIV0(a,b)	( ((b)>0.0f) ? ((a)/(b)) : 0.0f )
+#endif
+
+#ifndef SEC2HOUR
+#define SEC2HOUR(a) ((a)/3600.0f)
+#endif
+
+#ifndef SEC2MS
+#define SEC2MS(a)		(NEXTLONG((a)*1000))
+#endif
+
+#ifndef MS2SEC
+#define MS2SEC(a)		(ROUND1((a)/1000.0f))
+#endif
+
+
+#define MIN_LWF_SAMPLETIME			2
+#define MAX_LWF_SAMPLETIME			20
+
+#define SET(T, __funcVal) void Set ##  __funcVal (T __funcVal)  { m_ ## __funcVal = __funcVal; }
+#define GET(T, __funcVal) T  Get ##  __funcVal(void) const   { return m_ ## __funcVal;   }
+
+#define SETMODIFIED(T, __funcVal) void  Set ##  __funcVal (T __funcVal)  { if ( m_ ## __funcVal != __funcVal) { m_ ## __funcVal =  __funcVal; m_bModified = TRUE; } }
+
+#define SETGET(T, __funcVal) SET(T, __funcVal) \
+							 GET(T, __funcVal)
+
+#define SETGETMODIFIED(T, __funcVal) SETMODIFIED(T, __funcVal) \
+									   GET(T, __funcVal)
+
+
+#define __ARRAYSIZE(__a) (sizeof(__a)/sizeof(__a[0]))
+
+#ifndef M_PI
+#define M_PI 3.1415926535897932384626433832795
+#endif
+
+#ifndef UMFANG
+#define UMFANG(a) float((a)*M_PI)
+#endif
+
+
+
+/// @}

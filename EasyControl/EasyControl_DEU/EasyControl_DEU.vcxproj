@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{45CF4817-CFCE-46D6-9102-ED3ABD869221}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>16.0.31025.104</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>Debug\</OutDir>
+    <IntDir>Debug\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>EasyControl</TargetName>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\International\1031\</OutDir>
+    <IncludePath>$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>Release\</OutDir>
+    <IntDir>Release\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\International\1031\</OutDir>
+    <TargetName>EasyControl</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;EASYCONTROL_DEU_EXPORTS; AFX_RESOURCE_DLL;__EASYCONTROL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <OutputFile>$(OutDir)EasyControl.dll</OutputFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)EasyControl_DEU.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <ImportLibrary>$(OutDir)EasyControl_DEU.lib</ImportLibrary>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+    <ResourceCompile>
+      <PreprocessorDefinitions>__EASYCONTROL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0407</Culture>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;EASYCONTROL_DEU_EXPORTS;AFX_RESOURCE_DLL;__EASYCONTROL;_BCGSUITE_STATIC_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)EasyControl_DEU.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <ImportLibrary>$(OutDir)EasyControl_DEU.lib</ImportLibrary>
+    </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+    <ResourceCompile>
+      <PreprocessorDefinitions>__EASYCONTROL;_BCGSUITE_STATIC_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0407</Culture>
+      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\BCGSoft\BCGSuite for MFC\BCGSuite\Styles;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MinSpace</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <OmitFramePointers>true</OmitFramePointers>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;EASYCONTROL_DEU_EXPORTS; AFX_RESOURCE_DLL;__EASYCONTROL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat />
+    </ClCompile>
+    <Link>
+      <OutputFile>$(OutDir)EasyControl.dll</OutputFile>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <NoEntryPoint>false</NoEntryPoint>
+      <ImportLibrary>$(OutDir)EasyControl_DEU.lib</ImportLibrary>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <ResourceCompile>
+      <PreprocessorDefinitions>__EASYCONTROL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0407</Culture>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MinSpace</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <OmitFramePointers>true</OmitFramePointers>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;EASYCONTROL_DEU_EXPORTS;AFX_RESOURCE_DLL;__EASYCONTROL;_BCGSUITE_STATIC_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <NoEntryPoint>false</NoEntryPoint>
+      <ImportLibrary>$(OutDir)EasyControl_DEU.lib</ImportLibrary>
+    </Link>
+    <ResourceCompile>
+      <PreprocessorDefinitions>__EASYCONTROL;_BCGSUITE_STATIC_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0407</Culture>
+      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\BCGSoft\BCGSuite for MFC\BCGSuite\Styles;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="stub.c">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="EasyControl_DEU.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Ressource\AgitatorDisable.png" />
+    <Image Include="..\Ressource\AgitatorFocus.png" />
+    <Image Include="..\Ressource\AnyViewer.png" />
+    <Image Include="..\Ressource\AnyViewerDown.png" />
+    <Image Include="..\Ressource\AnyViewerUp.png" />
+    <Image Include="..\Ressource\arrow_down.png" />
+    <Image Include="..\Ressource\arrow_right.png" />
+    <Image Include="..\Ressource\arrow_up.png" />
+    <Image Include="..\Ressource\arrow_up_down_disable.png" />
+    <Image Include="..\Ressource\auto_disable.png" />
+    <Image Include="..\Ressource\auto_down.png" />
+    <Image Include="..\Ressource\auto_up.png" />
+    <Image Include="..\Ressource\BILD_GWB_DOSIERER.bmp" />
+    <Image Include="..\Ressource\BILD_GWB_DOSIERER_ALARM.bmp" />
+    <Image Include="..\Ressource\BILD_GWB_DOSIERER_RUN.bmp" />
+    <Image Include="..\Ressource\BILD_ICB_DOSIERER.bmp" />
+    <Image Include="..\Ressource\BILD_ICP_DOSIERER.bmp" />
+    <Image Include="..\Ressource\BILD_IFL_DOSIERER.bmp" />
+    <Image Include="..\Ressource\BILD_IFOS_DOSIERER.bmp" />
+    <Image Include="..\Ressource\BILD_IFS_DOSIERER.bmp" />
+    <Image Include="..\Ressource\BILD_IFUS_DOSIERER.bmp" />
+    <Image Include="..\Ressource\BILD_LCL_DOSIERER.bmp" />
+    <Image Include="..\Ressource\BILD_LCL_DOSIERER_ALARM.bmp" />
+    <Image Include="..\Ressource\BILD_LWB_DOSIERER.bmp" />
+    <Image Include="..\Ressource\BILD_LWB_DOSIERER_ALARM.bmp" />
+    <Image Include="..\Ressource\BILD_LWB_DOSIERER_RUN.bmp" />
+    <Image Include="..\Ressource\BILD_LWF_DOSIERER_REFILL.bmp" />
+    <Image Include="..\Ressource\BILD_LWF_DOSIERER_REFILL_ALARM.bmp" />
+    <Image Include="..\Ressource\BILD_LWP_DOSIERER.bmp" />
+    <Image Include="..\Ressource\BILD_LWP_DOSIERER_ALARM.bmp" />
+    <Image Include="..\Ressource\BILD_LWP_DOSIERER_RUN.bmp" />
+    <Image Include="..\Ressource\BILD_LWS_DOSIERER.bmp" />
+    <Image Include="..\Ressource\BILD_LWS_DOSIERER_ALARM.bmp" />
+    <Image Include="..\Ressource\BILD_LWS_DOSIERER_RUN.bmp" />
+    <Image Include="..\Ressource\BILD_LWV_DOSIERER.bmp" />
+    <Image Include="..\Ressource\BILD_LWV_DOSIERER_ALARM.bmp" />
+    <Image Include="..\Ressource\BILD_LWV_DOSIERER_RUN.bmp" />
+    <Image Include="..\Ressource\BILD_PID_DOSIERER.bmp" />
+    <Image Include="..\Ressource\BILD_REFILL_BLACK.bmp" />
+    <Image Include="..\Ressource\BILD_REFILL_BLUE.bmp" />
+    <Image Include="..\Ressource\BILD_REFILL_RED.bmp" />
+    <Image Include="..\Ressource\BILD_VERRIEGELUNG.bmp" />
+    <Image Include="..\Ressource\BILD_VOL_DOSIERER.bmp" />
+    <Image Include="..\Ressource\BILD_WBF_DOSIERER.bmp" />
+    <Image Include="..\Ressource\BILD_WBM_DOSIERER.bmp" />
+    <Image Include="..\ressource\bitmap1.bmp" />
+    <Image Include="..\ressource\bmp00001.bmp" />
+    <Image Include="..\Ressource\BtAddDisable.png" />
+    <Image Include="..\Ressource\BtAddDown.png" />
+    <Image Include="..\Ressource\BtAddFocus.png" />
+    <Image Include="..\Ressource\BtAddUp.png" />
+    <Image Include="..\Ressource\BtMinusDisable.bmp" />
+    <Image Include="..\Ressource\BtMinusDown.bmp" />
+    <Image Include="..\Ressource\BtMinusFocus.bmp" />
+    <Image Include="..\Ressource\BtMinusUp.bmp" />
+    <Image Include="..\Ressource\BtNextDisable.png" />
+    <Image Include="..\Ressource\BtNextDown.png" />
+    <Image Include="..\Ressource\BtNextFocus.png" />
+    <Image Include="..\Ressource\BtNextUp.png" />
+    <Image Include="..\Ressource\BtPlusDisable.bmp" />
+    <Image Include="..\Ressource\BtPlusDown.bmp" />
+    <Image Include="..\Ressource\BtPlusFocus.bmp" />
+    <Image Include="..\Ressource\BtPlusUp.bmp" />
+    <Image Include="..\Ressource\BtPreviousDisable.png" />
+    <Image Include="..\Ressource\BtPreviousDown.png" />
+    <Image Include="..\Ressource\BtPreviousFocus.png" />
+    <Image Include="..\Ressource\BtPreviousUp.png" />
+    <Image Include="..\ressource\BtRadioOff.bmp" />
+    <Image Include="..\ressource\BtRadioOn.bmp" />
+    <Image Include="..\Ressource\BtRadioOnOff.bmp" />
+    <Image Include="..\Ressource\BTRefillScrewDisable.png" />
+    <Image Include="..\Ressource\BTRefillScrewUp.png" />
+    <Image Include="..\Ressource\BtSpeedDisable.png" />
+    <Image Include="..\Ressource\BtSpeedFocus.png" />
+    <Image Include="..\Ressource\BtTrashDisable.png" />
+    <Image Include="..\Ressource\BtTrashDown.png" />
+    <Image Include="..\Ressource\BtTrashFocus.png" />
+    <Image Include="..\Ressource\BtTrashUp.png" />
+    <Image Include="..\Ressource\ButtonGreen.bmp" />
+    <Image Include="..\Ressource\ButtonGreen.png" />
+    <Image Include="..\Ressource\ButtonGreenBig.bmp" />
+    <Image Include="..\Ressource\ButtonGreenBig.png" />
+    <Image Include="..\Ressource\ButtonNone.bmp" />
+    <Image Include="..\Ressource\ButtonNoneBig.bmp" />
+    <Image Include="..\Ressource\ButtonNoneBig.png" />
+    <Image Include="..\Ressource\ButtonNoRefill.bmp" />
+    <Image Include="..\Ressource\ButtonRed.bmp" />
+    <Image Include="..\Ressource\ButtonRed.png" />
+    <Image Include="..\Ressource\ButtonRefill.bmp" />
+    <Image Include="..\Ressource\ButtonRefillNoRelease.bmp" />
+    <Image Include="..\Ressource\ButtonRefillRelease.bmp" />
+    <Image Include="..\ressource\DiagramFrame16.bmp" />
+    <Image Include="..\Ressource\DiagramFrame256.bmp" />
+    <Image Include="..\Ressource\DoseButtonOff.bmp" />
+    <Image Include="..\Ressource\DoseButtonPause.bmp" />
+    <Image Include="..\Ressource\DoseButtonPressed.bmp" />
+    <Image Include="..\Ressource\DoseButtonReady.bmp" />
+    <Image Include="..\Ressource\DoseButtonRun.bmp" />
+    <Image Include="..\Ressource\dosierer.bmp" />
+    <Image Include="..\Ressource\EasyControl.bmp" />
+    <Image Include="..\Ressource\feederMotorOff.png" />
+    <Image Include="..\Ressource\feederMotorReady.png" />
+    <Image Include="..\Ressource\feederMotorRun.png" />
+    <Image Include="..\Ressource\feederstatusLineOff.bmp" />
+    <Image Include="..\Ressource\feederstatusLineOff.png" />
+    <Image Include="..\Ressource\feederstatusLineRun.bmp" />
+    <Image Include="..\Ressource\feederstatusLineRun.png" />
+    <Image Include="..\Ressource\feederstatusOff.bmp" />
+    <Image Include="..\Ressource\feederstatusOff.png" />
+    <Image Include="..\Ressource\feederstatusRun.bmp" />
+    <Image Include="..\Ressource\feederstatusRun.png" />
+    <Image Include="..\Ressource\fillbrush.bmp" />
+    <Image Include="..\Ressource\GainInWeight.png" />
+    <Image Include="..\Ressource\HelpInfo.png" />
+    <Image Include="..\ressource\ico00001.ico" />
+    <Image Include="..\ressource\ico00002.ico" />
+    <Image Include="..\ressource\iconalar.ico" />
+    <Image Include="..\Ressource\IconAlarm.ico" />
+    <Image Include="..\Ressource\IconAlarmBig.ico" />
+    <Image Include="..\Ressource\IconAlert.ico" />
+    <Image Include="..\ressource\iconconn.ico" />
+    <Image Include="..\Ressource\IconConnect.ico" />
+    <Image Include="..\Ressource\IconConnectNormal.ico" />
+    <Image Include="..\Ressource\IconDisconnect.ico" />
+    <Image Include="..\Ressource\IconEasyControl.ico" />
+    <Image Include="..\Ressource\IconEasyControlDoc.ico" />
+    <Image Include="..\Ressource\IconFile.ico" />
+    <Image Include="..\Ressource\IconFlagChinese.ico" />
+    <Image Include="..\ressource\IconFlagDutch.ico" />
+    <Image Include="..\Ressource\IconFlagEnglish.ico" />
+    <Image Include="..\ressource\IconFlagFrench.ico" />
+    <Image Include="..\Ressource\IconFlagGerman.ico" />
+    <Image Include="..\Ressource\IconFlagGreek.ico" />
+    <Image Include="..\Ressource\IconFlagHungarian.ico" />
+    <Image Include="..\ressource\IconFlagItalian.ico" />
+    <Image Include="..\ressource\IconFlagPolish.ico" />
+    <Image Include="..\Ressource\IconFlagRussian.ico" />
+    <Image Include="..\ressource\IconFlagSpanish.ico" />
+    <Image Include="..\ressource\IconFlagTurkish.ico" />
+    <Image Include="..\Ressource\IconFlagUkrainian.ico" />
+    <Image Include="..\Ressource\IconGravNeutral.ico" />
+    <Image Include="..\Ressource\iconProductDatabase.ico" />
+    <Image Include="..\Ressource\IconProtocolModBus.ico" />
+    <Image Include="..\Ressource\IconProtocolNo.ico" />
+    <Image Include="..\Ressource\IconProtocolProfiBus.ico" />
+    <Image Include="..\ressource\IconProtocolProfiNet.ico" />
+    <Image Include="..\Ressource\IconProtocolS7Dave.ico" />
+    <Image Include="..\Ressource\IconReset.ico" />
+    <Image Include="..\Ressource\IconResetMessage.ico" />
+    <Image Include="..\Ressource\icons_large.png" />
+    <Image Include="..\Ressource\IconUser.ico" />
+    <Image Include="..\Ressource\IconUserLogin.ico" />
+    <Image Include="..\Ressource\IconVolum.ico" />
+    <Image Include="..\Ressource\IconVolumExt.ico" />
+    <Image Include="..\Ressource\IconWarning.ico" />
+    <Image Include="..\ressource\IconWarningBig.ico" />
+    <Image Include="..\ressource\idr_over.ico" />
+    <Image Include="..\ressource\ifs_cont.bmp" />
+    <Image Include="..\Ressource\ImageKg.png" />
+    <Image Include="..\Ressource\ImageKgh.png" />
+    <Image Include="..\Ressource\ImageLCGreen.bmp" />
+    <Image Include="..\Ressource\ImageLCOrange.bmp" />
+    <Image Include="..\Ressource\ImageLCOrangeGreen.bmp" />
+    <Image Include="..\Ressource\ImageLCRed.bmp" />
+    <Image Include="..\Ressource\ImagePercent.png" />
+    <Image Include="..\Ressource\ImageUpm.png" />
+    <Image Include="..\ressource\kalibwar.bmp" />
+    <Image Include="..\Ressource\kalibwarning.bmp" />
+    <Image Include="..\Ressource\key.bmp" />
+    <Image Include="..\Ressource\keynew.bmp" />
+    <Image Include="..\Ressource\LButtonMinusDown.png" />
+    <Image Include="..\Ressource\LButtonMinusUp.png" />
+    <Image Include="..\Ressource\LButtonPlusDown.png" />
+    <Image Include="..\Ressource\LButtonPlusUp.png" />
+    <Image Include="..\Ressource\LcGravimetricDisable.bmp" />
+    <Image Include="..\Ressource\LcGravimetricDisableExt.bmp" />
+    <Image Include="..\Ressource\LcGravimetricFocus.bmp" />
+    <Image Include="..\Ressource\LcGravimetricFocusExt.bmp" />
+    <Image Include="..\Ressource\LcVolumetricDisable.bmp" />
+    <Image Include="..\Ressource\LcVolumetricDisableExt.bmp" />
+    <Image Include="..\Ressource\LcVolumetricFocus.bmp" />
+    <Image Include="..\Ressource\LcVolumetricFocusExt.bmp" />
+    <Image Include="..\Ressource\LineDisable.bmp" />
+    <Image Include="..\Ressource\LineFocus.bmp" />
+    <Image Include="..\ressource\logbar16.bmp" />
+    <Image Include="..\Ressource\logbar256.bmp" />
+    <Image Include="..\Ressource\Logo.bmp" />
+    <Image Include="..\Ressource\logobrush.png" />
+    <Image Include="..\Ressource\LokalDisable.bmp" />
+    <Image Include="..\Ressource\LokalFocus.bmp" />
+    <Image Include="..\Ressource\LossInWeight.png" />
+    <Image Include="..\Ressource\Mainframe16.bmp" />
+    <Image Include="..\Ressource\Mainframe256.bmp" />
+    <Image Include="..\Ressource\MotorOff.bmp" />
+    <Image Include="..\Ressource\MotorReady.bmp" />
+    <Image Include="..\Ressource\MotorRun.bmp" />
+    <Image Include="..\ressource\Overview16.bmp" />
+    <Image Include="..\Ressource\Overview256.bmp" />
+    <Image Include="..\Ressource\process.bmp" />
+    <Image Include="..\ressource\radiooff.bmp" />
+    <Image Include="..\Ressource\radioOnOff.bmp" />
+    <Image Include="..\Ressource\radio_of32.png" />
+    <Image Include="..\Ressource\radio_on32.png" />
+    <Image Include="..\Ressource\recipeframe16.bmp" />
+    <Image Include="..\Ressource\recipeframe256.bmp" />
+    <Image Include="..\ressource\RecorderActive.ico" />
+    <Image Include="..\ressource\RecorderDeactive.ico" />
+    <Image Include="..\ressource\RecorderError.ico" />
+    <Image Include="..\Ressource\RefillReleaseDisableDisable.bmp" />
+    <Image Include="..\ressource\RefillReleaseDisableDisableExt.bmp" />
+    <Image Include="..\ressource\RefillReleaseDisableUp.bmp" />
+    <Image Include="..\ressource\RefillReleaseDisableUpExt.bmp" />
+    <Image Include="..\ressource\RefillReleaseEnableDisable.bmp" />
+    <Image Include="..\ressource\RefillReleaseEnableDisableExt.bmp" />
+    <Image Include="..\Ressource\RefillReleaseEnableDown.bmp" />
+    <Image Include="..\ressource\RefillReleaseEnableDownExt.bmp" />
+    <Image Include="..\Ressource\RemoteConnect.bmp" />
+    <Image Include="..\Ressource\RemoteDisonnect.bmp" />
+    <Image Include="..\Ressource\RemoteNormal.bmp" />
+    <Image Include="..\Ressource\SettingsHeader.png" />
+    <Image Include="..\Ressource\signale.bmp" />
+    <Image Include="..\Ressource\start.png" />
+    <Image Include="..\Ressource\stop.png" />
+    <Image Include="..\Ressource\Stoppuhr.bmp" />
+    <Image Include="..\Ressource\Tab1.bmp" />
+    <Image Include="..\Ressource\Tab2.bmp" />
+    <Image Include="..\Ressource\Tab3.bmp" />
+    <Image Include="..\Ressource\Tab4.bmp" />
+    <Image Include="..\Ressource\tabimages.bmp" />
+    <Image Include="..\ressource\tarawarn.bmp" />
+    <Image Include="..\Ressource\totalisator.bmp" />
+    <Image Include="..\Ressource\Trash.png" />
+    <Image Include="res\easyControlsplash.bmp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="EasyControl_DEU.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

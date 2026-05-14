@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\gtest_main.cc" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\lib\native\src\gtest\gtest-all.cc" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\lib\native\src\gmock\gmock-all.cc" />
+    <ClCompile Include="BASE\TestDoseCurve.cc">
+      <Filter>BASE</Filter>
+    </ClCompile>
+    <ClCompile Include="BASE\TestFieldTypeStack.cc">
+      <Filter>BASE</Filter>
+    </ClCompile>
+    <ClCompile Include="BASE\TestGenericRemoteHandler.cc">
+      <Filter>BASE</Filter>
+    </ClCompile>
+    <ClCompile Include="BASE\TestHopper.cc">
+      <Filter>BASE</Filter>
+    </ClCompile>
+    <ClCompile Include="BASE\TestMassflow.cc">
+      <Filter>BASE</Filter>
+    </ClCompile>
+    <ClCompile Include="BASE\TestSimpleParser.cc">
+      <Filter>BASE</Filter>
+    </ClCompile>
+    <ClCompile Include="BASE\TestSimValuesXml.cc">
+      <Filter>BASE</Filter>
+    </ClCompile>
+    <ClCompile Include="BASE\TestModbus.cc">
+      <Filter>Modbus</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="BASE">
+      <UniqueIdentifier>{f9600373-d95a-4634-8035-6bf10f5171ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modbus">
+      <UniqueIdentifier>{04424d13-896d-410f-9bc1-58fb8c6e02c6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

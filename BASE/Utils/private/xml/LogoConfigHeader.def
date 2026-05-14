@@ -1,0 +1,30 @@
+    "Locking\n\
+    \t\tinternal : internal locking, Release expression will be evaluated\n\
+    \t\texternal : external locking, Use external hardware input signal\n\
+     -------------------------------------------------------------------\n\
+     Release\n\
+    \t\t Use following operands:\n\
+    \t\t\t DI0 : digital hardware input for release, see IOConfig -> <DI3>Release</DI3> \n\
+    \t\t\t MF  : digital hardware input for main feeder\n\
+    \t\t\t SF1 : digital hardware input for side feeder 1\n\
+    \t\t\t SF2 : digital hardware input for side feeder 2\n\
+    \t\t\t Ri  : Run status of feeder i\n\
+    \t\t\t OM  : operate manual mode -> switch is in manual(service) mode\n\
+    \t\t\t OA  : operate automatic mode -> switch is in automatic mode\n\
+    \t\t\t SM  : ServiceMode set ( active result of string)\n\
+	\t\t\t SU  : ServiceMode user set\n\
+    \t\t Use operators AND / OR to create boolean expression\n\
+    \t\t\t Sample:\n\
+    \t\t\t\t <Release>DI0 AND R1 AND ( !MF OR SF1 )</Release>\n\
+    \t\t\t\t\tRelease = HIGH if DI0 ( HIGH ) and feeder 1 is running and main feeder ( LOW ) or side feeder ( HIGH )\n\
+    \t\t\t\t\t!MF =  MF(LOW)\n\
+     -------------------------------------------------------------------\n\
+     RunControl\n\
+     \t\tEnable\n\
+     \t\t\tNO   : No run monitoring activated\n\
+     \t\t\tYES  : run monitoring activated\n\
+     \t\tInputSignal\n\
+     \t\t\tNotUsed      : Not used\n\
+     \t\t\tPulseCounter  : Pulsecounter enabled\n\
+     \t\t\tAnalogInput  : Use analog input channel\n"
+     

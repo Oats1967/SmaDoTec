@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Quelldateien">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Headerdateien">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Quelldateien\src">
+      <UniqueIdentifier>{7c1c6d60-6822-4af2-9c96-cb32741c88f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LogLevel">
+      <UniqueIdentifier>{c95be9fb-2fee-41e4-9a8c-5cf9bc01fb25}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\s7_client.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\s7_firmware.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\s7_isotcp.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\s7_micro_client.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\s7_partner.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\s7_peer.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\s7_server.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\s7_text.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\s7_types.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lib\snap7_libmain.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sys\snap_msgsock.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sys\snap_platform.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sys\snap_sysutils.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sys\snap_tcpsrvr.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sys\snap_threads.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sys\win_threads.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DeviceSnap.h">
+      <Filter>Quelldateien\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\S7ConfigXml.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\snap7.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="include\S7Snap64.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\core\s7_client.cpp">
+      <Filter>Quelldateien\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\s7_isotcp.cpp">
+      <Filter>Quelldateien\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\s7_micro_client.cpp">
+      <Filter>Quelldateien\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\s7_partner.cpp">
+      <Filter>Quelldateien\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\s7_peer.cpp">
+      <Filter>Quelldateien\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\s7_server.cpp">
+      <Filter>Quelldateien\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\s7_text.cpp">
+      <Filter>Quelldateien\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sys\snap_msgsock.cpp">
+      <Filter>Quelldateien\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sys\snap_sysutils.cpp">
+      <Filter>Quelldateien\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sys\snap_tcpsrvr.cpp">
+      <Filter>Quelldateien\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sys\snap_threads.cpp">
+      <Filter>Quelldateien\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DeviceSnap.cpp">
+      <Filter>Quelldateien\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\snap7.cpp">
+      <Filter>Quelldateien\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lib\snap7_libmain.cpp">
+      <Filter>Quelldateien\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\S7Snap64.cpp">
+      <Filter>Quelldateien\src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\lib\snap7.def">
+      <Filter>Headerdateien</Filter>
+    </None>
+    <None Include="LogLevel.def">
+      <Filter>LogLevel</Filter>
+    </None>
+  </ItemGroup>
+</Project>

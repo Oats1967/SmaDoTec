@@ -1,0 +1,549 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Quelldateien">
+      <UniqueIdentifier>{6936edec-3c70-415f-945d-4fa2b51c3e33}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm</Extensions>
+    </Filter>
+    <Filter Include="Headerdateien">
+      <UniqueIdentifier>{99618d35-420c-43d2-a991-1530ad7ea2e4}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc</Extensions>
+    </Filter>
+    <Filter Include="Ressourcendateien">
+      <UniqueIdentifier>{db6b77f2-6c77-4465-9d4a-d1323eb52ada}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stub.c">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="EasyControl_CHS.rc">
+      <Filter>Ressourcendateien</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Ressource\Mainframe16.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\recipeframe16.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BILD_REFILL_BLACK.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BILD_REFILL_RED.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BtMinusDisable.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BtMinusDown.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BtMinusFocus.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BtMinusUp.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BtPlusDisable.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BtPlusDown.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BtPlusFocus.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="res\easyControlsplash.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\tabimages.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BtPlusUp.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BILD_LWS_DOSIERER.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BILD_LWS_DOSIERER_RUN.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BILD_LWS_DOSIERER_ALARM.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BILD_LWF_DOSIERER_REFILL.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BILD_LWF_DOSIERER_REFILL_ALARM.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BILD_LWP_DOSIERER.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BILD_LWP_DOSIERER_ALARM.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BILD_LWP_DOSIERER_RUN.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BILD_LWV_DOSIERER.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BILD_LWV_DOSIERER_ALARM.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BILD_LWV_DOSIERER_RUN.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BILD_VERRIEGELUNG.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BILD_PID_DOSIERER.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BILD_ICP_DOSIERER.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BILD_VOL_DOSIERER.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BILD_WBF_DOSIERER.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BILD_WBM_DOSIERER.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\ImageLCGreen.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\ImageLCRed.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\key.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\keynew.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\ImageLCOrange.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\dosierer.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\kalibwarning.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\ressource\tarawarn.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\fillbrush.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\LcGravimetricDisable.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\LcGravimetricFocus.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\LcVolumetricDisable.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\LcVolumetricFocus.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\LineDisable.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\LineFocus.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\LokalDisable.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\LokalFocus.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\EasyControl.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\MotorOff.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\MotorRun.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\MotorReady.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\feederstatusOff.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\feederstatusRun.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\feederstatusLineRun.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\feederstatusLineOff.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\DoseButtonOff.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\DoseButtonReady.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\DoseButtonRun.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\RemoteNormal.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\RemoteDisonnect.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\RemoteConnect.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\ressource\DiagramFrame16.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\ressource\logbar16.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\ressource\Overview16.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\recipeframe256.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\DiagramFrame256.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\Mainframe256.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\Overview256.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\logbar256.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\Logo.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\Stoppuhr.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BtRadioOnOff.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\ressource\kalibwar.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BILD_REFILL_BLUE.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\RefillReleaseEnableDown.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\ressource\RefillReleaseEnableDisable.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\ressource\RefillReleaseEnableDownExt.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\ressource\RefillReleaseEnableDisableExt.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\ressource\RefillReleaseDisableUp.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\RefillReleaseDisableDisable.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\ressource\RefillReleaseDisableUpExt.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\ressource\RefillReleaseDisableDisableExt.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\LcGravimetricDisableExt.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\LcGravimetricFocusExt.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\LcVolumetricDisableExt.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\LcVolumetricFocusExt.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\DoseButtonPressed.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BILD_LWB_DOSIERER.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BILD_LWB_DOSIERER_RUN.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BILD_LWB_DOSIERER_ALARM.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BILD_GWB_DOSIERER_RUN.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BILD_GWB_DOSIERER.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BILD_GWB_DOSIERER_ALARM.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BILD_ICB_DOSIERER.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\DoseButtonPause.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\ImageLCOrangeGreen.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BILD_LCL_DOSIERER_ALARM.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BILD_LCL_DOSIERER.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BILD_IFL_DOSIERER.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\Tab1.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\Tab2.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\Tab3.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\Tab4.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\ressource\BtRadioOff.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\ressource\BtRadioOn.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\ButtonRed.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\ButtonGreen.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BILD_IFOS_DOSIERER.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\BILD_IFUS_DOSIERER.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\ButtonNone.bmp">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\IconFile.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\IconFlagGreek.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\IconFlagHungarian.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\IconFlagUkrainian.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\IconFlagChinese.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\IconFlagRussian.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\iconProductDatabase.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\IconProtocolS7Dave.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\IconEasyControl.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\IconEasyControlDoc.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\IconWarning.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\IconReset.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\IconResetMessage.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\IconAlert.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\IconUser.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\IconVolumExt.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\IconVolum.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\IconGravNeutral.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\IconAlarm.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\IconFlagEnglish.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\IconFlagGerman.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\ressource\IconFlagFrench.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\ressource\IconFlagItalian.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\IconUserLogin.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\IconProtocolNo.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\IconProtocolModBus.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\IconProtocolProfiBus.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\IconAlarmBig.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\IconDisconnect.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\IconConnect.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\IconConnectNormal.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\ressource\IconFlagDutch.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\ressource\IconProtocolProfiNet.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\ressource\IconFlagTurkish.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\ressource\iconconn.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\ressource\idr_over.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\ressource\ico00001.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\ressource\ico00002.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\ressource\IconFlagPolish.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\ressource\IconFlagSpanish.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\ressource\iconalar.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\ressource\IconWarningBig.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\ressource\RecorderActive.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\ressource\RecorderDeactive.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\ressource\RecorderError.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="..\Ressource\ImageKgh.png" />
+    <Image Include="..\Ressource\ImagePercent.png" />
+    <Image Include="..\Ressource\ImageUpm.png" />
+    <Image Include="..\Ressource\icons_large.png" />
+    <Image Include="..\Ressource\SettingsHeader.png" />
+    <Image Include="..\Ressource\Trash.png" />
+    <Image Include="..\Ressource\BtTrashDisable.png" />
+    <Image Include="..\Ressource\BtTrashUp.png" />
+    <Image Include="..\Ressource\BtTrashFocus.png" />
+    <Image Include="..\Ressource\BtTrashDown.png" />
+    <Image Include="..\Ressource\BtAddDisable.png" />
+    <Image Include="..\Ressource\BtAddDown.png" />
+    <Image Include="..\Ressource\BtAddFocus.png" />
+    <Image Include="..\Ressource\BtAddUp.png" />
+    <Image Include="..\Ressource\BtNextDisable.png" />
+    <Image Include="..\Ressource\BtNextDown.png" />
+    <Image Include="..\Ressource\BtNextFocus.png" />
+    <Image Include="..\Ressource\BtNextUp.png" />
+    <Image Include="..\Ressource\BtPreviousDown.png" />
+    <Image Include="..\Ressource\BtPreviousDisable.png" />
+    <Image Include="..\Ressource\BtPreviousFocus.png" />
+    <Image Include="..\Ressource\BtPreviousUp.png" />
+    <Image Include="..\Ressource\logobrush.png" />
+    <Image Include="..\Ressource\radio_of32.png" />
+    <Image Include="..\Ressource\radio_on32.png" />
+    <Image Include="..\Ressource\start.png" />
+    <Image Include="..\Ressource\stop.png" />
+    <Image Include="..\Ressource\HelpInfo.png" />
+    <Image Include="..\Ressource\feederMotorOff.png" />
+    <Image Include="..\Ressource\feederMotorRun.png" />
+    <Image Include="..\Ressource\feederMotorReady.png" />
+    <Image Include="..\Ressource\feederstatusRun.png" />
+    <Image Include="..\Ressource\feederstatusLineRun.png" />
+    <Image Include="..\Ressource\feederstatusOff.png" />
+    <Image Include="..\Ressource\feederstatusLineOff.png" />
+    <Image Include="..\Ressource\arrow_down.png" />
+    <Image Include="..\Ressource\arrow_up.png" />
+    <Image Include="..\Ressource\AgitatorFocus.png" />
+    <Image Include="..\Ressource\AgitatorDisable.png" />
+    <Image Include="..\Ressource\BtSpeedFocus.png" />
+    <Image Include="..\Ressource\BtSpeedDisable.png" />
+    <Image Include="..\Ressource\LossInWeight.png" />
+    <Image Include="..\Ressource\GainInWeight.png" />
+    <Image Include="..\Ressource\ImageKg.png" />
+    <Image Include="..\Ressource\arrow_right.png" />
+    <Image Include="..\Ressource\BTRefillScrewUp.png" />
+    <Image Include="..\Ressource\BTRefillScrewDisable.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

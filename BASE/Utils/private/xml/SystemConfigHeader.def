@@ -1,0 +1,48 @@
+    "-------------------------------------------------------------------\n\
+    Architecture\n\
+    \t\tMaster : Master - recipe handling enabled\n\
+    \t\tSlave  : Slave - recipe handling disabled\n\
+     -------------------------------------------------------------------\n\
+    Type\n\
+    \t\tLWS     : Loss in weight feeder - screw\n\
+    \t\tLWP     : Loss in weight feeder - pump\n\
+    \t\tLWV     : Loss in weight feeder - vibrating feeder\n\
+    \t\tLWB     : Loss in weight feeder - screw batcher\n\
+    \t\tGWB     : Gain in weight feeder - screw batcher\n\
+    \t\tICB     : Integral control port batcher\n\
+    \t\tWBF     : Weight belt feeder\n\
+    \t\tPID     : PID control\n\
+    \t\tICP     : Integral control port continous\n\
+    \t\tWBM     : Weight belt feeder\n\
+    \t\tVOL     : Volumetric feeder\n\
+    \t\tLCL     : Only Loadcell\n\
+	\t\tIFL     : Infeed hopper with loadcell\n\
+	\t\tIFS     : Infeed hopper with switches\n\
+     -------------------------------------------------------------------\n\
+    FeederID    : 1..n\n\
+     -------------------------------------------------------------------\n\
+    FeedingType\n\
+    \t\tMF     : Main feeder\n\
+    \t\tSF1    : Side feeder 1\n\
+    \t\tSF2    : Side feeder 2\n\
+     -------------------------------------------------------------------\n\
+    EmptyFeeder\n\
+    \t\tRuntime     : Maximum runtime in seconds when action is started\n\
+    \t\tRestriction\n\
+    \t\t\tService : EmptyFeeeder can only run in service mode\n\
+    \t\t\tNone    : EmptyFeeeder can always run\n\
+     -------------------------------------------------------------------\n\
+     <Modules>\n\
+	 \t<ModuleRefill>\n\
+	 \t\t<RefillSignal>\n\
+     \t\t\t<Sequence>\n\
+     \t\t\t\tNormal : On refill request signal will be HIGH else LOW\n\
+     \t\t\t\tCyclic : Block running cyclically\n\
+     \t\t\t\tSequenceHIGH : Block running once and terminating with HIGH signal\n\
+     \t\t\t\tSequenceLOW : Block running once and terminating with LOW signal\n\
+     \t\t\t</Sequence>\n\
+	 \t\t</RefillSignal>\n\
+	 \t</ModuleRefill>\n\
+	 \t...\n\
+	 </Modules>\n"
+     

@@ -1,0 +1,177 @@
+<ContentPage
+    x:Class="VirtualKeyboard.Pages.NumericKeyboardPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:VirtualKeyboard.Controls"
+    xmlns:converter="clr-namespace:VirtualKeyboard.Converter"
+    BackgroundColor="{StaticResource Background}"
+   
+    Shell.NavBarIsVisible="False"
+    Shell.FlyoutBehavior="Disabled">
+    <ContentPage.Resources>
+        <!--<converter:DoubleScaler
+            x:Key="FontSizeScaler"
+            Factor="2.0">
+        </converter:DoubleScaler>-->
+    </ContentPage.Resources>
+    <Grid
+        Padding="{Binding KeySpacing}"
+        ColumnDefinitions="*,*,*,*"
+        ColumnSpacing="{Binding KeySpacing}"
+        RowDefinitions="*,*,*,*,*"
+        RowSpacing="{Binding KeySpacing}">
+
+        <!--  Row 0  -->
+        <controls:Key
+            Grid.Row="0"
+            Grid.Column="0"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="7"
+            FontSize="{Binding FontSize}"
+            Text="7" />
+        <controls:Key
+            Grid.Row="0"
+            Grid.Column="1"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="8"
+            FontSize="{Binding FontSize}"
+            Text="8" />
+        <controls:Key
+            Grid.Row="0"
+            Grid.Column="2"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="9"
+            FontSize="{Binding FontSize}"
+            Text="9" />
+        <controls:IconKey
+            Grid.Row="0"
+            Grid.Column="3"
+            BackgroundColor="{StaticResource SmaDoTecRed}"
+            Command="{Binding BackspacePressedCommand}"
+            
+            FontSize="{Binding FontSize}"
+            Text="{StaticResource BackspaceIcon}" />
+
+        <!--  Row 1  -->
+        <controls:Key
+            Grid.Row="1"
+            Grid.Column="0"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="4"
+            FontSize="{Binding FontSize}"
+            Text="4" />
+        <controls:Key
+            Grid.Row="1"
+            Grid.Column="1"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="5"
+            FontSize="{Binding FontSize}"
+            Text="5" />
+        <controls:Key
+            Grid.Row="1"
+            Grid.Column="2"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="6"
+            FontSize="{Binding FontSize}"
+            Text="6" />
+        <controls:IconKey
+            Grid.Row="1"
+            Grid.RowSpan="2"
+            Grid.Column="3"
+            BackgroundColor="{StaticResource SmaDoTecGreen}"
+            Command="{Binding EnterPressedCommand}"
+             FontSize="{Binding FontSize}"
+            Opacity="0.75"
+            Text="{StaticResource EnterIcon}" />
+
+
+        <!--  Row 2  -->
+        <controls:Key
+            Grid.Row="2"
+            Grid.Column="0"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="1"
+            FontSize="{Binding FontSize}"
+            Text="1" />
+        <controls:Key
+            Grid.Row="2"
+            Grid.Column="1"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="2"
+            FontSize="{Binding FontSize}"
+            Text="2" />
+        <controls:Key
+            Grid.Row="2"
+            Grid.Column="2"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="3"
+            FontSize="{Binding FontSize}"
+            Text="3" />
+
+
+        <!--  Row 3  -->
+        <controls:Key
+            Grid.Row="3"
+            Grid.Column="0"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="0"
+            FontSize="{Binding FontSize}"
+            Text="0" />
+        <controls:Key
+            Grid.Row="3"
+            Grid.Column="1"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="."
+            FontSize="{Binding FontSize}"
+            Text="." />
+        <controls:Key
+            Grid.Row="3"
+            Grid.Column="2"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="-"
+            FontSize="{Binding FontSize}"
+            Text="-" />
+        <controls:Key
+            Grid.Row="3"
+            Grid.Column="3"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="+"
+            FontSize="{Binding FontSize}"
+            Text="+" />
+
+        <!--  Row 4  -->
+        <Image
+            Grid.Row="4"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Aspect="AspectFit"
+            Source="firmenlogo_grey.jpg" />
+        <controls:IconKey
+            Grid.Row="4"
+            Grid.Column="2"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding LeftPressedCommand}"
+             FontSize="{Binding FontSize}"
+            Text="{StaticResource ArrowLeftIcon}" />
+        <controls:IconKey
+            Grid.Row="4"
+            Grid.Column="3"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding RightPressedCommand}"
+             FontSize="{Binding FontSize}"
+            Text="{StaticResource ArrowRightIcon}" />
+    </Grid>
+</ContentPage>

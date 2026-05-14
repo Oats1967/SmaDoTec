@@ -1,0 +1,652 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Quelldateien">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Headerdateien">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Quelldateien\Control">
+      <UniqueIdentifier>{0aca08de-97ec-4a8b-b167-3bcad9141dea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LogLevel">
+      <UniqueIdentifier>{12495c7f-1d5f-436f-aa33-5cbb08458dcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Task">
+      <UniqueIdentifier>{337cd407-047f-4f42-bf01-a1cb5349b888}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Module">
+      <UniqueIdentifier>{a892b23b-b693-40ee-b9e5-9e8b844c53ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Control\WeightControl">
+      <UniqueIdentifier>{dccb625f-4bd3-48a2-ae7b-addd160a0d8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Control\IFL">
+      <UniqueIdentifier>{6532b635-f5ff-4ae3-b774-23c3416be2cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Control\ICB">
+      <UniqueIdentifier>{01037966-b0ef-4c7a-911b-705b8389029b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Control\LCL">
+      <UniqueIdentifier>{cb8014ea-c5ef-4095-862e-32eabf0190e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Control\LWF">
+      <UniqueIdentifier>{6f0f40da-1087-45bd-acff-0c2178fc4b77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Control\ICP">
+      <UniqueIdentifier>{dbab02f5-c5dd-4b99-93e4-23508ddc8793}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Control\PID">
+      <UniqueIdentifier>{357cf2e4-a357-4728-9288-91dd11e9fe03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Control\LWB">
+      <UniqueIdentifier>{274bbc1e-386d-41b0-b92a-4b081f1664b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Control\WBM">
+      <UniqueIdentifier>{8df3459d-3ab0-40b3-a6d8-9322f51ff9cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Control\WBF">
+      <UniqueIdentifier>{85c20df3-c9da-4c24-9e78-c5458f25349a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Control\VOL">
+      <UniqueIdentifier>{a8fa671a-5e79-4f94-a2d4-fb025a27ab45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Control\LineControl">
+      <UniqueIdentifier>{f5cb5f90-c1c8-499e-a098-21a820bd949c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Control\AdsWrapper">
+      <UniqueIdentifier>{473febc1-dfd6-4b89-9482-a892f4d6ebd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Control\RefillControl">
+      <UniqueIdentifier>{0c1ff591-f922-4b49-aaab-134cef60896a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Control\IFS">
+      <UniqueIdentifier>{aa5e30a3-880c-4b07-9811-1680d4122ef4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Control\IFS\IFO">
+      <UniqueIdentifier>{77bf9211-a823-440e-994b-aa27523a7063}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Control\IFS\IFU">
+      <UniqueIdentifier>{64809390-a097-4f18-8493-ed36f0c267dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Control\AdsWrapper\AdsSensor">
+      <UniqueIdentifier>{8deb60ef-bf89-4977-a7ca-3cd1ce9b87be}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\LineControl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SleepTimer.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StatistikBuffer.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StatistikType.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SyControl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WbfEncoderControl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RemoteImpl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DeviceServerImpl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DoseServerImpl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DoseServer.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DoseServerInterface.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LCModuleImpl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LCModuleInterface.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DoseServerXml.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="..\remote\include\ProfibusInterface.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ProfibusImpl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="..\remote\include\RemoteState.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="..\remote\include\DeviceInterface.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="..\remote\include\ProfibusDevice.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="..\remote\include\RemoteInterface.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="..\remote\include\RemoteServer64.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="..\remote\include\RemoteServerInterface.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="..\remote\include\RemoteServiceConfig.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="..\remote\include\RemoteServiceInterface.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="..\remote\include\RemoteServiceModbusStandard.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="..\remote\include\RemoteServiceProfibus.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="..\remote\include\RemoteServiceS7.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="..\remote\include\RemoteServiceS7Interface.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="..\remote\include\S7Config.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="..\remote\include\S7Kernel64.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="..\remote\include\S7Simulator64.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="..\remote\include\S7Snap64.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BaseControl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\VolControl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IcpControl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LwfControl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LwvControl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WbfControl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WbmControl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PidControl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\NoneControl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AgitatorControl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LogoControl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LwsControl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LwpControl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MassflowAlarmControl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MeterControl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LwfTareControl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WbfTareControl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DosePerformanceAlarmControl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EmptyFeederControl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EmptyFeederTask.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CalibTask.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LwfTareTask.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WbfTareTask.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AlarmManager.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DriveControl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IcpDriveControl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LwbControl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GwbControl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RefillSignalControl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BatchControl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BatchTimeControl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="..\BASE\include\RefillTypes.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IcbControl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WeightBatchControl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ModuleSetpointControl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ModuleRampControl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ModuleExtSetpointControl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RefillWeightControl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LclControl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IflControl.h">
+      <Filter>Quelldateien\Control\IFL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ModuleLocalSetpointControl.h">
+      <Filter>Quelldateien\Control\LineControl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ModuleBatcherControl.h">
+      <Filter>Quelldateien\Control\LineControl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CalibGravTask.h">
+      <Filter>Quelldateien\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CalibVolTask.h">
+      <Filter>Quelldateien\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ModuleTotalizerControl.h">
+      <Filter>Quelldateien\Control\LineControl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AdsBaseControl.h">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AdsRefillControl.h">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AdsLineControl.h">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AdsWrapperControl.h">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AdsExtSetpointControl.h">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AdsRampControl.h">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AdsSetpointControl.h">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RefillControlVol.h">
+      <Filter>Quelldateien\Control\RefillControl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RefillControlGrav.h">
+      <Filter>Quelldateien\Control\RefillControl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RefillControl.h">
+      <Filter>Quelldateien\Control\RefillControl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AdsRefillControlVol.h">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\BASE\include\LCTypeDetection.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AdsIfsControl.h">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IfoControl.h">
+      <Filter>Quelldateien\Control\IFS\IFO</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IfuControl.h">
+      <Filter>Quelldateien\Control\IFS\IFU</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IfsControl.h">
+      <Filter>Quelldateien\Control\IFS</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AdsButton.h">
+      <Filter>Quelldateien\Control\AdsWrapper\AdsSensor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AdsDoseButton.h">
+      <Filter>Quelldateien\Control\AdsWrapper\AdsSensor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AdsDualState.h">
+      <Filter>Quelldateien\Control\AdsWrapper\AdsSensor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AdsLineButton.h">
+      <Filter>Quelldateien\Control\AdsWrapper\AdsSensor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AdsSensor.h">
+      <Filter>Quelldateien\Control\AdsWrapper\AdsSensor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AdsDoseSensor.h">
+      <Filter>Quelldateien\Control\AdsWrapper\AdsSensor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AdsDebounceDoseSensor.h">
+      <Filter>Quelldateien\Control\AdsWrapper\AdsSensor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AdsDualStateContainer.h">
+      <Filter>Quelldateien\Control\AdsWrapper\AdsSensor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AdsDebounceContainer.h">
+      <Filter>Quelldateien\Control\AdsWrapper\AdsSensor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AdsDebounceState.h">
+      <Filter>Quelldateien\Control\AdsWrapper\AdsSensor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AdsLineSensor.h">
+      <Filter>Quelldateien\Control\AdsWrapper\AdsSensor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AdsDebounceLineSensor.h">
+      <Filter>Quelldateien\Control\AdsWrapper\AdsSensor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AdsDriveControl.h">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AdsIcpControl.h">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AdsDoseMassflowOutput.h">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AdsPidControl.h">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AdsMassflowControl.h">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AdsRefillSignalControl.h">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AdsAgitatorControl.h">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AdsWbfControl.h">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AdsEmptyFeederTaskControl.h">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AdsTotalizerPulseControl.h">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ModuleTotalizerPulseControl.h">
+      <Filter>Quelldateien\Control\LineControl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EmptyFeederVolTask.h">
+      <Filter>Quelldateien\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EmptyFeederGravTask.h">
+      <Filter>Quelldateien\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TotalizerPulseThread.h">
+      <Filter>Quelldateien\Control\LineControl</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\NoiseAlarmControl.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DoseServerImpl.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DoseServer.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LCModuleImpl.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="src\NoneControl.cpp">
+      <Filter>Quelldateien\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LogoControl.cpp">
+      <Filter>Quelldateien\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MassflowAlarmControl.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DosePerformanceAlarmControl.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LwfTareTask.cpp">
+      <Filter>Quelldateien\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WbfTareTask.cpp">
+      <Filter>Quelldateien\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AlarmManager.cpp">
+      <Filter>Quelldateien\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DriveControl.cpp">
+      <Filter>Quelldateien\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GwbControl.cpp">
+      <Filter>Quelldateien\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BatchControl.cpp">
+      <Filter>Quelldateien\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BatchTimeAlarmControl.cpp">
+      <Filter>Quelldateien\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BaseControl.cpp">
+      <Filter>Quelldateien\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WeightBatchControl.cpp">
+      <Filter>Quelldateien\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MeterControl.cpp">
+      <Filter>Quelldateien\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LineControl.cpp">
+      <Filter>Quelldateien\Control\LineControl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ModuleRampControl.cpp">
+      <Filter>Quelldateien\Control\LineControl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ModuleExtSetpointControl.cpp">
+      <Filter>Quelldateien\Control\LineControl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WeightControl.cpp">
+      <Filter>Quelldateien\Control\WeightControl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FeederWeightControl.cpp">
+      <Filter>Quelldateien\Control\WeightControl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RemoteImpl.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IflControl.cpp">
+      <Filter>Quelldateien\Control\IFL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ModuleLineSetpointControl.cpp">
+      <Filter>Quelldateien\Control\LineControl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ModuleLocalSetpointControl.cpp">
+      <Filter>Quelldateien\Control\LineControl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ModuleSetpointControl.cpp">
+      <Filter>Quelldateien\Control\LineControl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ModuleBatcherControl.cpp">
+      <Filter>Quelldateien\Control\LineControl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IcbControl.cpp">
+      <Filter>Quelldateien\Control\ICB</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LclControl.cpp">
+      <Filter>Quelldateien\Control\LCL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LwfControl.cpp">
+      <Filter>Quelldateien\Control\LWF</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IcpControl.cpp">
+      <Filter>Quelldateien\Control\ICP</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PidControl.cpp">
+      <Filter>Quelldateien\Control\PID</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LwbControl.cpp">
+      <Filter>Quelldateien\Control\LWB</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WbmControl.cpp">
+      <Filter>Quelldateien\Control\WBM</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WbfControl.cpp">
+      <Filter>Quelldateien\Control\WBF</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VolControl.cpp">
+      <Filter>Quelldateien\Control\VOL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CalibGravTask.cpp">
+      <Filter>Quelldateien\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CalibVolTask.cpp">
+      <Filter>Quelldateien\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ModuleTotalizerControl.cpp">
+      <Filter>Quelldateien\Control\LineControl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AdsBaseControl.cpp">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AdsRefillControl.cpp">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AdsLineControl.cpp">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AdsWrapperControl.cpp">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AdsExtSetpointControl.cpp">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AdsRampControl.cpp">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AdsSetpointControl.cpp">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RefillControl.cpp">
+      <Filter>Quelldateien\Control\RefillControl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RefillSignalControl.cpp">
+      <Filter>Quelldateien\Control\RefillControl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RefillControlVol.cpp">
+      <Filter>Quelldateien\Control\RefillControl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RefillControlGrav.cpp">
+      <Filter>Quelldateien\Control\RefillControl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AdsRefillControlVol.cpp">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AdsIfsControl.cpp">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IfoControl.cpp">
+      <Filter>Quelldateien\Control\IFS\IFO</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IfuControl.cpp">
+      <Filter>Quelldateien\Control\IFS\IFU</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IfsControl.cpp">
+      <Filter>Quelldateien\Control\IFS</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AdsDriveControl.cpp">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AdsIcpControl.cpp">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AdsDoseMassflowOutput.cpp">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AdsPidControl.cpp">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AdsRefillSignalControl.cpp">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AdsAgitatorControl.cpp">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AdsWbfControl.cpp">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AdsEmptyFeederTaskControl.cpp">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AdsTotalizerPulseControl.cpp">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ModuleTotalizerPulseControl.cpp">
+      <Filter>Quelldateien\Control\LineControl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EmptyFeederVolTask.cpp">
+      <Filter>Quelldateien\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EmptyFeederGravTask.cpp">
+      <Filter>Quelldateien\Task</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LogLevel.def">
+      <Filter>LogLevel</Filter>
+    </None>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,35 @@
+//------------------------------------------------------------------------------------
+///
+///                           <<<   E A S Y C O N T R O L   >>>
+///
+///
+/// @brief  Declaration of module DoseData
+///
+/// @file   DoseData.def
+///
+///
+/// @coypright Ing.büro Hafer
+///            Branderweg 8A
+///            D-91058 Erlangen
+///
+/// @author    Detlef Hafer
+///
+//------------------------------------------------------------------------------------
+/// \addtogroup DoseDataLib
+/// @{
+#pragma once
+
+
+#define DOSIERUNG_OK			0
+#define DOSIERUNG_NOTOPEN		1
+#define DOSIERUNG_SAVEERROR		2
+#define DOSIERUNG_LOADERROR		3
+#define DOSIERUNG_CRCERROR		4
+#define DOSIERUNG_SAVEBAKERROR  5
+#define DOSIERUNG_INVALIDLENGTH 6
+
+#define DOSE_VOLUMETRISCH	0
+#define DOSE_GRAVIMETRISCH	1
+#define MAX_SETPOINT_LIMIT_GRAV 1.5F
+
+/// @}

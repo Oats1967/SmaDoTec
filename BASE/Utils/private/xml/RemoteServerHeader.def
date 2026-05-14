@@ -1,0 +1,12 @@
+    "-------------------------------------------------------------------\n\
+    Protocol:\n\
+    \t\tPROTOCOL_NONE\n\
+    \t\tPROTOCOL_OPENMODBUS\n\
+    \t\tPROTOCOL_PROFINET\n\
+    \t\tPROTOCOL_S7SNAP\n\
+    \t\tPROTOCOL_S7SIMULATOR\n\
+    \t\tPROTOCOL_PROFIBUS\n\n\
+    \t<Property>\n\
+    \t\t<Device>C:\\EasyControl\\config\\NOVO-TECH\\DeviceS71200.xml</Device>\n\
+    \t\t<Table>C:\\EasyControl\\config\\NOVO-TECH\\TableNovoTech.xml</Table>\n\
+    \t</Property>\n"

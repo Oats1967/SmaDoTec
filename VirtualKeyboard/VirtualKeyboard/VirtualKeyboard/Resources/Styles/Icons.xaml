@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <x:String x:Key="EnterIcon">&#xe31b;</x:String>
+    <x:String x:Key="BackspaceIcon">&#xe317;</x:String>
+    <x:String x:Key="ArrowUpIcon">&#xe316;</x:String>
+    <x:String x:Key="DoubleArrowUpIcon">&#xeacf;</x:String>
+    <x:String x:Key="ArrowRightIcon">&#xe5df;</x:String>
+    <x:String x:Key="ArrowLeftIcon">&#xe5de;</x:String>
+</ResourceDictionary>
+
+

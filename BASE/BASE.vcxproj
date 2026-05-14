@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{ab592a6e-7b7f-4f77-9d9d-618f24d8c87d}</ProjectGuid>
+    <RootNamespace>BASE</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>C:\DEVELOP\Cplusplus\EasyControl\BASE;C:\DEVELOP\Cplusplus\EasyControl\BASE\EasyTime\public;C:\DEVELOP\Cplusplus\EasyControl\BASE\Logger\public;C:\DEVELOP\Cplusplus\EasyControl\BASE\Mutex\public;C:\DEVELOP\Cplusplus\EasyControl\BASE\Task\public;C:\DEVELOP\Cplusplus\EasyControl\BASE\Utils\public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_LIB;_CRTDBG_MAP_ALLOC;LOGLEVELFILE="$(ProjectDir)LogLevel.def";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>C:\DEVELOP\Cplusplus;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>Default</LanguageStandard>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_LIB;LOGLEVELFILE="$(ProjectDir)LogLevel.def";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>C:\DEVELOP\Cplusplus\EasyControl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="crc\src\crc_16.c" />
+    <ClCompile Include="crc\src\crc_32.c" />
+    <ClCompile Include="crc\src\crc_8.c" />
+    <ClCompile Include="EasyTime\private\EasyTime.cpp" />
+    <ClCompile Include="math\private\linear.cpp" />
+    <ClCompile Include="src\DiagramConfig.cpp" />
+    <ClCompile Include="src\LogoConfig.cpp" />
+    <ClCompile Include="src\SimpleParser.cpp" />
+    <ClCompile Include="Task\private\Task.cpp" />
+    <ClCompile Include="Task\private\ThreadModul.cpp" />
+    <ClCompile Include="Utils\private\GatefilterCalculator.cpp" />
+    <ClCompile Include="Utils\private\GenericRemoteHandler.cpp" />
+    <ClCompile Include="Utils\private\GenericTime.cpp" />
+    <ClCompile Include="Utils\private\LogItem.cpp">
+      <DebugInformationFormat Condition="'$(Configuration)|$(Platform)'=='Release|x64'">None</DebugInformationFormat>
+    </ClCompile>
+    <ClCompile Include="Utils\private\LogItemList.cpp">
+      <DebugInformationFormat Condition="'$(Configuration)|$(Platform)'=='Release|x64'">None</DebugInformationFormat>
+    </ClCompile>
+    <ClCompile Include="Utils\private\MassflowMemory.cpp" />
+    <ClCompile Include="Utils\private\ProductItem.cpp" />
+    <ClCompile Include="Utils\private\ProductItemList.cpp" />
+    <ClCompile Include="Utils\private\RecipeItem.cpp">
+      <DebugInformationFormat Condition="'$(Configuration)|$(Platform)'=='Release|x64'">None</DebugInformationFormat>
+    </ClCompile>
+    <ClCompile Include="Utils\private\RecipeItemList.cpp">
+      <DebugInformationFormat Condition="'$(Configuration)|$(Platform)'=='Release|x64'">None</DebugInformationFormat>
+    </ClCompile>
+    <ClCompile Include="Utils\private\RecItem.cpp">
+      <DebugInformationFormat Condition="'$(Configuration)|$(Platform)'=='Release|x64'">None</DebugInformationFormat>
+    </ClCompile>
+    <ClCompile Include="Utils\private\RecItemList.cpp">
+      <DebugInformationFormat Condition="'$(Configuration)|$(Platform)'=='Release|x64'">None</DebugInformationFormat>
+    </ClCompile>
+    <ClCompile Include="Utils\private\StringUtil.cpp" />
+    <ClCompile Include="Utils\private\UserrRights.cpp">
+      <DebugInformationFormat Condition="'$(Configuration)|$(Platform)'=='Release|x64'">None</DebugInformationFormat>
+    </ClCompile>
+    <ClCompile Include="Utils\private\UserrRightsList.cpp" />
+    <ClCompile Include="Utils\private\xml\DiagramConfigXml.cpp" />
+    <ClCompile Include="Utils\private\xml\DoseServerXml.cpp" />
+    <ClCompile Include="Utils\private\xml\EasyControlConfigXml.cpp" />
+    <ClCompile Include="Utils\private\xml\EasyGraphConfigXml.cpp" />
+    <ClCompile Include="Utils\private\xml\EasyGraphSettingsXml.cpp" />
+    <ClCompile Include="Utils\private\xml\GenericRemoteXml.cpp" />
+    <ClCompile Include="Utils\private\xml\HelperXml.cpp" />
+    <ClCompile Include="Utils\private\xml\IOConfigXml.cpp" />
+    <ClCompile Include="Utils\private\xml\LayoutConfigXml.cpp" />
+    <ClCompile Include="Utils\private\xml\LineConfigXml.cpp" />
+    <ClCompile Include="Utils\private\xml\LineGraphConfigXml.cpp" />
+    <ClCompile Include="Utils\private\xml\LogoConfigXml.cpp" />
+    <ClCompile Include="Utils\private\xml\OpenModbusXml.cpp" />
+    <ClCompile Include="Utils\private\xml\ProductDatabaseXml.cpp" />
+    <ClCompile Include="Utils\private\xml\ProfibusDeviceXml.cpp" />
+    <ClCompile Include="Utils\private\xml\RecipefileXml.cpp" />
+    <ClCompile Include="Utils\private\xml\RecorderConfigXml.cpp" />
+    <ClCompile Include="Utils\private\xml\RecorderDescriptionXml.cpp" />
+    <ClCompile Include="Utils\private\xml\RemoteServerXml.cpp" />
+    <ClCompile Include="Utils\private\xml\S7SimulatorXml.cpp" />
+    <ClCompile Include="Utils\private\xml\S7SnapXml.cpp" />
+    <ClCompile Include="Utils\private\xml\SystemAlarmXml.cpp" />
+    <ClCompile Include="Utils\private\xml\SystemBackupXml.cpp" />
+    <ClCompile Include="Utils\private\xml\SystemConfigXml.cpp" />
+    <ClCompile Include="Utils\private\xml\TouchkeyboardXml.cpp" />
+    <ClCompile Include="xml\tinyxml2.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Base.h" />
+    <ClInclude Include="crc\src\crc.h" />
+    <ClInclude Include="include\2DHopper.h" />
+    <ClInclude Include="include\AlarmCategoryMap.h" />
+    <ClInclude Include="include\AlarmErrorMap.h" />
+    <ClInclude Include="include\AlarmTypes.h" />
+    <ClInclude Include="include\Date2Show.h" />
+    <ClInclude Include="include\DeviceConfig.h" />
+    <ClInclude Include="include\DeviceSimulatorConfig.h" />
+    <ClInclude Include="include\DiagramSettings.h" />
+    <ClInclude Include="include\DoseDataCache.h" />
+    <ClInclude Include="include\DoseServerConfig.h" />
+    <ClInclude Include="include\DoseStatistics.h" />
+    <ClInclude Include="include\DoseTypeMap.h" />
+    <ClInclude Include="include\EasyControlConfig.h" />
+    <ClInclude Include="include\EasyGraphConfig.h" />
+    <ClInclude Include="include\EasyGraphSettings.h" />
+    <ClInclude Include="include\EncoderState.h" />
+    <ClInclude Include="include\FeederTypeMap.h" />
+    <ClInclude Include="include\FieldTypeStack.h" />
+    <ClInclude Include="include\GenericRemoteConfig.h" />
+    <ClInclude Include="include\IOActionType.h" />
+    <ClInclude Include="include\IOConfig.h" />
+    <ClInclude Include="include\IOLineConfig.h" />
+    <ClInclude Include="include\Language.h" />
+    <ClInclude Include="include\LanguageMap.h" />
+    <ClInclude Include="include\LCPriorityList.h" />
+    <ClInclude Include="include\LCSubTypesMap.h" />
+    <ClInclude Include="include\LCType.h" />
+    <ClInclude Include="include\LCTypesMap.h" />
+    <ClInclude Include="include\LineConfig.h" />
+    <ClInclude Include="include\LogoConfig.h" />
+    <ClInclude Include="include\LogoLocking.h" />
+    <ClInclude Include="include\LogoLockingMap.h" />
+    <ClInclude Include="include\MassflowSelect.h" />
+    <ClInclude Include="include\MassflowSelectMap.h" />
+    <ClInclude Include="include\ModbusConfig.h" />
+    <ClInclude Include="include\ModuleTotalizerImpulseConfig.h" />
+    <ClInclude Include="include\MutexContainer.h" />
+    <ClInclude Include="include\OneScrewConfig.h" />
+    <ClInclude Include="include\Point.h" />
+    <ClInclude Include="include\ProductDatabaseMap.h" />
+    <ClInclude Include="include\ProfibusTypes.h" />
+    <ClInclude Include="include\RecorderDescription.h" />
+    <ClInclude Include="include\RecorderDescriptionMap.h" />
+    <ClInclude Include="include\RefillSignalType.h" />
+    <ClInclude Include="include\RefillSignalTypeMap.h" />
+    <ClInclude Include="include\RemoteAlarmStatusMap.h" />
+    <ClInclude Include="include\RemoteCategoryMap.h" />
+    <ClInclude Include="include\RemoteConfig.h" />
+    <ClInclude Include="include\RemoteFieldTypeMap.h" />
+    <ClInclude Include="include\RemoteLineAlarmStatusMap.h" />
+    <ClInclude Include="include\RemoteLineProcessControlMap.h" />
+    <ClInclude Include="include\RemoteLineProcessStatusMap.h" />
+    <ClInclude Include="include\RemoteMaskMap.h" />
+    <ClInclude Include="include\RemoteProcessControlMap.h" />
+    <ClInclude Include="include\RemoteProcessStatusMap.h" />
+    <ClInclude Include="include\RemoteS7Types.h" />
+    <ClInclude Include="include\RemoteServerConfig.h" />
+    <ClInclude Include="include\RemoteState.h" />
+    <ClInclude Include="include\Size.h" />
+    <ClInclude Include="include\StackType.h" />
+    <ClInclude Include="include\Statemachine.h" />
+    <ClInclude Include="include\StringEnumMap.h" />
+    <ClInclude Include="include\SystemBackup.h" />
+    <ClInclude Include="include\SystemConfig.h" />
+    <ClInclude Include="include\TouchkeyboardConfig.h" />
+    <ClInclude Include="include\TrendGraphicConfig.h" />
+    <ClInclude Include="include\TypeEqual.h" />
+    <ClInclude Include="include\UserClassMap.h" />
+    <ClInclude Include="include\WbmStates.h" />
+    <ClInclude Include="include\XMLStringEnumMap.h" />
+    <ClInclude Include="math\public\DoseCurve.h" />
+    <ClInclude Include="math\public\linear.h" />
+    <ClInclude Include="math\public\PidControl.h" />
+    <ClInclude Include="types.h" />
+    <ClInclude Include="Utils\public\BitOp.h" />
+    <ClInclude Include="Utils\public\FifoBuffer.h" />
+    <ClInclude Include="Utils\public\FloatRingBuffer.h" />
+    <ClInclude Include="Utils\public\FloatRingBufferEx.h" />
+    <ClInclude Include="Utils\public\GenericList.h" />
+    <ClInclude Include="Utils\public\GenericTime.h" />
+    <ClInclude Include="Utils\public\LogItem.h" />
+    <ClInclude Include="Utils\public\LogItemList.h" />
+    <ClInclude Include="Utils\public\MassflowMemory.h" />
+    <ClInclude Include="Utils\public\MeasuredBuffer.h" />
+    <ClInclude Include="Utils\public\Memory.h" />
+    <ClInclude Include="Utils\public\ProductItem.h" />
+    <ClInclude Include="Utils\public\ProductItemList.h" />
+    <ClInclude Include="Utils\public\RingBuffer.h" />
+    <ClInclude Include="Utils\public\Timer.h" />
+    <ClInclude Include="Utils\public\UserRights.h" />
+    <ClInclude Include="Utils\public\UserRightsList.h" />
+    <ClInclude Include="Utils\public\WeightPair.h" />
+    <ClInclude Include="Utils\public\xml\DiagramConfigXml.h" />
+    <ClInclude Include="Utils\public\xml\DoseServerXml.h" />
+    <ClInclude Include="Utils\public\xml\EasyControlConfigXml.h" />
+    <ClInclude Include="Utils\public\xml\EasyGraphConfigXml.h" />
+    <ClInclude Include="Utils\public\xml\GenericRemoteXml.h" />
+    <ClInclude Include="Utils\public\xml\IOConfigXml.h" />
+    <ClInclude Include="Utils\public\xml\LayoutConfigXml.h" />
+    <ClInclude Include="Utils\public\xml\LineConfigXml.h" />
+    <ClInclude Include="Utils\public\xml\LineGraphConfigXml.h" />
+    <ClInclude Include="Utils\public\xml\LogoConfigXml.h" />
+    <ClInclude Include="Utils\public\xml\OpenModbusXml.h" />
+    <ClInclude Include="Utils\public\xml\ProductDatabaseXml.h" />
+    <ClInclude Include="Utils\public\xml\ProfibusDeviceXml.h" />
+    <ClInclude Include="Utils\public\xml\ProfibusXml.h" />
+    <ClInclude Include="Utils\public\xml\RecipefileXml.h" />
+    <ClInclude Include="Utils\public\xml\RemoteServerXml.h" />
+    <ClInclude Include="Utils\public\xml\S7SnapXml.h" />
+    <ClInclude Include="Utils\public\xml\ScaleConfigXml.h" />
+    <ClInclude Include="Utils\public\xml\SystemAlarmXml.h" />
+    <ClInclude Include="Utils\public\xml\SystemBackupXml.h" />
+    <ClInclude Include="Utils\public\xml\SystemConfigXml.h" />
+    <ClInclude Include="Utils\public\xml\TouchkeyboardXml.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="include\AlarmTypes.def" />
+    <None Include="LogLevel.def" />
+    <None Include="Utils\private\xml\GenericRemoteHeader.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Logger\Logger.vcxproj">
+      <Project>{6fe1dc42-88b7-4ebd-a91f-73826b869961}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

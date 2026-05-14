@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{16a959bf-9bab-4847-b831-861ee91d1ba5}</ProjectGuid>
+    <RootNamespace>DoseServer</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <PublicIncludeDirectories>$(PublicIncludeDirectories)</PublicIncludeDirectories>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;DOSESERVER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;DOSESERVER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;DOSESERVER_EXPORTS;_WINDOWS;_USRDLL;_CRTDBG_MAP_ALLOC;LOGLEVELFILE="$(ProjectDir)LogLevel.def";__SIM_WEIGHT_GUI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>C:\DEVELOP\Cplusplus\EasyControl;C:\DEVELOP\Cplusplus\EasyControl\RemoteServer\include;C:\DEVELOP\Cplusplus\EasyControl\DoseServer\include;C:\DEVELOP\Cplusplus\EasyControl\DoseServer\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <UndefinePreprocessorDefinitions>__SIM_WEIGHT_GUI</UndefinePreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+      <AdditionalLibraryDirectories>C:\TwinCAT\AdsApi\TcAdsDll\x64\lib;C:\TwinCAT\AdsApi\TcAdsDll\Lib\x64;C:\DEVELOP\Cplusplus\EasyControl\DoseServer\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>TcAdsDll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;DOSESERVER_EXPORTS;_WINDOWS;_USRDLL;LOGLEVELFILE="$(ProjectDir)LogLevel.def";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>C:\DEVELOP\Cplusplus\EasyControl;C:\DEVELOP\Cplusplus\EasyControl\RemoteServer\include;C:\DEVELOP\Cplusplus\EasyControl\DoseServer\include;C:\DEVELOP\Cplusplus\EasyControl\DoseServer\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <DebugInformationFormat>None</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+      <AdditionalDependencies>TcAdsDll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\TwinCAT\AdsApi\TcAdsDll\x64\lib;C:\TwinCAT\AdsApi\TcAdsDll\Lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\BASE\include\LCTypeDetection.h" />
+    <ClInclude Include="..\BASE\include\RefillTypes.h" />
+    <ClInclude Include="..\remote\include\DeviceInterface.h" />
+    <ClInclude Include="..\remote\include\ProfibusDevice.h" />
+    <ClInclude Include="..\remote\include\ProfibusInterface.h" />
+    <ClInclude Include="..\remote\include\RemoteInterface.h" />
+    <ClInclude Include="..\remote\include\RemoteServer64.h" />
+    <ClInclude Include="..\remote\include\RemoteServerInterface.h" />
+    <ClInclude Include="..\remote\include\RemoteServiceConfig.h" />
+    <ClInclude Include="..\remote\include\RemoteServiceInterface.h" />
+    <ClInclude Include="..\remote\include\RemoteServiceModbusStandard.h" />
+    <ClInclude Include="..\remote\include\RemoteServiceProfibus.h" />
+    <ClInclude Include="..\remote\include\RemoteServiceS7.h" />
+    <ClInclude Include="..\remote\include\RemoteServiceS7Interface.h" />
+    <ClInclude Include="..\remote\include\RemoteState.h" />
+    <ClInclude Include="..\remote\include\S7Config.h" />
+    <ClInclude Include="..\remote\include\S7Kernel64.h" />
+    <ClInclude Include="..\remote\include\S7Simulator64.h" />
+    <ClInclude Include="..\remote\include\S7Snap64.h" />
+    <ClInclude Include="include\DoseServer.h" />
+    <ClInclude Include="include\DoseServerInterface.h" />
+    <ClInclude Include="include\LCModuleInterface.h" />
+    <ClInclude Include="src\AdsAgitatorControl.h" />
+    <ClInclude Include="src\AdsBaseControl.h" />
+    <ClInclude Include="src\AdsButton.h" />
+    <ClInclude Include="src\AdsDebounceContainer.h" />
+    <ClInclude Include="src\AdsDebounceDoseSensor.h" />
+    <ClInclude Include="src\AdsDebounceLineSensor.h" />
+    <ClInclude Include="src\AdsDebounceState.h" />
+    <ClInclude Include="src\AdsDoseButton.h" />
+    <ClInclude Include="src\AdsDoseMassflowOutput.h" />
+    <ClInclude Include="src\AdsDoseSensor.h" />
+    <ClInclude Include="src\AdsDriveControl.h" />
+    <ClInclude Include="src\AdsDualState.h" />
+    <ClInclude Include="src\AdsDualStateContainer.h" />
+    <ClInclude Include="src\AdsEmptyFeederTaskControl.h" />
+    <ClInclude Include="src\AdsExtSetpointControl.h" />
+    <ClInclude Include="src\AdsIcpControl.h" />
+    <ClInclude Include="src\AdsIfsControl.h" />
+    <ClInclude Include="src\AdsLineButton.h" />
+    <ClInclude Include="src\AdsLineControl.h" />
+    <ClInclude Include="src\AdsLineSensor.h" />
+    <ClInclude Include="src\AdsMassflowControl.h" />
+    <ClInclude Include="src\AdsPidControl.h" />
+    <ClInclude Include="src\AdsRampControl.h" />
+    <ClInclude Include="src\AdsRefillControl.h" />
+    <ClInclude Include="src\AdsRefillControlVol.h" />
+    <ClInclude Include="src\AdsRefillSignalControl.h" />
+    <ClInclude Include="src\AdsSensor.h" />
+    <ClInclude Include="src\AdsSetpointControl.h" />
+    <ClInclude Include="src\AdsTotalizerPulseControl.h" />
+    <ClInclude Include="src\AdsWbfControl.h" />
+    <ClInclude Include="src\AdsWrapperControl.h" />
+    <ClInclude Include="src\AgitatorControl.h" />
+    <ClInclude Include="src\AlarmManager.h" />
+    <ClInclude Include="src\BaseControl.h" />
+    <ClInclude Include="src\BatchControl.h" />
+    <ClInclude Include="src\BatchTimeControl.h" />
+    <ClInclude Include="src\CalibGravTask.h" />
+    <ClInclude Include="src\CalibTask.h" />
+    <ClInclude Include="src\CalibVolTask.h" />
+    <ClInclude Include="src\DeviceServerImpl.h" />
+    <ClInclude Include="src\DosePerformanceAlarmControl.h" />
+    <ClInclude Include="src\DoseServerImpl.h" />
+    <ClInclude Include="src\DoseServerXml.h" />
+    <ClInclude Include="src\DriveControl.h" />
+    <ClInclude Include="src\EmptyFeederControl.h" />
+    <ClInclude Include="src\EmptyFeederGravTask.h" />
+    <ClInclude Include="src\EmptyFeederTask.h" />
+    <ClInclude Include="src\EmptyFeederVolTask.h" />
+    <ClInclude Include="src\GwbControl.h" />
+    <ClInclude Include="src\IcbControl.h" />
+    <ClInclude Include="src\IcpControl.h" />
+    <ClInclude Include="src\IcpDriveControl.h" />
+    <ClInclude Include="src\IflControl.h" />
+    <ClInclude Include="src\IfoControl.h" />
+    <ClInclude Include="src\IfsControl.h" />
+    <ClInclude Include="src\IfuControl.h" />
+    <ClInclude Include="src\LclControl.h" />
+    <ClInclude Include="src\LCModuleImpl.h" />
+    <ClInclude Include="src\LineControl.h" />
+    <ClInclude Include="src\LogoControl.h" />
+    <ClInclude Include="src\LwbControl.h" />
+    <ClInclude Include="src\LwfControl.h" />
+    <ClInclude Include="src\LwfTareControl.h" />
+    <ClInclude Include="src\LwfTareTask.h" />
+    <ClInclude Include="src\LwpControl.h" />
+    <ClInclude Include="src\LwsControl.h" />
+    <ClInclude Include="src\LwvControl.h" />
+    <ClInclude Include="src\MassflowAlarmControl.h" />
+    <ClInclude Include="src\MeterControl.h" />
+    <ClInclude Include="src\ModuleBatcherControl.h" />
+    <ClInclude Include="src\ModuleExtSetpointControl.h" />
+    <ClInclude Include="src\ModuleLocalSetpointControl.h" />
+    <ClInclude Include="src\ModuleRampControl.h" />
+    <ClInclude Include="src\ModuleSetpointControl.h" />
+    <ClInclude Include="src\ModuleTotalizerControl.h" />
+    <ClInclude Include="src\ModuleTotalizerPulseControl.h" />
+    <ClInclude Include="src\NoneControl.h" />
+    <ClInclude Include="src\PidControl.h" />
+    <ClInclude Include="src\ProfibusImpl.h" />
+    <ClInclude Include="src\RefillControl.h" />
+    <ClInclude Include="src\RefillControlGrav.h" />
+    <ClInclude Include="src\RefillControlVol.h" />
+    <ClInclude Include="src\RefillSignalControl.h" />
+    <ClInclude Include="src\RefillWeightControl.h" />
+    <ClInclude Include="src\RemoteImpl.h" />
+    <ClInclude Include="src\SleepTimer.h" />
+    <ClInclude Include="src\StatistikBuffer.h" />
+    <ClInclude Include="src\StatistikType.h" />
+    <ClInclude Include="src\SyControl.h" />
+    <ClInclude Include="src\TotalizerPulseThread.h" />
+    <ClInclude Include="src\VolControl.h" />
+    <ClInclude Include="src\WbfControl.h" />
+    <ClInclude Include="src\WbfEncoderControl.h" />
+    <ClInclude Include="src\WbfTareControl.h" />
+    <ClInclude Include="src\WbfTareTask.h" />
+    <ClInclude Include="src\WbmControl.h" />
+    <ClInclude Include="src\WeightBatchControl.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\AdsAgitatorControl.cpp" />
+    <ClCompile Include="src\AdsBaseControl.cpp" />
+    <ClCompile Include="src\AdsDoseMassflowOutput.cpp" />
+    <ClCompile Include="src\AdsDriveControl.cpp" />
+    <ClCompile Include="src\AdsEmptyFeederTaskControl.cpp" />
+    <ClCompile Include="src\AdsExtSetpointControl.cpp" />
+    <ClCompile Include="src\AdsIcpControl.cpp" />
+    <ClCompile Include="src\AdsIfsControl.cpp" />
+    <ClCompile Include="src\AdsLineControl.cpp" />
+    <ClCompile Include="src\AdsPidControl.cpp" />
+    <ClCompile Include="src\AdsRampControl.cpp" />
+    <ClCompile Include="src\AdsRefillControl.cpp" />
+    <ClCompile Include="src\AdsRefillControlVol.cpp" />
+    <ClCompile Include="src\AdsRefillSignalControl.cpp" />
+    <ClCompile Include="src\AdsSetpointControl.cpp" />
+    <ClCompile Include="src\AdsTotalizerPulseControl.cpp" />
+    <ClCompile Include="src\AdsWbfControl.cpp" />
+    <ClCompile Include="src\AdsWrapperControl.cpp" />
+    <ClCompile Include="src\AlarmManager.cpp" />
+    <ClCompile Include="src\BaseControl.cpp" />
+    <ClCompile Include="src\BatchControl.cpp" />
+    <ClCompile Include="src\BatchTimeAlarmControl.cpp" />
+    <ClCompile Include="src\CalibGravTask.cpp" />
+    <ClCompile Include="src\CalibVolTask.cpp" />
+    <ClCompile Include="src\DosePerformanceAlarmControl.cpp" />
+    <ClCompile Include="src\DoseServer.cpp" />
+    <ClCompile Include="src\DoseServerImpl.cpp" />
+    <ClCompile Include="src\DriveControl.cpp" />
+    <ClCompile Include="src\EmptyFeederGravTask.cpp" />
+    <ClCompile Include="src\EmptyFeederVolTask.cpp" />
+    <ClCompile Include="src\FeederWeightControl.cpp" />
+    <ClCompile Include="src\GwbControl.cpp" />
+    <ClCompile Include="src\IcbControl.cpp" />
+    <ClCompile Include="src\IcpControl.cpp" />
+    <ClCompile Include="src\IflControl.cpp" />
+    <ClCompile Include="src\IfoControl.cpp" />
+    <ClCompile Include="src\IfsControl.cpp" />
+    <ClCompile Include="src\IfuControl.cpp" />
+    <ClCompile Include="src\LclControl.cpp" />
+    <ClCompile Include="src\LCModuleImpl.cpp" />
+    <ClCompile Include="src\LineControl.cpp" />
+    <ClCompile Include="src\LogoControl.cpp" />
+    <ClCompile Include="src\LwbControl.cpp" />
+    <ClCompile Include="src\LwfControl.cpp" />
+    <ClCompile Include="src\LwfTareTask.cpp" />
+    <ClCompile Include="src\MassflowAlarmControl.cpp" />
+    <ClCompile Include="src\MeterControl.cpp" />
+    <ClCompile Include="src\ModuleBatcherControl.cpp" />
+    <ClCompile Include="src\ModuleExtSetpointControl.cpp" />
+    <ClCompile Include="src\ModuleLineSetpointControl.cpp" />
+    <ClCompile Include="src\ModuleLocalSetpointControl.cpp" />
+    <ClCompile Include="src\ModuleRampControl.cpp" />
+    <ClCompile Include="src\ModuleSetpointControl.cpp" />
+    <ClCompile Include="src\ModuleTotalizerControl.cpp" />
+    <ClCompile Include="src\ModuleTotalizerPulseControl.cpp" />
+    <ClCompile Include="src\NoiseAlarmControl.cpp" />
+    <ClCompile Include="src\NoneControl.cpp" />
+    <ClCompile Include="src\PidControl.cpp" />
+    <ClCompile Include="src\RefillControl.cpp" />
+    <ClCompile Include="src\RefillControlGrav.cpp" />
+    <ClCompile Include="src\RefillControlVol.cpp" />
+    <ClCompile Include="src\RefillSignalControl.cpp" />
+    <ClCompile Include="src\RemoteImpl.cpp" />
+    <ClCompile Include="src\VolControl.cpp" />
+    <ClCompile Include="src\WbfControl.cpp" />
+    <ClCompile Include="src\WbfTareTask.cpp" />
+    <ClCompile Include="src\WbmControl.cpp" />
+    <ClCompile Include="src\WeightBatchControl.cpp" />
+    <ClCompile Include="src\WeightControl.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AdsClient\AdsClient.vcxproj">
+      <Project>{1792e18c-78c6-4f8f-8581-8a8ed0736fa8}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\BASE\BASE.vcxproj">
+      <Project>{ab592a6e-7b7f-4f77-9d9d-618f24d8c87d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\DoseDataLib\DoseDataLib.vcxproj">
+      <Project>{9ddebfe2-045f-4034-8214-8fcd3dc20240}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\RemoteServer\RemoteServer.vcxproj">
+      <Project>{533affdf-f9b0-4a80-b79d-1b6841d5fd6f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\remote\RemoteServiceModbusStandard\RemoteServiceModbusStandard.vcxproj">
+      <Project>{f3f14ce1-1a8c-4fb1-85c8-b6cccb01c793}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\remote\RemoteServiceProfibus\RemoteServiceProfibus.vcxproj">
+      <Project>{d8224c3e-3ee2-42f9-8c9c-652f9dabd6e2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\remote\RemoteServiceS7\RemoteServiceS7.vcxproj">
+      <Project>{5b322d67-dd8a-4997-bae8-9bc5a3799bc6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\remote\S7Simulator\S7Simulator.vcxproj">
+      <Project>{0b3aaada-ea20-442b-ba79-8b907794312d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\remote\S7Snap\S7Snap.vcxproj">
+      <Project>{ff6f78aa-202a-45aa-a0aa-34849e2a6e07}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LogLevel.def" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

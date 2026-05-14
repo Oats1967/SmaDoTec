@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Quelldateien">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Headerdateien">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Quelldateien\Charts">
+      <UniqueIdentifier>{1a55d81e-0b89-4626-b93d-a6555fd9485e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Charts">
+      <UniqueIdentifier>{39e0e4fd-b886-48f5-9985-005d9eb51335}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\License">
+      <UniqueIdentifier>{3c70c5ed-7b5f-47ae-a63b-72c0e33cb223}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Tools">
+      <UniqueIdentifier>{9f74c26b-baf5-46a4-bf64-5bb6ffc6f1ce}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="EasyGraph.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="framework.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="MainFrm.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="ChildFrm.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="EasyGraphDoc.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="EasyGraphView.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="FileView.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewTree.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="OutputWnd.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="PropertiesWnd.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="CalendarBar.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="SplashWindow.h">
+      <Filter>Quelldateien</Filter>
+    </ClInclude>
+    <ClInclude Include="wmuser.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="WorkspaceBar.h">
+      <Filter>Quelldateien</Filter>
+    </ClInclude>
+    <ClInclude Include="global.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Statistics.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="GroupView.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="VirtualSeries.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="ChartLineView.h">
+      <Filter>Headerdateien\Charts</Filter>
+    </ClInclude>
+    <ClInclude Include="ChartMassflow.h">
+      <Filter>Headerdateien\Charts</Filter>
+    </ClInclude>
+    <ClInclude Include="ChartNetweight.h">
+      <Filter>Headerdateien\Charts</Filter>
+    </ClInclude>
+    <ClInclude Include="ChartSetpoint.h">
+      <Filter>Headerdateien\Charts</Filter>
+    </ClInclude>
+    <ClInclude Include="ChartTotalizer.h">
+      <Filter>Headerdateien\Charts</Filter>
+    </ClInclude>
+    <ClInclude Include="ChartDriveCommand.h">
+      <Filter>Headerdateien\Charts</Filter>
+    </ClInclude>
+    <ClInclude Include="ChartDoseperformance.h">
+      <Filter>Headerdateien\Charts</Filter>
+    </ClInclude>
+    <ClInclude Include="ChartRotSpeed.h">
+      <Filter>Headerdateien\Charts</Filter>
+    </ClInclude>
+    <ClInclude Include="ChartCombinedView.h">
+      <Filter>Headerdateien\Charts</Filter>
+    </ClInclude>
+    <ClInclude Include="CustomChart.h">
+      <Filter>Quelldateien\Charts</Filter>
+    </ClInclude>
+    <ClInclude Include="CustomYAxis.h">
+      <Filter>Headerdateien\Charts</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckBox.h">
+      <Filter>Quelldateien</Filter>
+    </ClInclude>
+    <ClInclude Include="MassflowSelectMap.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="..\EasyControl\BASE\include\EasyGraphSettings.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadResource.h">
+      <Filter>Quelldateien</Filter>
+    </ClInclude>
+    <ClInclude Include="WrapperBase.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="EditCtrl.h">
+      <Filter>Quelldateien\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="MFCMacros.h">
+      <Filter>Quelldateien\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\XLicense\LicenseLib\hostid.h">
+      <Filter>Quelldateien\License</Filter>
+    </ClInclude>
+    <ClInclude Include="..\XLicense\LicenseLib\identify.h">
+      <Filter>Quelldateien\License</Filter>
+    </ClInclude>
+    <ClInclude Include="..\XLicense\LicenseLib\identifyB.h">
+      <Filter>Quelldateien\License</Filter>
+    </ClInclude>
+    <ClInclude Include="..\XLicense\LicenseLib\License.h">
+      <Filter>Quelldateien\License</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="EasyGraph.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="MainFrm.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="EasyGraphDoc.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="EasyGraphView.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewTree.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="PropertiesWnd.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="CalendarBar.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="SplashWindow.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="WorkspaceBar.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Statistics.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="GroupView.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="ChartDriveCommand.cpp">
+      <Filter>Quelldateien\Charts</Filter>
+    </ClCompile>
+    <ClCompile Include="ChartLineView.cpp">
+      <Filter>Quelldateien\Charts</Filter>
+    </ClCompile>
+    <ClCompile Include="ChartMassflow.cpp">
+      <Filter>Quelldateien\Charts</Filter>
+    </ClCompile>
+    <ClCompile Include="ChartNetweight.cpp">
+      <Filter>Quelldateien\Charts</Filter>
+    </ClCompile>
+    <ClCompile Include="ChartSetpoint.cpp">
+      <Filter>Quelldateien\Charts</Filter>
+    </ClCompile>
+    <ClCompile Include="ChartTotalizer.cpp">
+      <Filter>Quelldateien\Charts</Filter>
+    </ClCompile>
+    <ClCompile Include="ChartDoseperformance.cpp">
+      <Filter>Quelldateien\Charts</Filter>
+    </ClCompile>
+    <ClCompile Include="ChartRotSpeed.cpp">
+      <Filter>Quelldateien\Charts</Filter>
+    </ClCompile>
+    <ClCompile Include="ChartCombinedView.cpp">
+      <Filter>Quelldateien\Charts</Filter>
+    </ClCompile>
+    <ClCompile Include="CustomChart.cpp">
+      <Filter>Quelldateien\Charts</Filter>
+    </ClCompile>
+    <ClCompile Include="CustomYAxis.cpp">
+      <Filter>Quelldateien\Charts</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadResource.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="WrapperBase.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="EditCtrl.cpp">
+      <Filter>Quelldateien\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="MFCMacros.cpp">
+      <Filter>Quelldateien\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\XLicense\LicenseLib\hostid.cpp">
+      <Filter>Quelldateien\License</Filter>
+    </ClCompile>
+    <ClCompile Include="..\XLicense\LicenseLib\IdentifyB.cpp">
+      <Filter>Quelldateien\License</Filter>
+    </ClCompile>
+    <ClCompile Include="..\XLicense\LicenseLib\license.cpp">
+      <Filter>Quelldateien\License</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

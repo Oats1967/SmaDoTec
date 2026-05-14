@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{1792e18c-78c6-4f8f-8581-8a8ed0736fa8}</ProjectGuid>
+    <RootNamespace>AdsClient</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>AdsClient</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;ADSCLIENT_EXPORTS;_WINDOWS;_USRDLL;__EASYCONTROL;__SIM_RELEASE;__SIM_PESA;__SIM_SOEMER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>C:\DEVELOP\Cplusplus\EasyControl\AdsClient;C:\DEVELOP\Cplusplus\EasyControl;C:\DEVELOP\Cplusplus\EasyControl\BASE;C:\TwinCAT\AdsApi\TcAdsDll\Include;C:\DEVELOP\Cplusplus\EasyControl\AdsClient\src\public;C:\DEVELOP\Cplusplus\EasyControl\AdsClient\src\private;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <UndefinePreprocessorDefinitions>__SIM_RELEASE;__SIM_PESA;__SIM_SOEMER;%(UndefinePreprocessorDefinitions)</UndefinePreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;ADSCLIENT_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;ADSCLIENT_EXPORTS;_WINDOWS;_USRDLL;__EASYCONTROL;_CRTDBG_MAP_ALLOC;__SIM_RELEASE;__SIM_SOEMER;__SIM_PESA;__SIM_LAUMAS;__SIM_KTRON;LOGLEVELFILE="$(ProjectDir)LogLevel.def";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>C:\DEVELOP\Cplusplus\EasyControl;C:\TwinCAT\AdsApi\TcAdsDll\Include;C:\DEVELOP\Cplusplus\EasyControl\AdsClient\include;C:\DEVELOP\Cplusplus\EasyControl\AdsClient\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <UndefinePreprocessorDefinitions>%(UndefinePreprocessorDefinitions)</UndefinePreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;ADSCLIENT_EXPORTS;_WINDOWS;_USRDLL;__EASYCONTROL;LOGLEVELFILE="$(ProjectDir)LogLevel.def";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>C:\DEVELOP\Cplusplus\EasyControl;C:\TwinCAT\AdsApi\TcAdsDll\Include;C:\DEVELOP\Cplusplus\EasyControl\AdsClient\include;C:\DEVELOP\Cplusplus\EasyControl\AdsClient\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <DebugInformationFormat>None</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\private\AdsBusEtherCAT.cpp" />
+    <ClCompile Include="src\private\AdsBusEtherCATSim.cpp" />
+    <ClCompile Include="src\private\AdsBusRS485.cpp" />
+    <ClCompile Include="src\private\AdsBusRS485Sim.cpp" />
+    <ClCompile Include="src\private\AdsClient.cpp" />
+    <ClCompile Include="src\private\AdsClientImpl.cpp" />
+    <ClCompile Include="src\private\AdsDoseImpl.cpp" />
+    <ClCompile Include="src\private\AdsHelper.cpp" />
+    <ClCompile Include="src\private\AdsKTronCellImpl.cpp" />
+    <ClCompile Include="src\private\AdsKTronCellSim.cpp" />
+    <ClCompile Include="src\private\AdsLaumasCellImpl.cpp" />
+    <ClCompile Include="src\private\AdsLaumasCellSim.cpp" />
+    <ClCompile Include="src\private\AdsLineImpl.cpp" />
+    <ClCompile Include="src\private\AdsPesaCellImpl.cpp" />
+    <ClCompile Include="src\private\AdsPesaCellSim.cpp" />
+    <ClCompile Include="src\private\AdsProfiAdapter.cpp" />
+    <ClCompile Include="src\private\AdsSoemerCellImpl.cpp" />
+    <ClCompile Include="src\private\AdsSoemerCellSim.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\AdsClient.h" />
+    <ClInclude Include="include\AdsTypen.h" />
+    <ClInclude Include="src\private\AdsAnalogInput.h" />
+    <ClInclude Include="src\private\AdsAnalogOutput.h" />
+    <ClInclude Include="src\private\AdsBusEtherCAT.h" />
+    <ClInclude Include="src\private\AdsBusInterface.h" />
+    <ClInclude Include="src\private\AdsBusRS485.h" />
+    <ClInclude Include="src\private\AdsCell.h" />
+    <ClInclude Include="src\private\AdsControlImpl.h" />
+    <ClInclude Include="src\private\AdsDigitalInput.h" />
+    <ClInclude Include="src\private\AdsDigitalOutput.h" />
+    <ClInclude Include="src\private\AdsDoseImpl.h" />
+    <ClInclude Include="src\private\AdsGenericInput.h" />
+    <ClInclude Include="src\private\AdsGenericOutput.h" />
+    <ClInclude Include="src\private\AdsHelper.h" />
+    <ClInclude Include="src\private\AdsHelperProfibus.h" />
+    <ClInclude Include="src\private\AdsHelperTypes.h" />
+    <ClInclude Include="src\private\AdsKTronCellImpl.h" />
+    <ClInclude Include="src\private\AdsLaumasCellImpl.h" />
+    <ClInclude Include="src\private\AdsLaumasCellSim.h" />
+    <ClInclude Include="src\private\AdsLineImpl.h" />
+    <ClInclude Include="src\private\AdsPesaCellSim.h" />
+    <ClInclude Include="src\private\AdsProfiAdapter.h" />
+    <ClInclude Include="src\private\AdsProfiNet.h" />
+    <ClInclude Include="src\private\AdsSoemerCellImpl.h" />
+    <ClInclude Include="src\private\AdsSoemerCellSim.h" />
+    <ClInclude Include="src\private\EasyControlVer.h" />
+    <ClInclude Include="src\public\AdsClientImpl.h" />
+    <ClInclude Include="src\public\AdsClientInterface.h" />
+    <ClInclude Include="src\public\AdsLoadCellInterface.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BASE\BASE.vcxproj">
+      <Project>{ab592a6e-7b7f-4f77-9d9d-618f24d8c87d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Logger\Logger.vcxproj">
+      <Project>{6fe1dc42-88b7-4ebd-a91f-73826b869961}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LogLevel.def" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

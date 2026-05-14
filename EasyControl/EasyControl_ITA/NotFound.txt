@@ -1,0 +1,35 @@
+..\\ressource\\BtRadioOff.bmp
+..\\ressource\\BtRadioOn.bmp
+..\\Ressource\\IconFile.ico
+Start AnyViewer
+Daten exportieren
+Daten importieren
+Remote
+Totalizer [kg]
+1000.00
+1000.00
+Speedbox
+Integral Control Port Batcher - ICB
+Rampeneigenschaften
+Tara
+Einlauftrichter - IFU
+Gewichtsdemo
+ProductName
+ProductVersion
+VarFileInfo
+Translation
+C:\\DEVELOP\\Cplusplus\\EasyControl\\Ressource\\arrow_up_down_disable.png
+C:\\DEVELOP\\Cplusplus\\EasyControl\\Ressource\\auto_up.png
+C:\\DEVELOP\\Cplusplus\\EasyControl\\Ressource\\auto_down.png
+C:\\DEVELOP\\Cplusplus\\EasyControl\\Ressource\\auto_disable.png
+C:\\DEVELOP\\Cplusplus\\EasyControl\\Ressource\\AnyViewerUp.png
+C:\\DEVELOP\\Cplusplus\\EasyControl\\Ressource\\AnyViewerDown.png
+Progress
+SmaDoTec GmbH
+Loss in weight batcher - LWB
+EasyControl Update-Dateien (*.etu)|*.etu|EasyControl System-Dateien (*.ets)|*.ets|Recorder-Dateien (*.eta)|*.eta|Log-Dateien (*.etl)|*.etl|Rezeptur-Dateien (*.etr)|*.etr||
+Tara
+Batch timeout
+SmaDoTec GmbH
+Macht den letzten Vorgang rückgängig.\nRückgängig
+Setzt das aktuelle Fenster zurück

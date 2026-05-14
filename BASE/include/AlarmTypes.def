@@ -1,0 +1,31 @@
+//------------------------------------------------------------------------------------
+///
+///                           <<<   E A S Y C O N T R O L   >>>
+///
+///
+/// @brief  Declaration of module GlobalError.h
+///
+/// @file   GlobalError.h
+///
+///
+/// @coypright Ing.büro Hafer
+///            Branderweg 8A
+///            D-91058 Erlangen
+///
+/// @author    Detlef Hafer
+///
+//------------------------------------------------------------------------------------
+/// \addtogroup DoseServer
+/// @{
+#pragma once
+
+#define AL_NONE				0x00000000
+#define AL_ALARM0			0x00000001
+#define AL_ALARM1			0x00000002
+#define AL_ALARM2			0x00000004
+#define AL_ALARM3			0x00000008
+#define AL_SIZE				_S32(base::eAlarmCategoryMax)
+
+#define ERROR_ALL (base::eAlarmError::ERROR_DOSE_MAX)
+
+/// @}

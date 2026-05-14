@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{34552033-7146-4abf-a190-74f017552914}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{cdc37c45-8811-4f36-a356-43c77bcee076}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LogLevel">
+      <UniqueIdentifier>{f0b969e7-604a-451f-9008-12ed0a952731}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LogLevel.def">
+      <Filter>LogLevel</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\BusProtocolErrors.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hmtimer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MbusSlaveServer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MbusTcpSlaveProtocol.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SimMbusTcpSlaveProtocol.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\FieldTalkVersion.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\hmcrc16.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\hmhex.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\hmplatf.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\hmtimer.hpp">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\hmtracelog.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MbusDataTableInterface.hpp">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BusProtocolErrors.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MbusSlaveServer.hpp">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MbusTcpSlaveProtocol.hpp">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

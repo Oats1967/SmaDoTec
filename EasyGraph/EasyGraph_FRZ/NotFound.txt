@@ -1,0 +1,102 @@
+afxres.h
+verrsrc.h
+resource.h\0
+\r\n
+#endif\r\n
+afxres.h
+\r\n
+verrsrc.h
+\r\n
+\r\n
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n
+LANGUAGE 7, 1\r\n
+resource\\EasyGraph.rc2
+  // Nicht mit Microsoft Visual C++ bearbeitete Ressourcen\r\n
+l.DEU\\afxres.rc
+      // Standardkomponenten\r\n
+l.DEU\\afxprint.rc
+    // Ressourcen für Drucken/Seitenansicht\r\n
+#if !defined(_AFXDLL)\r\n
+l.DEU\\afxribbon.rc
+        // Ressourcen für MFC-Menüband und -Steuerleiste\r\n
+#endif\r\n
+#endif\r\n
+C:\\DEVELOP\\Cplusplus\\EasyGraph\\resource\\Background.bmp
+&Neu\tStrg+N
+Ö&ffnen...\tStrg+O
+&Schließen
+Dru&ckeinrichtung
+Zuletzt verwendete Datei
+&Beenden
+&Ansicht
+&Symbolleisten und Andockfenster
+<Platzhalter>
+Status&leiste
+&Anwendungsdarstellung
+Windows &2000
+Office &XP
+&Windows XP
+Office 200&3
+Visual Studio 200&5
+Visual Studio 200&8
+Office 200&7
+Stil '&Blau'
+Stil 'S&chwarz'
+Stil '&Silber'
+Stil '&Aqua'
+&Hilfe
+&Informationen zu EasyGraph
+&Ausschneiden\tStrg+X
+&Kopieren\tStrg+C
+&Einfügen\tStrg+V
+Sortieren
+Alphabetisch &sortieren
+Nach &Typ sortieren
+Nach Zugriff sorti&eren
+Nach T&yp gruppieren
+Öff&nen
+Öffnen &mit
+&Kompilieren
+&Ausschneiden\tStrg+X
+&Kopieren\tStrg+C
+E&ntfernen
+&Eigenschaften
+Popup
+&Kopieren
+&Löschen
+&Ausblenden
+&Informationen zu EasyGraph
+Office 2007 (Stil '&Blau')
+Office 2007 (Stil 'S&chwarz')
+Office 2007 (Stil '&Silber')
+Office 2007 (Stil '&Aqua')
+Win&dows 7
+Realtime Monitoring
+Select
+Informationen zu EasyGraph
+MS Shell Dlg
+EasyGraph, Version 1.0
+Copyright (C) 2024
+MS Shell Dlg
+Static
+MS Shell Dlg
+Static
+MS Shell Dlg
+Static
+MS Shell Dlg
+Static
+Global settings
+Historie [min]
+Eigenschaftenfenster
+Realtime Monitoring
+Refreshtime [s]
+Bereich 1
+Bereich 2
+Statistics
+Refreshtime [s]
+&Fenster
+Bereit
+SCRL
+l.DEU\afxres.rc
+l.DEU\afxprint.rc
+l.DEU\afxribbon.rc

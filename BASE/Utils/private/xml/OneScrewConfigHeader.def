@@ -1,0 +1,15 @@
+    "Header Version V80\n\
+     -------------------------------------------------------------------\n\
+	\tEnable : YES / NO\n\
+	\tLineSetpoint : IO / MANUAL\n\
+    \t<Scale> -> if scale does not exist, scale is disabled\n\
+	\t\tMaxWeight : At maximum weight line setpoint will be reduced\n\
+	\t\tMinWeight : At minimum weight line setpoint will be increased\n\
+	\t<Sensor>  -> if sensor does not exist, sensor is disabled\n\
+	\t\tLimitSwitchHighEnable : NO / YES\n\
+	\t\tLimitSwitchLowEnable : NO / YES\n\
+	\t\tLimitSwitchHighTimeout : timeout\n\
+	\t\tLimitSwitchLowTimeout : timeout\n\
+    \tGainFactor\n\
+	\tReduceFactor\n"
+     

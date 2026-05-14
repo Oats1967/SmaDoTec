@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="VirtualKeyboard.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:VirtualKeyboard.Pages"
+    Shell.BackgroundColor="AliceBlue"
+    Shell.FlyoutBehavior="Disabled"
+    Shell.NavBarIsVisible="False">
+
+
+    <ShellContent
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage"
+        Shell.NavBarIsVisible="False" />
+    <ShellContent
+        ContentTemplate="{DataTemplate local:GermanKeyboardPage}"
+        Route="GermanKeyboardPage"
+        Shell.NavBarIsVisible="False" />
+    <ShellContent
+        ContentTemplate="{DataTemplate local:NumericKeyboardPage}"
+        Route="NumericKeyboardPage"
+        Shell.NavBarIsVisible="False" />
+
+
+
+
+</Shell>

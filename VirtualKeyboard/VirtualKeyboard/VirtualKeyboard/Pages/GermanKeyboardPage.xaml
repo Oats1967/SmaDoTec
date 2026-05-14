@@ -1,0 +1,589 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="VirtualKeyboard.Pages.GermanKeyboardPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:VirtualKeyboard.Controls"
+    xmlns:converter="clr-namespace:VirtualKeyboard.Converter"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+     Shell.NavBarIsVisible="False"
+    BackgroundColor="Grey">
+    <ContentPage.Resources>
+
+        <!--<converter:DoubleScaler x:Key="FontSizeScaler" Factor="2.0" />-->
+
+        <toolkit:BoolToObjectConverter
+            x:Key="CapsLockColorConverter"
+            FalseObject="#F5F5F5"
+            TrueObject="#6B6B6B" />
+
+        <toolkit:BoolToObjectConverter
+            x:Key="QConverter"
+            FalseObject="q"
+            TrueObject="Q" />
+        <toolkit:BoolToObjectConverter
+            x:Key="WConverter"
+            FalseObject="w"
+            TrueObject="W" />
+        <toolkit:BoolToObjectConverter
+            x:Key="EConverter"
+            FalseObject="e"
+            TrueObject="E" />
+        <toolkit:BoolToObjectConverter
+            x:Key="RConverter"
+            FalseObject="r"
+            TrueObject="R" />
+        <toolkit:BoolToObjectConverter
+            x:Key="TConverter"
+            FalseObject="t"
+            TrueObject="T" />
+        <toolkit:BoolToObjectConverter
+            x:Key="ZConverter"
+            FalseObject="z"
+            TrueObject="Z" />
+        <toolkit:BoolToObjectConverter
+            x:Key="UConverter"
+            FalseObject="u"
+            TrueObject="U" />
+        <toolkit:BoolToObjectConverter
+            x:Key="IConverter"
+            FalseObject="i"
+            TrueObject="I" />
+        <toolkit:BoolToObjectConverter
+            x:Key="OConverter"
+            FalseObject="o"
+            TrueObject="O" />
+        <toolkit:BoolToObjectConverter
+            x:Key="PConverter"
+            FalseObject="p"
+            TrueObject="P" />
+        <toolkit:BoolToObjectConverter
+            x:Key="ÜConverter"
+            FalseObject="ü"
+            TrueObject="Ü" />
+        <toolkit:BoolToObjectConverter
+            x:Key="AConverter"
+            FalseObject="a"
+            TrueObject="A" />
+        <toolkit:BoolToObjectConverter
+            x:Key="SConverter"
+            FalseObject="s"
+            TrueObject="S" />
+        <toolkit:BoolToObjectConverter
+            x:Key="DConverter"
+            FalseObject="d"
+            TrueObject="D" />
+        <toolkit:BoolToObjectConverter
+            x:Key="FConverter"
+            FalseObject="f"
+            TrueObject="F" />
+        <toolkit:BoolToObjectConverter
+            x:Key="GConverter"
+            FalseObject="g"
+            TrueObject="G" />
+        <toolkit:BoolToObjectConverter
+            x:Key="HConverter"
+            FalseObject="h"
+            TrueObject="H" />
+        <toolkit:BoolToObjectConverter
+            x:Key="JConverter"
+            FalseObject="j"
+            TrueObject="J" />
+        <toolkit:BoolToObjectConverter
+            x:Key="KConverter"
+            FalseObject="k"
+            TrueObject="K" />
+        <toolkit:BoolToObjectConverter
+            x:Key="LConverter"
+            FalseObject="l"
+            TrueObject="L" />
+        <toolkit:BoolToObjectConverter
+            x:Key="ÖConverter"
+            FalseObject="ö"
+            TrueObject="Ö" />
+        <toolkit:BoolToObjectConverter
+            x:Key="ÄConverter"
+            FalseObject="ä"
+            TrueObject="Ä" />
+        <toolkit:BoolToObjectConverter
+            x:Key="YConverter"
+            FalseObject="y"
+            TrueObject="Y" />
+        <toolkit:BoolToObjectConverter
+            x:Key="XConverter"
+            FalseObject="x"
+            TrueObject="X" />
+        <toolkit:BoolToObjectConverter
+            x:Key="CConverter"
+            FalseObject="c"
+            TrueObject="C" />
+        <toolkit:BoolToObjectConverter
+            x:Key="VConverter"
+            FalseObject="v"
+            TrueObject="V" />
+        <toolkit:BoolToObjectConverter
+            x:Key="BConverter"
+            FalseObject="b"
+            TrueObject="B" />
+        <toolkit:BoolToObjectConverter
+            x:Key="NConverter"
+            FalseObject="n"
+            TrueObject="N" />
+        <toolkit:BoolToObjectConverter
+            x:Key="MConverter"
+            FalseObject="m"
+            TrueObject="M" />
+
+
+    </ContentPage.Resources>
+
+    <Grid
+        Padding="{Binding KeySpacing}"
+        ColumnDefinitions="*,*,*,*,*,*,*,*,*,*,*,*,*,*"
+        ColumnSpacing="{Binding KeySpacing}"
+        RowDefinitions="*,*,*,*,*"
+        RowSpacing="{Binding KeySpacing}">
+
+        <!--  Row 0  -->
+        <controls:Key
+            Grid.Row="0"
+            Grid.Column="0"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="1"
+            FontSize="{Binding FontSize}"
+            Text="1" />
+        <controls:Key
+            Grid.Row="0"
+            Grid.Column="1"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="2"
+            FontSize="{Binding FontSize}"
+            Text="2" />
+        <controls:Key
+            Grid.Row="0"
+            Grid.Column="2"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="3"
+            FontSize="{Binding FontSize}"
+            Text="3" />
+        <controls:Key
+            Grid.Row="0"
+            Grid.Column="3"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="4"
+            FontSize="{Binding FontSize}"
+            Text="4" />
+        <controls:Key
+            Grid.Row="0"
+            Grid.Column="4"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="5"
+            FontSize="{Binding FontSize}"
+            Text="5" />
+        <controls:Key
+            Grid.Row="0"
+            Grid.Column="5"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="6"
+            FontSize="{Binding FontSize}"
+            Text="6" />
+        <controls:Key
+            Grid.Row="0"
+            Grid.Column="6"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="7"
+            FontSize="{Binding FontSize}"
+            Text="7" />
+        <controls:Key
+            Grid.Row="0"
+            Grid.Column="7"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="8"
+            FontSize="{Binding FontSize}"
+            Text="8" />
+        <controls:Key
+            Grid.Row="0"
+            Grid.Column="8"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="9"
+            FontSize="{Binding FontSize}"
+            Text="9" />
+        <controls:Key
+            Grid.Row="0"
+            Grid.Column="9"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="0"
+            FontSize="{Binding FontSize}"
+            Text="0" />
+        <controls:Key
+            Grid.Row="0"
+            Grid.Column="10"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="ß"
+            FontSize="{Binding FontSize}"
+            Text="ß" />
+        <controls:IconKey
+            Grid.Row="0"
+            Grid.Column="11"
+            Grid.ColumnSpan="3"
+            BackgroundColor="{StaticResource SmaDoTecRed}"
+            Command="{Binding BackspacePressedCommand}"
+             FontSize="{Binding FontSize}"
+            Text="{StaticResource BackspaceIcon}" />
+
+        <!--  Row 1  -->
+        <controls:Key
+            Grid.Row="1"
+            Grid.Column="0"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="{Binding CapsLock, Converter={StaticResource QConverter}}"
+            FontSize="{Binding FontSize}"
+            Text="{Binding CapsLock, Converter={StaticResource QConverter}}" />
+        <controls:Key
+            Grid.Row="1"
+            Grid.Column="1"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="{Binding CapsLock, Converter={StaticResource WConverter}}"
+            FontSize="{Binding FontSize}"
+            Text="{Binding CapsLock, Converter={StaticResource WConverter}}" />
+        <controls:Key
+            Grid.Row="1"
+            Grid.Column="2"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="{Binding CapsLock, Converter={StaticResource EConverter}}"
+            FontSize="{Binding FontSize}"
+            Text="{Binding CapsLock, Converter={StaticResource EConverter}}" />
+        <controls:Key
+            Grid.Row="1"
+            Grid.Column="3"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="{Binding CapsLock, Converter={StaticResource RConverter}}"
+            FontSize="{Binding FontSize}"
+            Text="{Binding CapsLock, Converter={StaticResource RConverter}}" />
+        <controls:Key
+            Grid.Row="1"
+            Grid.Column="4"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="{Binding CapsLock, Converter={StaticResource TConverter}}"
+            FontSize="{Binding FontSize}"
+            Text="{Binding CapsLock, Converter={StaticResource TConverter}}" />
+        <controls:Key
+            Grid.Row="1"
+            Grid.Column="5"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="{Binding CapsLock, Converter={StaticResource ZConverter}}"
+            FontSize="{Binding FontSize}"
+            Text="{Binding CapsLock, Converter={StaticResource ZConverter}}" />
+        <controls:Key
+            Grid.Row="1"
+            Grid.Column="6"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="{Binding CapsLock, Converter={StaticResource UConverter}}"
+            FontSize="{Binding FontSize}"
+            Text="{Binding CapsLock, Converter={StaticResource UConverter}}" />
+        <controls:Key
+            Grid.Row="1"
+            Grid.Column="7"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="{Binding CapsLock, Converter={StaticResource IConverter}}"
+            FontSize="{Binding FontSize}"
+            Text="{Binding CapsLock, Converter={StaticResource IConverter}}" />
+        <controls:Key
+            Grid.Row="1"
+            Grid.Column="8"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="{Binding CapsLock, Converter={StaticResource OConverter}}"
+            FontSize="{Binding FontSize}"
+            Text="{Binding CapsLock, Converter={StaticResource OConverter}}" />
+        <controls:Key
+            Grid.Row="1"
+            Grid.Column="9"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="{Binding CapsLock, Converter={StaticResource PConverter}}"
+            FontSize="{Binding FontSize}"
+            Text="{Binding CapsLock, Converter={StaticResource PConverter}}" />
+        <controls:Key
+            Grid.Row="1"
+            Grid.Column="10"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="{Binding CapsLock, Converter={StaticResource ÜConverter}}"
+            FontSize="{Binding FontSize}"
+            Text="{Binding CapsLock, Converter={StaticResource ÜConverter}}" />
+        <controls:Key
+            Grid.Row="1"
+            Grid.Column="11"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="+"
+            FontSize="{Binding FontSize}"
+            Text="+" />
+        <controls:IconKey
+            Grid.Row="1"
+            Grid.RowSpan="3"
+            Grid.Column="12"
+            Grid.ColumnSpan="2"
+            BackgroundColor="{StaticResource SmaDoTecGreen}"
+            Command="{Binding EnterPressedCommand}"
+ FontSize="{Binding FontSize}"
+            Opacity="0.75"
+            Text="{StaticResource EnterIcon}" />
+
+        <!--  Row 2  -->
+        <controls:Key
+            Grid.Row="2"
+            Grid.Column="0"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="{Binding CapsLock, Converter={StaticResource AConverter}}"
+            FontSize="{Binding FontSize}"
+            Text="{Binding CapsLock, Converter={StaticResource AConverter}}" />
+        <controls:Key
+            Grid.Row="2"
+            Grid.Column="1"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="{Binding CapsLock, Converter={StaticResource SConverter}}"
+            FontSize="{Binding FontSize}"
+            Text="{Binding CapsLock, Converter={StaticResource SConverter}}" />
+        <controls:Key
+            Grid.Row="2"
+            Grid.Column="2"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="{Binding CapsLock, Converter={StaticResource DConverter}}"
+            FontSize="{Binding FontSize}"
+            Text="{Binding CapsLock, Converter={StaticResource DConverter}}" />
+        <controls:Key
+            Grid.Row="2"
+            Grid.Column="3"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="{Binding CapsLock, Converter={StaticResource FConverter}}"
+            FontSize="{Binding FontSize}"
+            Text="{Binding CapsLock, Converter={StaticResource FConverter}}" />
+        <controls:Key
+            Grid.Row="2"
+            Grid.Column="4"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="{Binding CapsLock, Converter={StaticResource GConverter}}"
+            FontSize="{Binding FontSize}"
+            Text="{Binding CapsLock, Converter={StaticResource GConverter}}" />
+        <controls:Key
+            Grid.Row="2"
+            Grid.Column="5"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="{Binding CapsLock, Converter={StaticResource HConverter}}"
+            FontSize="{Binding FontSize}"
+            Text="{Binding CapsLock, Converter={StaticResource HConverter}}" />
+        <controls:Key
+            Grid.Row="2"
+            Grid.Column="6"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="{Binding CapsLock, Converter={StaticResource JConverter}}"
+            FontSize="{Binding FontSize}"
+            Text="{Binding CapsLock, Converter={StaticResource JConverter}}" />
+        <controls:Key
+            Grid.Row="2"
+            Grid.Column="7"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="{Binding CapsLock, Converter={StaticResource KConverter}}"
+            FontSize="{Binding FontSize}"
+            Text="{Binding CapsLock, Converter={StaticResource KConverter}}" />
+        <controls:Key
+            Grid.Row="2"
+            Grid.Column="8"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="{Binding CapsLock, Converter={StaticResource LConverter}}"
+            FontSize="{Binding FontSize}"
+            Text="{Binding CapsLock, Converter={StaticResource LConverter}}" />
+        <controls:Key
+            Grid.Row="2"
+            Grid.Column="9"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="{Binding CapsLock, Converter={StaticResource ÖConverter}}"
+            FontSize="{Binding FontSize}"
+            Text="{Binding CapsLock, Converter={StaticResource ÖConverter}}" />
+        <controls:Key
+            Grid.Row="2"
+            Grid.Column="10"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="{Binding CapsLock, Converter={StaticResource ÄConverter}}"
+            FontSize="{Binding FontSize}"
+            Text="{Binding CapsLock, Converter={StaticResource ÄConverter}}" />
+        <controls:Key
+            Grid.Row="2"
+            Grid.Column="11"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="#"
+            FontSize="{Binding FontSize}"
+            Text="#" />
+
+        <!--  Row 3  -->
+        <controls:IconKey
+            Grid.Row="3"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            BackgroundColor="{Binding CapsLock, Converter={StaticResource CapsLockColorConverter}}"
+            FontSize="{Binding FontSize}"
+            Text="{StaticResource ArrowUpIcon}">
+            <Button.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding CapsLockPressedCommand}" NumberOfTapsRequired="1" />
+                <TapGestureRecognizer Command="{Binding LockCommand}" NumberOfTapsRequired="2" />
+            </Button.GestureRecognizers>
+            <Button.Triggers>
+                <MultiTrigger TargetType="Button">
+                    <MultiTrigger.Conditions>
+                        <BindingCondition Binding="{Binding Locked}" Value="True" />
+                        <BindingCondition Binding="{Binding CapsLock}" Value="True" />
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Text" Value="{StaticResource DoubleArrowUpIcon}" />
+                </MultiTrigger>
+            </Button.Triggers>
+        </controls:IconKey>
+        <controls:Key
+            Grid.Row="3"
+            Grid.Column="2"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="{Binding CapsLock, Converter={StaticResource YConverter}}"
+            FontSize="{Binding FontSize}"
+            Text="{Binding CapsLock, Converter={StaticResource YConverter}}" />
+        <controls:Key
+            Grid.Row="3"
+            Grid.Column="3"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="{Binding CapsLock, Converter={StaticResource XConverter}}"
+            FontSize="{Binding FontSize}"
+            Text="{Binding CapsLock, Converter={StaticResource XConverter}}" />
+        <controls:Key
+            Grid.Row="3"
+            Grid.Column="4"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="{Binding CapsLock, Converter={StaticResource CConverter}}"
+            FontSize="{Binding FontSize}"
+            Text="{Binding CapsLock, Converter={StaticResource CConverter}}" />
+        <controls:Key
+            Grid.Row="3"
+            Grid.Column="5"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="{Binding CapsLock, Converter={StaticResource VConverter}}"
+            FontSize="{Binding FontSize}"
+            Text="{Binding CapsLock, Converter={StaticResource VConverter}}" />
+        <controls:Key
+            Grid.Row="3"
+            Grid.Column="6"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="{Binding CapsLock, Converter={StaticResource BConverter}}"
+            FontSize="{Binding FontSize}"
+            Text="{Binding CapsLock, Converter={StaticResource BConverter}}" />
+        <controls:Key
+            Grid.Row="3"
+            Grid.Column="7"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="{Binding CapsLock, Converter={StaticResource NConverter}}"
+            FontSize="{Binding FontSize}"
+            Text="{Binding CapsLock, Converter={StaticResource NConverter}}" />
+        <controls:Key
+            Grid.Row="3"
+            Grid.Column="8"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="{Binding CapsLock, Converter={StaticResource MConverter}}"
+            FontSize="{Binding FontSize}"
+            Text="{Binding CapsLock, Converter={StaticResource MConverter}}" />
+        <controls:Key
+            Grid.Row="3"
+            Grid.Column="9"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter=","
+            FontSize="{Binding FontSize}"
+            Text="," />
+        <controls:Key
+            Grid.Row="3"
+            Grid.Column="10"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="."
+            FontSize="{Binding FontSize}"
+            Text="." />
+        <controls:Key
+            Grid.Row="3"
+            Grid.Column="11"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter="-"
+            FontSize="{Binding FontSize}"
+            Text="-" />
+
+        <!--  Row 4  -->
+        <Image
+            Grid.Row="4"
+            Grid.Column="0"
+            Grid.ColumnSpan="4"
+            Aspect="Fill"
+            Source="firmenlogo_grey.jpg" />
+        <controls:Key
+            Grid.Row="4"
+            Grid.Column="4"
+            Grid.ColumnSpan="6"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding KeyPressedCommand}"
+            CommandParameter=" "
+            FontSize="{Binding FontSize}"
+            Text=" " />
+        <controls:IconKey
+            Grid.Row="4"
+            Grid.Column="10"
+            Grid.ColumnSpan="2"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding LeftPressedCommand}"
+             FontSize="{Binding FontSize}"
+            Text="{StaticResource ArrowLeftIcon}" />
+        <controls:IconKey
+            Grid.Row="4"
+            Grid.Column="12"
+            Grid.ColumnSpan="2"
+            BackgroundColor="{StaticResource NormalKey}"
+            Command="{Binding RightPressedCommand}"
+             FontSize="{Binding FontSize}"
+            Text="{StaticResource ArrowRightIcon}" />
+    </Grid>
+
+
+</ContentPage>

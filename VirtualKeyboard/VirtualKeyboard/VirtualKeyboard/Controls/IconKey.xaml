@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Button
+    x:Class="VirtualKeyboard.Controls.IconKey"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    HorizontalOptions="FillAndExpand"
+    Style="{StaticResource MaterialIcon}"
+    VerticalOptions="FillAndExpand"
+    Padding="0"
+    >
+    <Button.Shadow>
+        <Shadow Brush="Black" Opacity="0.8" />
+    </Button.Shadow>
+
+    <VisualStateManager.VisualStateGroups>
+        <VisualStateGroupList>
+            <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal">
+                    <VisualState.Setters>
+                        <Setter Property="Scale" Value="1" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Pressed">
+                    <VisualState.Setters>
+                        <Setter Property="Scale" Value="0.95" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateGroupList>
+    </VisualStateManager.VisualStateGroups>
+</Button>
+
+

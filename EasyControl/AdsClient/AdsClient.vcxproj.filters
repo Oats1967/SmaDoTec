@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Quelldateien">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Headerdateien">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="LogLevel">
+      <UniqueIdentifier>{0d8b3e40-9339-4470-bb99-fb5b1b3bf87c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Loadcell">
+      <UniqueIdentifier>{11f912a1-ed41-4252-ad76-3c057992bf11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Loadcell\Simulation">
+      <UniqueIdentifier>{e46a0731-c04f-4c23-b851-a97ccc80dc1d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\private\AdsHelper.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="src\private\AdsDoseImpl.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="src\private\AdsLineImpl.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="src\private\AdsProfiAdapter.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="src\private\AdsClientImpl.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="src\private\AdsClient.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="src\private\AdsLaumasCellImpl.cpp">
+      <Filter>Quelldateien\Loadcell</Filter>
+    </ClCompile>
+    <ClCompile Include="src\private\AdsPesaCellImpl.cpp">
+      <Filter>Quelldateien\Loadcell</Filter>
+    </ClCompile>
+    <ClCompile Include="src\private\AdsSoemerCellImpl.cpp">
+      <Filter>Quelldateien\Loadcell</Filter>
+    </ClCompile>
+    <ClCompile Include="src\private\AdsBusRS485.cpp">
+      <Filter>Quelldateien\Loadcell</Filter>
+    </ClCompile>
+    <ClCompile Include="src\private\AdsBusEtherCAT.cpp">
+      <Filter>Quelldateien\Loadcell</Filter>
+    </ClCompile>
+    <ClCompile Include="src\private\AdsLaumasCellSim.cpp">
+      <Filter>Quelldateien\Loadcell\Simulation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\private\AdsPesaCellSim.cpp">
+      <Filter>Quelldateien\Loadcell\Simulation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\private\AdsSoemerCellSim.cpp">
+      <Filter>Quelldateien\Loadcell\Simulation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\private\AdsBusEtherCATSim.cpp">
+      <Filter>Quelldateien\Loadcell\Simulation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\private\AdsBusRS485Sim.cpp">
+      <Filter>Quelldateien\Loadcell\Simulation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\private\AdsKTronCellImpl.cpp">
+      <Filter>Quelldateien\Loadcell</Filter>
+    </ClCompile>
+    <ClCompile Include="src\private\AdsKTronCellSim.cpp">
+      <Filter>Quelldateien\Loadcell\Simulation</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\private\AdsHelper.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\private\AdsDoseImpl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\private\AdsLineImpl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\private\EasyControlVer.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\private\AdsHelperProfibus.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AdsTypen.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AdsClient.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\private\AdsDigitalOutput.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\private\AdsAnalogOutput.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\private\AdsAnalogInput.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\private\AdsGenericOutput.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\private\AdsGenericInput.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\private\AdsDigitalInput.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\private\AdsControlImpl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\private\AdsProfiNet.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\private\AdsProfiAdapter.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\public\AdsLoadCellInterface.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\private\AdsSoemerCellImpl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\public\AdsClientInterface.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\public\AdsClientImpl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\private\AdsCell.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\private\AdsPesaCellSim.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\private\AdsSoemerCellSim.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\private\AdsLaumasCellSim.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\private\AdsLaumasCellImpl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\private\AdsBusRS485.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\private\AdsBusInterface.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\private\AdsBusEtherCAT.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\private\AdsHelperTypes.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\private\AdsKTronCellImpl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LogLevel.def">
+      <Filter>LogLevel</Filter>
+    </None>
+  </ItemGroup>
+</Project>

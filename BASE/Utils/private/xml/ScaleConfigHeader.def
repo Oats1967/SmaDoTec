@@ -1,0 +1,22 @@
+    "-------------------------------------------------------------------\n\
+    \tLCType\n\
+    \t\t\t-      : No scale activated\n\
+    \t\t\tPESA   : PESA board actived\n\
+    \t\t\tSOEMER : Soemer board active\n\
+    \t\t\tLAUMAS : Laumas ( EtherCAT) board active\n\
+    \t\t\tKTRON  : K-Tron board active\n\n\n\
+    \t\t<Units>\n\
+    \t\t\t<Scale>\n\
+    \t\t\t\t<LCType>PESA</LCType>\n\
+    \t\t\t\t<LCAddress>1</LCAddress>\n\
+    \t\t\t</Scale>\n\
+    \t\t\t<Scale>\n\
+    \t\t\t\t<LCType>SOEMER</LCType>\n\
+    \t\t\t\t<LCAddress>2</LCAddress>\n\
+    \t\t\t</Scale>\n\
+    \t\t\t<Scale>\n\
+    \t\t\t\t<LCType>-</LCType>\n\
+    \t\t\t\t<LCAddress>3</LCAddress>\n\
+    \t\t\t</Scale>\n\
+    \t\t</Units>\n"
+     

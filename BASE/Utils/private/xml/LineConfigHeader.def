@@ -1,0 +1,28 @@
+    "-------------------------------------------------------------------\n\
+	\tModule\n\
+    \t\tModuleLocalSetpoint\n\
+	\t\t\tEnable : YES / NO\n\
+	\t\t**************************************************\n\
+    \t\tModuleLineSetpoint\n\
+	\t\t\tEnable : YES / NO\n\
+    \t\t\tLineRelease : YES / NO\n\
+    \t\t\tLineStart   : YES / NO\n\
+	\t\t**************************************************\n\
+    \t\tModuleRamp\n\
+	\t\t\tEnable : YES / NO\n\
+	\t\t**************************************************\n\
+    \t\tModuleExternalSetpoint\n\
+	\t\t\tEnable : YES / NO\n\
+	\t\t\tLineExternalInvSetpoint : todo\n\
+	\t\t**************************************************\n\
+    \t\tModuleBatcher\n\
+	\t\t\tEnable : YES / NO\n\
+	\t\t**************************************************\n\
+    \t\tModuleTotalizer\n\
+	\t\t\tEnable : YES / NO\n\
+	\t\t**************************************************\n\
+    \t\tModuleTotalizerImpulse\n\
+	\t\t\tEnable : YES / NO\n\
+	-------------------------------------------------------------------\n"
+	
+     
