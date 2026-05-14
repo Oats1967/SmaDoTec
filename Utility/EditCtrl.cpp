@@ -84,8 +84,8 @@ void CEditCtrl::Create(CWnd* pParent, int32_t id, const CRect& aRect, const CStr
 	// ASSERT(m_pEdit == NULL);
 	if (m_pEdit)
 	{
-		delete m_pEdit;
-		m_pEdit = NULL;
+		m_pEdit->SendMessage(WM_KILLFOCUS);
+		return;
 	}
 	ASSERT(VALIDPARENT(pParent));
 	if (VALIDPARENT(pParent))
@@ -128,6 +128,7 @@ LRESULT CEditCtrl::OnShowKeyboard ( WPARAM bValue, LPARAM)
 	{
 		ShowAlphaKeyboard();
 	}
+	SetFocus();
 	return 0L;
 }
 //**********************************************************************************************************************
@@ -140,7 +141,6 @@ void CEditCtrl::Create(const CRect& aRect, const CString& aText, BOOL bNumericKe
 	g_buffer[BUFFERSIZE(g_buffer) - 1] = 0;
 	SetSel(0, -1);
 	ShowWindow(TRUE);
-	SetFocus();
 	PostMessage(WM_NOTIFYEDITKEYBOARD, WPARAM(bNumericKeyboard));
 }
 //**********************************************************************************************************************
@@ -205,7 +205,6 @@ BOOL CEditCtrl::PreTranslateMessage(MSG* pMsg)
 	{
 		if ( pMsg->wParam == VK_RETURN || pMsg->wParam == VK_ESCAPE)
 		{
-
 			if ( pMsg->wParam == VK_RETURN )
 			{
 				ASSERT(m_bValidValue == FALSE);
