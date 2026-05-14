@@ -18,9 +18,9 @@
 #include <cstdio>
 #include <cassert>
 #include "BASE/Task/public/Task.h"
-#include "S7Simulator64.h"
-#include "S7Snap64.h"
-#include "RemoteS7.h"
+#include "remote/S7Simulator/include/S7Simulator64.h"
+#include "remote/S7Snap/include/S7Snap64.h"
+#include "include/RemoteS7.h"
 #include "Logger/include/Logger.h"
 
 

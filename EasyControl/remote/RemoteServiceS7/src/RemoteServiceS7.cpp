@@ -15,8 +15,8 @@
 /// @author        Detlef Hafer
 ///
 //------------------------------------------------------------------------------------
-#include "RemoteServiceS7.h"
-#include "RemoteS7.h"
+#include "include/RemoteServiceS7.h"
+#include "include/RemoteS7.h"
 
 static remote::CRemoteS7* g_pRemoteServerImpl = nullptr;
  
