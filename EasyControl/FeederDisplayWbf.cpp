@@ -19,7 +19,7 @@
 #include "FeederDisplayWbf.h"
 #include "EasyControl_DEU/resource.h"
 #include "FormatMetric.h"
-#include "MFCMacros.h"
+#include "Utility/MFCMacros.h"
 
 
 #ifdef _DEBUG

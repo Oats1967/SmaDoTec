@@ -75,6 +75,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\DEVELOP\Cplusplus\SmaDoTec;C:\DEVELOP\Cplusplus\SmaDoTec\EasyControl;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>Release\</OutDir>
@@ -119,7 +120,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>C:\DEVELOP\Cplusplus\EasyControl;C:\DEVELOP\Cplusplus\EasyControl\Tools;C:\DEVELOP\Cplusplus\EasyControl\DoseServer\include;C:\Program Files %28x86%29\BCGSoft\BCGSuite for MFC\BCGSuite;C:\DEVELOP\Cplusplus\EasyControl\TKBoard\public;C:\DEVELOP\Cplusplus\EasyControl\VKBoard\public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\BCGSoft\BCGSuite for MFC\BCGSuite;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_WINDOWS;_DEBUG;__EASYCONTROL;_CRTDBG_MAP_ALLOC;_BCGCBPRO_STATIC_;LOGLEVELFILE="$(ProjectDir)LogLevel.def";__TKBOARD;__SIM_WEIGHT_GUI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
@@ -221,6 +222,21 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Utility\EditCtrl.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\Utility\MFCMacros.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\XLicense\LicenseLib\hostid.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\XLicense\LicenseLib\IdentifyB.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\XLicense\LicenseLib\license.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="AgitatorSpeedBoxDlg.cpp" />
     <ClCompile Include="AlarmArchiveDoc.cpp" />
     <ClCompile Include="AlarmArchiveFrame.cpp" />
@@ -267,8 +283,6 @@
     <ClCompile Include="EasyControlLayout.cpp" />
     <ClCompile Include="EasyControlView.cpp" />
     <ClCompile Include="ECMessageBox.cpp" />
-    <ClCompile Include="EditCtrl.cpp" />
-    <ClCompile Include="EditCtrlEx.cpp" />
     <ClCompile Include="EmptyFeederSpeedBoxDlg.cpp" />
     <ClCompile Include="FeederDisplay.cpp" />
     <ClCompile Include="FeederDisplayGwb.cpp" />
@@ -335,7 +349,6 @@
     <ClCompile Include="MainFrmStatusBar.cpp" />
     <ClCompile Include="MaxFineSpeedBoxDlg.cpp" />
     <ClCompile Include="MaxGrossSpeedBoxDlg.cpp" />
-    <ClCompile Include="MFCMacros.cpp" />
     <ClCompile Include="ModelessDlg.cpp" />
     <ClCompile Include="NewPasswordDlg.cpp" />
     <ClCompile Include="OverviewGaugeCtrl.cpp" />
@@ -399,18 +412,6 @@
     <ClCompile Include="WrapperBase.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="XLicense\LicenseLib\hostid.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="XLicense\LicenseLib\IdentifyB.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="XLicense\LicenseLib\license.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -530,7 +531,6 @@
     <ClInclude Include="DoseRefillReleaseButtonGrafikVol.h" />
     <ClInclude Include="DoseRefillReleaseButtonGrafikWbf.h" />
     <ClInclude Include="DoseRefillReleaseButtonGrafikWbm.h" />
-    <ClInclude Include="EditCtrlEx.h" />
     <ClInclude Include="EmptyFeederSpeedBoxDlg.h" />
     <ClInclude Include="FeederDisplay.h" />
     <ClInclude Include="FeederDisplayGwb.h" />
@@ -644,6 +644,7 @@
     <ClInclude Include="TouchKeyboard.h" />
     <ClInclude Include="UserNameDlg.h" />
     <ClInclude Include="UserPage.h" />
+    <ClInclude Include="utility.h" />
     <ClInclude Include="VolAlarmPage.h" />
     <ClInclude Include="VolAlertPage.h" />
     <ClInclude Include="VolMotorPage.h" />
@@ -671,6 +672,12 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BASE\BASE.vcxproj">
+      <Project>{ab592a6e-7b7f-4f77-9d9d-618f24d8c87d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\VKBoard\VKBoard.vcxproj">
+      <Project>{5daa81f8-6325-4d5b-9f81-9d7ab0e144ea}</Project>
+    </ProjectReference>
     <ProjectReference Include="DoseServer\DoseServer.vcxproj">
       <Project>{16a959bf-9bab-4847-b831-861ee91d1ba5}</Project>
     </ProjectReference>

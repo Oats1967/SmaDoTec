@@ -20,9 +20,9 @@
 #include "CalibrationDlg.h"
 #include "CalibrateProgressDlg.h"
 #include "BASE/Utils/public/Memory.h"
-#include "MFCMacros.h"
-#include "FormatMetric.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+ #include "FormatMetric.h"
+#include "Utility/EditCtrl.h"
 #include "HelpInfoDlgEx.h"
 
 
@@ -370,13 +370,13 @@ void CCalibrationDlg::OnItemactivateCalibrationList(NMHDR* pNMHDR, LRESULT* pRes
 //*********************************************************************************************************
 BOOL CCalibrationDlg::OnNotifyCalibrationDrivecommand()
 {
-	return CEditCtrlEx::GetFloatAbsRange(m_cfg.fDriveCommand[m_CalibIndex], 0, 100.0F);
+	return CEditCtrl::GetFloatAbsRangeModified(m_cfg.fDriveCommand[m_CalibIndex], 0, 100.0F);
 }
 //*********************************************************************************************************
 //*********************************************************************************************************
 void CCalibrationDlg::OnClickedCalibrationDrivecommand()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_CALIBRATION_DRIVECOMMAND_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_CALIBRATION_DRIVECOMMAND_EDIT);
 }
 //*********************************************************************************************************
 //*********************************************************************************************************
@@ -399,7 +399,7 @@ BOOL CCalibrationDlg::OnNotifyCalibrationMeasuretime()
 //*********************************************************************************************************
 void CCalibrationDlg::OnClickedCalibrationMeasuretime()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_CALIBRATION_MEASURETIME_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_CALIBRATION_MEASURETIME_EDIT);
 }
 //*********************************************************************************************************
 //*********************************************************************************************************
@@ -422,7 +422,7 @@ BOOL CCalibrationDlg::OnNotifyCalibrationDosePerformance()
 //*********************************************************************************************************
 void CCalibrationDlg::OnClickedCalibrationDosePerformance()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_CALIBRATION_DOSEPERFORMANCE_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_CALIBRATION_DOSEPERFORMANCE_EDIT);
 }
 //*********************************************************************************************************
 //*********************************************************************************************************

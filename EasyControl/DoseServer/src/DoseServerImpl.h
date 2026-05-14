@@ -25,9 +25,9 @@
 #include "BASE/Task/public/ThreadModul.h"
 #include "BASE/include/DoseServerConfig.h"
 #include "BASE/include/LineConfig.h"
-#include "RemoteServerInterface.h"
-#include "DoseServerInterface.h"
-#include "LCModuleInterface.h"
+#include "RemoteServer/include/RemoteServerInterface.h"
+#include "include/DoseServerInterface.h"
+#include "include/LCModuleInterface.h"
 #include "LogoControl.h"
 
 

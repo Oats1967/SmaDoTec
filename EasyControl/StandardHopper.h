@@ -19,7 +19,7 @@
 
 #include "BASE/include/2DHopper.h"
 #include "IGrafikHopper.h"
-#include "Colors.def"
+#include "Utility/Colors.def"
 
 
 class CStandardHopper : public IGrafikHopper

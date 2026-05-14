@@ -22,8 +22,8 @@
 #include "WbmMotorPage.h"
 #include "GlobalConst.h"
 #include "BASE/Base.def"
-#include "MFCMacros.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+#include "Utility/EditCtrl.h"
 
 
 
@@ -127,7 +127,7 @@ LRESULT CWbmMotorPage::OnWeighingChanged(WPARAM, LPARAM)
 //******************************************************************************************************
 BOOL CWbmMotorPage::OnNotifyMassflowFilter()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbsRange(m_fInputFilter, 0.0F, 100.0F);
+	auto bModified =CEditCtrl::GetFloatAbsRangeModified(m_fInputFilter, 0.0F, 100.0F);
 	if (bModified)
 	{
 		REMOTEREF.setDoseMassflowFilter(m_sItem, m_fInputFilter);
@@ -138,7 +138,7 @@ BOOL CWbmMotorPage::OnNotifyMassflowFilter()
 //******************************************************************************************************
 BOOL CWbmMotorPage::OnNotifyMaxRotationalSpeed()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbsRange(m_fMaxRotationalSpeed, 0.0F, 10000.0F);
+	auto bModified =CEditCtrl::GetFloatAbsRangeModified(m_fMaxRotationalSpeed, 0.0F, 10000.0F);
 	if (bModified)
 	{
 		REMOTEREF.setDoseMaxRotationalSpeed(m_sItem, m_fMaxRotationalSpeed);
@@ -149,7 +149,7 @@ BOOL CWbmMotorPage::OnNotifyMaxRotationalSpeed()
 //******************************************************************************************************
 BOOL CWbmMotorPage::OnNotifyStartupDelay()
 {
-	auto bModified = CEditCtrlEx::GetLongAbsRange(m_lStartupDelay, 0, 1000U);
+	auto bModified = CEditCtrl::GetLongAbsRangeModified(m_lStartupDelay, 0, 1000U);
 	if (bModified)
 	{
 		REMOTEREF.setDoseStartupDelay(m_sItem, m_lStartupDelay);
@@ -160,7 +160,7 @@ BOOL CWbmMotorPage::OnNotifyStartupDelay()
 //******************************************************************************************************
 BOOL CWbmMotorPage::OnNotifyReduction()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbsRange(m_fReduction, 0.0F, 1000.0F);
+	auto bModified =CEditCtrl::GetFloatAbsRangeModified(m_fReduction, 0.0F, 1000.0F);
 	if (bModified)
 	{
 		REMOTEREF.setDoseWbfReduction(m_sItem, m_fReduction);
@@ -171,7 +171,7 @@ BOOL CWbmMotorPage::OnNotifyReduction()
 //******************************************************************************************************
 BOOL CWbmMotorPage::OnNotifyBeltLoadSetpoint()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbs(m_fBeltLoadSetpoint);
+	auto bModified = CEditCtrl::GetFloatAbsModified(m_fBeltLoadSetpoint);
 	if (bModified)
 	{
 		REMOTEREF.setDoseWbfBeltLoadSetpoint(m_sItem, m_fBeltLoadSetpoint);
@@ -182,7 +182,7 @@ BOOL CWbmMotorPage::OnNotifyBeltLoadSetpoint()
 //******************************************************************************************************
 BOOL CWbmMotorPage::OnNotifyBeltLoadWheelSize()
 {
-	auto bModified = CEditCtrlEx::GetLongAbs(m_lWheelSize);
+	auto bModified = CEditCtrl::GetLongAbsModified(m_lWheelSize);
 	if (bModified)
 	{
 		REMOTEREF.setDoseWbfWheelSize(m_sItem, m_lWheelSize);
@@ -194,7 +194,7 @@ BOOL CWbmMotorPage::OnNotifyBeltLoadWheelSize()
 //******************************************************************************************************
 BOOL CWbmMotorPage::OnNotifyWeighingLine()
 {
-	auto bModified = CEditCtrlEx::GetLongAbs(m_lWeighingLine);
+	auto bModified = CEditCtrl::GetLongAbsModified(m_lWeighingLine);
 	if (bModified)
 	{
 		REMOTEREF.setDoseWbfWeighingLine(m_sItem, m_lWeighingLine);
@@ -205,7 +205,7 @@ BOOL CWbmMotorPage::OnNotifyWeighingLine()
 //******************************************************************************************************
 BOOL CWbmMotorPage::OnNotifyMaxSetpoint()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbs(m_fMaxSetpoint);
+	auto bModified = CEditCtrl::GetFloatAbsModified(m_fMaxSetpoint);
 	if (bModified)
 	{
 		REMOTEREF.setDoseMaxSetpoint(m_sItem, m_fMaxSetpoint);
@@ -216,7 +216,7 @@ BOOL CWbmMotorPage::OnNotifyMaxSetpoint()
 //******************************************************************************************************
 BOOL CWbmMotorPage::OnNotifySampleInterval()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbsRange(m_fSampleInterval, 0.0f, 10.0f);
+	auto bModified =CEditCtrl::GetFloatAbsRangeModified(m_fSampleInterval, 0.0f, 10.0f);
 	if (bModified)
 	{
 		REMOTEREF.setPidSampleInterval(m_sItem, SEC2MS(m_fSampleInterval));
@@ -345,55 +345,55 @@ BOOL CWbmMotorPage::OnInitDialog()
 //******************************************************************************************************
 void CWbmMotorPage::OnStnClickedWBMMotorMassflowDamping()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_WBM_MOTOR_MASSFLOWDAMPING);
+	CEditCtrl::CreateFromDlgItem(this, IDC_WBM_MOTOR_MASSFLOWDAMPING);
 }
 //******************************************************************************************************
 //******************************************************************************************************
 void CWbmMotorPage::OnStnClickedWBMMotorPidSampleInterval()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_WBM_MOTOR_PIDSAMPLEINTERVAL);
+	CEditCtrl::CreateFromDlgItem(this, IDC_WBM_MOTOR_PIDSAMPLEINTERVAL);
 }
 //******************************************************************************************************
 //******************************************************************************************************
 void CWbmMotorPage::OnStnClickedWBMMotorReduction()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_WBM_MOTOR_REDUCTION);
+	CEditCtrl::CreateFromDlgItem(this, IDC_WBM_MOTOR_REDUCTION);
 }
 //******************************************************************************************************
 //******************************************************************************************************
 void CWbmMotorPage::OnStnClickedWBMMotorBeltLoadSetpoint()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_WBM_MOTOR_BELTLOADSETPOINT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_WBM_MOTOR_BELTLOADSETPOINT);
 }
 //******************************************************************************************************
 //******************************************************************************************************
 void CWbmMotorPage::OnStnClickedWBMMotorWheelSize()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_WBM_MOTOR_WHEELSIZE);
+	CEditCtrl::CreateFromDlgItem(this, IDC_WBM_MOTOR_WHEELSIZE);
 }
 //******************************************************************************************************
 //******************************************************************************************************
 void CWbmMotorPage::OnStnClickedWBMMotorWeighingLine()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_WBM_MOTOR_WAEGESTRECKE);
+	CEditCtrl::CreateFromDlgItem(this, IDC_WBM_MOTOR_WAEGESTRECKE);
 }
 //******************************************************************************************************
 //******************************************************************************************************
 void CWbmMotorPage::OnStnClickedWBMMotorRotationalSpeed()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_WBM_MOTOR_MAXROTSPEED);
+	CEditCtrl::CreateFromDlgItem(this, IDC_WBM_MOTOR_MAXROTSPEED);
 }
 //******************************************************************************************************
 //******************************************************************************************************
 void CWbmMotorPage::OnStnClickedWBMMotorBezugsgroesse()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_WBM_MOTOR_MAXSETPOINT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_WBM_MOTOR_MAXSETPOINT);
 }
 //******************************************************************************************************
 //******************************************************************************************************
 void CWbmMotorPage::OnStnClickedWBMMotorStartupDelay()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_WBM_MOTOR_STARTUPDELAY);
+	CEditCtrl::CreateFromDlgItem(this, IDC_WBM_MOTOR_STARTUPDELAY);
 }
 //******************************************************************************************************
 //******************************************************************************************************

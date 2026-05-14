@@ -25,8 +25,8 @@
 #include "IcbRecipePage.h"
 #include "DataImage.h"
 #include "GlobalConst.h"
-#include "MFCMacros.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+#include "Utility/EditCtrl.h"
 
 
 
@@ -105,7 +105,7 @@ void CIcbRecipePage::DoDataExchange(CDataExchange* pDX)
 //******************************************************************************************************
 BOOL CIcbRecipePage::OnNotifyEditSetpoint(void)
 {
-	auto bModified = CEditCtrlEx::GetFloatAbs(m_fSetpoint);
+	auto bModified = CEditCtrl::GetFloatAbsModified(m_fSetpoint);
 	if (bModified)
 	{		
 		REMOTEREF.setDoseSetpoint(m_sItem, m_fSetpoint);
@@ -268,19 +268,19 @@ void CIcbRecipePage::OnBnClickedDosiererTotalizerReset()
 //***************************************************************************************
 void CIcbRecipePage::OnStnClickedDosiererName()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_STRINGCTRL, IDC_ICB_RECIPE_NAME);
+	CEditCtrl::CreateFromDlgItem(this, IDC_ICB_RECIPE_NAME);
 }
 //***************************************************************************************
 //***************************************************************************************
 void CIcbRecipePage::OnStnClickedDosiererSetpoint()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_ICB_RECIPE_BATCHSETPOINT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_ICB_RECIPE_BATCHSETPOINT);
 }
 //***************************************************************************************
 //***************************************************************************************
 void CIcbRecipePage::OnStnClickedDosiererQmnummer()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_STRINGCTRL, IDC_ICB_RECIPE_QMNUMBER);
+	CEditCtrl::CreateFromDlgItem(this, IDC_ICB_RECIPE_QMNUMBER);
 }
 //***************************************************************************************
 //***************************************************************************************

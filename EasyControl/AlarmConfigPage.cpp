@@ -22,7 +22,7 @@
 #include "AlarmMap.h"
 #include "DataImage.h"
 #include "AlarmConfigPage.h"
-#include "MFCMacros.h"
+#include "Utility/MFCMacros.h"
 
 
 //******************************************************************************************************

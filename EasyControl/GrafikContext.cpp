@@ -17,7 +17,7 @@
 //------------------------------------------------------------------------------------
 #include "stdafx.h"
 #include "GrafikContext.h"
-#include "MFCMacros.h"
+#include "Utility/MFCMacros.h"
 #include "FormatMetric.h"
 
 

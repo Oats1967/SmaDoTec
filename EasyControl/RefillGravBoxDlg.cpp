@@ -24,8 +24,8 @@
 #include "RefillFeederSpeedBoxDlg.h"
 #include "FeederScaleBoxDlg.h"
 #include "FormatMetric.h"
-#include "MFCMacros.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+#include "Utility/EditCtrl.h"
 #include "HelpInfoDlgEx.h"
 #include "FormatMetric.h"
 
@@ -279,7 +279,7 @@ BOOL CRefillGravBoxDlg::OnNotifyEditRefillMinMin()
 //*****************************************************************************************************
 BOOL CRefillGravBoxDlg::OnNotifyEditRefillTime()
 {
-	auto bModified = CEditCtrlEx::GetLongAbs(m_lRefillTime);
+	auto bModified = CEditCtrl::GetLongAbsModified(m_lRefillTime);
 	if (bModified)
 	{
 		REMOTEREF.setDoseRefillTime(m_sItem, m_lRefillTime);
@@ -290,7 +290,7 @@ BOOL CRefillGravBoxDlg::OnNotifyEditRefillTime()
 //*****************************************************************************************************
 BOOL CRefillGravBoxDlg::OnNotifyEditRefillSwitchDelay()
 {
-	auto bModified = CEditCtrlEx::GetLongAbs(m_lRefillSwitchDelay);
+	auto bModified = CEditCtrl::GetLongAbsModified(m_lRefillSwitchDelay);
 	if (bModified)
 	{
 		REMOTEREF.setDoseRefillSwitchDelay(m_sItem, m_lRefillSwitchDelay);
@@ -589,31 +589,31 @@ void CRefillGravBoxDlg::OnBnClickedRefillFeederEmptyStarted()
 //*************************************************************************************
 void CRefillGravBoxDlg::OnStnClickedRefillMin()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_REFILLGRAV_MINLIMIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_REFILLGRAV_MINLIMIT);
 }
 //*************************************************************************************
 //*************************************************************************************
 void CRefillGravBoxDlg::OnStnClickedRefillMax()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_REFILLGRAV_MAXLIMIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_REFILLGRAV_MAXLIMIT);
 }
 //*************************************************************************************
 //*************************************************************************************
 void CRefillGravBoxDlg::OnStnClickedRefillMinMin()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_REFILLGRAV_ALARMLIMITLIMIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_REFILLGRAV_ALARMLIMITLIMIT);
 }
 //*************************************************************************************
 //*************************************************************************************
 void CRefillGravBoxDlg::OnStnClickedRefillTime()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_REFILLGRAV_TIME);
+	CEditCtrl::CreateFromDlgItem(this, IDC_REFILLGRAV_TIME);
 }
 //*************************************************************************************
 //*************************************************************************************
 void CRefillGravBoxDlg::OnStnClickedRefillSwitchDelay()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_REFILLGRAV_ZZ_SWITCHDELAY);
+	CEditCtrl::CreateFromDlgItem(this, IDC_REFILLGRAV_ZZ_SWITCHDELAY);
 }
 //*************************************************************************************
 //*************************************************************************************

@@ -165,6 +165,9 @@
     <Filter Include="Quelldateien\Prozess\FeederDisplay\WBF">
       <UniqueIdentifier>{1e7181de-db21-448d-8731-0ee1d5a08399}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Quelldateien\Utility">
+      <UniqueIdentifier>{fdee10d7-f121-4599-b380-fc75aa518a64}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LoadResource.cpp">
@@ -187,9 +190,6 @@
     </ClCompile>
     <ClCompile Include="DosePropertySheet.cpp">
       <Filter>Quelldateien\Prozess\Property</Filter>
-    </ClCompile>
-    <ClCompile Include="EditCtrl.cpp">
-      <Filter>Quelldateien\Tools</Filter>
     </ClCompile>
     <ClCompile Include="RemoteControl.cpp">
       <Filter>Quelldateien</Filter>
@@ -356,17 +356,8 @@
     <ClCompile Include="ECMessageBox.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="XLicense\LicenseLib\license.cpp">
-      <Filter>Quelldateien\License</Filter>
-    </ClCompile>
-    <ClCompile Include="XLicense\LicenseLib\hostid.cpp">
-      <Filter>Quelldateien\License</Filter>
-    </ClCompile>
     <ClCompile Include="InfoBox.cpp">
       <Filter>Quelldateien\Prozess\InfoBox</Filter>
-    </ClCompile>
-    <ClCompile Include="MFCMacros.cpp">
-      <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="TextProgressCtrl.cpp">
       <Filter>Quelldateien</Filter>
@@ -391,9 +382,6 @@
     </ClCompile>
     <ClCompile Include="PasswordDlg.cpp">
       <Filter>Quelldateien\Login</Filter>
-    </ClCompile>
-    <ClCompile Include="XLicense\LicenseLib\IdentifyB.cpp">
-      <Filter>Quelldateien\License</Filter>
     </ClCompile>
     <ClCompile Include="AlarmMap.cpp">
       <Filter>Quelldateien</Filter>
@@ -632,9 +620,6 @@
     <ClCompile Include="LineTotalizerPulseDlg.cpp">
       <Filter>Quelldateien\Prozess\LineTab\LineSettings</Filter>
     </ClCompile>
-    <ClCompile Include="EditCtrlEx.cpp">
-      <Filter>Quelldateien\Tools</Filter>
-    </ClCompile>
     <ClCompile Include="HelpInfoDlg.cpp">
       <Filter>Quelldateien\Tools</Filter>
     </ClCompile>
@@ -655,6 +640,21 @@
     </ClCompile>
     <ClCompile Include="RecipeEditDlg.cpp">
       <Filter>Quelldateien\Recipe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\XLicense\LicenseLib\hostid.cpp">
+      <Filter>Quelldateien\License</Filter>
+    </ClCompile>
+    <ClCompile Include="..\XLicense\LicenseLib\IdentifyB.cpp">
+      <Filter>Quelldateien\License</Filter>
+    </ClCompile>
+    <ClCompile Include="..\XLicense\LicenseLib\license.cpp">
+      <Filter>Quelldateien\License</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\MFCMacros.cpp">
+      <Filter>Quelldateien\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\EditCtrl.cpp">
+      <Filter>Quelldateien\Utility</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1393,9 +1393,6 @@
     <ClInclude Include="LineTotalizerPulseDlg.h">
       <Filter>Quelldateien\Prozess\LineTab\LineSettings</Filter>
     </ClInclude>
-    <ClInclude Include="EditCtrlEx.h">
-      <Filter>Quelldateien\Tools</Filter>
-    </ClInclude>
     <ClInclude Include="HelpInfoDlgEx.h">
       <Filter>Quelldateien\Tools</Filter>
     </ClInclude>
@@ -1407,6 +1404,9 @@
     </ClInclude>
     <ClInclude Include="DoseProductNameGrafik.h">
       <Filter>Quelldateien\Prozess\FeederDisplay\DoseContainer</Filter>
+    </ClInclude>
+    <ClInclude Include="utility.h">
+      <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

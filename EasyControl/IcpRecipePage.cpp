@@ -21,8 +21,8 @@
 #include "ECMessageBox.h"
 #include "RemoteControl.h"
 #include "IcpRecipePage.h"
-#include "MFCMacros.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+#include "Utility/EditCtrl.h"
 
 
 
@@ -98,7 +98,7 @@ void CIcpRecipePage::DoDataExchange(CDataExchange* pDX)
 //****************************************************************************************
 BOOL CIcpRecipePage::OnNotifySetpoint()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbs(m_fSetpoint);
+	auto bModified = CEditCtrl::GetFloatAbsModified(m_fSetpoint);
 	if (bModified)
 	{
 		REMOTEREF.setDoseSetpoint(m_sItem, m_fSetpoint);
@@ -109,7 +109,7 @@ BOOL CIcpRecipePage::OnNotifySetpoint()
 //******************************************************************************************************
 BOOL CIcpRecipePage::OnNotifyEditANNumber(void)
 {
-	auto bModified = CEditCtrlEx::GetString(m_szANNumber);
+	auto bModified = CEditCtrl::GetStringModified(m_szANNumber);
 	if (bModified)
 	{
 		REMOTEREF.setLineANNumber(toStdString(m_szANNumber));
@@ -238,25 +238,25 @@ void CIcpRecipePage::OnBnClickedIcpTotalizerReset()
 //****************************************************************************************
 void CIcpRecipePage::OnStnClickedIcpName()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_STRINGCTRL, IDC_ICP_RECIPE_NAME);
+	CEditCtrl::CreateFromDlgItem(this, IDC_ICP_RECIPE_NAME);
 }
 //****************************************************************************************
 //****************************************************************************************
 void CIcpRecipePage::OnStnClickedIcpQmnummer()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_STRINGCTRL, IDC_ICP_RECIPE_QMNUMBER);
+	CEditCtrl::CreateFromDlgItem(this, IDC_ICP_RECIPE_QMNUMBER);
 }
 //****************************************************************************************
 //****************************************************************************************
 void CIcpRecipePage::OnStnClickedIcpSetpoint()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_ICP_RECIPE_SETPOINT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_ICP_RECIPE_SETPOINT);
 }
 //***************************************************************************************
 //***************************************************************************************
 void CIcpRecipePage::OnStnClickedDosiererANnummer()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_STRINGCTRL, IDC_ICP_RECIPE_ANNUMBER);
+	CEditCtrl::CreateFromDlgItem(this, IDC_ICP_RECIPE_ANNUMBER);
 }
 //****************************************************************************************
 //****************************************************************************************

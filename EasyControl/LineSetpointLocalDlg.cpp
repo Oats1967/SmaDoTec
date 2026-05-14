@@ -18,8 +18,8 @@
 #include "stdafx.h"
 #include "EasyControl.h"
 #include "LineSetpointLocalDlg.h"
-#include "MFCMacros.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+#include "Utility/EditCtrl.h"
 #include "HelpInfoDlgEx.h"
 
 
@@ -61,13 +61,13 @@ END_MESSAGE_MAP()
 //***********************************************************************************************
 void CLineSetpointLocalDlg::OnStnClickedLineSetpointMaxSetpoint()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_LINE_LOCALSETPOINT_MAXSETPOINT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LINE_LOCALSETPOINT_MAXSETPOINT);
 }
 //***********************************************************************************************
 //***********************************************************************************************
 BOOL CLineSetpointLocalDlg::OnNotifyEditMaxSetpoint()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbs(m_MaxSetpoint);
+	auto bModified = CEditCtrl::GetFloatAbsModified(m_MaxSetpoint);
 	if (bModified)
 	{
 		REMOTEREF.setLineMaxSetpoint(m_MaxSetpoint);

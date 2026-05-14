@@ -15,7 +15,7 @@
 #include "stdafx.h"
 #include <direct.h>
 #include "FileHelper.h"
-#include "StringConvert.h"
+#include "Utility/StringConvert.h"
 
 //------------------------------------------------------------------------------------
 ///  @brief   ReadSystemPath

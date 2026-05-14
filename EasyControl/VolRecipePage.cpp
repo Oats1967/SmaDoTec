@@ -22,8 +22,8 @@
 #include "RemoteControl.h"
 #include "VolRecipePage.h"
 #include "RefillVolBoxDlg.h"
-#include "MFCMacros.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+#include "Utility/EditCtrl.h"
 
 
 #define EDITITEM(_a, _func) 	BINDFUNC(_a, CVolRecipePage, _func)
@@ -114,7 +114,7 @@ void CVolRecipePage::DoDataExchange(CDataExchange* pDX)
 //***************************************************************************************
 BOOL CVolRecipePage::OnNotifyEditSetpoint(void)
 {
-	auto bModified = CEditCtrlEx::GetFloatAbs(m_fSetpoint);
+	auto bModified = CEditCtrl::GetFloatAbsModified(m_fSetpoint);
 	if (bModified)
 	{
 		REMOTEREF.setDoseSetpoint(m_sItem, m_fSetpoint);
@@ -126,7 +126,7 @@ BOOL CVolRecipePage::OnNotifyEditSetpoint(void)
 //******************************************************************************************************
 BOOL CVolRecipePage::OnNotifyEditANNumber(void)
 {
-	auto bModified = CEditCtrlEx::GetString(m_szANNumber);
+	auto bModified = CEditCtrl::GetStringModified(m_szANNumber);
 	if (bModified)
 	{
 		REMOTEREF.setLineANNumber(toStdString(m_szANNumber));
@@ -364,25 +364,25 @@ void CVolRecipePage::OnBnClickedRefillRelease()
 //*************************************************************************************
 void CVolRecipePage::OnBnClickedVolName()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_STRINGCTRL, IDC_VOL_RECIPE_NAME);
+	CEditCtrl::CreateFromDlgItem(this, IDC_VOL_RECIPE_NAME);
 }
 //*****************************************************************************************************
 //*****************************************************************************************************
 void CVolRecipePage::OnStnClickedVolSetpoint()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_VOL_RECIPE_SETPOINT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_VOL_RECIPE_SETPOINT);
 }
 //*****************************************************************************************************
 //*****************************************************************************************************
 void CVolRecipePage::OnBnClickedVolQMNumber()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_UINT64CTRL, IDC_VOL_RECIPE_QMNUMBER);
+	CEditCtrl::CreateFromDlgItem(this, IDC_VOL_RECIPE_QMNUMBER);
 }
 //***************************************************************************************
 //***************************************************************************************
 void CVolRecipePage::OnStnClickedVolANnummer()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_STRINGCTRL, IDC_VOL_RECIPE_ANNUMBER);
+	CEditCtrl::CreateFromDlgItem(this, IDC_VOL_RECIPE_ANNUMBER);
 }
 
 //*****************************************************************************************************

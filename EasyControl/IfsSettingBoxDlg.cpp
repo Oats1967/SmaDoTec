@@ -20,8 +20,8 @@
 #include "IfsSettingBoxDlg.h"
 #include "RemoteControl.h"
 #include "FormatMetric.h"
-#include "MFCMacros.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+#include "Utility/EditCtrl.h"
 #include "HelpInfoDlgEx.h"
 
 
@@ -181,7 +181,7 @@ LRESULT CIfsSettingBoxDlg::OnNotifyEdit(WPARAM id, LPARAM bValue)
 //*****************************************************************************************************
 BOOL CIfsSettingBoxDlg::OnNotifyEditDebounceMax()
 {
-	auto bModified = CEditCtrlEx::GetLongAbs(m_MaxDebounce);
+	auto bModified = CEditCtrl::GetLongAbsModified(m_MaxDebounce);
 	if (bModified)
 	{
 		REMOTEREF.setIfsDebounceMax(m_sItem, m_MaxDebounce);
@@ -192,7 +192,7 @@ BOOL CIfsSettingBoxDlg::OnNotifyEditDebounceMax()
 //*****************************************************************************************************
 BOOL CIfsSettingBoxDlg::OnNotifyEditDebounceMin()
 {
-	auto bModified = CEditCtrlEx::GetLongAbs(m_MinDebounce);
+	auto bModified = CEditCtrl::GetLongAbsModified(m_MinDebounce);
 	if (bModified)
 	{
 		REMOTEREF.setIfsDebounceMin(m_sItem, m_MinDebounce);
@@ -246,13 +246,13 @@ BOOL CIfsSettingBoxDlg::OnInitDialog()
 //*************************************************************************************
 void CIfsSettingBoxDlg::OnStnDebounceMax()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_IFS_SETTING_DEBOUNCEMAX_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_IFS_SETTING_DEBOUNCEMAX_EDIT);
 }
 //*************************************************************************************
 //*************************************************************************************
 void CIfsSettingBoxDlg::OnStnDebounceMin()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_IFS_SETTING_DEBOUNCEMIN_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_IFS_SETTING_DEBOUNCEMIN_EDIT);
 }
 //*************************************************************************************
 //*************************************************************************************

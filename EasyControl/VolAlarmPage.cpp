@@ -19,8 +19,8 @@
 #include "EasyControl.h"
 #include "VolAlarmPage.h"
 #include "RemoteControl.h"
-#include "MFCMacros.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+#include "Utility/EditCtrl.h"
 
 
 #define EDITITEM(_a, _func) 	BINDFUNC(_a, CVolAlarmPage, _func)
@@ -86,7 +86,7 @@ void CVolAlarmPage::DoDataExchange(CDataExchange* pDX)
 //***************************************************************************************************************
 BOOL CVolAlarmPage::OnNotifyAlarmDriveCommandHigh()
 {
-	auto bModified = CEditCtrlEx::GetLongAbsRange(m_DriveCommandHigh, 0, 100U);
+	auto bModified = CEditCtrl::GetLongAbsRangeModified(m_DriveCommandHigh, 0, 100U);
 	if (bModified)
 	{
 		REMOTEREF.setDoseAlarmDriveCommandHigh(m_sItem, m_DriveCommandHigh);
@@ -97,7 +97,7 @@ BOOL CVolAlarmPage::OnNotifyAlarmDriveCommandHigh()
 //***************************************************************************************************************
 BOOL CVolAlarmPage::OnNotifyAlarmDriveCommandLow()
 {
-	auto bModified = CEditCtrlEx::GetLongAbsRange(m_DriveCommandLow, 0, 100U);
+	auto bModified = CEditCtrl::GetLongAbsRangeModified(m_DriveCommandLow, 0, 100U);
 	if (bModified)
 	{
 		REMOTEREF.setDoseAlarmDriveCommandLow(m_sItem, m_DriveCommandLow);
@@ -108,7 +108,7 @@ BOOL CVolAlarmPage::OnNotifyAlarmDriveCommandLow()
 //***************************************************************************************************************
 BOOL CVolAlarmPage::OnNotifyAlarmReactionDelay()
 {
-	auto bModified = CEditCtrlEx::GetLongAbsRange(m_AlarmReactionDelay, 0, 10000U);
+	auto bModified = CEditCtrl::GetLongAbsRangeModified(m_AlarmReactionDelay, 0, 10000U);
 	if (bModified)
 	{
 		REMOTEREF.setDoseAlarmReactionDelay(m_sItem, m_AlarmReactionDelay);
@@ -119,7 +119,7 @@ BOOL CVolAlarmPage::OnNotifyAlarmReactionDelay()
 //***************************************************************************************************************
 BOOL CVolAlarmPage::OnNotifyAlarmStartReactionDelay()
 {
-	auto bModified = CEditCtrlEx::GetLongAbsRange(m_lAlarmStartReactionDelay, 0, 10000U);
+	auto bModified = CEditCtrl::GetLongAbsRangeModified(m_lAlarmStartReactionDelay, 0, 10000U);
 	if (bModified)
 	{
 		REMOTEREF.setDoseAlarmStartReactionDelay(m_sItem, m_lAlarmStartReactionDelay);
@@ -190,25 +190,25 @@ BOOL CVolAlarmPage::OnInitDialog()
 //***************************************************************************************************************
 void CVolAlarmPage::OnStnClickedVolAlarmDriveCommandHigh()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_VOL_ALARM_DRIVECOMMAND_HIGH);
+	CEditCtrl::CreateFromDlgItem(this, IDC_VOL_ALARM_DRIVECOMMAND_HIGH);
 }
 //***************************************************************************************************************
 //***************************************************************************************************************
 void CVolAlarmPage::OnStnClickedVolAlarmDriveCommandLow()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_VOL_ALARM_DRIVECOMMAND_LOW);
+	CEditCtrl::CreateFromDlgItem(this, IDC_VOL_ALARM_DRIVECOMMAND_LOW);
 }
 //***************************************************************************************************************
 //***************************************************************************************************************
 void CVolAlarmPage::OnStnClickedVolAlarmReactionDelay()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_VOL_ALARM_REACTIONDELAY);
+	CEditCtrl::CreateFromDlgItem(this, IDC_VOL_ALARM_REACTIONDELAY);
 }
 //***************************************************************************************************************
 //***************************************************************************************************************
 void CVolAlarmPage::OnStnClickedVolAlarmStartReactionDelay()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_VOL_ALARM_STARTREACTIONDELAY);
+	CEditCtrl::CreateFromDlgItem(this, IDC_VOL_ALARM_STARTREACTIONDELAY);
 
 }
 //***************************************************************************************************************

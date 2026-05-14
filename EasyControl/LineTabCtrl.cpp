@@ -23,7 +23,7 @@
 #include "LineTabTotalizer.h"
 #include "LineTabExtern.h"
 #include "DataImage.h"
-#include "MFCMacros.h"
+#include "Utility/MFCMacros.h"
 
 
 CLineTabCtrl* CLineTabCtrl::g_pLineTabCtrl = NULL;

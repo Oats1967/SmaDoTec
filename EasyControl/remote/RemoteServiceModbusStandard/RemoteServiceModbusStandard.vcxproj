@@ -82,6 +82,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\DEVELOP\Cplusplus\SmaDoTec;C:\DEVELOP\Cplusplus\SmaDoTec\EasyControl;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -143,7 +144,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\DEVELOP\Cplusplus\EasyControl;C:\DEVELOP\Cplusplus\EasyControl\remote\ModBusKernel\include;C:\DEVELOP\Cplusplus\EasyControl\remote\RemoteHandler\include;C:\DEVELOP\Cplusplus\EasyControl\remote\RemoteServiceModbusStandard\include;C:\DEVELOP\Cplusplus\EasyControl\remote\RemoteServiceModbusStandard\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\DEVELOP\Cplusplus\SmaDoTec\EasyControl\remote\RemoteServiceModbusStandard;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WholeProgramOptimization>true</WholeProgramOptimization>
       <DebugInformationFormat>None</DebugInformationFormat>
     </ClCompile>

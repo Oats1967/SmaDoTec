@@ -20,9 +20,9 @@
 #include "CalibrationVolDlg.h"
 #include "CalibrateProgressDlg.h"
 #include "BASE/Utils/public/Memory.h"
-#include "MFCMacros.h"
+#include "Utility/MFCMacros.h"
 #include "FormatMetric.h"
-#include "EditCtrlEx.h"
+#include "Utility/EditCtrl.h"
 #include "HelpInfoDlgEx.h"
 
 
@@ -236,7 +236,7 @@ void CCalibrationVolDlg::OnOK()
 //*********************************************************************************************************
 BOOL CCalibrationVolDlg::OnNotifyCalibrationDrivecommand()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbsRange(m_fCalibDriveCommand, 0, 100.0F);
+	auto bModified = CEditCtrl::GetFloatAbsRangeModified(m_fCalibDriveCommand, 0, 100.0F);
 	if (bModified)
 	{
 		base::calib::CalibType cfg;
@@ -250,7 +250,7 @@ BOOL CCalibrationVolDlg::OnNotifyCalibrationDrivecommand()
 //*********************************************************************************************************
 void CCalibrationVolDlg::OnClickedCalibrationDrivecommand()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_CALIBRATIONVOL_DRIVECOMMAND_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_CALIBRATIONVOL_DRIVECOMMAND_EDIT);
 }
 //*********************************************************************************************************
 //*********************************************************************************************************
@@ -276,7 +276,7 @@ BOOL CCalibrationVolDlg::OnNotifyCalibrationMeasuretime()
 //*********************************************************************************************************
 void CCalibrationVolDlg::OnClickedCalibrationMeasuretime()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_CALIBRATIONVOL_MEASURETIME_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_CALIBRATIONVOL_MEASURETIME_EDIT);
 }
 
 //*********************************************************************************************************
@@ -312,7 +312,7 @@ BOOL CCalibrationVolDlg::OnNotifyCalibrationWeight()
 //*********************************************************************************************************
 void CCalibrationVolDlg::OnClickedCalibrationWeight()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_CALIBRATIONVOL_WEIGHT_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_CALIBRATIONVOL_WEIGHT_EDIT);
 }
 //*********************************************************************************************************
 //*********************************************************************************************************

@@ -26,9 +26,9 @@
 #include "RecipeView.h"
 #include "RemoteControl.h"
 #include "FormatMetric.h"
-#include "MFCMacros.h"
+#include "Utility/MFCMacros.h"
 #include "DataImage.h"
-#include "EditCtrlEx.h"
+#include "Utility/EditCtrl.h"
 #include "RecipeEditDlg.h"
 #include "ToolTipDlg.h"
 
@@ -722,19 +722,19 @@ void CRecipeView::Dump(CDumpContext& dc) const
 //************************************************************************************
 void CRecipeView::OnStnClickedRecipeLineName()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_STRINGCTRL, IDC_RECIPE_LINE_NAME);
+	CEditCtrl::CreateFromDlgItem(this, IDC_RECIPE_LINE_NAME);
 }
 //************************************************************************************
 //************************************************************************************
 void CRecipeView::OnStnClickedRecipeLineQMNumber()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_UINT64CTRL, IDC_RECIPE_LINE_QMNUMMER);
+	CEditCtrl::CreateFromDlgItem(this, IDC_RECIPE_LINE_QMNUMMER);
 }
 //************************************************************************************
 //************************************************************************************
 void CRecipeView::OnStnClickedRecipeLineSetpoint()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_RECIPE_LINE_SETPOINT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_RECIPE_LINE_SETPOINT);
 }
 //************************************************************************************
 //************************************************************************************
@@ -778,7 +778,7 @@ void CRecipeView::OnStnClickedDosierTyp(UINT nID)
 //************************************************************************************
 void CRecipeView::OnStnClickedFloat(UINT nID)
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, nID);
+	CEditCtrl::CreateFromDlgItem(this, nID);
 }
 //************************************************************************************
 //************************************************************************************

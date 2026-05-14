@@ -20,8 +20,8 @@
 #include "EasyControl.h"
 #include "PidAlarmPage.h"
 #include "RemoteControl.h"
-#include "MFCMacros.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+#include "Utility/EditCtrl.h"
 
 
 #define EDITITEM(_a, _func) 	BINDFUNC(_a, CPidAlarmPage, _func)
@@ -103,7 +103,7 @@ void CPidAlarmPage::DoDataExchange(CDataExchange* pDX)
 //******************************************************************************************************
 BOOL CPidAlarmPage::OnNotifyAlarmHigh(void)
 {
-	auto bModified = CEditCtrlEx::GetLongAbsRange(m_MassflowHigh, 0, 100U);
+	auto bModified = CEditCtrl::GetLongAbsRangeModified(m_MassflowHigh, 0, 100U);
 	if (bModified)
 	{
 		REMOTEREF.setDoseAlarmMassflowHigh(m_sItem, m_MassflowHigh);
@@ -114,7 +114,7 @@ BOOL CPidAlarmPage::OnNotifyAlarmHigh(void)
 //*******************************************************************************
 BOOL CPidAlarmPage::OnNotifyAlarmLow(void)
 {
-	auto bModified = CEditCtrlEx::GetLongAbsRange(m_MassflowLow, 0, 100U);
+	auto bModified = CEditCtrl::GetLongAbsRangeModified(m_MassflowLow, 0, 100U);
 	if (bModified)
 	{
 		REMOTEREF.setDoseAlarmMassflowLow(m_sItem, m_MassflowLow);
@@ -125,7 +125,7 @@ BOOL CPidAlarmPage::OnNotifyAlarmLow(void)
 //*******************************************************************************
 BOOL CPidAlarmPage::OnNotifyAlarmDriveCommandHigh(void)
 {
-	auto bModified = CEditCtrlEx::GetLongAbsRange(m_MaxDriveCommand, 0, 100U);
+	auto bModified = CEditCtrl::GetLongAbsRangeModified(m_MaxDriveCommand, 0, 100U);
 	if (bModified)
 	{
 		REMOTEREF.setDoseAlarmDriveCommandHigh(m_sItem, m_MaxDriveCommand);
@@ -136,7 +136,7 @@ BOOL CPidAlarmPage::OnNotifyAlarmDriveCommandHigh(void)
 //*******************************************************************************
 BOOL CPidAlarmPage::OnNotifyAlarmDriveCommandLow(void)
 {
-	auto bModified = CEditCtrlEx::GetLongAbsRange(m_MinDriveCommand, 0, 100U);
+	auto bModified = CEditCtrl::GetLongAbsRangeModified(m_MinDriveCommand, 0, 100U);
 	if (bModified)
 	{
 		REMOTEREF.setDoseAlarmDriveCommandLow(m_sItem, m_MinDriveCommand);
@@ -147,7 +147,7 @@ BOOL CPidAlarmPage::OnNotifyAlarmDriveCommandLow(void)
 //*******************************************************************************
 BOOL CPidAlarmPage::OnNotifyAlarmReactionDelay(void)
 {
-	auto bModified = CEditCtrlEx::GetLongAbsRange(m_AlarmReactionDelay, 0, 10000U);
+	auto bModified = CEditCtrl::GetLongAbsRangeModified(m_AlarmReactionDelay, 0, 10000U);
 	if (bModified)
 	{
 		REMOTEREF.setDoseAlarmReactionDelay(m_sItem, m_AlarmReactionDelay);
@@ -158,7 +158,7 @@ BOOL CPidAlarmPage::OnNotifyAlarmReactionDelay(void)
 //*******************************************************************************
 BOOL CPidAlarmPage::OnNotifyAlarmStartDelay(void)
 {
-	auto bModified = CEditCtrlEx::GetLongAbsRange(m_lAlarmStartReactionDelay, 0, 10000U);
+	auto bModified = CEditCtrl::GetLongAbsRangeModified(m_lAlarmStartReactionDelay, 0, 10000U);
 	if (bModified)
 	{
 		REMOTEREF.setDoseAlarmStartReactionDelay(m_sItem, m_lAlarmStartReactionDelay);
@@ -237,37 +237,37 @@ BOOL CPidAlarmPage::OnInitDialog()
 //********************************************************************************************************
 void CPidAlarmPage::OnStnClickedPidAlarmMassflowHigh()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_PID_ALARM_MASSFLOW_HIGH);
+	CEditCtrl::CreateFromDlgItem(this, IDC_PID_ALARM_MASSFLOW_HIGH);
 }
 //********************************************************************************************************
 //********************************************************************************************************
 void CPidAlarmPage::OnStnClickedPidAlarmMassflowLow()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_PID_ALARM_MASSFLOW_LOW);
+	CEditCtrl::CreateFromDlgItem(this, IDC_PID_ALARM_MASSFLOW_LOW);
 }
 //********************************************************************************************************
 //********************************************************************************************************
 void CPidAlarmPage::OnStnClickedPidAlarmDriveCommandHigh()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_PID_ALARM_DRIVECOMMAND_HIGH);
+	CEditCtrl::CreateFromDlgItem(this, IDC_PID_ALARM_DRIVECOMMAND_HIGH);
 }
 //********************************************************************************************************
 //********************************************************************************************************
 void CPidAlarmPage::OnStnClickedPidAlarmDriveCommandLow()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_PID_ALARM_DRIVECOMMAND_LOW);
+	CEditCtrl::CreateFromDlgItem(this, IDC_PID_ALARM_DRIVECOMMAND_LOW);
 }
 //********************************************************************************************************
 //********************************************************************************************************
 void CPidAlarmPage::OnStnClickedPidAlarmReactionDelay()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_PID_ALARM_REACTIONDELAY);
+	CEditCtrl::CreateFromDlgItem(this, IDC_PID_ALARM_REACTIONDELAY);
 }
 //********************************************************************************************************
 //********************************************************************************************************
 void CPidAlarmPage::OnStnClickedPidAlarmStartReactionDelay()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_PID_ALARM_STARTREACTIONDELAY);
+	CEditCtrl::CreateFromDlgItem(this, IDC_PID_ALARM_STARTREACTIONDELAY);
 }
 //***************************************************************************************************************
 //***************************************************************************************************************

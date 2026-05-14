@@ -18,7 +18,7 @@
 #include "stdafx.h"
 #include "EasyControl.h"
 #include "HelpInfoDlg.h"
-#include "MFCMacros.h"
+#include "Utility/MFCMacros.h"
 
 
 

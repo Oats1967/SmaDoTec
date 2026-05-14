@@ -19,7 +19,7 @@
 #include "EasyControl.h"
 #include "RemoteControl.h"
 #include "AlertPage.h"
-#include "MFCMacros.h"
+#include "Utility/MFCMacros.h"
 #include "BASE/include/AlarmTypes.def"
 
 

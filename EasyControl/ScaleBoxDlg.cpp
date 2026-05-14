@@ -21,8 +21,8 @@
 #include "ECMessageBox.h"
 #include "RemoteControl.h"
 #include "FormatMetric.h"
-#include "MFCMacros.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+#include "Utility/EditCtrl.h"
 #include "HelpInfoDlgEx.h"
 
 
@@ -161,13 +161,13 @@ void CScaleBoxDlg::RemoveBottomControls(std::vector<int32_t>& ids)
 //**************************************************************************************
 void CScaleBoxDlg::OnStnClickedScaleBoxTaragewicht()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_SCALEBOX_TARAWEIGHT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_SCALEBOX_TARAWEIGHT);
 }
 //**************************************************************************************
 //**************************************************************************************
 void CScaleBoxDlg::OnStnClickedScaleBoxKorrekturfaktor()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_SCALEBOX_ZZ_CORRECTIONFACTOR);
+	CEditCtrl::CreateFromDlgItem(this, IDC_SCALEBOX_ZZ_CORRECTIONFACTOR);
 }
 //**************************************************************************************
 //**************************************************************************************
@@ -197,7 +197,7 @@ void CScaleBoxDlg::OnBnClickedScaleBoxSensoradresseClr()
 //**************************************************************************************
 BOOL CScaleBoxDlg::OnNotifyEditTaraWeight()
 {
-	auto bModified = CEditCtrlEx::GetFloat(m_fTaraWeight);
+	auto bModified = CEditCtrl::GetFloatModified(m_fTaraWeight);
 	if (bModified)
 	{
 		REMOTEREF.setDoseLCTaraWeight(m_sItem, m_fTaraWeight);
@@ -208,7 +208,7 @@ BOOL CScaleBoxDlg::OnNotifyEditTaraWeight()
 //**************************************************************************************
 BOOL CScaleBoxDlg::OnNotifyEditCorrectionFactor()
 {
-	auto bModified = CEditCtrlEx::GetFloat(m_fCorrectionFactor);
+	auto bModified = CEditCtrl::GetFloatModified(m_fCorrectionFactor);
 	if (bModified)
 	{
 		REMOTEREF.setDoseLCCorrectionFactor(m_sItem, m_fCorrectionFactor);

@@ -18,7 +18,7 @@
 #include "stdafx.h"
 #include "EasyControl_DEU/resource.h"
 #include "FeederDisplayLwp.h"
-#include "MFCMacros.h"
+#include "Utility/MFCMacros.h"
 
 
 #ifdef _DEBUG

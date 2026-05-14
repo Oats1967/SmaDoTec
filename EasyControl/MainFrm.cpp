@@ -34,7 +34,7 @@
 #include "NewPasswordDlg.h"
 #include "SingleUserDlg.h"
 #include "DataImage.h"
-#include "TKBoardInterface.h"
+#include "VKBoard/public/TKBoardInterface.h"
 
 
 #define TLICENCEID 37

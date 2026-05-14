@@ -15,10 +15,10 @@
 /// @author    Detlef Hafer
 ///
 //------------------------------------------------------------------------------------
-#include "pch.h"
+#include "Utility.h"
 #include <cstring>
 #include "BASE/Utils/public/StringUtil.h"
-#include "EditCtrl.h"
+#include "Utility/EditCtrl.h"
 #include "Utility/StringConvert.h"
 #include "Utility/MFCMacros.h"
 
@@ -32,7 +32,7 @@
 
 CEditCtrl* CEditCtrl  :: m_pEdit = NULL;
 
-CEditCtrl::DATATYPE	CEditCtrl :: uVal;
+TCHAR CEditCtrl::g_buffer[100];
 
 
 IMPLEMENT_DYNAMIC(CEditCtrl, CEdit)
@@ -136,71 +136,32 @@ void CEditCtrl::Create(const CRect& aRect, const CString& aText)
 //**********************************************************************************************************************
 //**********************************************************************************************************************
 int32_t	CEditCtrl  :: GetLong   ( void)
-{ 
-	ASSERT(m_pEdit);
-	if (m_pEdit && m_pEdit->IsValidValue())
-	{
-		CString szBuff;
-		m_pEdit->GetWindowText(szBuff);
-		uVal.iInt = std::stoi(LPCTSTR(szBuff));
-	}
-	return uVal.iInt; 
-}
+{ 	return _S32(std::stoi(LPCTSTR(g_buffer)));}
 //**********************************************************************************************************************
 //**********************************************************************************************************************
 int32_t	CEditCtrl::GetLongAbs(void)
-{	return _S32(labs(uVal.iInt));
-}
+{	return _S32(std::labs(GetLong()));}
 //**********************************************************************************************************************
 //**********************************************************************************************************************
-float32_t	CEditCtrl  :: GetFloat   ( void)
-{ 
-	ASSERT(m_pEdit);
-	if (m_pEdit && m_pEdit->IsValidValue())
-	{
-		CString szBuff;
-		m_pEdit->GetWindowText(szBuff);
-		uVal.fFloat = _F32(std::stof(LPCTSTR(szBuff)));
-	}
-	return uVal.fFloat; }
+float32_t	CEditCtrl::GetFloat(void)
+{	return _F32(std::stof(LPCTSTR(g_buffer)));}
 //**********************************************************************************************************************
 float32_t	CEditCtrl::GetFloatAbs(void)
-{ 
-	return _F32(fabs(GetFloat())); }
+{ 	return _F32(fabs(GetFloat())); }
 //**********************************************************************************************************************
 //**********************************************************************************************************************
 CString	CEditCtrl  :: GetString   ( void)
-{ 
-	ASSERT(m_pEdit);
-	if (m_pEdit && m_pEdit->IsValidValue())
-	{
-		CString szBuff;
-		m_pEdit->GetWindowText(szBuff);
-		std::string val = toStdString(szBuff);
-		const auto length = __min(sizeof(uVal.szBuff) - 1, val.length());
-		strncpy_s(uVal.szBuff, val.c_str(), length);
-		uVal.szBuff[length] = 0;
-	}
-	return CString(uVal.szBuff); 
-}
+{ 	return CString(g_buffer); }
 //**********************************************************************************************************************
 //**********************************************************************************************************************
 uint64_t	CEditCtrl::GetUint64(void)
-{	
-	ASSERT(m_pEdit);
-	if (m_pEdit && m_pEdit->IsValidValue())
-	{
-		CString szBuff;
-		m_pEdit->GetWindowText(szBuff);
-		uVal.iUInt64 = std::stoull(LPCTSTR(szBuff));
-	}
-	return _U64(uVal.iUInt64);
-}
+{	return _U64(std::stoull(g_buffer));}
 //**********************************************************************************************************************
 //**********************************************************************************************************************
 CEditCtrl::~CEditCtrl()
 {
 	m_pEdit = NULL;
+	g_buffer[0] = 0;
 }
 //**********************************************************************************************************************
 //**********************************************************************************************************************
@@ -238,6 +199,10 @@ BOOL CEditCtrl::PreTranslateMessage(MSG* pMsg)
 			if ( pMsg->wParam == VK_RETURN )
 			{
 				ASSERT(m_bValidValue == FALSE);
+				CString szBuff;
+				GetWindowText(szBuff);
+				_tcscpy_s(g_buffer, sizeof(g_buffer) - 1, LPCTSTR(szBuff));
+				g_buffer[sizeof(g_buffer) - 1] = 0;
 				m_bValidValue = TRUE;
 			}
             ShowWindow(SW_HIDE);

@@ -17,7 +17,7 @@
 //------------------------------------------------------------------------------------
 #include "stdafx.h"
 #include "ProductListCtrl.h"
-#include "MFCMacros.h"
+#include "Utility/MFCMacros.h"
 
 
 #define ICON_SIZEX 16

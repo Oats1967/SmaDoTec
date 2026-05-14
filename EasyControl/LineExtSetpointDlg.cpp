@@ -20,9 +20,9 @@
 #include "EasyControl.h"
 #include "LineExtSetpointDlg.h"
 #include "DataImage.h"
-#include "MFCMacros.h"
+#include "Utility/MFCMacros.h"
 #include "FormatMetric.h"
-#include "EditCtrlEx.h"
+#include "Utility/EditCtrl.h"
 #include "HelpInfoDlgEx.h"
 
 
@@ -82,13 +82,13 @@ END_MESSAGE_MAP()
 //***********************************************************************************************
 void CLineExtSetpointDlg::OnStnClickedLineExtSetpointScaleEdit()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_LINE_EXTSETPOINT_SCALE_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LINE_EXTSETPOINT_SCALE_EDIT);
 }
 //***********************************************************************************************
 //***********************************************************************************************
 void CLineExtSetpointDlg::OnStnClickedLineExtSetpointOffsetEdit()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_LINE_EXTSETPOINT_OFFSET_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LINE_EXTSETPOINT_OFFSET_EDIT);
 }
 //***********************************************************************************************
 //***********************************************************************************************
@@ -122,7 +122,7 @@ void CLineExtSetpointDlg::OnBnClickedLineExtSetpointUser()
 //***********************************************************************************************
 BOOL CLineExtSetpointDlg::OnNotifyEditScale()
 {
-	auto modified = CEditCtrlEx::GetFloatAbs(m_Scale);
+	auto modified = CEditCtrl::GetFloatAbsModified(m_Scale);
 	if (modified)
 	{
 		REMOTEREF.setLineExtSetpointScale(m_Scale);
@@ -133,7 +133,7 @@ BOOL CLineExtSetpointDlg::OnNotifyEditScale()
 //***********************************************************************************************
 BOOL CLineExtSetpointDlg::OnNotifyEditOffset()
 {
-	auto modified = CEditCtrlEx::GetFloatRange(m_Offset, -10.0f, 10.0f);
+	auto modified =CEditCtrl::GetFloatRangeModified(m_Offset, -10.0f, 10.0f);
 	if (modified)
 	{
 		REMOTEREF.setLineExtSetpointOffset(m_Offset);

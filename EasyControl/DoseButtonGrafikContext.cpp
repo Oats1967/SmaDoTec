@@ -18,7 +18,7 @@
 #include "stdafx.h"
 #include "DoseButtonGrafikContext.h"
 #include "EasyControl_DEU/resource.h"
-#include "MFCMacros.h"
+#include "Utility/MFCMacros.h"
 
 
 //**************************************************************************************************

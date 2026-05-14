@@ -29,7 +29,7 @@
 #include "BASE/Utils/public/xml/IOConfigXml.h"
 #include "BASE/Utils/public/xml/LogoConfigXml.h"
 #include "DoseDataLib/include/DoseData.h"
-#include "RemoteServer64.h"
+#include "RemoteServer/include/RemoteServer64.h"
 #include "DoseServerImpl.h"
 #include "LCModuleImpl.h"
 #include "RemoteImpl.h"

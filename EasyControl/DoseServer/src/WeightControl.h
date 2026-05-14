@@ -21,7 +21,7 @@
 #include "BASE/include/LCType.h"
 #include "BASE/Utils/public/WeightPair.h"
 #include "AlarmControl.h"
-#include "LCModuleInterface.h"
+#include "include/LCModuleInterface.h"
 
 
 

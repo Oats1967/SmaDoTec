@@ -24,7 +24,7 @@
 #include "ECMessageBox.h"
 #include "SettingsRecipePage.h"
 #include "RemoteControl.h"
-#include "MFCMacros.h"
+#include "Utility/MFCMacros.h"
 
 
 

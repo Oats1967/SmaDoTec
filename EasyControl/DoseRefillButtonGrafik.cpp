@@ -32,7 +32,7 @@
 #include "DoseRefillButtonGrafikWbf.h"
 #include "DoseRefillButtonGrafikWbm.h"
 #include "EasyControl_DEU/resource.h"
-#include "MFCMacros.h"
+#include "Utility/MFCMacros.h"
 
 
 /////////////////////////////////////////////////////////////////////////////

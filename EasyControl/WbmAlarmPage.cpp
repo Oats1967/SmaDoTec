@@ -20,8 +20,8 @@
 #include "ECMessageBox.h"
 #include "WbmAlarmPage.h"
 #include "RemoteControl.h"
-#include "MFCMacros.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+#include "Utility/EditCtrl.h"
 
 
 
@@ -83,7 +83,7 @@ void CWbmAlarmPage::DoDataExchange(CDataExchange* pDX)
 //***************************************************************************************************************
 BOOL CWbmAlarmPage::OnNotifyAlarmReactionDelay()
 {
-	auto bModified = CEditCtrlEx::GetLongAbsRange(m_AlarmReactionDelay, 0, 100U);
+	auto bModified = CEditCtrl::GetLongAbsRangeModified(m_AlarmReactionDelay, 0, 100U);
 	if (bModified)
 	{
 		REMOTEREF.setDoseAlarmReactionDelay(m_sItem, m_AlarmReactionDelay);
@@ -94,7 +94,7 @@ BOOL CWbmAlarmPage::OnNotifyAlarmReactionDelay()
 //***************************************************************************************************************
 BOOL CWbmAlarmPage::OnNotifyAlarmStartReactionDelay()
 {
-	auto bModified = CEditCtrlEx::GetLongAbsRange(m_lAlarmStartReactionDelay, 0, 100U);
+	auto bModified = CEditCtrl::GetLongAbsRangeModified(m_lAlarmStartReactionDelay, 0, 100U);
 	if (bModified)
 	{
 		REMOTEREF.setDoseAlarmStartReactionDelay(m_sItem, m_lAlarmStartReactionDelay);
@@ -105,7 +105,7 @@ BOOL CWbmAlarmPage::OnNotifyAlarmStartReactionDelay()
 //***************************************************************************************************************
 BOOL CWbmAlarmPage::OnNotifyAlarmWbfMinBeltLoad()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbsRange(m_fMinBeltLoad, 0.0F, 10000.0F);
+	auto bModified =CEditCtrl::GetFloatAbsRangeModified(m_fMinBeltLoad, 0.0F, 10000.0F);
 	if (bModified)
 	{
 		if (m_fMaxBeltLoad < m_fMinBeltLoad)
@@ -120,7 +120,7 @@ BOOL CWbmAlarmPage::OnNotifyAlarmWbfMinBeltLoad()
 //***************************************************************************************************************
 BOOL CWbmAlarmPage::OnNotifyAlarmWbfMaxBeltLoad()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbsRange(m_fMaxBeltLoad, 0.0F, 10000.0F);
+	auto bModified =CEditCtrl::GetFloatAbsRangeModified(m_fMaxBeltLoad, 0.0F, 10000.0F);
 	if (bModified)
 	{
 		if (m_fMaxBeltLoad < m_fMinBeltLoad)
@@ -201,25 +201,25 @@ BOOL CWbmAlarmPage::OnInitDialog()
 //******************************************************************************************************
 void CWbmAlarmPage::OnStnClickedWBMAlarmMinBeltLoad()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_WBM_ALARM_MINBELTLOAD);
+	CEditCtrl::CreateFromDlgItem(this, IDC_WBM_ALARM_MINBELTLOAD);
 }
 //******************************************************************************************************
 //******************************************************************************************************
 void CWbmAlarmPage::OnStnClickedWBMAlarmMaxBeltLoad()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_WBM_ALARM_MAXBELTLOAD);
+	CEditCtrl::CreateFromDlgItem(this, IDC_WBM_ALARM_MAXBELTLOAD);
 }
 //******************************************************************************************************
 //******************************************************************************************************
 void CWbmAlarmPage::OnStnClickedWBMAlarmReactionDelay()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_WBM_ALARM_REACTIONDELAY);
+	CEditCtrl::CreateFromDlgItem(this, IDC_WBM_ALARM_REACTIONDELAY);
 }
 //******************************************************************************************************
 //******************************************************************************************************
 void CWbmAlarmPage::OnStnClickedWBMAlarmStartReactionDelay()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_WBM_ALARM_STARTREACTIONDELAY);
+	CEditCtrl::CreateFromDlgItem(this, IDC_WBM_ALARM_STARTREACTIONDELAY);
 }
 //******************************************************************************************************
 //******************************************************************************************************

@@ -20,8 +20,8 @@
 #include "RemoteControl.h"
 #include "GlobalConst.h"
 #include "DataImage.h"
-#include "MFCMacros.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+#include "Utility/EditCtrl.h"
 
 
 
@@ -126,7 +126,7 @@ void CLwfAlarmPage::DoDataExchange(CDataExchange* pDX)
 //***************************************************************************************************************
 BOOL CLwfAlarmPage::OnNotifyAlarmMassflowHigh()
 {
-	auto bModified = CEditCtrlEx::GetLongAbsRange(m_AlarmMassflowHigh, 0, 100U);
+	auto bModified = CEditCtrl::GetLongAbsRangeModified(m_AlarmMassflowHigh, 0, 100U);
 	if (bModified)
 	{
 		REMOTEREF.setDoseAlarmMassflowHigh(m_sItem, m_AlarmMassflowHigh);
@@ -137,7 +137,7 @@ BOOL CLwfAlarmPage::OnNotifyAlarmMassflowHigh()
 //***************************************************************************************************************
 BOOL CLwfAlarmPage::OnNotifyAlarmMassflowLow()
 {
-	auto bModified = CEditCtrlEx::GetLongAbsRange(m_AlarmMassflowLow, 0, 100U);
+	auto bModified = CEditCtrl::GetLongAbsRangeModified(m_AlarmMassflowLow, 0, 100U);
 	if (bModified)
 	{
 		REMOTEREF.setDoseAlarmMassflowLow(m_sItem, m_AlarmMassflowLow);
@@ -148,7 +148,7 @@ BOOL CLwfAlarmPage::OnNotifyAlarmMassflowLow()
 //***************************************************************************************************************
 BOOL CLwfAlarmPage::OnNotifyAlarmDriveCommandHigh()
 {
-	auto bModified = CEditCtrlEx::GetLongAbsRange(m_AlarmDriveCommandHigh, 0, 100U);
+	auto bModified = CEditCtrl::GetLongAbsRangeModified(m_AlarmDriveCommandHigh, 0, 100U);
 	if (bModified)
 	{
 		REMOTEREF.setDoseAlarmDriveCommandHigh(m_sItem, m_AlarmDriveCommandHigh);
@@ -159,7 +159,7 @@ BOOL CLwfAlarmPage::OnNotifyAlarmDriveCommandHigh()
 //***************************************************************************************************************
 BOOL CLwfAlarmPage::OnNotifyAlarmDriveCommandLow()
 {
-	auto bModified = CEditCtrlEx::GetLongAbsRange(m_AlarmDriveCommandLow, 0, 100U);
+	auto bModified = CEditCtrl::GetLongAbsRangeModified(m_AlarmDriveCommandLow, 0, 100U);
 	if (bModified)
 	{
 		REMOTEREF.setDoseAlarmDriveCommandLow(m_sItem, m_AlarmDriveCommandLow);
@@ -170,7 +170,7 @@ BOOL CLwfAlarmPage::OnNotifyAlarmDriveCommandLow()
 //***************************************************************************************************************
 BOOL CLwfAlarmPage::OnNotifyAlarmDosePerformance()
 {
-	auto bModified = CEditCtrlEx::GetLongAbsRange(m_lAlarmDosePerformance, 0, 100U);
+	auto bModified = CEditCtrl::GetLongAbsRangeModified(m_lAlarmDosePerformance, 0, 100U);
 	if (bModified)
 	{
 		REMOTEREF.setDoseAlarmDosePerformance(m_sItem, m_lAlarmDosePerformance);
@@ -181,7 +181,7 @@ BOOL CLwfAlarmPage::OnNotifyAlarmDosePerformance()
 //***************************************************************************************************************
 BOOL CLwfAlarmPage::OnNotifyAlarmReactionDelay()
 {
-	auto bModified = CEditCtrlEx::GetLongAbsRange(m_AlarmReactionDelay, 0, 1000U);
+	auto bModified = CEditCtrl::GetLongAbsRangeModified(m_AlarmReactionDelay, 0, 1000U);
 	if (bModified)
 	{
 		REMOTEREF.setDoseAlarmReactionDelay(m_sItem, m_AlarmReactionDelay);
@@ -192,7 +192,7 @@ BOOL CLwfAlarmPage::OnNotifyAlarmReactionDelay()
 //***************************************************************************************************************
 BOOL CLwfAlarmPage::OnNotifyAlarmStartReactionDelay()
 {
-	auto bModified = CEditCtrlEx::GetLongAbsRange(m_lAlarmStartReactionDelay, 0, 1000U);
+	auto bModified = CEditCtrl::GetLongAbsRangeModified(m_lAlarmStartReactionDelay, 0, 1000U);
 	if (bModified)
 	{
 		REMOTEREF.setDoseAlarmStartReactionDelay(m_sItem, m_lAlarmStartReactionDelay);
@@ -203,7 +203,7 @@ BOOL CLwfAlarmPage::OnNotifyAlarmStartReactionDelay()
 //***************************************************************************************************************
 BOOL CLwfAlarmPage::OnNotifyAlarmNoiseLimit()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbsRange(m_AlarmNoiseLimit, 0.0f, 1000.0f);
+	auto bModified =CEditCtrl::GetFloatAbsRangeModified(m_AlarmNoiseLimit, 0.0f, 1000.0f);
 	if (bModified)
 	{
 		REMOTEREF.setDoseAlarmNoiseLimit(m_sItem, m_AlarmNoiseLimit);
@@ -214,7 +214,7 @@ BOOL CLwfAlarmPage::OnNotifyAlarmNoiseLimit()
 //***************************************************************************************************************
 BOOL CLwfAlarmPage::OnNotifyAlarmMaxBatchTime()
 {
-	auto bModified = CEditCtrlEx::GetLongAbsRange(m_lAlarmMaxBatchTime, 0, 10000U);
+	auto bModified = CEditCtrl::GetLongAbsRangeModified(m_lAlarmMaxBatchTime, 0, 10000U);
 	if (bModified)
 	{
 		REMOTEREF.setDoseAlarmMaxBatchTime(m_sItem, m_lAlarmMaxBatchTime);
@@ -316,55 +316,55 @@ BOOL CLwfAlarmPage::OnInitDialog()
 //***************************************************************************************************************
 void CLwfAlarmPage::OnStnClickedDosiererAlarmMassflowHigh()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_LWF_ALARM_MASSFLOW_HIGH);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LWF_ALARM_MASSFLOW_HIGH);
 }
 //***************************************************************************************************************
 //***************************************************************************************************************
 void CLwfAlarmPage::OnStnClickedDosiererAlarmMassflowLow()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_LWF_ALARM_MASSFLOW_LOW);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LWF_ALARM_MASSFLOW_LOW);
 }
 //***************************************************************************************************************
 //***************************************************************************************************************
 void CLwfAlarmPage::OnStnClickedDosiererAlarmDriveCommandHigh()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_LWF_ALARM_DRIVECOMMAND_HIGH);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LWF_ALARM_DRIVECOMMAND_HIGH);
 }
 //***************************************************************************************************************
 //***************************************************************************************************************
 void CLwfAlarmPage::OnStnClickedDosiererAlarmDriveCommandLow()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_LWF_ALARM_DRIVECOMMAND_LOW);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LWF_ALARM_DRIVECOMMAND_LOW);
 }
 //***************************************************************************************************************
 //***************************************************************************************************************
 void CLwfAlarmPage::OnStnClickedDosiererAlarmReactionDelay()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_LWF_ALARM_REACTIONDELAY);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LWF_ALARM_REACTIONDELAY);
 }
 //***************************************************************************************************************
 //***************************************************************************************************************
 void CLwfAlarmPage::OnStnClickedDosiererAlarmStartReactionDelay()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_LWF_ALARM_STARTREACTIONDELAY);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LWF_ALARM_STARTREACTIONDELAY);
 }
 //***************************************************************************************************************
 //***************************************************************************************************************
 void CLwfAlarmPage::OnStnClickedDosiererAlarmDosePerformance()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_LWF_ALARM_DOSEPERFORMANCE);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LWF_ALARM_DOSEPERFORMANCE);
 }
 //***************************************************************************************************************
 //***************************************************************************************************************
 void CLwfAlarmPage::OnStnClickedDosiererAlarmMaxBatchTime()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_LWF_ALARM_MAXBATCHTIME);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LWF_ALARM_MAXBATCHTIME);
 }
 //***************************************************************************************************************
 //***************************************************************************************************************
 void CLwfAlarmPage::OnStnClickedDosiererAlarmNoiseLimit()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_LWF_ALARM_NOISELIMIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LWF_ALARM_NOISELIMIT);
 }
 //***************************************************************************************************************
 //***************************************************************************************************************

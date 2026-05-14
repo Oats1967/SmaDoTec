@@ -23,8 +23,8 @@
 #include "WbmRecipePage.h"
 #include "GlobalConst.h"
 #include "DataImage.h"
-#include "MFCMacros.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+#include "Utility/EditCtrl.h"
 
 
 //******************************************************************************************************
@@ -225,13 +225,13 @@ void CWbmRecipePage::OnBnClickedWbfRecipeDoseTotalizerReset()
 //******************************************************************************************************
 void CWbmRecipePage::OnStnClickedWbfRecipeName()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_STRINGCTRL, IDC_WBM_RECIPE_NAME);
+	CEditCtrl::CreateFromDlgItem(this, IDC_WBM_RECIPE_NAME);
 }
 //******************************************************************************************************
 //******************************************************************************************************
 void CWbmRecipePage::OnStnClickedWbfRecipeQmnummer()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_STRINGCTRL, IDC_WBM_RECIPE_QMNUMMER);
+	CEditCtrl::CreateFromDlgItem(this, IDC_WBM_RECIPE_QMNUMMER);
 }
 //******************************************************************************************************
 //******************************************************************************************************

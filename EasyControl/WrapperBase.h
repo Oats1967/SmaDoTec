@@ -18,8 +18,8 @@
 #pragma once
 
 #include "remote/include/RemoteInterface.h"
-#include "DoseServerInterface.h"
-#include "TKBoardInterface.h"
+#include "DoseServer/include/DoseServerInterface.h"
+#include "VKBoard/public/TKBoardInterface.h"
 #include "BASE/Utils/public/UserRightsList.h"
 #include "BASE/Utils/public/LogItemList.h"
 #include "BASE/Utils/public/ProductItemList.h"

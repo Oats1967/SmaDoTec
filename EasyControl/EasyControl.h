@@ -26,7 +26,7 @@
 #include "EasyControlCountry.h"
 #include "RemoteControl.h"
 #include "ViewSelect.h"
-#include "ErrorCodes.h"
+#include "DoseServer/include/ErrorCodes.h"
 
 
 enum class eLC_Address : uint32_t

@@ -19,8 +19,8 @@
 #include "EasyControl.h"
 #include "UserNameDlg.h"
 #include "FormatMetric.h"
-#include "MFCMacros.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+#include "Utility/EditCtrl.h"
 
 
 
@@ -66,7 +66,7 @@ LRESULT CUserNameDlg::OnNotifyEdit(WPARAM id, LPARAM)
 {
 	switch(id)
 	{
-		case IDC_USERNAME				:	CEditCtrlEx :: GetString(m_szUserName);
+		case IDC_USERNAME				:	CEditCtrl :: GetStringModified(m_szUserName);
 											ENABLE_ID(IDOK, !m_szUserName.IsEmpty());
 											break;
 		default:
@@ -91,7 +91,7 @@ void CUserNameDlg::SetUserLevel (const base::utils::eUserClass newUser)
 //*******************************************************************************************************************
 void CUserNameDlg::OnStnClickedBenutzername()
 {
-   	CEditCtrl :: GetInput(this, E_TYPCTRL::E_STRINGCTRL, IDC_USERNAME);
+   	CEditCtrl::CreateFromDlgItem(this, IDC_USERNAME);
 }
 //*******************************************************************************************************************
 //*******************************************************************************************************************

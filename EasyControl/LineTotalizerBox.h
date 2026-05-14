@@ -17,7 +17,7 @@
 //------------------------------------------------------------------------------------
 #pragma once
 
-#include "Colors.def"
+#include "Utility/Colors.def"
 #include "BitmapDC.h"
 
 class CLineTotalizerBox

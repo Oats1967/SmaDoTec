@@ -17,10 +17,10 @@
 //------------------------------------------------------------------------------------
 #include <cassert>
 #include "BASE/Utils/public/xml/RemoteServerXml.h"
-#include "RemoteServerImpl.h"
-#include "RemoteServiceModbusStandard.h"
-#include "RemoteServiceS7.h"
-#include "RemoteServiceProfibus.h"
+#include "include/RemoteServerImpl.h"
+#include "remote/RemoteServiceModbusStandard/include/RemoteServiceModbusStandard.h"
+#include "remote/RemoteServiceS7/include/RemoteServiceS7.h"
+#include "remote/RemoteServiceProfibus/include/RemoteServiceProfibus.h"
 #include "Logger/include/Logger.h"
 
 

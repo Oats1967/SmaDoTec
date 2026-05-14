@@ -27,8 +27,8 @@
 #include "FeederScaleBoxDlg.h"
 #include "DataImage.h"
 #include "GlobalConst.h"
-#include "MFCMacros.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+#include "Utility/EditCtrl.h"
 
 
 
@@ -133,7 +133,7 @@ LRESULT CLwbRecipePage::OnDestroyScaleBox(WPARAM, LPARAM)
 //******************************************************************************************************
 BOOL CLwbRecipePage::OnNotifyEditSetpoint(void)
 {
-	auto bModified = CEditCtrlEx::GetFloatAbs(m_fSetpoint);
+	auto bModified = CEditCtrl::GetFloatAbsModified(m_fSetpoint);
 	if (bModified)
 	{		
 		REMOTEREF.setDoseSetpoint(m_sItem, m_fSetpoint);
@@ -145,7 +145,7 @@ BOOL CLwbRecipePage::OnNotifyEditSetpoint(void)
 //******************************************************************************************************
 BOOL CLwbRecipePage::OnNotifyEditANNumber(void)
 {
-	auto bModified = CEditCtrlEx::GetString(m_szANNumber);
+	auto bModified = CEditCtrl::GetStringModified(m_szANNumber);
 	if (bModified)
 	{
 		REMOTEREF.setLineANNumber(toStdString(m_szANNumber));
@@ -419,25 +419,25 @@ void CLwbRecipePage::OnStnClickedDosiererScale()
 //***************************************************************************************
 void CLwbRecipePage::OnStnClickedDosiererName()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_STRINGCTRL, IDC_LWB_RECIPE_NAME);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LWB_RECIPE_NAME);
 }
 //***************************************************************************************
 //***************************************************************************************
 void CLwbRecipePage::OnStnClickedDosiererSetpoint()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_LWB_RECIPE_BATCHSETPOINT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LWB_RECIPE_BATCHSETPOINT);
 }
 //***************************************************************************************
 //***************************************************************************************
 void CLwbRecipePage::OnStnClickedDosiererQmnummer()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_STRINGCTRL, IDC_LWB_RECIPE_QMNUMBER);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LWB_RECIPE_QMNUMBER);
 }
 //***************************************************************************************
 //***************************************************************************************
 void CLwbRecipePage::OnStnClickedDosiererANnummer()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_STRINGCTRL, IDC_LWB_RECIPE_ANNUMBER);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LWB_RECIPE_ANNUMBER);
 }
 //***************************************************************************************
 //***************************************************************************************

@@ -19,7 +19,7 @@
 #include "LineTabExtern.h"
 #include "ECMessageBox.h"
 #include "DataImage.h"
-#include "MFCMacros.h"
+#include "Utility/MFCMacros.h"
 
 
 // CLineTabExtern-Dialog

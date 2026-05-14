@@ -17,20 +17,9 @@
 //------------------------------------------------------------------------------------
 #pragma once
 
-#include "pch.h"
-#include "EasyGraph.h"
+#include "utility.h"
 #include "BASE/types.h"
 #include "VKBoard/public/TKBoardInterface.h"
-
-
-// CEditCtrl
-enum class E_TYPCTRL : uint32_t 
-{ 
-	E_INTCTRL = 0, 
-	E_FLOATCTRL, 
-	E_STRINGCTRL, 
-	E_UINT64CTRL
-};
 
 
 
@@ -38,21 +27,13 @@ class CEditCtrl : public CEdit
 {
 	DECLARE_DYNAMIC(CEditCtrl)
 
-	union DATATYPE
-	{
-		char_t	szBuff[100];
-		int32_t		iInt;
-		float32_t	fFloat;
-		uint64_t	iUInt64;
-	};
-
 protected:
 	CWnd*		m_pParent;
 	int32_t     m_ID;
 	BOOL		m_bValidValue;
 
 protected:
-	static DATATYPE uVal;
+	static TCHAR g_buffer[100];
 
 
 protected:

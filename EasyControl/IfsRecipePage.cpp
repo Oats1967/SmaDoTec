@@ -22,8 +22,8 @@
 #include "RemoteControl.h"
 #include "IfsRecipePage.h"
 #include "IfsSettingBoxDlg.h"
-#include "MFCMacros.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+#include "Utility/EditCtrl.h"
 
 
 #define EDITITEM(_a, _func) 	BINDFUNC(_a, CIfsRecipePage, _func)
@@ -201,19 +201,19 @@ void CIfsRecipePage::OnStnClickedIfsSetting()
 //*****************************************************************************************************
 void CIfsRecipePage::OnStnClickedIfsName()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_STRINGCTRL, IDC_IFS_RECIPE_NAME);
+	CEditCtrl::CreateFromDlgItem(this, IDC_IFS_RECIPE_NAME);
 }
 //*****************************************************************************************************
 //*****************************************************************************************************
 void CIfsRecipePage::OnStnClickedGainFactor()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_IFS_RECIPE_GAINFACTOR_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_IFS_RECIPE_GAINFACTOR_EDIT);
 }
 //*****************************************************************************************************
 //*****************************************************************************************************
 void CIfsRecipePage::OnStnClickedReduceFactor()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_IFS_RECIPE_REDUCEFACTOR_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_IFS_RECIPE_REDUCEFACTOR_EDIT);
 }
 //*****************************************************************************************************
 //*****************************************************************************************************
@@ -221,19 +221,19 @@ void CIfsRecipePage::OnStnClickedReduceFactor()
 //***********************************************************************************************
 void CIfsRecipePage::OnStnClickedIfsStepTimeGain()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_IFS_RECIPE_TIMESTEPGAIN_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_IFS_RECIPE_TIMESTEPGAIN_EDIT);
 }
 //***********************************************************************************************
 //***********************************************************************************************
 void CIfsRecipePage::OnStnClickedIfsStepTimeReduce()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_IFS_RECIPE_TIMESTEPREDUCE_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_IFS_RECIPE_TIMESTEPREDUCE_EDIT);
 }
 //***********************************************************************************************
 //***********************************************************************************************
 void CIfsRecipePage::OnStnClickedIfsSetpointOverflow()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_IFS_RECIPE_SETPOINTOVERFLOW_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_IFS_RECIPE_SETPOINTOVERFLOW_EDIT);
 }
 //***********************************************************************************************
 //***********************************************************************************************
@@ -287,7 +287,7 @@ HBRUSH CIfsRecipePage::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 //******************************************************************************************************
 BOOL CIfsRecipePage::OnNotifyEditGainFactor(void)
 {
-	auto bModified = CEditCtrlEx::GetFloatAbs(m_GainFactor);
+	auto bModified = CEditCtrl::GetFloatAbsModified(m_GainFactor);
 	if (bModified)
 	{
 		m_GainFactor = ROUND1(m_GainFactor);
@@ -299,7 +299,7 @@ BOOL CIfsRecipePage::OnNotifyEditGainFactor(void)
 //******************************************************************************************************
 BOOL CIfsRecipePage::OnNotifyEditReduceFactor(void)
 {
-	auto bModified = CEditCtrlEx::GetFloatAbs(m_ReduceFactor);
+	auto bModified = CEditCtrl::GetFloatAbsModified(m_ReduceFactor);
 	if (bModified)
 	{
 		m_ReduceFactor = ROUND1(m_ReduceFactor);
@@ -311,7 +311,7 @@ BOOL CIfsRecipePage::OnNotifyEditReduceFactor(void)
 //***********************************************************************************************
 BOOL CIfsRecipePage::OnNotifyStepTimeGain()
 {
-	auto bModified = CEditCtrlEx::GetLongAbs(m_StepTimeGain);
+	auto bModified = CEditCtrl::GetLongAbsModified(m_StepTimeGain);
 	if (bModified)
 	{
 		REMOTEREF.setIfsStepTimeGain(m_sItem, m_StepTimeGain);
@@ -322,7 +322,7 @@ BOOL CIfsRecipePage::OnNotifyStepTimeGain()
 //***********************************************************************************************
 BOOL CIfsRecipePage::OnNotifyStepTimeReduce()
 {
-	auto bModified = CEditCtrlEx::GetLongAbs(m_StepTimeReduce);
+	auto bModified = CEditCtrl::GetLongAbsModified(m_StepTimeReduce);
 	if (bModified)
 	{
 		REMOTEREF.setIfsStepTimeReduce(m_sItem, m_StepTimeReduce);
@@ -333,7 +333,7 @@ BOOL CIfsRecipePage::OnNotifyStepTimeReduce()
 //******************************************************************************************************
 BOOL CIfsRecipePage::OnNotifySetpointOverflowInfo(void)
 {
-	auto bModified = CEditCtrlEx::GetFloatAbs(m_SetpointOverflow);
+	auto bModified = CEditCtrl::GetFloatAbsModified(m_SetpointOverflow);
 	if (bModified)
 	{
 		m_SetpointOverflow = ROUND1(m_SetpointOverflow);

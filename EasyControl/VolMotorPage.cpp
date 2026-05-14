@@ -21,8 +21,8 @@
 #include "VolMotorPage.h"
 #include "CalibrationVolDlg.h"
 #include "ECMessageBox.h"
-#include "MFCMacros.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+#include "Utility/EditCtrl.h"
 
 
 
@@ -82,7 +82,7 @@ void CVolMotorPage::DoDataExchange(CDataExchange* pDX)
 //***************************************************************************************
 BOOL CVolMotorPage::OnNotifyMaxSetpoint()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbsRange(m_fMaxSetpoint, 0.0f, 10000.0f);
+	auto bModified =CEditCtrl::GetFloatAbsRangeModified(m_fMaxSetpoint, 0.0f, 10000.0f);
 	if (bModified)
 	{
 		REMOTEREF.setDoseMaxSetpoint(m_sItem, m_fMaxSetpoint);
@@ -93,7 +93,7 @@ BOOL CVolMotorPage::OnNotifyMaxSetpoint()
 //**************************************************************************************************************
 BOOL CVolMotorPage::OnNotifyMaxRotationalSpeed()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbs(m_fMaxRotationalSpeed);
+	auto bModified = CEditCtrl::GetFloatAbsModified(m_fMaxRotationalSpeed);
 	if (bModified)
 	{
 		REMOTEREF.setDoseMaxRotationalSpeed(m_sItem, m_fMaxRotationalSpeed);
@@ -106,7 +106,7 @@ BOOL CVolMotorPage::OnNotifyDoseperformance()
 {
 	const float32_t c_epsilon = 1e-4F;
 
-	auto bModified = CEditCtrlEx::GetFloatAbs(m_fDoseperformance);
+	auto bModified = CEditCtrl::GetFloatAbsModified(m_fDoseperformance);
 	if (bModified)
 	{
 		REMOTEREF.setDoseDosePerformance(m_sItem, 0, m_fDoseperformance);
@@ -187,19 +187,19 @@ BOOL CVolMotorPage::OnInitDialog()
 //**************************************************************************************************************
 void CVolMotorPage::OnStnClickedMotorRotationalSpeed()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_VOL_MOTOR_DREHZAHL_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_VOL_MOTOR_DREHZAHL_EDIT);
 }
 //**************************************************************************************************************
 //**************************************************************************************************************
 void CVolMotorPage::OnStnClickedMaxSetpoint()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_VOL_MOTOR_MAXSETPOINT_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_VOL_MOTOR_MAXSETPOINT_EDIT);
 }
 //**************************************************************************************************************
 //**************************************************************************************************************
 void CVolMotorPage::OnStnClickedDoseperformance()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_VOL_MOTOR_DOSEPERFORMANCE_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_VOL_MOTOR_DOSEPERFORMANCE_EDIT);
 }
 //**************************************************************************************************************
 //**************************************************************************************************************

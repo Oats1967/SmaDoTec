@@ -1,12 +1,12 @@
 echo off
 
 set ROOT=EasyControl
-set FBASE=C:\DEVELOP\Cplusplus\%ROOT%
+set FBASE=C:\DEVELOP\Cplusplus\SmaDoTec\%ROOT%
 set SOURCERCDIR=%FBASE%\%ROOT%_DEU
 set SOURCERCFILE=%SOURCERCDIR%\%ROOT%_DEU.rc
 set SOURCENOTFOUNDFILE=%SOURCERCDIR%\NotFound.txt
 set SOURCEEXCLUDEFILE=%SOURCERCDIR%\exclude.txt
-set CSVBASE=C:\DEVELOP\Cplusplus\EasyControl\Language\EasyControlCSV.csv
+set CSVBASE=C:\DEVELOP\Cplusplus\SmaDoTec\Language\EasyControlCSV.csv
 
 
 

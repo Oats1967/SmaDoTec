@@ -20,8 +20,8 @@
 #include "ECMessageBox.h"
 #include "RemoteControl.h"
 #include "PidMotorPage.h"
-#include "MFCMacros.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+#include "Utility/EditCtrl.h"
 
 
 #define EDITITEM(_a, _func) 	BINDFUNC(_a, CPidMotorPage, _func)
@@ -158,7 +158,7 @@ void CPidMotorPage::DoDataExchange(CDataExchange* pDX)
 //**************************************************************************************************************
 BOOL CPidMotorPage::OnNotifyPidPropGainFine()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbsRange(m_fPidPropGainFine, 0.0F, 100.0f);
+	auto bModified =CEditCtrl::GetFloatAbsRangeModified(m_fPidPropGainFine, 0.0F, 100.0f);
 	if (bModified)
 	{
 		REMOTEREF.setDosePidPropGainFine(m_sItem, m_fPidPropGainFine);
@@ -169,7 +169,7 @@ BOOL CPidMotorPage::OnNotifyPidPropGainFine()
 //**************************************************************************************************************
 BOOL CPidMotorPage::OnNotifyPidPropGainGross()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbsRange(m_fPidPropGainGross, 0.0F, 100.0f);
+	auto bModified =CEditCtrl::GetFloatAbsRangeModified(m_fPidPropGainGross, 0.0F, 100.0f);
 	if (bModified)
 	{
 		REMOTEREF.setDosePidPropGainGross(m_sItem, m_fPidPropGainGross);
@@ -180,7 +180,7 @@ BOOL CPidMotorPage::OnNotifyPidPropGainGross()
 //**************************************************************************************************************
 BOOL CPidMotorPage::OnNotifyPidIntegralGain()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbsRange(m_fPidIntegralGain, 0.0F, 100.0f);
+	auto bModified =CEditCtrl::GetFloatAbsRangeModified(m_fPidIntegralGain, 0.0F, 100.0f);
 	if (bModified)
 	{
 		REMOTEREF.setDosePidPropGainGross(m_sItem, m_fPidIntegralGain);
@@ -191,7 +191,7 @@ BOOL CPidMotorPage::OnNotifyPidIntegralGain()
 //**************************************************************************************************************
 BOOL CPidMotorPage::OnNotifyPidPropGainSwitchGrossFine()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbsRange(m_fPidPropGainSwitchGrossFine, 0.0F, 100.0f);
+	auto bModified =CEditCtrl::GetFloatAbsRangeModified(m_fPidPropGainSwitchGrossFine, 0.0F, 100.0f);
 	if (bModified)
 	{
 		REMOTEREF.setDosePidPropGainSwitchGrossFine(m_sItem, m_fPidPropGainSwitchGrossFine);
@@ -202,7 +202,7 @@ BOOL CPidMotorPage::OnNotifyPidPropGainSwitchGrossFine()
 //**************************************************************************************************************
 BOOL CPidMotorPage::OnNotifyMassflowFilter()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbsRange(m_fMassflowFilter, 0.0F, 100.0f);
+	auto bModified =CEditCtrl::GetFloatAbsRangeModified(m_fMassflowFilter, 0.0F, 100.0f);
 	if (bModified)
 	{
 		REMOTEREF.setDoseMassflowFilter(m_sItem, m_fMassflowFilter);
@@ -213,7 +213,7 @@ BOOL CPidMotorPage::OnNotifyMassflowFilter()
 //**************************************************************************************************************
 BOOL CPidMotorPage::OnNotifyMaxSetpoint()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbsRange(m_fMaxSetpoint, 0.0F, 10000.0f);
+	auto bModified =CEditCtrl::GetFloatAbsRangeModified(m_fMaxSetpoint, 0.0F, 10000.0f);
 	if (bModified)
 	{
 		REMOTEREF.setDoseMaxSetpoint(m_sItem, m_fMaxSetpoint);
@@ -225,7 +225,7 @@ BOOL CPidMotorPage::OnNotifyMaxSetpoint()
 //**************************************************************************************************************
 BOOL CPidMotorPage::OnNotifyMassflowSteepness()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbsRange(m_fSteepnessMassflow, 0.0F, 100.0f);
+	auto bModified =CEditCtrl::GetFloatAbsRangeModified(m_fSteepnessMassflow, 0.0F, 100.0f);
 	if (bModified)
 	{
 		REMOTEREF.setDoseMassflowSteepness(m_sItem, m_fSteepnessMassflow);
@@ -236,7 +236,7 @@ BOOL CPidMotorPage::OnNotifyMassflowSteepness()
 //**************************************************************************************************************
 BOOL CPidMotorPage::OnNotifyStartupDelay()
 {
-	auto bModified = CEditCtrlEx::GetLongAbsRange(m_lStartupDelay, 0U, 1000U);
+	auto bModified = CEditCtrl::GetLongAbsRangeModified(m_lStartupDelay, 0U, 1000U);
 	if (bModified)
 	{
 		REMOTEREF.setDoseStartupDelay(m_sItem, m_lStartupDelay);
@@ -247,7 +247,7 @@ BOOL CPidMotorPage::OnNotifyStartupDelay()
 //**************************************************************************************************************
 BOOL CPidMotorPage::OnNotifySampleInterval()
 {
-	auto bModified = CEditCtrlEx::GetLongAbsRange(m_lSampleInterval, 0U, 1000U);
+	auto bModified = CEditCtrl::GetLongAbsRangeModified(m_lSampleInterval, 0U, 1000U);
 	if (bModified)
 	{
 		REMOTEREF.setPidSampleInterval(m_sItem, m_lSampleInterval);
@@ -258,7 +258,7 @@ BOOL CPidMotorPage::OnNotifySampleInterval()
 //**************************************************************************************************************
 BOOL CPidMotorPage::OnNotifyStartupRamp()
 {
-	auto bModified = CEditCtrlEx::GetLongAbs(m_lStartupRamp);
+	auto bModified = CEditCtrl::GetLongAbsModified(m_lStartupRamp);
 	if (bModified)
 	{
 		REMOTEREF.setDoseStartupRamp(m_sItem, m_lStartupRamp);
@@ -269,7 +269,7 @@ BOOL CPidMotorPage::OnNotifyStartupRamp()
 //******************************************************************************************************************
 BOOL CPidMotorPage::OnNotifyDosePerformance()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbsRange(m_fDosePerformance, 0.01f, 10000.0f);
+	auto bModified =CEditCtrl::GetFloatAbsRangeModified(m_fDosePerformance, 0.01f, 10000.0f);
 	if (bModified)
 	{
 		REMOTEREF.setDoseDosePerformance(m_sItem, 0, m_fDosePerformance);
@@ -407,37 +407,37 @@ void CPidMotorPage::OnBnClickedPidMotorDriveCommandausgabeinvCheck()
 //******************************************************************************************************************
 void CPidMotorPage::OnStnClickedPidMotorPidPropGainFine()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_PID_MOTOR_PIDPROPGAIN_FINE);
+	CEditCtrl::CreateFromDlgItem(this, IDC_PID_MOTOR_PIDPROPGAIN_FINE);
 }
 //******************************************************************************************************************
 //******************************************************************************************************************
 void CPidMotorPage::OnStnClickedPidMotorPidPropGainGross()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_PID_MOTOR_PIDPROPGAIN_GROSS);
+	CEditCtrl::CreateFromDlgItem(this, IDC_PID_MOTOR_PIDPROPGAIN_GROSS);
 }
 //******************************************************************************************************************
 //******************************************************************************************************************
 void CPidMotorPage::OnStnClickedPidMotorPidPropGainSwitchGrossFine()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_PID_MOTOR_PIDPROPGAINSWITCHGROSSFINE);
+	CEditCtrl::CreateFromDlgItem(this, IDC_PID_MOTOR_PIDPROPGAINSWITCHGROSSFINE);
 }
 //******************************************************************************************************************
 //******************************************************************************************************************
 void CPidMotorPage::OnStnClickedPidMotorPidIntegralGain()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_PID_MOTOR_INTEGRALGAIN);
+	CEditCtrl::CreateFromDlgItem(this, IDC_PID_MOTOR_INTEGRALGAIN);
 }
 //******************************************************************************************************************
 //******************************************************************************************************************
 void CPidMotorPage::OnStnClickedPidMotorMassflowFilter()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_PID_MOTOR_MASSFLOWFILTER);
+	CEditCtrl::CreateFromDlgItem(this, IDC_PID_MOTOR_MASSFLOWFILTER);
 }
 //******************************************************************************************************************
 //******************************************************************************************************************
 void CPidMotorPage::OnStnClickedPidMotorPidSampleInterval()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_PID_MOTOR_PIDSAMPLEINTERVAL);
+	CEditCtrl::CreateFromDlgItem(this, IDC_PID_MOTOR_PIDSAMPLEINTERVAL);
 }
 //******************************************************************************************************************
 //******************************************************************************************************************
@@ -457,32 +457,32 @@ void CPidMotorPage::OnStnClickedPidMotorDosePerformance()
 	}
 	if ( bEdit )
 	{
-		CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_PID_MOTOR_DOSEPERFORMANCE);
+		CEditCtrl::CreateFromDlgItem(this, IDC_PID_MOTOR_DOSEPERFORMANCE);
 	}
 }
 //******************************************************************************************************************
 //******************************************************************************************************************
 void CPidMotorPage::OnStnClickedPidMotorMaxSetpoint()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_PID_MOTOR_MAXSETPOINT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_PID_MOTOR_MAXSETPOINT);
 }
 //******************************************************************************************************************
 //******************************************************************************************************************
 void CPidMotorPage::OnStnClickedPidMotorSteepnessMassflow()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_PID_MOTOR_STEEPNESSMASSFLOW);
+	CEditCtrl::CreateFromDlgItem(this, IDC_PID_MOTOR_STEEPNESSMASSFLOW);
 }
 //******************************************************************************************************************
 //******************************************************************************************************************
 void CPidMotorPage::OnStnClickedPidMotorStartupDelay()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_PID_MOTOR_STARTUPDELAY);
+	CEditCtrl::CreateFromDlgItem(this, IDC_PID_MOTOR_STARTUPDELAY);
 }
 //******************************************************************************************************************
 //******************************************************************************************************************
 void CPidMotorPage::OnStnClickedPidMotorStartupRamp()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_PID_MOTOR_STARTUPRAMP);
+	CEditCtrl::CreateFromDlgItem(this, IDC_PID_MOTOR_STARTUPRAMP);
 }
 //******************************************************************************************************************
 //******************************************************************************************************************

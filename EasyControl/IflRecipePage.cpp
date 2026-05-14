@@ -24,8 +24,8 @@
 #include "GainFactorSpeedBoxDlg.h"
 #include "ReduceFactorSpeedBoxDlg.h"
 #include "FeederScaleBoxDlg.h"
-#include "MFCMacros.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+#include "Utility/EditCtrl.h"
 
 
 #define EDITITEM(_a, _func) 	BINDFUNC(_a, CIflRecipePage, _func)
@@ -187,7 +187,7 @@ BOOL CIflRecipePage::OnNotifyEditHysteresis(void)
 //******************************************************************************************************
 BOOL CIflRecipePage::OnNotifyEditMinLineSetpoint(void)
 {
-	auto bModified = CEditCtrlEx::GetFloatAbs(m_fMinLineSetpoint);
+	auto bModified = CEditCtrl::GetFloatAbsModified(m_fMinLineSetpoint);
 	if (bModified)
 	{
 		REMOTEREF.setDoseIflMinLineSetpoint(m_sItem, m_fMinLineSetpoint);
@@ -198,7 +198,7 @@ BOOL CIflRecipePage::OnNotifyEditMinLineSetpoint(void)
 //******************************************************************************************************
 BOOL CIflRecipePage::OnNotifyEditMaxLineSetpoint(void)
 {
-	auto bModified = CEditCtrlEx::GetFloatAbs(m_fMaxLineSetpoint);
+	auto bModified = CEditCtrl::GetFloatAbsModified(m_fMaxLineSetpoint);
 	if (bModified)
 	{
 		REMOTEREF.setDoseIflMaxLineSetpoint(m_sItem, m_fMaxLineSetpoint);
@@ -209,7 +209,7 @@ BOOL CIflRecipePage::OnNotifyEditMaxLineSetpoint(void)
 //******************************************************************************************************
 BOOL CIflRecipePage::OnNotifyEditLineSetpoint(void)
 {
-	auto bModified = CEditCtrlEx::GetFloatAbs(m_fLineSetpoint);
+	auto bModified = CEditCtrl::GetFloatAbsModified(m_fLineSetpoint);
 	if (bModified)
 	{
 		REMOTEREF.setLineSetpoint(m_fLineSetpoint);
@@ -337,7 +337,7 @@ BOOL CIflRecipePage::OnSetActive()
 //*****************************************************************************************************
 void CIflRecipePage::OnStnClickedIflName()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_STRINGCTRL, IDC_IFL_RECIPE_NAME);
+	CEditCtrl::CreateFromDlgItem(this, IDC_IFL_RECIPE_NAME);
 }
 //*****************************************************************************************************
 //*****************************************************************************************************
@@ -353,37 +353,37 @@ void CIflRecipePage::OnStnClickedScale()
 //*****************************************************************************************************
 void CIflRecipePage::OnStnClickedMinLevel()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_IFL_RECIPE_MINLEVEL_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_IFL_RECIPE_MINLEVEL_EDIT);
 }
 //*****************************************************************************************************
 //*****************************************************************************************************
 void CIflRecipePage::OnStnClickedMaxLevel()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_IFL_RECIPE_MAXLEVEL_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_IFL_RECIPE_MAXLEVEL_EDIT);
 }
 //*****************************************************************************************************
 //*****************************************************************************************************
 void CIflRecipePage::OnStnClickedHysteresis()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_IFL_RECIPE_HYSTERESIS_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_IFL_RECIPE_HYSTERESIS_EDIT);
 }
 //*****************************************************************************************************
 //*****************************************************************************************************
 void CIflRecipePage::OnStnClickedMinLineSetpoint()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_IFL_RECIPE_MINSETPOINT_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_IFL_RECIPE_MINSETPOINT_EDIT);
 }
 //*****************************************************************************************************
 //*****************************************************************************************************
 void CIflRecipePage::OnStnClickedMaxLineSetpoint()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_IFL_RECIPE_MAXSETPOINT_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_IFL_RECIPE_MAXSETPOINT_EDIT);
 }
 //*****************************************************************************************************
 //*****************************************************************************************************
 void CIflRecipePage::OnStnClickedLineSetpoint()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_IFL_RECIPE_SETPOINT_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_IFL_RECIPE_SETPOINT_EDIT);
 }
 //*****************************************************************************************************
 //*****************************************************************************************************

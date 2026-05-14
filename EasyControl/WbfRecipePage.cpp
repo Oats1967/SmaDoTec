@@ -23,8 +23,8 @@
 #include "WbfRecipePage.h"
 #include "GlobalConst.h"
 #include "DataImage.h"
-#include "MFCMacros.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+#include "Utility/EditCtrl.h"
 
 
 //******************************************************************************************************
@@ -127,7 +127,7 @@ void CWbfRecipePage::SetControlStyle (void)
 //******************************************************************************************************
 BOOL CWbfRecipePage::OnNotifySetpoint()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbs(m_fSetpoint);
+	auto bModified = CEditCtrl::GetFloatAbsModified(m_fSetpoint);
 	if (bModified)
 	{
 		REMOTEREF.setDoseSetpoint(m_sItem, m_fSetpoint);
@@ -286,19 +286,19 @@ void CWbfRecipePage::OnBnClickedWbfTotalizerReset()
 //******************************************************************************************************
 void CWbfRecipePage::OnStnClickedWbfRecipeName()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_STRINGCTRL, IDC_WBF_RECIPE_NAME);
+	CEditCtrl::CreateFromDlgItem(this, IDC_WBF_RECIPE_NAME);
 }
 //******************************************************************************************************
 //******************************************************************************************************
 void CWbfRecipePage::OnStnClickedWbfRecipeQmnumber()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_STRINGCTRL, IDC_WBF_RECIPE_QMNUMBER);
+	CEditCtrl::CreateFromDlgItem(this, IDC_WBF_RECIPE_QMNUMBER);
 }
 //******************************************************************************************************
 //******************************************************************************************************
 void CWbfRecipePage::OnStnClickedWbfRecipeSetpoint()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_WBF_RECIPE_SETPOINT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_WBF_RECIPE_SETPOINT);
 }
 //******************************************************************************************************
 //******************************************************************************************************

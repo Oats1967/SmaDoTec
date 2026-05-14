@@ -20,8 +20,8 @@
 #include "ECMessageBox.h"
 #include "RemoteControl.h"
 #include "SettingsPathPage.h"
-#include "MFCMacros.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+#include "Utility/EditCtrl.h"
 #include "HelpInfoDlgEx.h"
 
 
@@ -209,7 +209,7 @@ void CSettingsPathPage::OnBnClickedSettingsPathRecorderPathButton()
 //*****************************************************************************************************
 void CSettingsPathPage::OnBnClickedSettingsPathRecorderPathIntervalButton()
 {
-	CEditCtrl :: GetInput (this, E_TYPCTRL::E_INTCTRL, IDC_SETTINGS_PATH_RECORDER_INTERVAL);
+	CEditCtrl::CreateFromDlgItem(this, IDC_SETTINGS_PATH_RECORDER_INTERVAL);
 }
 //*****************************************************************************************************
 //*****************************************************************************************************

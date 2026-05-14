@@ -19,8 +19,8 @@
 #include "stdafx.h"
 #include "EasyControl.h"
 #include "LineSetpointLineDlg.h"
-#include "MFCMacros.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+#include "Utility/EditCtrl.h"
 #include "HelpInfoDlgEx.h"
 
 
@@ -84,31 +84,31 @@ END_MESSAGE_MAP()
 //***********************************************************************************************
 void CLineSetpointLineDlg::OnStnClickedLineSetpointMinTotband()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_LINE_LINESETPOINT_MINTOTBAND_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LINE_LINESETPOINT_MINTOTBAND_EDIT);
 }
 //***********************************************************************************************
 //***********************************************************************************************
 void CLineSetpointLineDlg::OnStnClickedLineSetpointFilterTime()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_LINE_LINESETPOINT_FILTERTIME_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LINE_LINESETPOINT_FILTERTIME_EDIT);
 }
 //***********************************************************************************************
 //***********************************************************************************************
 void CLineSetpointLineDlg::OnStnClickedLineSetpointHysteresis()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_LINE_LINESETPOINT_HYSTERESIS_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LINE_LINESETPOINT_HYSTERESIS_EDIT);
 }
 //***********************************************************************************************
 //***********************************************************************************************
 void CLineSetpointLineDlg::OnStnClickedLineSetpointMaxSetpoint()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_LINE_LINESETPOINT_MAXSETPOINT_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LINE_LINESETPOINT_MAXSETPOINT_EDIT);
 }
 //***********************************************************************************************
 //***********************************************************************************************
 BOOL CLineSetpointLineDlg::OnNotifyEditMaxSetpoint()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbs(m_MaxSetpoint);
+	auto bModified = CEditCtrl::GetFloatAbsModified(m_MaxSetpoint);
 	if (bModified)
 	{
 		REMOTEREF.setLineMaxSetpoint(m_MaxSetpoint);
@@ -119,7 +119,7 @@ BOOL CLineSetpointLineDlg::OnNotifyEditMaxSetpoint()
 //***********************************************************************************************
 BOOL CLineSetpointLineDlg::OnNotifyEditMinTotband()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbs(m_MinTotBand);
+	auto bModified = CEditCtrl::GetFloatAbsModified(m_MinTotBand);
 	if (bModified)
 	{
 		REMOTEREF.setLineMinTotband(m_MinTotBand);
@@ -131,7 +131,7 @@ BOOL CLineSetpointLineDlg::OnNotifyEditMinTotband()
 //***********************************************************************************************
 BOOL CLineSetpointLineDlg::OnNotifyEditHysteresis()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbs(m_Hysteresis);
+	auto bModified = CEditCtrl::GetFloatAbsModified(m_Hysteresis);
 	if (bModified)
 	{
 		if (m_Hysteresis == 0.0F)
@@ -147,7 +147,7 @@ BOOL CLineSetpointLineDlg::OnNotifyEditHysteresis()
 //***********************************************************************************************
 BOOL CLineSetpointLineDlg::OnNotifyEditNominalFilterTime()
 {
-	auto bModified = CEditCtrlEx::GetLongAbsRange(m_FilterTime, 0, 100U);
+	auto bModified = CEditCtrl::GetLongAbsRangeModified(m_FilterTime, 0, 100U);
 	if (bModified)
 	{
 		REMOTEREF.setLineFilterTime(m_FilterTime);

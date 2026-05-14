@@ -40,7 +40,7 @@
 #include "RecipeFrame.h"
 #include "RecipeDoc.h"
 #include "RecipeView.h"
-#include "DoseServer.h"
+#include "DoseServer/include/DoseServer.h"
 
 #include "Xlicense/LicenseLib/License.h"
 #include "Xlicense/LicenseLib/hostid.h"
@@ -58,7 +58,7 @@
 #ifdef __TKBOARD
 #include "TKBoard64.h"
 #else
-#include "VKBoard64.h"
+#include "VKBoard/public/VKBoard64.h"
 #endif
 #include "RemoteControl.h"
    

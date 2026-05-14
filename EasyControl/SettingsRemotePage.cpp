@@ -23,7 +23,7 @@
 #include "SettingsRemotePage.h"
 #include "BASE/Utils/public/xml/RemoteServerXml.h"
 #include "BASE/Utils/public/xml/DoseServerXml.h"
-#include "MFCMacros.h"
+#include "Utility/MFCMacros.h"
 
 
 

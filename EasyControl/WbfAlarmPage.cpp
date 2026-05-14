@@ -21,8 +21,8 @@
 #include "WbfAlarmPage.h"
 #include "RemoteControl.h"
 #include "DataImage.h"
-#include "MFCMacros.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+#include "Utility/EditCtrl.h"
 
 
 
@@ -103,7 +103,7 @@ void CWbfAlarmPage::DoDataExchange(CDataExchange* pDX)
 //******************************************************************************************************
 BOOL CWbfAlarmPage::OnNotifyAlarmMassflowHigh()
 {
-	auto bModified = CEditCtrlEx::GetLongAbsRange(m_MassflowHigh, 0, 100U);
+	auto bModified = CEditCtrl::GetLongAbsRangeModified(m_MassflowHigh, 0, 100U);
 	if (bModified)
 	{
 		REMOTEREF.setDoseAlarmMassflowHigh(m_sItem, m_MassflowHigh);
@@ -114,7 +114,7 @@ BOOL CWbfAlarmPage::OnNotifyAlarmMassflowHigh()
 //***************************************************************************************************************
 BOOL CWbfAlarmPage::OnNotifyAlarmMassflowLow()
 {
-	auto bModified = CEditCtrlEx::GetLongAbsRange(m_MassflowLow, 0, 100U);
+	auto bModified = CEditCtrl::GetLongAbsRangeModified(m_MassflowLow, 0, 100U);
 	if (bModified)
 	{
 		REMOTEREF.setDoseAlarmMassflowLow(m_sItem, m_MassflowLow);
@@ -125,7 +125,7 @@ BOOL CWbfAlarmPage::OnNotifyAlarmMassflowLow()
 //***************************************************************************************************************
 BOOL CWbfAlarmPage::OnNotifyAlarmDriveCommandHigh()
 {
-	auto bModified = CEditCtrlEx::GetLongAbsRange(m_AlarmDriveCommandHigh, 0, 100U);
+	auto bModified = CEditCtrl::GetLongAbsRangeModified(m_AlarmDriveCommandHigh, 0, 100U);
 	if (bModified)
 	{
 		REMOTEREF.setDoseAlarmDriveCommandHigh(m_sItem, m_AlarmDriveCommandHigh);
@@ -136,7 +136,7 @@ BOOL CWbfAlarmPage::OnNotifyAlarmDriveCommandHigh()
 //***************************************************************************************************************
 BOOL CWbfAlarmPage::OnNotifyAlarmDriveCommandLow()
 {
-	auto bModified = CEditCtrlEx::GetLongAbsRange(m_AlarmDriveCommandLow, 0, 100U);
+	auto bModified = CEditCtrl::GetLongAbsRangeModified(m_AlarmDriveCommandLow, 0, 100U);
 	if (bModified)
 	{
 		REMOTEREF.setDoseAlarmDriveCommandLow(m_sItem, m_AlarmDriveCommandLow);
@@ -147,7 +147,7 @@ BOOL CWbfAlarmPage::OnNotifyAlarmDriveCommandLow()
 //***************************************************************************************************************
 BOOL CWbfAlarmPage::OnNotifyAlarmReactionDelay()
 {
-	auto bModified = CEditCtrlEx::GetLongAbsRange(m_AlarmReactionDelay, 0, 10000U);
+	auto bModified = CEditCtrl::GetLongAbsRangeModified(m_AlarmReactionDelay, 0, 10000U);
 	if (bModified)
 	{
 		REMOTEREF.setDoseAlarmReactionDelay(m_sItem, m_AlarmReactionDelay);
@@ -158,7 +158,7 @@ BOOL CWbfAlarmPage::OnNotifyAlarmReactionDelay()
 //***************************************************************************************************************
 BOOL CWbfAlarmPage::OnNotifyAlarmStartReactionDelay()
 {
-	auto bModified = CEditCtrlEx::GetLongAbsRange(m_lAlarmStartReactionDelay, 0, 10000U);
+	auto bModified = CEditCtrl::GetLongAbsRangeModified(m_lAlarmStartReactionDelay, 0, 10000U);
 	if (bModified)
 	{
 		REMOTEREF.setDoseAlarmStartReactionDelay(m_sItem, m_lAlarmStartReactionDelay);
@@ -169,7 +169,7 @@ BOOL CWbfAlarmPage::OnNotifyAlarmStartReactionDelay()
 //***************************************************************************************************************
 BOOL CWbfAlarmPage::OnNotifyAlarmMinBeltLoad()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbsRange(m_fMinBeltLoad, 0, 10000.0F);
+	auto bModified =CEditCtrl::GetFloatAbsRangeModified(m_fMinBeltLoad, 0, 10000.0F);
 	if (bModified)
 	{
 		REMOTEREF.setDoseAlarmWbfMinBeltLoad(m_sItem, m_fMinBeltLoad);
@@ -251,43 +251,43 @@ BOOL CWbfAlarmPage::OnInitDialog()
 //***************************************************************************************************************
 void CWbfAlarmPage::OnStnClickedWbfAlarmMassflowHigh()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_WBF_ALARM_MASSFLOW_HIGH);
+	CEditCtrl::CreateFromDlgItem(this, IDC_WBF_ALARM_MASSFLOW_HIGH);
 }
 //***************************************************************************************************************
 //***************************************************************************************************************
 void CWbfAlarmPage::OnStnClickedWbfAlarmMassflowLow()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_WBF_ALARM_MASSFLOW_LOW);
+	CEditCtrl::CreateFromDlgItem(this, IDC_WBF_ALARM_MASSFLOW_LOW);
 }
 //***************************************************************************************************************
 //***************************************************************************************************************
 void CWbfAlarmPage::OnStnClickedWbfAlarmDriveCommandHigh()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_WBF_ALARM_DRIVECOMMAND_HIGH);
+	CEditCtrl::CreateFromDlgItem(this, IDC_WBF_ALARM_DRIVECOMMAND_HIGH);
 }
 //***************************************************************************************************************
 //***************************************************************************************************************
 void CWbfAlarmPage::OnStnClickedWbfAlarmDriveCommandLow()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_WBF_ALARM_DRIVECOMMAND_LOW);
+	CEditCtrl::CreateFromDlgItem(this, IDC_WBF_ALARM_DRIVECOMMAND_LOW);
 }
 //***************************************************************************************************************
 //***************************************************************************************************************
 void CWbfAlarmPage::OnStnClickedWbfAlarmMinBeltLoad()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_WBF_ALARM_MINBELTLOAD);
+	CEditCtrl::CreateFromDlgItem(this, IDC_WBF_ALARM_MINBELTLOAD);
 }
 //***************************************************************************************************************
 //***************************************************************************************************************
 void CWbfAlarmPage::OnStnClickedWbfAlarmReactionDelay()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_WBF_ALARM_REACTIONDELAY);
+	CEditCtrl::CreateFromDlgItem(this, IDC_WBF_ALARM_REACTIONDELAY);
 }
 //***************************************************************************************************************
 //***************************************************************************************************************
 void CWbfAlarmPage::OnStnClickedWbfAlarmStartReactionDelay()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_WBF_ALARM_STARTREACTIONDELAY);
+	CEditCtrl::CreateFromDlgItem(this, IDC_WBF_ALARM_STARTREACTIONDELAY);
 }
 //***************************************************************************************************************
 //***************************************************************************************************************

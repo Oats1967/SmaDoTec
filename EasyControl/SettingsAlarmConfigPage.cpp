@@ -24,7 +24,7 @@
 #include "SettingsAlarmConfigPage.h"
 #include "RemoteControl.h"
 #include "BASE/Utils/public/xml/SystemAlarmXml.h"
-#include "MFCMacros.h"
+#include "Utility/MFCMacros.h"
 
 
 

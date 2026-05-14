@@ -19,8 +19,8 @@
 #include "stdafx.h"
 #include "EasyControl.h"
 #include "LineTotalizerPulseDlg.h"
-#include "MFCMacros.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+#include "Utility/EditCtrl.h"
 #include "HelpInfoDlgEx.h"
 
 
@@ -69,19 +69,19 @@ END_MESSAGE_MAP()
 //***********************************************************************************************
 void CLineTotalizerPulseDlg::OnStnClickedStep()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_LINE_TOTALIZERIMPULSE_STEP_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LINE_TOTALIZERIMPULSE_STEP_EDIT);
 }
 //***********************************************************************************************
 //***********************************************************************************************
 void CLineTotalizerPulseDlg::OnStnClickedImpulse()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_LINE_TOTALIZERIMPULSE_IMPULSE_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LINE_TOTALIZERIMPULSE_IMPULSE_EDIT);
 }
 //***********************************************************************************************
 //***********************************************************************************************
 BOOL CLineTotalizerPulseDlg::OnNotifyEditStep()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbs(m_Step);
+	auto bModified = CEditCtrl::GetFloatAbsModified(m_Step);
 	if (bModified)
 	{
 		REMOTEREF.setLineTotalizerPulseStep(m_Step);
@@ -92,7 +92,7 @@ BOOL CLineTotalizerPulseDlg::OnNotifyEditStep()
 //***********************************************************************************************
 BOOL CLineTotalizerPulseDlg::OnNotifyEditImpulse()
 {
-	auto bModified = CEditCtrlEx::GetLongAbs(m_Impulse);
+	auto bModified = CEditCtrl::GetLongAbsModified(m_Impulse);
 	if (bModified)
 	{
 		REMOTEREF.setLineTotalizerPulseDuration(m_Impulse);

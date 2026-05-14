@@ -19,8 +19,8 @@
 #include "EasyControl.h"
 #include "RemoteControl.h"
 #include "IcpMotorPage.h"
-#include "MFCMacros.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+#include "Utility/EditCtrl.h"
 
 
 
@@ -71,7 +71,7 @@ void CIcpMotorPage::DoDataExchange(CDataExchange* pDX)
 //******************************************************************************************************
 BOOL CIcpMotorPage::OnNotifyMaxSetpoint()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbsRange(m_fMaxSetpoint, 0.1f, 10000.0f);
+	auto bModified =CEditCtrl::GetFloatAbsRangeModified(m_fMaxSetpoint, 0.1f, 10000.0f);
 	if (bModified)
 	{
 		REMOTEREF.setDoseMaxSetpoint(m_sItem, m_fMaxSetpoint);
@@ -82,7 +82,7 @@ BOOL CIcpMotorPage::OnNotifyMaxSetpoint()
 //******************************************************************************************************
 BOOL CIcpMotorPage::OnNotifySteepnessMassflow()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbsRange(m_fSteepnessMassflow, 0.1f, 100.0f);
+	auto bModified =CEditCtrl::GetFloatAbsRangeModified(m_fSteepnessMassflow, 0.1f, 100.0f);
 	if (bModified)
 	{
 		REMOTEREF.setDoseMassflowSteepness(m_sItem, m_fSteepnessMassflow);
@@ -160,13 +160,13 @@ BOOL CIcpMotorPage::OnInitDialog()
 //****************************************************************************************
 void CIcpMotorPage::OnStnClickedIcpMaxSetpoint()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_ICP_MOTOR_MAXSETPOINT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_ICP_MOTOR_MAXSETPOINT);
 }
 //****************************************************************************************
 //****************************************************************************************
 void CIcpMotorPage::OnStnClickedIcpMotorSteepnessMassflow()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_ICP_MOTOR_STEEPNESSMASSFLOW);
+	CEditCtrl::CreateFromDlgItem(this, IDC_ICP_MOTOR_STEEPNESSMASSFLOW);
 }
 //****************************************************************************************
 //****************************************************************************************

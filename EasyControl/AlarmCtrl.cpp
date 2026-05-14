@@ -20,7 +20,7 @@
 #include "AlarmMap.h"
 #include "HelpInfoDlg.h"
 #include "ToolTipDlg.h"
-#include "MFCMacros.h"
+#include "Utility/MFCMacros.h"
 
 
 

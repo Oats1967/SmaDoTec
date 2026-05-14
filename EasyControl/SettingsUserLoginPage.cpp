@@ -21,7 +21,7 @@
 #include "SettingsUserLoginPage.h"
 #include "UserNameDlg.h"
 #include "GlobalConst.h"
-#include "MFCMacros.h"
+#include "Utility/MFCMacros.h"
 
 
 #define ICON_SIZE 16

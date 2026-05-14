@@ -19,8 +19,8 @@
 #include "stdafx.h"
 #include "EasyControl.h"
 #include "LineRampDlg.h"
-#include "MFCMacros.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+#include "Utility/EditCtrl.h"
 #include "HelpInfoDlgEx.h"
 
 
@@ -69,19 +69,19 @@ END_MESSAGE_MAP()
 //***********************************************************************************************
 void CLineRampDlg::OnStnClickedRampStep()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_LINE_RAMP_STEP);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LINE_RAMP_STEP);
 }
 //***********************************************************************************************
 //***********************************************************************************************
 void CLineRampDlg::OnStnClickedRampDelay()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_LINE_RAMP_DELAY);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LINE_RAMP_DELAY);
 }
 //***********************************************************************************************
 //***********************************************************************************************
 BOOL CLineRampDlg::OnNotifyEditRampStep()
 {
-	auto bModified = CEditCtrlEx::GetLongAbs(m_RampStep);
+	auto bModified = CEditCtrl::GetLongAbsModified(m_RampStep);
 	if (bModified)
 	{
 		REMOTEREF.setLineRampStep(_F32(m_RampStep));
@@ -92,7 +92,7 @@ BOOL CLineRampDlg::OnNotifyEditRampStep()
 //***********************************************************************************************
 BOOL CLineRampDlg::OnNotifyEditRampDelay()
 {
-	auto bModified = CEditCtrlEx::GetLongAbs(m_RampDelay);
+	auto bModified = CEditCtrl::GetLongAbsModified(m_RampDelay);
 	if (bModified)
 	{
 		REMOTEREF.setLineRampDelay(m_RampDelay);

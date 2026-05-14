@@ -25,8 +25,8 @@
 #include "ECMessageBox.h"
 #include "AgitatorSpeedBoxDlg.h"
 #include "ProductDatabaseBox.h"
-#include "MFCMacros.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+#include "Utility/EditCtrl.h"
 #include "HelpInfoDlgEx.h"
 
 
@@ -313,7 +313,7 @@ void CDosePage::CreateHelpInfoBox(const int32_t InfoId, const int32_t captionId,
 //******************************************************************************************************
 BOOL CDosePage::OnNotifyEditName()
 {
-	auto bModified = CEditCtrlEx::GetString(m_szName);
+	auto bModified = CEditCtrl::GetStringModified(m_szName);
 	if (bModified)
 	{
 		REMOTEREF.setDoseName(m_sItem, toStdString(m_szName));

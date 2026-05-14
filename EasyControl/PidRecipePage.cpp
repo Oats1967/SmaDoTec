@@ -21,8 +21,8 @@
 #include "ECMessageBox.h"
 #include "RemoteControl.h"
 #include "PidRecipePage.h"
-#include "MFCMacros.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+#include "Utility/EditCtrl.h"
 
 
 #define EDITITEM(_a, _func) 	BINDFUNC(_a, CPidRecipePage, _func)
@@ -95,7 +95,7 @@ void CPidRecipePage::DoDataExchange(CDataExchange* pDX)
 //******************************************************************************************************
 BOOL CPidRecipePage::OnNotifyEditSetpoint(void)
 {
-	BOOL bModified = CEditCtrlEx::GetFloatAbs(m_fSetpoint);
+	BOOL bModified = CEditCtrl::GetFloatAbsModified(m_fSetpoint);
 	if (bModified)
 	{
 		REMOTEREF.setDoseSetpoint(m_sItem, m_fSetpoint);
@@ -106,7 +106,7 @@ BOOL CPidRecipePage::OnNotifyEditSetpoint(void)
 //******************************************************************************************************
 BOOL CPidRecipePage::OnNotifyEditANNumber(void)
 {
-	BOOL bModified = CEditCtrlEx::GetString(m_szANNumber);
+	BOOL bModified = CEditCtrl::GetStringModified(m_szANNumber);
 	if (bModified)
 	{
 		REMOTEREF.setLineANNumber(toStdString(m_szANNumber));
@@ -287,25 +287,25 @@ void CPidRecipePage::OnBnClickedPidTotalizerReset()
 //*****************************************************************************************************
 void CPidRecipePage::OnStnClickedPidName()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_STRINGCTRL, IDC_PID_RECIPE_NAME);
+	CEditCtrl::CreateFromDlgItem(this, IDC_PID_RECIPE_NAME);
 }
 //*****************************************************************************************************
 //*****************************************************************************************************
 void CPidRecipePage::OnStnClickedPidQmNumber()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_UINT64CTRL, IDC_PID_RECIPE_QMNUMBER);
+	CEditCtrl::CreateFromDlgItem(this, IDC_PID_RECIPE_QMNUMBER);
 }
 //*****************************************************************************************************
 //*****************************************************************************************************
 void CPidRecipePage::OnStnClickedPidSetpoint()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_PID_RECIPE_SETPOINT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_PID_RECIPE_SETPOINT);
 }
 //***************************************************************************************
 //***************************************************************************************
 void CPidRecipePage::OnStnClickedANnummer()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_STRINGCTRL, IDC_PID_RECIPE_ANNUMBER);
+	CEditCtrl::CreateFromDlgItem(this, IDC_PID_RECIPE_ANNUMBER);
 }
 
 //*****************************************************************************************************

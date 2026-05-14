@@ -26,7 +26,7 @@
 #include "DosePropertySheet.h"
 #include "LineTabCtrl.h"
 #include "AlarmLog.h"
-#include "TKBoardInterface.h"
+#include "VKBoard/public/TKBoardInterface.h"
 #include "BASE/EasyTime/public/EasyTime.h"
 
 #if _DEBUG

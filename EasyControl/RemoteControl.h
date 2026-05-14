@@ -19,7 +19,7 @@
 
 #include "WrapperBase.h"
 #include "LCStatus.h"
-#include "StringConvert.h"
+#include "Utility/StringConvert.h"
 
 extern int32_t getActiveItem();
 extern void    setActiveItem(int32_t);

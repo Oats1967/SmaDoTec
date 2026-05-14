@@ -19,8 +19,8 @@
 #include "EasyControl.h"
 #include "IfsAlarmPage.h"
 #include "RemoteControl.h"
-#include "MFCMacros.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+#include "Utility/EditCtrl.h"
 
 
 
@@ -87,7 +87,7 @@ void CIfsAlarmPage::DoDataExchange(CDataExchange* pDX)
 //***********************************************************************************************
 BOOL CIfsAlarmPage::OnNotifyFeederEmptyTimeOut()
 {
-    auto bModified = CEditCtrlEx::GetLongAbs(m_FeederEmptyTimeOut);
+    auto bModified = CEditCtrl::GetLongAbsModified(m_FeederEmptyTimeOut);
     if (bModified)
     {
         REMOTEREF.setIfsFeederEmptyTimeOut(m_sItem, m_FeederEmptyTimeOut);
@@ -98,7 +98,7 @@ BOOL CIfsAlarmPage::OnNotifyFeederEmptyTimeOut()
 //***********************************************************************************************
 BOOL CIfsAlarmPage::OnNotifyFeederOverflowTimeOut()
 {
-    auto bModified = CEditCtrlEx::GetLongAbs(m_FeederOverflowTimeout);
+    auto bModified = CEditCtrl::GetLongAbsModified(m_FeederOverflowTimeout);
     if (bModified)
     {
         REMOTEREF.setIfsFeederOverflowTimeOut(m_sItem, m_FeederOverflowTimeout);
@@ -109,7 +109,7 @@ BOOL CIfsAlarmPage::OnNotifyFeederOverflowTimeOut()
 //***************************************************************************************************************
 BOOL CIfsAlarmPage::OnNotifyAlarmReactionDelay()
 {
-    auto bModified = CEditCtrlEx::CEditCtrlEx::GetLongAbsRange(m_AlarmReactionDelay, 0, 10000U);
+    auto bModified = CEditCtrl::GetLongAbsRangeModified(m_AlarmReactionDelay, 0, 10000U);
     if (bModified)
     {
         REMOTEREF.setDoseAlarmReactionDelay(m_sItem, m_AlarmReactionDelay);
@@ -120,7 +120,7 @@ BOOL CIfsAlarmPage::OnNotifyAlarmReactionDelay()
 //***************************************************************************************************************
 BOOL CIfsAlarmPage::OnNotifyAlarmStartReactionDelay()
 {
-    auto bModified = CEditCtrlEx::CEditCtrlEx::GetLongAbsRange(m_lAlarmStartReactionDelay, 0, 10000U);
+    auto bModified = CEditCtrl::GetLongAbsRangeModified(m_lAlarmStartReactionDelay, 0, 10000U);
     if (bModified)
     {
         REMOTEREF.setDoseAlarmStartReactionDelay(m_sItem, m_lAlarmStartReactionDelay);
@@ -177,25 +177,25 @@ BOOL CIfsAlarmPage::OnUpdateControls(void)
 //***********************************************************************************************
 void CIfsAlarmPage::OnStnClickedIfsFeederEmptyTimeOut()
 {
-    CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_IFS_ALARM_TIMEOUTFEEDEREMPTY_EDIT);
+    CEditCtrl::CreateFromDlgItem(this, IDC_IFS_ALARM_TIMEOUTFEEDEREMPTY_EDIT);
 }
 //***********************************************************************************************
 //***********************************************************************************************
 void CIfsAlarmPage::OnStnClickedIfsFeederOverflowTimeOut()
 {
-    CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_IFS_ALARM_TIMEOUTOVERFLOW_EDIT);
+    CEditCtrl::CreateFromDlgItem(this, IDC_IFS_ALARM_TIMEOUTOVERFLOW_EDIT);
 }
 //***************************************************************************************************************
 //***************************************************************************************************************
 void CIfsAlarmPage::OnStnClickedIfsAlarmReactionDelay()
 {
-    CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_IFS_ALARM_REACTIONDELAY_EDIT);
+    CEditCtrl::CreateFromDlgItem(this, IDC_IFS_ALARM_REACTIONDELAY_EDIT);
 }
 //***************************************************************************************************************
 //***************************************************************************************************************
 void CIfsAlarmPage::OnStnClickedIfsAlarmStartReactionDelay()
 {
-    CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_IFS_ALARM_STARTREACTIONDELAY_EDIT);
+    CEditCtrl::CreateFromDlgItem(this, IDC_IFS_ALARM_STARTREACTIONDELAY_EDIT);
 }
 //******************************************************************************************************
 //******************************************************************************************************

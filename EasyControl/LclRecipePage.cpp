@@ -22,8 +22,8 @@
 #include "RemoteControl.h"
 #include "LclRecipePage.h"
 #include "FeederScaleBoxDlg.h"
-#include "MFCMacros.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+#include "Utility/EditCtrl.h"
 
 
 #define EDITITEM(_a, _func) 	BINDFUNC(_a, CLclRecipePage, _func)
@@ -157,7 +157,7 @@ BOOL CLclRecipePage::OnSetActive()
 //*****************************************************************************************************
 void CLclRecipePage::OnBnClickedLclName()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_STRINGCTRL, IDC_LCL_RECIPE_NAME);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LCL_RECIPE_NAME);
 }
 //*****************************************************************************************************
 //*****************************************************************************************************
@@ -221,7 +221,7 @@ void CLclRecipePage::OnStnClickedScale()
 //***********************************************************************************************
 BOOL CLclRecipePage::OnNotifyEditMinLevel(void)
 {
-	auto bModified = CEditCtrlEx::GetFloatAbs(m_fMinLevel);
+	auto bModified = CEditCtrl::GetFloatAbsModified(m_fMinLevel);
 	if (bModified)
 	{
 		REMOTEREF.setDoseLclWeightMinLevel(m_sItem, m_fMinLevel);
@@ -232,7 +232,7 @@ BOOL CLclRecipePage::OnNotifyEditMinLevel(void)
 //******************************************************************************************************
 BOOL CLclRecipePage::OnNotifyEditMaxLevel(void)
 {
-	auto bModified = CEditCtrlEx::GetFloatAbs(m_fMaxLevel);
+	auto bModified = CEditCtrl::GetFloatAbsModified(m_fMaxLevel);
 	if (bModified)
 	{
 		REMOTEREF.setDoseLclWeightMaxLevel(m_sItem, m_fMaxLevel);
@@ -255,13 +255,13 @@ void CLclRecipePage::OnBnClickedLclMaxLevelInfo()
 //**************************************************************************************************************
 void CLclRecipePage::OnStnClickedMinLevel()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_LCL_RECIPE_MINLEVEL);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LCL_RECIPE_MINLEVEL);
 }
 //**************************************************************************************************************
 //**************************************************************************************************************
 void CLclRecipePage::OnStnClickedMaxLevel()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_LCL_RECIPE_MAXLEVEL);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LCL_RECIPE_MAXLEVEL);
 }
 //***************************************************************************************
 //***************************************************************************************

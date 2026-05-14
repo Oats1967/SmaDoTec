@@ -2,7 +2,7 @@
 #ifdef __SIM_WEIGHT_GUI
 #include "EasyControl.h"
 #include "WeightDemoDlg.h"
-#include "MFCMacros.h"
+#include "Utility/MFCMacros.h"
 
 
 
@@ -191,19 +191,19 @@ BOOL CWeightDemoDlg::OnNotifyEditItem()
 //***************************************************************************************
 void CWeightDemoDlg::OnStnClickedWeightEdit()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_WEIGHT_DEMO_WEIGHT_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_WEIGHT_DEMO_WEIGHT_EDIT);
 }
 //***************************************************************************************
 //***************************************************************************************
 void CWeightDemoDlg::OnStnClickedStepEdit()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_WEIGHT_DEMO_STEP_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_WEIGHT_DEMO_STEP_EDIT);
 }
 //***************************************************************************************
 //***************************************************************************************
 void CWeightDemoDlg::OnStnClickedItemEdit()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_WEIGHT_DEMO_ITEM_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_WEIGHT_DEMO_ITEM_EDIT);
 }
 //***************************************************************************************
 //***************************************************************************************

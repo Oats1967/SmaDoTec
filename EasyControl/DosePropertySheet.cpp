@@ -20,7 +20,7 @@
 #include "RemoteControl.h"
 #include "EasyControl.h"
 #include "DosePropertySheet.h"
-#include "MFCMacros.h"
+#include "Utility/MFCMacros.h"
 
 
 

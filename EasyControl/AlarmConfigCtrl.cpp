@@ -18,7 +18,7 @@
 #include "stdafx.h"
 #include "AlarmConfigCtrl.h"
 #include "AlarmMap.h"
-#include "MFCMacros.h"
+#include "Utility/MFCMacros.h"
 
 
 #define ICON_SIZEX 16

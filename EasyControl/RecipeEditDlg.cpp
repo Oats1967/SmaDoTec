@@ -19,7 +19,7 @@
 #include "EasyControl.h"
 #include "RecipeEditDlg.h"
 #include "ProductDatabaseBox.h"
-#include "MFCMacros.h"
+#include "Utility/MFCMacros.h"
 
 
 #define TIMERID 1
@@ -209,5 +209,5 @@ void CRecipeEditDlg::OnClickName()
 	if (IsWindowLocked()) // sonst geht gleich das EditCtrl auf und der Timer schliesst es wieder
 		return;
 
-	CEditCtrl::GetInput(this, (m_bProductName) ? E_TYPCTRL::E_STRINGCTRL : E_TYPCTRL::E_UINT64CTRL, IDC_EDITDLG_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_EDITDLG_EDIT);
 }

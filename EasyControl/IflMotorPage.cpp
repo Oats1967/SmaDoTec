@@ -24,8 +24,8 @@
 #include "GainFactorSpeedBoxDlg.h"
 #include "ReduceFactorSpeedBoxDlg.h"
 #include "FeederScaleBoxDlg.h"
-#include "MFCMacros.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+#include "Utility/EditCtrl.h"
 
 
 #define EDITITEM(_a, _func) 	BINDFUNC(_a, CIflMotorPage, _func)
@@ -77,7 +77,7 @@ void CIflMotorPage::DoDataExchange(CDataExchange* pDX)
 //******************************************************************************************************
 BOOL CIflMotorPage::OnNotifyEditPidGain(void)
 {
-	auto bModified = CEditCtrlEx::GetFloatAbsRange(m_fPidGain, 0.0F, 10000.0F);
+	auto bModified =CEditCtrl::GetFloatAbsRangeModified(m_fPidGain, 0.0F, 10000.0F);
 	if (bModified)
 	{
 		REMOTEREF.setDosePidPropGainGross(m_sItem, m_fPidGain);
@@ -88,7 +88,7 @@ BOOL CIflMotorPage::OnNotifyEditPidGain(void)
 //******************************************************************************************************
 BOOL CIflMotorPage::OnNotifyEditSampleTime(void)
 {
-	auto bModified = CEditCtrlEx::GetLongAbsRange(m_SampleInterval, 0, 20U);
+	auto bModified = CEditCtrl::GetLongAbsRangeModified(m_SampleInterval, 0, 20U);
 	if (bModified)
 	{
 		REMOTEREF.setPidSampleInterval(m_sItem, m_SampleInterval);
@@ -162,13 +162,13 @@ BOOL CIflMotorPage::OnInitDialog()
 //*****************************************************************************************************
 void CIflMotorPage::OnStnClickedSampleTime()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_IFL_MOTOR_PIDSAMPLEINTERVAL_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_IFL_MOTOR_PIDSAMPLEINTERVAL_EDIT);
 }
 //*****************************************************************************************************
 //*****************************************************************************************************
 void CIflMotorPage::OnStnClickedPidGain()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_IFL_MOTOR_PROPGAIN_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_IFL_MOTOR_PROPGAIN_EDIT);
 }
 //*****************************************************************************************************
 //*****************************************************************************************************

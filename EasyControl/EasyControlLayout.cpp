@@ -20,7 +20,7 @@
 #include "EasyControlDoc.h"
 #include "EasyControlView.h"
 #include "DataImage.h"
-#include "MFCMacros.h"
+#include "Utility/MFCMacros.h"
 
 
 static const LOADLTYP<1> aLoadTyp1 =

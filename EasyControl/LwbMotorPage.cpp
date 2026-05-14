@@ -28,8 +28,8 @@
 #include "MaxGrossSpeedBoxDlg.h"
 #include "MaxFineSpeedBoxDlg.h"
 #include "DataImage.h"
-#include "MFCMacros.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+#include "Utility/EditCtrl.h"
 
 
 
@@ -162,7 +162,7 @@ void CLwbMotorPage::DoDataExchange(CDataExchange* pDX)
 //**************************************************************************************************************
 BOOL CLwbMotorPage::OnNotifyBatchGrossStream()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbs(m_fGrossStream);
+	auto bModified = CEditCtrl::GetFloatAbsModified(m_fGrossStream);
 	if (bModified)
 	{
 		REMOTEREF.setDoseBatchGrossStream(m_sItem, m_fGrossStream);
@@ -173,7 +173,7 @@ BOOL CLwbMotorPage::OnNotifyBatchGrossStream()
 //**************************************************************************************************************
 BOOL CLwbMotorPage::OnNotifyBatchFineStream()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbs(m_fFineStream);
+	auto bModified = CEditCtrl::GetFloatAbsModified(m_fFineStream);
 	if (bModified)
 	{
 		REMOTEREF.setDoseBatchFineStream(m_sItem, m_fFineStream);
@@ -184,7 +184,7 @@ BOOL CLwbMotorPage::OnNotifyBatchFineStream()
 //**************************************************************************************************************
 BOOL CLwbMotorPage::OnNotifyBatchSwitchpoint()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbs(m_fSwitchpoint);
+	auto bModified = CEditCtrl::GetFloatAbsModified(m_fSwitchpoint);
 	if (bModified)
 	{
 		REMOTEREF.setDoseBatchSwitchpoint(m_sItem, m_fSwitchpoint);
@@ -229,7 +229,7 @@ BOOL CLwbMotorPage::OnNotifyBatchScale()
 //**************************************************************************************************************
 BOOL CLwbMotorPage::OnNotifyBatchTime()
 {
-	auto bModified = CEditCtrlEx::GetLongAbs(m_lBatchTime);
+	auto bModified = CEditCtrl::GetLongAbsModified(m_lBatchTime);
 	if (bModified)
 	{
 		REMOTEREF.setDoseBatchTime(m_sItem, m_lBatchTime);
@@ -240,7 +240,7 @@ BOOL CLwbMotorPage::OnNotifyBatchTime()
 //**************************************************************************************************************
 BOOL CLwbMotorPage::OnNotifyBatchOverrunCompensation()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbs(m_fOverrunCompensation);
+	auto bModified = CEditCtrl::GetFloatAbsModified(m_fOverrunCompensation);
 	if (bModified)
 	{
 		REMOTEREF.setDoseBatchOverrunCompensation(m_sItem, m_fOverrunCompensation);
@@ -251,7 +251,7 @@ BOOL CLwbMotorPage::OnNotifyBatchOverrunCompensation()
 //**************************************************************************************************************
 BOOL CLwbMotorPage::OnNotifyMaxRotationalSpeed()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbs(m_fMaxRotationalSpeed);
+	auto bModified = CEditCtrl::GetFloatAbsModified(m_fMaxRotationalSpeed);
 	if (bModified)
 	{
 		REMOTEREF.setDoseMaxRotationalSpeed(m_sItem, m_fMaxRotationalSpeed);
@@ -262,7 +262,7 @@ BOOL CLwbMotorPage::OnNotifyMaxRotationalSpeed()
 //**************************************************************************************************************
 BOOL CLwbMotorPage::OnNotifyMaxMaxSetpoint()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbs(m_fMaxSetpoint);
+	auto bModified = CEditCtrl::GetFloatAbsModified(m_fMaxSetpoint);
 	if (bModified)
 	{
 		REMOTEREF.setDoseMaxSetpoint(m_sItem, m_fMaxSetpoint);
@@ -273,7 +273,7 @@ BOOL CLwbMotorPage::OnNotifyMaxMaxSetpoint()
 //**************************************************************************************************************
 BOOL CLwbMotorPage::OnNotifyEncoderMonitor()
 {
-	auto bModified = CEditCtrlEx::GetLongAbs(m_lEncoderMonitor);
+	auto bModified = CEditCtrl::GetLongAbsModified(m_lEncoderMonitor);
 	if (bModified)
 	{
 		REMOTEREF.setDoseEncoderMonitor(m_sItem, m_lEncoderMonitor);
@@ -284,7 +284,7 @@ BOOL CLwbMotorPage::OnNotifyEncoderMonitor()
 //**************************************************************************************************************
 BOOL CLwbMotorPage::OnNotifyStartupDelay()
 {
-	auto bModified = CEditCtrlEx::GetLongAbs(m_lStartupDelay);
+	auto bModified = CEditCtrl::GetLongAbsModified(m_lStartupDelay);
 	if (bModified)
 	{
 		REMOTEREF.setDoseStartupDelay(m_sItem, m_lStartupDelay);
@@ -474,55 +474,55 @@ BOOL CLwbMotorPage::OnInitDialog()
 //**************************************************************************************************************
 void CLwbMotorPage::OnStnClickedMotorMaxSetpoint()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_LWB_MOTOR_MAXSETPOINT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LWB_MOTOR_MAXSETPOINT);
 }
 //**************************************************************************************************************
 //**************************************************************************************************************
 void CLwbMotorPage::OnStnClickedMotorMaxRotSpeed()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_LWB_MOTOR_MAXROTSPEED);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LWB_MOTOR_MAXROTSPEED);
 }
 //**************************************************************************************************************
 //**************************************************************************************************************
 void CLwbMotorPage::OnStnClickedMotorEncoderMonitor()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_LWB_MOTOR_ENCODERMONITOR);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LWB_MOTOR_ENCODERMONITOR);
 }
 //**************************************************************************************************************
 //**************************************************************************************************************
 void CLwbMotorPage::OnStnClickedMotorStartupDelay()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_LWB_MOTOR_STARTUPDELAY);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LWB_MOTOR_STARTUPDELAY);
 }
 //**************************************************************************************************************
 void CLwbMotorPage::OnStnClickedMotorGrossStream()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_LWB_MOTOR_GROSSSTREAM);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LWB_MOTOR_GROSSSTREAM);
 }
 //**************************************************************************************************************
 void CLwbMotorPage::OnStnClickedMotorFineStream()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_LWB_MOTOR_FINESTREAM);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LWB_MOTOR_FINESTREAM);
 }
 //**************************************************************************************************************
 void CLwbMotorPage::OnStnClickedMotorSwitchpoint()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_LWB_MOTOR_SWITCHPOINT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LWB_MOTOR_SWITCHPOINT);
 }
 //**************************************************************************************************************
 void CLwbMotorPage::OnStnClickedMotorScale()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_LWB_MOTOR_SCALE);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LWB_MOTOR_SCALE);
 }
 //**************************************************************************************************************
 void CLwbMotorPage::OnStnClickedMotorBatchTime()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_LWB_MOTOR_BATCHTIME);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LWB_MOTOR_BATCHTIME);
 }
 //**************************************************************************************************************
 void CLwbMotorPage::OnStnClickedMotorOverrunCompensation()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_LWB_MOTOR_OVERRUNCOMPENSATION);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LWB_MOTOR_OVERRUNCOMPENSATION);
 }
 //**************************************************************************************************************
 //**************************************************************************************************************

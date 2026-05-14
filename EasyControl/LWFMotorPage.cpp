@@ -26,8 +26,8 @@
 #include "GlobalConst.h"
 #include "CalibrationDlg.h"
 #include "DataImage.h"
-#include "MFCMacros.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+#include "Utility/EditCtrl.h"
 
 
 
@@ -160,7 +160,7 @@ void CLwfMotorPage::DoDataExchange(CDataExchange* pDX)
 //**************************************************************************************************************
 BOOL CLwfMotorPage::OnNotifyPidPropGainGross()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbs(m_fPIDGrobVerstaerkung);
+	auto bModified = CEditCtrl::GetFloatAbsModified(m_fPIDGrobVerstaerkung);
 	if (bModified)
 	{
 		REMOTEREF.setDosePidPropGainGross(m_sItem, m_fPIDGrobVerstaerkung);
@@ -171,7 +171,7 @@ BOOL CLwfMotorPage::OnNotifyPidPropGainGross()
 //**************************************************************************************************************
 BOOL CLwfMotorPage::OnNotifySampleInterval()
 {
-	auto bModified = CEditCtrlEx::GetLongAbsRange(m_SampleInterval, MIN_LWF_SAMPLETIME, MAX_LWF_SAMPLETIME);
+	auto bModified = CEditCtrl::GetLongAbsRangeModified(m_SampleInterval, MIN_LWF_SAMPLETIME, MAX_LWF_SAMPLETIME);
 	if (bModified)
 	{
 		REMOTEREF.setPidSampleInterval(m_sItem, m_SampleInterval);
@@ -200,7 +200,7 @@ BOOL CLwfMotorPage::OnNotifyDosePerformance()
 //**************************************************************************************************************
 BOOL CLwfMotorPage::OnNotifyMaxRotationalSpeed()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbs(m_fMaxRotationalSpeed);
+	auto bModified = CEditCtrl::GetFloatAbsModified(m_fMaxRotationalSpeed);
 	if (bModified)
 	{
 		REMOTEREF.setDoseMaxRotationalSpeed(m_sItem, m_fMaxRotationalSpeed);
@@ -211,7 +211,7 @@ BOOL CLwfMotorPage::OnNotifyMaxRotationalSpeed()
 //**************************************************************************************************************
 BOOL CLwfMotorPage::OnNotifyMaxMaxSetpoint()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbs(m_fMaxSetpoint);
+	auto bModified = CEditCtrl::GetFloatAbsModified(m_fMaxSetpoint);
 	if (bModified)
 	{
 		REMOTEREF.setDoseMaxSetpoint(m_sItem, m_fMaxSetpoint);
@@ -222,7 +222,7 @@ BOOL CLwfMotorPage::OnNotifyMaxMaxSetpoint()
 //**************************************************************************************************************
 BOOL CLwfMotorPage::OnNotifyEncoderMonitor()
 {
-	auto bModified = CEditCtrlEx::GetLongAbs(m_lEncoderMonitor);
+	auto bModified = CEditCtrl::GetLongAbsModified(m_lEncoderMonitor);
 	if (bModified)
 	{
 		REMOTEREF.setDoseEncoderMonitor(m_sItem, m_lEncoderMonitor);
@@ -233,7 +233,7 @@ BOOL CLwfMotorPage::OnNotifyEncoderMonitor()
 //**************************************************************************************************************
 BOOL CLwfMotorPage::OnNotifyStartupDelay()
 {
-	auto bModified = CEditCtrlEx::GetLongAbs(m_lStartupDelay);
+	auto bModified = CEditCtrl::GetLongAbsModified(m_lStartupDelay);
 	if (bModified)
 	{
 		REMOTEREF.setDoseStartupDelay(m_sItem, m_lStartupDelay);
@@ -244,7 +244,7 @@ BOOL CLwfMotorPage::OnNotifyStartupDelay()
 //**************************************************************************************************************
 BOOL CLwfMotorPage::OnNotifyGatefilter()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbsRange(m_fGatefilter, 0.0F, 1000.0f);
+	auto bModified =CEditCtrl::GetFloatAbsRangeModified(m_fGatefilter, 0.0F, 1000.0f);
 	if (bModified)
 	{
 		REMOTEREF.setDoseGatefilter(m_sItem, m_fGatefilter);
@@ -255,7 +255,7 @@ BOOL CLwfMotorPage::OnNotifyGatefilter()
 //**************************************************************************************************************
 BOOL CLwfMotorPage::OnNotifyMassflowfilter()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbsRange(m_fMassflowfilter, 0.0F, 100.0f);
+	auto bModified =CEditCtrl::GetFloatAbsRangeModified(m_fMassflowfilter, 0.0F, 100.0f);
 	if (bModified)
 	{
 		REMOTEREF.setDoseMassflowFilter(m_sItem, m_fMassflowfilter);
@@ -266,7 +266,7 @@ BOOL CLwfMotorPage::OnNotifyMassflowfilter()
 //**************************************************************************************************************
 BOOL CLwfMotorPage::OnNotifyMaxDriveCommandChange()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbsRange(m_fMaxDriveCommandChange, 0.0F, 50.0f);
+	auto bModified =CEditCtrl::GetFloatAbsRangeModified(m_fMaxDriveCommandChange, 0.0F, 50.0f);
 	if (bModified)
 	{
 		REMOTEREF.setDoseMaxDriveCommandChange(m_sItem, m_fMaxDriveCommandChange);
@@ -277,7 +277,7 @@ BOOL CLwfMotorPage::OnNotifyMaxDriveCommandChange()
 //**************************************************************************************************************
 BOOL CLwfMotorPage::OnNotifyMinSetpointChange()
 {
-	auto bModified = CEditCtrlEx::GetFloatAbsRange(m_fMinSetpointChange, 0.0F, 5.0f);
+	auto bModified =CEditCtrl::GetFloatAbsRangeModified(m_fMinSetpointChange, 0.0F, 5.0f);
 	if (bModified)
 	{
 		REMOTEREF.setDoseMinSetpointChange(m_sItem, m_fMinSetpointChange);
@@ -487,19 +487,19 @@ void CLwfMotorPage::OnBnClickedMotorCalibrate()
 //**************************************************************************************************************
 void CLwfMotorPage::OnStnClickedMotorGatefilter()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_LWF_MOTOR_GATEFILTER);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LWF_MOTOR_GATEFILTER);
 }
 //**************************************************************************************************************
 //**************************************************************************************************************
 void CLwfMotorPage::OnStnClickedMotorPidSampleInterval()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_LWF_MOTOR_PIDSAMPLEINTERVAL);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LWF_MOTOR_PIDSAMPLEINTERVAL);
 }
 //**************************************************************************************************************
 //**************************************************************************************************************
 void CLwfMotorPage::OnStnClickedMotorGain()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_LWF_MOTOR_GAIN);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LWF_MOTOR_GAIN);
 }
 //**************************************************************************************************************
 //**************************************************************************************************************
@@ -518,50 +518,50 @@ void CLwfMotorPage::OnStnClickedMotorDosePerformance()
 	}
 	if ( bEdit ) 
 	{
-		CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_LWF_MOTOR_DOSEPERFORMANCE);
+		CEditCtrl::CreateFromDlgItem(this, IDC_LWF_MOTOR_DOSEPERFORMANCE);
 	}
 }
 //**************************************************************************************************************
 //**************************************************************************************************************
 void CLwfMotorPage::OnStnClickedMotorMaxSetpoint()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_LWF_MOTOR_MAXSETPOINT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LWF_MOTOR_MAXSETPOINT);
 }
 //**************************************************************************************************************
 //**************************************************************************************************************
 void CLwfMotorPage::OnStnClickedMotorMassflowfilter()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_LWF_MOTOR_MASSFLOWFILTER);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LWF_MOTOR_MASSFLOWFILTER);
 }
 //**************************************************************************************************************
 //**************************************************************************************************************
 void CLwfMotorPage::OnStnClickedMotorMaxDriveCommand()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_LWF_MOTOR_MAXDRIVECOMMAND);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LWF_MOTOR_MAXDRIVECOMMAND);
 }
 //**************************************************************************************************************
 //**************************************************************************************************************
 void CLwfMotorPage::OnStnClickedMotorMinSetpointChange()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_LWF_MOTOR_MINSETPOINTCHANGE);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LWF_MOTOR_MINSETPOINTCHANGE);
 }
 //**************************************************************************************************************
 //**************************************************************************************************************
 void CLwfMotorPage::OnStnClickedMotorMaxRotSpeed()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_LWF_MOTOR_MAXROTSPEED);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LWF_MOTOR_MAXROTSPEED);
 }
 //**************************************************************************************************************
 //**************************************************************************************************************
 void CLwfMotorPage::OnStnClickedMotorEncoderMonitor()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_LWF_MOTOR_ENCODERMONITOR);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LWF_MOTOR_ENCODERMONITOR);
 }
 //**************************************************************************************************************
 //**************************************************************************************************************
 void CLwfMotorPage::OnStnClickedMotorStartupDelay()
 {
-	CEditCtrl :: GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_LWF_MOTOR_STARTUPDELAY);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LWF_MOTOR_STARTUPDELAY);
 }
 //**************************************************************************************************************
 //**************************************************************************************************************

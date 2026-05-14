@@ -19,8 +19,8 @@
 #include "EasyControl.h"
 #include "IcpAlarmPage.h"
 #include "RemoteControl.h"
-#include "MFCMacros.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+#include "Utility/EditCtrl.h"
 
 
 
@@ -102,7 +102,7 @@ void CIcpAlarmPage::DoDataExchange(CDataExchange* pDX)
 //***************************************************************************************************************
 BOOL CIcpAlarmPage::OnNotifyAlarmDriveCommandHigh()
 {
-    auto bModified = CEditCtrlEx::GetLongAbsRange(m_DriveCommandHigh, 0, 100U);
+    auto bModified = CEditCtrl::GetLongAbsRangeModified(m_DriveCommandHigh, 0, 100U);
     if (bModified)
     {
         REMOTEREF.setDoseAlarmDriveCommandHigh(m_sItem, m_DriveCommandHigh);
@@ -113,7 +113,7 @@ BOOL CIcpAlarmPage::OnNotifyAlarmDriveCommandHigh()
 //***************************************************************************************************************
 BOOL CIcpAlarmPage::OnNotifyAlarmDriveCommandLow()
 {
-    auto bModified = CEditCtrlEx::GetLongAbsRange(m_DriveCommandLow, 0, 100U);
+    auto bModified = CEditCtrl::GetLongAbsRangeModified(m_DriveCommandLow, 0, 100U);
     if (bModified)
     {
         REMOTEREF.setDoseAlarmDriveCommandLow(m_sItem, m_DriveCommandLow);
@@ -124,7 +124,7 @@ BOOL CIcpAlarmPage::OnNotifyAlarmDriveCommandLow()
 //***************************************************************************************************************
 BOOL CIcpAlarmPage::OnNotifyAlarmMassflowHigh()
 {
-    auto bModified = CEditCtrlEx::GetLongAbsRange(m_MassflowHigh, 0, 100U);
+    auto bModified = CEditCtrl::GetLongAbsRangeModified(m_MassflowHigh, 0, 100U);
     if (bModified)
     {
         REMOTEREF.setDoseAlarmMassflowHigh(m_sItem, m_MassflowHigh);
@@ -135,7 +135,7 @@ BOOL CIcpAlarmPage::OnNotifyAlarmMassflowHigh()
 //***************************************************************************************************************
 BOOL CIcpAlarmPage::OnNotifyAlarmMassflowLow()
 {
-    auto bModified = CEditCtrlEx::GetLongAbsRange(m_MassflowLow, 0, 100U);
+    auto bModified = CEditCtrl::GetLongAbsRangeModified(m_MassflowLow, 0, 100U);
     if (bModified)
     {
         REMOTEREF.setDoseAlarmMassflowLow(m_sItem, m_MassflowLow);
@@ -146,7 +146,7 @@ BOOL CIcpAlarmPage::OnNotifyAlarmMassflowLow()
 //***************************************************************************************************************
 BOOL CIcpAlarmPage::OnNotifyAlarmReactionDelay()
 {
-    auto bModified = CEditCtrlEx::GetLongAbsRange(m_AlarmReactionDelay, 0, 10000U);
+    auto bModified = CEditCtrl::GetLongAbsRangeModified(m_AlarmReactionDelay, 0, 10000U);
     if (bModified)
     {
         REMOTEREF.setDoseAlarmReactionDelay(m_sItem, m_AlarmReactionDelay);
@@ -157,7 +157,7 @@ BOOL CIcpAlarmPage::OnNotifyAlarmReactionDelay()
 //***************************************************************************************************************
 BOOL CIcpAlarmPage::OnNotifyAlarmStartReactionDelay()
 {
-    auto bModified = CEditCtrlEx::GetLongAbsRange(m_lAlarmStartReactionDelay, 0, 10000U);
+    auto bModified = CEditCtrl::GetLongAbsRangeModified(m_lAlarmStartReactionDelay, 0, 10000U);
     if (bModified)
     {
         REMOTEREF.setDoseAlarmStartReactionDelay(m_sItem, m_lAlarmStartReactionDelay);
@@ -217,37 +217,37 @@ BOOL CIcpAlarmPage::OnUpdateControls(void)
 //***************************************************************************************************************
 void CIcpAlarmPage::OnStnClickedIcpAlarmMassflowHigh()
 {
-    CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_ICP_ALARM_MASSFLOW_HIGH);
+    CEditCtrl::CreateFromDlgItem(this, IDC_ICP_ALARM_MASSFLOW_HIGH);
 }
 //***************************************************************************************************************
 //***************************************************************************************************************
 void CIcpAlarmPage::OnStnClickedIcpAlarmMassflowLow()
 {
-    CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_ICP_ALARM_MASSFLOW_LOW);
+    CEditCtrl::CreateFromDlgItem(this, IDC_ICP_ALARM_MASSFLOW_LOW);
 }
 //***************************************************************************************************************
 //***************************************************************************************************************
 void CIcpAlarmPage::OnStnClickedIcpAlarmDriveCommandHigh()
 {
-    CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_ICP_ALARM_DRIVECOMMAND_HIGH);
+    CEditCtrl::CreateFromDlgItem(this, IDC_ICP_ALARM_DRIVECOMMAND_HIGH);
 }
 //***************************************************************************************************************
 //***************************************************************************************************************
 void CIcpAlarmPage::OnStnClickedIcpAlarmDriveCommandLow()
 {
-    CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_ICP_ALARM_DRIVECOMMAND_LOW);
+    CEditCtrl::CreateFromDlgItem(this, IDC_ICP_ALARM_DRIVECOMMAND_LOW);
 }
 //***************************************************************************************************************
 //***************************************************************************************************************
 void CIcpAlarmPage::OnStnClickedIcpAlarmReactionDelay()
 {
-    CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_ICP_ALARM_REACTIONDELAY);
+    CEditCtrl::CreateFromDlgItem(this, IDC_ICP_ALARM_REACTIONDELAY);
 }
 //***************************************************************************************************************
 //***************************************************************************************************************
 void CIcpAlarmPage::OnStnClickedIcpAlarmStartReactionDelay()
 {
-    CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_ICP_ALARM_STARTREACTIONDELAY);
+    CEditCtrl::CreateFromDlgItem(this, IDC_ICP_ALARM_STARTREACTIONDELAY);
 }
 //******************************************************************************************************
 //******************************************************************************************************

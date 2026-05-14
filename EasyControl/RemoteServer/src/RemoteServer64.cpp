@@ -15,8 +15,8 @@
 /// @author        Detlef Hafer
 ///
 //------------------------------------------------------------------------------------
-#include "RemoteServer64.h"
-#include "RemoteServerImpl.h"
+#include "include/RemoteServer64.h"
+#include "include/RemoteServerImpl.h"
 
 static CRemoteServerImpl* g_pRemoteServerImpl = nullptr;
 

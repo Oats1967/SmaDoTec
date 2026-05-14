@@ -22,8 +22,8 @@
 #include "LineSettingsDlg.h"
 #include "DataImage.h"
 #include "FormatMetric.h"
-#include "MFCMacros.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+#include "Utility/EditCtrl.h"
 
 
 
@@ -220,7 +220,7 @@ void CLineTabOverview::SetValue()
 //******************************************************************************************************
 BOOL CLineTabOverview::OnNotifyEditSetpoint(void)
 {
-	auto bModified = CEditCtrlEx::GetFloatAbs(m_fSetpoint);
+	auto bModified = CEditCtrl::GetFloatAbsModified(m_fSetpoint);
 	if (bModified)
 	{
 		REMOTEREF.setLineSetpoint(m_fSetpoint);
@@ -329,7 +329,7 @@ void CLineTabOverview::OnStnClickedLineTabOverviewSetpoint()
 	const BOOL bLineEditEnable = IsSetpointEditable();
 	if (bLineEditEnable)
 	{
-		CEditCtrl::GetInput(this, E_TYPCTRL::E_FLOATCTRL, IDC_LINETAB_OVERVIEW_SETPOINT_EDIT);
+		CEditCtrl::CreateFromDlgItem(this, IDC_LINETAB_OVERVIEW_SETPOINT_EDIT);
 	}
 }
 //*******************************************************************************************************************

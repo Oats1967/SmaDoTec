@@ -23,8 +23,8 @@
 #include "RefillFeederSpeedBoxDlg.h"
 #include "EmptyFeederSpeedBoxDlg.h"
 #include "FormatMetric.h"
-#include "MFCMacros.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+#include "Utility/EditCtrl.h"
 #include "HelpInfoDlgEx.h"
 
 
@@ -229,7 +229,7 @@ LRESULT CRefillVolBoxDlg::OnSpeedBoxClosed(WPARAM, LPARAM)
 //*****************************************************************************************************
 BOOL CRefillVolBoxDlg::OnNotifyEditFeederEmptyStart()
 {
-	auto bModified = CEditCtrlEx::GetLongAbs(m_FeederEmptyStart);
+	auto bModified = CEditCtrl::GetLongAbsModified(m_FeederEmptyStart);
 	if (bModified)
 	{
 		REMOTEREF.setDoseRefillFeederEmptyStart(m_sItem, m_FeederEmptyStart);
@@ -240,7 +240,7 @@ BOOL CRefillVolBoxDlg::OnNotifyEditFeederEmptyStart()
 //*****************************************************************************************************
 BOOL CRefillVolBoxDlg::OnNotifyEditDebounceMax()
 {
-	auto bModified = CEditCtrlEx::GetLongAbs(m_MaxDebounce);
+	auto bModified = CEditCtrl::GetLongAbsModified(m_MaxDebounce);
 	if (bModified)
 	{
 		REMOTEREF.setDoseRefillDebounceMax(m_sItem, m_MaxDebounce);
@@ -251,7 +251,7 @@ BOOL CRefillVolBoxDlg::OnNotifyEditDebounceMax()
 //*****************************************************************************************************
 BOOL CRefillVolBoxDlg::OnNotifyEditRefillTime()
 {
-	auto bModified = CEditCtrlEx::GetLongAbs(m_lRefillTime);
+	auto bModified = CEditCtrl::GetLongAbsModified(m_lRefillTime);
 	if (bModified)
 	{
 		REMOTEREF.setDoseRefillTime(m_sItem, m_lRefillTime);
@@ -263,7 +263,7 @@ BOOL CRefillVolBoxDlg::OnNotifyEditRefillTime()
 //*****************************************************************************************************
 BOOL CRefillVolBoxDlg::OnNotifyEditDebounceMin()
 {
-	auto bModified = CEditCtrlEx::GetLongAbs(m_MinDebounce);
+	auto bModified = CEditCtrl::GetLongAbsModified(m_MinDebounce);
 	if (bModified)
 	{
 		REMOTEREF.setDoseRefillDebounceMin(m_sItem, m_MinDebounce);
@@ -403,25 +403,25 @@ BOOL CRefillVolBoxDlg::OnInitDialog()
 //*************************************************************************************
 void CRefillVolBoxDlg::OnStnClickedFeederEmptyStart()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_REFILLVOL_FEEDEREMTPYSTART_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_REFILLVOL_FEEDEREMTPYSTART_EDIT);
 }
 //*************************************************************************************
 //*************************************************************************************
 void CRefillVolBoxDlg::OnStnDebounceMax()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_REFILLVOL_ZZ_DEBOUNCEMAX_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_REFILLVOL_ZZ_DEBOUNCEMAX_EDIT);
 }
 //*************************************************************************************
 //*************************************************************************************
 void CRefillVolBoxDlg::OnStnDebounceMin()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_REFILLVOL_ZZ_DEBOUNCEMIN_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_REFILLVOL_ZZ_DEBOUNCEMIN_EDIT);
 }
 //*************************************************************************************
 //*************************************************************************************
 void CRefillVolBoxDlg::OnStnClickedRefillTime()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_REFILLVOL_TIME_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_REFILLVOL_TIME_EDIT);
 }
 //*************************************************************************************
 //*************************************************************************************

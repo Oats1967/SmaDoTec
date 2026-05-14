@@ -19,8 +19,7 @@
 
 #include "BASE/Base.h"
 #include "BitmapDC.h"
-#include "MFCMacros.h"
-
+#include "Utility/MFCMacros.h"
 
 
 class CGrafikContext

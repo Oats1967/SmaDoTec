@@ -21,8 +21,8 @@
 #include "BASE/Base.def"
 #include "RemoteControl.h"
 #include "SettingsProductListPage.h"
-#include "MFCMacros.h"
-#include "EditCtrlEx.h"
+#include "Utility/MFCMacros.h"
+#include "Utility/EditCtrl.h"
 #include "HelpInfoDlgEx.h"
 
 
@@ -118,7 +118,7 @@ LRESULT CSettingsProductListPage::OnNotifyEdit(WPARAM id, LPARAM bValue)
 //**************************************************************************************************************
 BOOL CSettingsProductListPage::OnNotifyProductName()
 {
-	auto bModified = CEditCtrlEx::GetString(m_szProduct);
+	auto bModified = CEditCtrl::GetStringModified(m_szProduct);
 	if (bModified)
 	{
 		m_szProductModified = TRUE;
@@ -130,7 +130,7 @@ BOOL CSettingsProductListPage::OnNotifyProductName()
 //**************************************************************************************************************
 BOOL CSettingsProductListPage::OnNotifyProductKey()
 {
-	auto bModified = CEditCtrlEx::GetUint64(m_QMNumber);
+	auto bModified = CEditCtrl::GetUint64Modified(m_QMNumber);
 	if (bModified)
 	{
 		m_QMNumberModified = TRUE;
@@ -332,12 +332,12 @@ BOOL CSettingsProductListPage::OnSetActive()
 //*********************************************************************************************************
 void  CSettingsProductListPage::OnStnClickedProductName()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_STRINGCTRL, IDC_SETTINGS_PRODUCTLIST_NAME);
+	CEditCtrl::CreateFromDlgItem(this, IDC_SETTINGS_PRODUCTLIST_NAME);
 }
 //*********************************************************************************************************
 //*********************************************************************************************************
 void  CSettingsProductListPage::OnStnClickedKey()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_UINT64CTRL, IDC_SETTINGS_PRODUCTLIST_KEY);
+	CEditCtrl::CreateFromDlgItem(this, IDC_SETTINGS_PRODUCTLIST_KEY);
 }
 

@@ -19,7 +19,7 @@
 
 #include "EasyControl.h"
 #include "ModelessDlg.h"
-#include "EditCtrlEx.h"
+#include "Utility/EditCtrl.h"
 #include "ButtonProductList.h"
 
 //------------------------------------------------------------------------------------------------------

@@ -17,9 +17,9 @@
 //------------------------------------------------------------------------------------
 
 #include "stdafx.h"
-#include "MFCMacros.h"
+#include "Utility/MFCMacros.h"
 #include "DiagramScaleDlg.h"
-#include "EditCtrlEx.h"
+#include "Utility/EditCtrl.h"
 
 
 // CDiagramScaleDlg-Dialog
@@ -212,73 +212,73 @@ void CDiagramScaleDlg::GetValue(void)
 //**************************************************************************************************************
 void CDiagramScaleDlg::OnStnClickedDiagramScaleDosePerformanceMin()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_DIAGRAM_SCALE_DOSEPERFORMANCE_MIN);
+	CEditCtrl::CreateFromDlgItem(this, IDC_DIAGRAM_SCALE_DOSEPERFORMANCE_MIN);
 }
 //**************************************************************************************************************
 //**************************************************************************************************************
 void CDiagramScaleDlg::OnStnClickedDiagramScaleDosePerformanceMax()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_DIAGRAM_SCALE_DOSEPERFORMANCE_MAX);
+	CEditCtrl::CreateFromDlgItem(this, IDC_DIAGRAM_SCALE_DOSEPERFORMANCE_MAX);
 }
 //**************************************************************************************************************
 //**************************************************************************************************************
 void CDiagramScaleDlg::OnStnClickedDiagramScaleSetpointMin()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_DIAGRAM_SCALE_SETPOINT_MIN);
+	CEditCtrl::CreateFromDlgItem(this, IDC_DIAGRAM_SCALE_SETPOINT_MIN);
 }
 //**************************************************************************************************************
 //**************************************************************************************************************
 void CDiagramScaleDlg::OnStnClickedDiagramScaleSetpointMax()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_DIAGRAM_SCALE_SETPOINT_MAX);
+	CEditCtrl::CreateFromDlgItem(this, IDC_DIAGRAM_SCALE_SETPOINT_MAX);
 }
 //**************************************************************************************************************
 //**************************************************************************************************************
 void CDiagramScaleDlg::OnStnClickedDiagramScaleMassflowMin()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_DIAGRAM_SCALE_MASSFLOW_MIN);
+	CEditCtrl::CreateFromDlgItem(this, IDC_DIAGRAM_SCALE_MASSFLOW_MIN);
 }
 //**************************************************************************************************************
 //**************************************************************************************************************
 void CDiagramScaleDlg::OnStnClickedDiagramScaleMassflowMax()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_DIAGRAM_SCALE_MASSFLOW_MAX);
+	CEditCtrl::CreateFromDlgItem(this, IDC_DIAGRAM_SCALE_MASSFLOW_MAX);
 }
 //**************************************************************************************************************
 //**************************************************************************************************************
 void CDiagramScaleDlg::OnStnClickedDiagramScaleWeightMin()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_DIAGRAM_SCALE_WEIGHT_MIN);
+	CEditCtrl::CreateFromDlgItem(this, IDC_DIAGRAM_SCALE_WEIGHT_MIN);
 }
 //**************************************************************************************************************
 //**************************************************************************************************************
 void CDiagramScaleDlg::OnStnClickedDiagramScaleWeightMax()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_DIAGRAM_SCALE_WEIGHT_MAX);
+	CEditCtrl::CreateFromDlgItem(this, IDC_DIAGRAM_SCALE_WEIGHT_MAX);
 }
 //**************************************************************************************************************
 //**************************************************************************************************************
 void CDiagramScaleDlg::OnStnClickedDiagramScaleDriveCommandMin()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_DIAGRAM_SCALE_DRIVECOMMAND_MIN);
+	CEditCtrl::CreateFromDlgItem(this, IDC_DIAGRAM_SCALE_DRIVECOMMAND_MIN);
 }
 //**************************************************************************************************************
 //**************************************************************************************************************
 void CDiagramScaleDlg::OnStnClickedDiagramScaleDriveCommandMax()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_DIAGRAM_SCALE_DRIVECOMMAND_MAX);
+	CEditCtrl::CreateFromDlgItem(this, IDC_DIAGRAM_SCALE_DRIVECOMMAND_MAX);
 }
 //**************************************************************************************************************
 //**************************************************************************************************************
 void CDiagramScaleDlg::OnStnClickedDiagramScaleRotSpeedMin()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_DIAGRAM_SCALE_ROTSPEED_MIN);
+	CEditCtrl::CreateFromDlgItem(this, IDC_DIAGRAM_SCALE_ROTSPEED_MIN);
 }
 //**************************************************************************************************************
 //**************************************************************************************************************
 void CDiagramScaleDlg::OnStnClickedDiagramScaleRotSpeedMax()
 {
-	CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_DIAGRAM_SCALE_ROTSPEED_MAX);
+	CEditCtrl::CreateFromDlgItem(this, IDC_DIAGRAM_SCALE_ROTSPEED_MAX);
 }
 //**************************************************************************************************************
 //**************************************************************************************************************

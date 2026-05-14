@@ -20,7 +20,7 @@
 #include "EasyControl.h"
 #include "ECMessageBox.h"
 #include "SettingsLayoutPage.h"
-#include "MFCMacros.h"
+#include "Utility/MFCMacros.h"
 
 
 
