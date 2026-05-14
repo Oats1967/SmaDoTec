@@ -79,6 +79,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <TargetName>$(ProjectName)64</TargetName>
+    <IncludePath>C:\DEVELOP\Cplusplus\SmaDoTec;C:\DEVELOP\Cplusplus\SmaDoTec\EasyControl;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -125,7 +126,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\DEVELOP\Cplusplus\EasyControl;C:\DEVELOP\Cplusplus\EasyControl\RemoteServer\include;C:\DEVELOP\Cplusplus\EasyControl\remote\ModBusKernel\include;C:\DEVELOP\Cplusplus\EasyControl\remote\RemoteServiceS7\include;C:\DEVELOP\Cplusplus\EasyControl\remote\RemoteServiceModbusStandard\include;C:\DEVELOP\Cplusplus\EasyControl\remote\RemoteServiceProfibus\include;C:\DEVELOP\Cplusplus\EasyControl\remote\S7Simulator\include;C:\DEVELOP\Cplusplus\EasyControl\remote\S7Snap\include;C:\DEVELOP\Cplusplus\EasyControl\RemoteServer\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -166,11 +167,14 @@
     <ClCompile Include="src\RemoteServerImpl.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\BASE\BASE.vcxproj">
+      <Project>{ab592a6e-7b7f-4f77-9d9d-618f24d8c87d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Logger\Logger.vcxproj">
+      <Project>{6fe1dc42-88b7-4ebd-a91f-73826b869961}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\AdsClient\AdsClient.vcxproj">
       <Project>{1792e18c-78c6-4f8f-8581-8a8ed0736fa8}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\BASE\BASE.vcxproj">
-      <Project>{ab592a6e-7b7f-4f77-9d9d-618f24d8c87d}</Project>
     </ProjectReference>
     <ProjectReference Include="..\remote\RemoteServiceModbusStandard\RemoteServiceModbusStandard.vcxproj">
       <Project>{f3f14ce1-1a8c-4fb1-85c8-b6cccb01c793}</Project>

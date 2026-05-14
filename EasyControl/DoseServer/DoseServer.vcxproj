@@ -127,7 +127,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\DEVELOP\Cplusplus\EasyControl;C:\DEVELOP\Cplusplus\EasyControl\RemoteServer\include;C:\DEVELOP\Cplusplus\EasyControl\DoseServer\include;C:\DEVELOP\Cplusplus\EasyControl\DoseServer\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\DEVELOP\Cplusplus\SmaDoTec\EasyControl\DoseServer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <UndefinePreprocessorDefinitions>__SIM_WEIGHT_GUI</UndefinePreprocessorDefinitions>
     </ClCompile>
     <Link>

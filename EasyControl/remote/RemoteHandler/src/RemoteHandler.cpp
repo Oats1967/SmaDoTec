@@ -21,7 +21,7 @@
 #include "remote/include/DeviceInterface.h"
 #include "remote/include/RemoteInterface.h"
 #include "Logger/include/Logger.h"
-#include "RemoteHandler.h"
+#include "include/RemoteHandler.h"
 
 
 using namespace base;
