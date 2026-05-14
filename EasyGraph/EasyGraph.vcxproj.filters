@@ -18,8 +18,8 @@
     <Filter Include="Quelldateien\License">
       <UniqueIdentifier>{3c70c5ed-7b5f-47ae-a63b-72c0e33cb223}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Quelldateien\Tools">
-      <UniqueIdentifier>{9f74c26b-baf5-46a4-bf64-5bb6ffc6f1ce}</UniqueIdentifier>
+    <Filter Include="Quelldateien\Utility">
+      <UniqueIdentifier>{fd079d49-9131-4e6c-a177-ba9352a98b7f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -134,12 +134,6 @@
     <ClInclude Include="WrapperBase.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="EditCtrl.h">
-      <Filter>Quelldateien\Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="MFCMacros.h">
-      <Filter>Quelldateien\Tools</Filter>
-    </ClInclude>
     <ClInclude Include="..\XLicense\LicenseLib\hostid.h">
       <Filter>Quelldateien\License</Filter>
     </ClInclude>
@@ -151,6 +145,15 @@
     </ClInclude>
     <ClInclude Include="..\XLicense\LicenseLib\License.h">
       <Filter>Quelldateien\License</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Utility\EditCtrl.h">
+      <Filter>Quelldateien\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Utility\MFCMacros.h">
+      <Filter>Quelldateien\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Utility\StringConvert.h">
+      <Filter>Quelldateien\Utility</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -229,12 +232,6 @@
     <ClCompile Include="WrapperBase.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="EditCtrl.cpp">
-      <Filter>Quelldateien\Tools</Filter>
-    </ClCompile>
-    <ClCompile Include="MFCMacros.cpp">
-      <Filter>Quelldateien\Tools</Filter>
-    </ClCompile>
     <ClCompile Include="..\XLicense\LicenseLib\hostid.cpp">
       <Filter>Quelldateien\License</Filter>
     </ClCompile>
@@ -244,5 +241,16 @@
     <ClCompile Include="..\XLicense\LicenseLib\license.cpp">
       <Filter>Quelldateien\License</Filter>
     </ClCompile>
+    <ClCompile Include="..\Utility\EditCtrl.cpp">
+      <Filter>Quelldateien\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\MFCMacros.cpp">
+      <Filter>Quelldateien\Utility</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Utility\Colors.def">
+      <Filter>Quelldateien\Utility</Filter>
+    </None>
   </ItemGroup>
 </Project>

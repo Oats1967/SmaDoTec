@@ -79,12 +79,14 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\DEVELOP\Cplusplus\SmaDoTec;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\DEVELOP\Cplusplus\SmaDoTec;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -115,7 +117,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_WINDOWS;_DEBUG;LOGLEVELFILE="$(ProjectDir)LogLevel.def";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\DEVELOP\Cplusplus;C:\DEVELOP\Cplusplus\EasyGraph;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\DEVELOP\Cplusplus\SmaDoTec\EasyGraph;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -166,7 +168,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_WINDOWS;NDEBUG;LOGLEVELFILE="$(ProjectDir)LogLevel.def";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\DEVELOP\Cplusplus\EasyControl;C:\DEVELOP\Cplusplus\EasyControl\Logger</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\DEVELOP\Cplusplus\SmaDoTec\EasyGraph;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -186,6 +188,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\EasyControl\BASE\include\EasyGraphSettings.h" />
+    <ClInclude Include="..\Utility\EditCtrl.h" />
+    <ClInclude Include="..\Utility\MFCMacros.h" />
+    <ClInclude Include="..\Utility\StringConvert.h" />
     <ClInclude Include="..\XLicense\LicenseLib\hostid.h" />
     <ClInclude Include="..\XLicense\LicenseLib\identify.h" />
     <ClInclude Include="..\XLicense\LicenseLib\identifyB.h" />
@@ -207,7 +212,6 @@
     <ClInclude Include="EasyGraph.h" />
     <ClInclude Include="EasyGraphDoc.h" />
     <ClInclude Include="EasyGraphView.h" />
-    <ClInclude Include="EditCtrl.h" />
     <ClInclude Include="FileView.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="global.h" />
@@ -215,7 +219,6 @@
     <ClInclude Include="LoadResource.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="MassflowSelectMap.h" />
-    <ClInclude Include="MFCMacros.h" />
     <ClInclude Include="OutputWnd.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="PropertiesWnd.h" />
@@ -230,14 +233,19 @@
     <ClInclude Include="WrapperBase.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Utility\EditCtrl.cpp" />
+    <ClCompile Include="..\Utility\MFCMacros.cpp" />
     <ClCompile Include="..\XLicense\LicenseLib\hostid.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\XLicense\LicenseLib\IdentifyB.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\XLicense\LicenseLib\license.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="CalendarBar.cpp" />
     <ClCompile Include="ChartCombinedView.cpp" />
@@ -254,13 +262,11 @@
     <ClCompile Include="EasyGraph.cpp" />
     <ClCompile Include="EasyGraphDoc.cpp" />
     <ClCompile Include="EasyGraphView.cpp" />
-    <ClCompile Include="EditCtrl.cpp" />
     <ClCompile Include="GroupView.cpp" />
     <ClCompile Include="LoadResource.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="MainFrm.cpp" />
-    <ClCompile Include="MFCMacros.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -284,6 +290,9 @@
     <ProjectReference Include="..\VKBoard\VKBoard.vcxproj">
       <Project>{5daa81f8-6325-4d5b-9f81-9d7ab0e144ea}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Utility\Colors.def" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -15,9 +15,10 @@
 /// @author        Detlef Hafer
 ///
 //------------------------------------------------------------------------------------
+//#include "EasyGraph.h"
 #include "pch.h"
-#include "EasyGraph.h"
-#include "MFCMacros.h"
+#include "BASE/types.h"
+#include "Utility/MFCMacros.h"
 
 namespace mfcmacros
 {

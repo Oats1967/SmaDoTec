@@ -78,7 +78,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\DEVELOP\Cplusplus\EasyGraph;$(IncludePath)</IncludePath>
+    <IncludePath>C:\DEVELOP\Cplusplus\SmaDoTec\EasyGraph;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\International\1033\</OutDir>
     <TargetName>EasyGraph</TargetName>
   </PropertyGroup>
@@ -86,7 +86,7 @@
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\International\1033\</OutDir>
     <TargetName>EasyGraph</TargetName>
-    <IncludePath>C:\DEVELOP\Cplusplus\EasyGraph;$(IncludePath)</IncludePath>
+    <IncludePath>C:\DEVELOP\Cplusplus\SmaDoTec\EasyGraph;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

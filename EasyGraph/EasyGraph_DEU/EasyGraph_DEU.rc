@@ -124,7 +124,7 @@ IDR_MENU_IMAGES         BITMAP                  "resource\\menuimages.bmp"
 
 IDR_EXPLORER            BITMAP                  "resource\\explorer.bmp"
 
-IDB_BACKGROUND          BITMAP                  "C:\\DEVELOP\\Cplusplus\\EasyGraph\\resource\\Background.bmp"
+IDB_BACKGROUND          BITMAP                  "resource\\Background.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////

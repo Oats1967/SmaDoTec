@@ -19,8 +19,8 @@
 #include <cstring>
 #include "BASE/Utils/public/StringUtil.h"
 #include "EditCtrl.h"
-#include "StringConvert.h"
-#include "MFCMacros.h"
+#include "Utility/StringConvert.h"
+#include "Utility/MFCMacros.h"
 
 
 #ifndef RANGE

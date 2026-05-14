@@ -4,8 +4,8 @@
 #include "framework.h"
 #include "PropertiesWnd.h"
 #include "MainFrm.h"
-#include "StringConvert.h"
-#include "EditCtrlEx.h"
+#include "Utility/StringConvert.h"
+#include "Utility/EditCtrl.h"
 
 
 #ifdef _DEBUG
