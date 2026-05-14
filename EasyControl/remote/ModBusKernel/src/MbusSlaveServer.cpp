@@ -34,7 +34,7 @@
 #include "BASE/types.h"
 
 // Package header
-#include "MbusSlaveServer.hpp"
+#include "include/MbusSlaveServer.hpp"
 
 
 /* Make sure that a char_t is signed! Unsigned might work, but it's not tested */

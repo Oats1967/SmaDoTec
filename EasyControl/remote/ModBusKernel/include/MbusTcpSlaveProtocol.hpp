@@ -28,7 +28,7 @@
 #pragma once
 
 // Package header
-#include "hmtcpip.h"
+#include "hmlib/include/hmtcpip.h"
 #include "MbusSlaveServer.hpp"
 
 

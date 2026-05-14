@@ -17,7 +17,7 @@
 //------------------------------------------------------------------------------------
 
 #include "DeviceSnap.h"
-#include "S7Snap64.h"
+#include "include/S7Snap64.h"
 
 static CDeviceSnap* g_pDeviceImpl = nullptr;
 

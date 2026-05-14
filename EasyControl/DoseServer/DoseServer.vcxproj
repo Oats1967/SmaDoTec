@@ -78,11 +78,12 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(IncludePath)</IncludePath>
+    <IncludePath>C:\DEVELOP\Cplusplus\SmaDoTec;C:\DEVELOP\Cplusplus\SmaDoTec\EasyControl;$(IncludePath)</IncludePath>
     <PublicIncludeDirectories>$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\DEVELOP\Cplusplus\SmaDoTec;C:\DEVELOP\Cplusplus\SmaDoTec\EasyControl;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -354,11 +355,11 @@
     <ClCompile Include="src\WeightControl.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\BASE\BASE.vcxproj">
+      <Project>{ab592a6e-7b7f-4f77-9d9d-618f24d8c87d}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\AdsClient\AdsClient.vcxproj">
       <Project>{1792e18c-78c6-4f8f-8581-8a8ed0736fa8}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\BASE\BASE.vcxproj">
-      <Project>{ab592a6e-7b7f-4f77-9d9d-618f24d8c87d}</Project>
     </ProjectReference>
     <ProjectReference Include="..\DoseDataLib\DoseDataLib.vcxproj">
       <Project>{9ddebfe2-045f-4034-8214-8fcd3dc20240}</Project>

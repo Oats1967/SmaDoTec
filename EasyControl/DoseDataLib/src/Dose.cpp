@@ -27,7 +27,7 @@
 #include "BASE/Utils/public/BitOp.h"
 #include "BASE/crc/src/crc.h"
 #include "Dose.h"
-#include "DoseData.def"
+#include "DoseDataLib/include/DoseData.def"
 
 #include "Logger/include/Logger.h"
 

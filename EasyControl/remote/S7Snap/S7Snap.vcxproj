@@ -79,9 +79,11 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <TargetName>$(ProjectName)64</TargetName>
+    <IncludePath>C:\DEVELOP\Cplusplus\SmaDoTec;C:\DEVELOP\Cplusplus\SmaDoTec\EasyControl;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\DEVELOP\Cplusplus\SmaDoTec;C:\DEVELOP\Cplusplus\SmaDoTec\EasyControl;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -125,7 +127,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\DEVELOP\Cplusplus\EasyControl;C:\DEVELOP\Cplusplus\EasyControl\remote\S7Snap\include;C:\DEVELOP\Cplusplus\EasyControl\remote\S7Snap\src;C:\DEVELOP\Cplusplus\EasyControl\remote\S7Snap\src\core;C:\DEVELOP\Cplusplus\EasyControl\remote\S7Snap\src\sys;C:\DEVELOP\Cplusplus\EasyControl\remote\S7Snap\src\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\DEVELOP\Cplusplus\SmaDoTec\EasyControl\remote\S7Snap;C:\DEVELOP\Cplusplus\SmaDoTec\EasyControl\remote\S7Snap\src\core;C:\DEVELOP\Cplusplus\SmaDoTec\EasyControl\remote\S7Snap\src\lib;C:\DEVELOP\Cplusplus\SmaDoTec\EasyControl\remote\S7Snap\src\sys;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -144,7 +146,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\DEVELOP\Cplusplus\EasyControl;C:\DEVELOP\Cplusplus\EasyControl\remote\S7Snap\include;C:\DEVELOP\Cplusplus\EasyControl\remote\S7Snap\src;C:\DEVELOP\Cplusplus\EasyControl\remote\S7Snap\src\core;C:\DEVELOP\Cplusplus\EasyControl\remote\S7Snap\src\sys;C:\DEVELOP\Cplusplus\EasyControl\remote\S7Snap\src\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\DEVELOP\Cplusplus\SmaDoTec\EasyControl\remote\S7Snap;C:\DEVELOP\Cplusplus\SmaDoTec\EasyControl\remote\S7Snap\src\core;C:\DEVELOP\Cplusplus\SmaDoTec\EasyControl\remote\S7Snap\src\lib;C:\DEVELOP\Cplusplus\SmaDoTec\EasyControl\remote\S7Snap\src\sys;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WholeProgramOptimization>true</WholeProgramOptimization>
       <DebugInformationFormat>None</DebugInformationFormat>
     </ClCompile>
@@ -203,7 +205,7 @@
     <None Include="src\lib\snap7.def" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\BASE\BASE.vcxproj">
+    <ProjectReference Include="..\..\..\BASE\BASE.vcxproj">
       <Project>{ab592a6e-7b7f-4f77-9d9d-618f24d8c87d}</Project>
     </ProjectReference>
   </ItemGroup>

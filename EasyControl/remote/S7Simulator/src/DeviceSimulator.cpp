@@ -17,11 +17,10 @@
 //------------------------------------------------------------------------------------
 #include <cassert>
 #include <algorithm>
-#include "DeviceSimulator.h"
+#include "include/DeviceSimulator.h"
 #include "BASE/Utils/public/GenericRemoteHandler.h"
 #include "BASE/Utils/public/xml/GenericRemoteXml.h"
 #include "BASE/Utils/public/xml/S7SimulatorXml.h"
-//#include "BASE/Utils/public/xml/SimValuesXml.h"
 #include "BASE/include/FieldTypeStack.h"
 #include "Logger/include/Logger.h"
 

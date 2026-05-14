@@ -30,7 +30,7 @@
 #include <stdlib.h>
 
 /* HM C/C++ library header */
-#include "hmcrc16.h"
+#include "hmlib/include/hmcrc16.h"
 
 
 /*

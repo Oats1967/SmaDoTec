@@ -10,6 +10,9 @@
     <Filter Include="LogLevel">
       <UniqueIdentifier>{f0b969e7-604a-451f-9008-12ed0a952731}</UniqueIdentifier>
     </Filter>
+    <Filter Include="hmlib">
+      <UniqueIdentifier>{4c211857-92b1-4a5e-a087-21e575918b82}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="LogLevel.def">
@@ -18,9 +21,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BusProtocolErrors.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\hmtimer.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\MbusSlaveServer.cpp">
@@ -32,24 +32,15 @@
     <ClCompile Include="src\SimMbusTcpSlaveProtocol.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="hmlib\src\hmcrc16.c">
+      <Filter>hmlib</Filter>
+    </ClCompile>
+    <ClCompile Include="hmlib\src\hmhex.c">
+      <Filter>hmlib</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\FieldTalkVersion.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="src\hmcrc16.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="src\hmhex.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="src\hmplatf.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="src\hmtimer.hpp">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="src\hmtracelog.h">
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\MbusDataTableInterface.hpp">
@@ -63,6 +54,9 @@
     </ClInclude>
     <ClInclude Include="include\MbusTcpSlaveProtocol.hpp">
       <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\hmtimer.hpp">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

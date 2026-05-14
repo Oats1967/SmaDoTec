@@ -16,7 +16,7 @@
 ///
 //------------------------------------------------------------------------------------
 #include "BASE/types.h"
-#include "hmplatf.h"
+#include "hmlib/include/hmplatf.h"
 
 /* Platform header */
 #if defined(__PALMOS__)
@@ -26,7 +26,7 @@
 #endif
 
 /* Include FieldTalk package header */
-#include "BusProtocolErrors.h"
+#include "include/BusProtocolErrors.h"
 
 /* UNICODE support (MS VC++, Win CE) */
 #if defined (_UNICODE)

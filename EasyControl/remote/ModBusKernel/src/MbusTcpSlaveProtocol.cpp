@@ -50,9 +50,9 @@
 #include "BASE/types.h"
 
 // Package header
-#include "hmtracelog.h"
-#include "hmtcpip.h"
-#include "MbusTcpSlaveProtocol.hpp"
+#include "hmlib/include/hmtracelog.h"
+#include "hmlib/include/hmtcpip.h"
+#include "include/MbusTcpSlaveProtocol.hpp"
 
 // Version identifier
 

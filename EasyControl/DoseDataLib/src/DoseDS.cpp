@@ -1,7 +1,7 @@
 #include <cassert>
 #include "Dose.h"
 
-#include "Dosedata.def"
+#include "DoseDataLib/include/DoseData.def"
 #include "DoseDataImplMacro.h"
 
 IMPLEMENT_DOSEDSV_STRING( std::string, Name)						// Name

@@ -27,7 +27,7 @@
 
 
 /* HM C/C++ library header */
-#include "hmhex.h"
+#include "hmlib/include/hmhex.h"
 
 
 /*****************************************************************************

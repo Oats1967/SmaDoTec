@@ -671,9 +671,6 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="BASE\BASE.vcxproj">
-      <Project>{ab592a6e-7b7f-4f77-9d9d-618f24d8c87d}</Project>
-    </ProjectReference>
     <ProjectReference Include="DoseServer\DoseServer.vcxproj">
       <Project>{16a959bf-9bab-4847-b831-861ee91d1ba5}</Project>
     </ProjectReference>
@@ -697,9 +694,6 @@
     </ProjectReference>
     <ProjectReference Include="remote\S7Snap\S7Snap.vcxproj">
       <Project>{ff6f78aa-202a-45aa-a0aa-34849e2a6e07}</Project>
-    </ProjectReference>
-    <ProjectReference Include="VKBoard\VKBoard.vcxproj">
-      <Project>{5daa81f8-6325-4d5b-9f81-9d7ab0e144ea}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

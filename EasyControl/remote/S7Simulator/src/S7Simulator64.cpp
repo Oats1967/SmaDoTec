@@ -15,8 +15,8 @@
 /// @author        Detlef Hafer
 ///
 //------------------------------------------------------------------------------------
-#include "S7Simulator64.h"
-#include "DeviceSimulator.h"
+#include "include/S7Simulator64.h"
+#include "include/DeviceSimulator.h"
 
 
 static CDeviceSimulator* g_pDeviceImpl = nullptr;
