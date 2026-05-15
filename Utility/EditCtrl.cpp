@@ -84,15 +84,17 @@ void CEditCtrl::Create(CWnd* pParent, int32_t id, const CRect& aRect, const CStr
 	// ASSERT(m_pEdit == NULL);
 	if (m_pEdit)
 	{
-		m_pEdit->SendMessage(WM_KILLFOCUS);
-		return;
+		mfcmacros::SendMessage(m_pEdit, WM_KILLFOCUS, WPARAM(m_pEdit->GetParent()));
 	}
-	ASSERT(VALIDPARENT(pParent));
-	if (VALIDPARENT(pParent))
+	else
 	{
-		mfcmacros::SendMessage(pParent, WM_NOTIFYEDITBOX);
-		m_pEdit = new CEditCtrl(pParent, id);
-		m_pEdit->Create(aRect, aText, bNumericKeyboard);
+		ASSERT(VALIDPARENT(pParent));
+		if (VALIDPARENT(pParent))
+		{
+			mfcmacros::SendMessage(pParent, WM_NOTIFYEDITBOX);
+			m_pEdit = new CEditCtrl(pParent, id);
+			m_pEdit->Create(aRect, aText, bNumericKeyboard);
+		}
 	}
 }
 //**********************************************************************************************************************
@@ -137,6 +139,7 @@ void CEditCtrl::Create(const CRect& aRect, const CString& aText, BOOL bNumericKe
 {
 	CEdit::Create(WS_CHILD | WS_BORDER | ES_AUTOHSCROLL, aRect, m_pParent, 1);
 	SetWindowText(aText);
+	memset(g_buffer, 0, sizeof(g_buffer));
 	_tcscpy_s(g_buffer, BUFFERSIZE(g_buffer) - 1, LPCTSTR(aText));
 	g_buffer[BUFFERSIZE(g_buffer) - 1] = 0;
 	SetSel(0, -1);
@@ -157,7 +160,7 @@ float32_t	CEditCtrl::GetFloat(void)
 {	return _F32(std::stof(LPCTSTR(g_buffer)));}
 //**********************************************************************************************************************
 float32_t	CEditCtrl::GetFloatAbs(void)
-{ 	return _F32(fabs(GetFloat())); }
+{ 	return _F32(std::fabs(GetFloat())); }
 //**********************************************************************************************************************
 //**********************************************************************************************************************
 CString	CEditCtrl  :: GetString   ( void)
@@ -213,6 +216,7 @@ BOOL CEditCtrl::PreTranslateMessage(MSG* pMsg)
 				m_bValidValue = (! szBuff.IsEmpty());
 				if (m_bValidValue)
 				{
+					memset(g_buffer, 0, sizeof(g_buffer));
 					_tcscpy_s(g_buffer, BUFFERSIZE(g_buffer) - 1, LPCTSTR(szBuff));
 					g_buffer[BUFFERSIZE(g_buffer) - 1] = 0;
 				}
@@ -229,7 +233,7 @@ BOOL CEditCtrl::PreTranslateMessage(MSG* pMsg)
 //***********************************************************************************************
 BOOL CEditCtrl::GetLongAbsModified(uint32_t& rValue)
 {
-	auto value = _U32(CEditCtrl::GetLongAbs());
+	auto value = _U32(GetLongAbs());
 	BOOL bModified = (rValue != value);
 	if (bModified)
 	{
@@ -242,7 +246,7 @@ BOOL CEditCtrl::GetLongAbsModified(uint32_t& rValue)
 BOOL CEditCtrl::GetLongAbsRangeModified(uint32_t& rValue, const uint32_t Min, const uint32_t Max)
 {
 	ASSERT(Min < Max);
-	auto value = _U32(CEditCtrl::GetLongAbs());
+	auto value = _U32(GetLongAbs());
 	value = RANGE(value, Min, Max);
 	BOOL bModified = (value != rValue);
 	if (bModified)
@@ -255,7 +259,7 @@ BOOL CEditCtrl::GetLongAbsRangeModified(uint32_t& rValue, const uint32_t Min, co
 //***********************************************************************************************
 BOOL CEditCtrl::GetUint64Modified(uint64_t& rValue)
 {
-	auto value = CEditCtrl::GetUint64();
+	auto value = GetUint64();
 	BOOL bModified = (value != rValue);
 	if (bModified)
 	{
@@ -267,7 +271,7 @@ BOOL CEditCtrl::GetUint64Modified(uint64_t& rValue)
 //***********************************************************************************************
 BOOL CEditCtrl::GetFloatAbsModified(float32_t& rValue)
 {
-	auto value = _F32(fabs(CEditCtrl::GetFloat()));
+	auto value = _F32(fabs(GetFloat()));
 	BOOL bModified = (rValue != value);
 	if (bModified)
 	{
@@ -279,7 +283,7 @@ BOOL CEditCtrl::GetFloatAbsModified(float32_t& rValue)
 //***********************************************************************************************
 BOOL CEditCtrl::GetFloatModified(float32_t& rValue)
 {
-	auto value = CEditCtrl::GetFloat();
+	auto value = GetFloat();
 	BOOL bModified = (rValue != value);
 	if (bModified)
 	{
@@ -292,7 +296,7 @@ BOOL CEditCtrl::GetFloatModified(float32_t& rValue)
 BOOL CEditCtrl::GetFloatAbsRangeModified(float32_t& rValue, const float32_t fMin, const float32_t fMax)
 {
 	ASSERT(fMin < fMax);
-	auto value = _F32(fabs(CEditCtrl::GetFloat()));
+	auto value = GetFloatAbs();
 	value = RANGE(value, fMin, fMax);
 	BOOL bModified = (rValue != value);
 	if (bModified)
@@ -306,7 +310,7 @@ BOOL CEditCtrl::GetFloatAbsRangeModified(float32_t& rValue, const float32_t fMin
 BOOL CEditCtrl::GetFloatRangeModified(float32_t& rValue, const float32_t fMin, const float32_t fMax)
 {
 	ASSERT(fMin < fMax);
-	auto value = _F32(CEditCtrl::GetFloat());
+	auto value = GetFloat();
 	value = RANGE(value, fMin, fMax);
 	BOOL bModified = (rValue != value);
 	if (bModified)
@@ -319,7 +323,7 @@ BOOL CEditCtrl::GetFloatRangeModified(float32_t& rValue, const float32_t fMin, c
 //***********************************************************************************************
 BOOL CEditCtrl::GetStringModified(CString& rValue)
 {
-	auto value = CEditCtrl::GetString();
+	auto value = GetString();
 	BOOL bModified = (value != rValue);
 	if (bModified)
 	{

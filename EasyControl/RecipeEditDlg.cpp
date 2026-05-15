@@ -209,5 +209,5 @@ void CRecipeEditDlg::OnClickName()
 	if (IsWindowLocked()) // sonst geht gleich das EditCtrl auf und der Timer schliesst es wieder
 		return;
 
-	CEditCtrl::CreateFromDlgItem(this, IDC_EDITDLG_EDIT);
+	CEditCtrl::CreateFromDlgItem(this, IDC_EDITDLG_EDIT, !m_bProductName);
 }
