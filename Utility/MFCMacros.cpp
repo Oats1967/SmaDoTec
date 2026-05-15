@@ -15,7 +15,7 @@
 /// @author        Detlef Hafer
 ///
 //------------------------------------------------------------------------------------
-//#include "EasyGraph.h"
+
 #include "Utility.h"
 #include "BASE/types.h"
 #include "Utility/MFCMacros.h"

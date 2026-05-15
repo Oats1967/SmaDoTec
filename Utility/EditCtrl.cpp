@@ -16,7 +16,7 @@
 ///
 //------------------------------------------------------------------------------------
 #include "Utility.h"
-#include <cstring>
+#include <string.h>
 #include "BASE/Utils/public/StringUtil.h"
 #include "Utility/EditCtrl.h"
 #include "Utility/StringConvert.h"

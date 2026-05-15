@@ -437,7 +437,7 @@ void CLwbRecipePage::OnStnClickedDosiererQmnummer()
 //***************************************************************************************
 void CLwbRecipePage::OnStnClickedDosiererANnummer()
 {
-	CEditCtrl::CreateFromDlgItem(this, IDC_LWB_RECIPE_ANNUMBER);
+	CEditCtrl::CreateFromDlgItem(this, IDC_LWB_RECIPE_ANNUMBER, FALSE);
 }
 //***************************************************************************************
 //***************************************************************************************

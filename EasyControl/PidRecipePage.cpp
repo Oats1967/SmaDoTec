@@ -305,7 +305,7 @@ void CPidRecipePage::OnStnClickedPidSetpoint()
 //***************************************************************************************
 void CPidRecipePage::OnStnClickedANnummer()
 {
-	CEditCtrl::CreateFromDlgItem(this, IDC_PID_RECIPE_ANNUMBER);
+	CEditCtrl::CreateFromDlgItem(this, IDC_PID_RECIPE_ANNUMBER, FALSE);
 }
 
 //*****************************************************************************************************

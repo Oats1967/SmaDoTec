@@ -382,7 +382,7 @@ void CVolRecipePage::OnBnClickedVolQMNumber()
 //***************************************************************************************
 void CVolRecipePage::OnStnClickedVolANnummer()
 {
-	CEditCtrl::CreateFromDlgItem(this, IDC_VOL_RECIPE_ANNUMBER);
+	CEditCtrl::CreateFromDlgItem(this, IDC_VOL_RECIPE_ANNUMBER, FALSE);
 }
 
 //*****************************************************************************************************

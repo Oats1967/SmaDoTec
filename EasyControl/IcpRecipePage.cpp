@@ -256,7 +256,7 @@ void CIcpRecipePage::OnStnClickedIcpSetpoint()
 //***************************************************************************************
 void CIcpRecipePage::OnStnClickedDosiererANnummer()
 {
-	CEditCtrl::CreateFromDlgItem(this, IDC_ICP_RECIPE_ANNUMBER);
+	CEditCtrl::CreateFromDlgItem(this, IDC_ICP_RECIPE_ANNUMBER, FALSE);
 }
 //****************************************************************************************
 //****************************************************************************************

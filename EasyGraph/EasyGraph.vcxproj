@@ -233,8 +233,12 @@
     <ClInclude Include="WrapperBase.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Utility\EditCtrl.cpp" />
-    <ClCompile Include="..\Utility\MFCMacros.cpp" />
+    <ClCompile Include="..\Utility\EditCtrl.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\Utility\MFCMacros.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="..\XLicense\LicenseLib\hostid.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>

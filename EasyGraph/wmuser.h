@@ -30,4 +30,5 @@
 #define WM_NOTIFYEDIT							(WM_EASYGRAPH + 9) // Send if application will be closed
 #define WM_NOTIFYCLICK							(WM_EASYGRAPH + 10) // Send if application will be closed
 #define WM_NOTIFYEDITBOX						(WM_EASYGRAPH + 11) // Send if application will be closed
+#define WM_NOTIFYEDITKEYBOARD					(WM_EASYGRAPH + 12) // Send if application will be closed
 
