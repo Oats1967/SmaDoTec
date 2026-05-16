@@ -36,7 +36,7 @@ struct ItemProperty
 
 
 IMPLEMENT_DYNAMIC(CPropertyGrid, CMFCPropertyGridProperty)
-IMPLEMENT_DYNAMIC(CPropertyColorGrid, CMFCPropertyGridProperty)
+IMPLEMENT_DYNAMIC(CPropertyColorGrid, CMFCPropertyGridColorProperty)
 
 
 #define BINDFUNC(_a, _b, _func) 	{ _a, std::bind(&_b::_func, this) }
