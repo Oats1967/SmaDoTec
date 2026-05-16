@@ -258,7 +258,7 @@ CPropertyGrid* CPropertiesWnd::CreateRealTimeMonitoringProperty()
 	CString szRefreshtimeDescr;
 	VERIFY(szRefreshtimeDescr.LoadString(IDS_REFRESHTIME_DESCR));
 	auto uniqueID = CUniqueProperty::ZipID(_U32(ID_REFRESHTIME));
-	auto* pElPropRefreshTime = new CPropertyGrid(this, uniqueID, _T("1"), szRefreshtimeDescr, NULL, NULL, NULL, _T("0123456789"));
+	auto* pElPropRefreshTime = new CPropertyGrid(this, uniqueID, szRefreshtime, _T("1"), szRefreshtimeDescr, NULL, NULL, NULL, _T("0123456789"));
 	auto& rSettings = g_Statistics.GetSettings();
 	szTemp.Format(_T("%d"), rSettings.m_RealMonitoringRefreshTime);
 	pElPropRefreshTime->SetValue(COleVariant(szTemp, VT_BSTR));
@@ -501,22 +501,32 @@ LRESULT CPropertiesWnd::OnPropertyChanged(__in WPARAM wparam, __in LPARAM lParam
 void CPropertiesWnd::OnBnClickedRefreshTime()
 {
 	//CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_LWF_RECIPE_NAME);
-	CRect aRect{ CPoint(198,105), CSize(60,28) };
+	//CRect aRect{ CPoint(198,205), CSize(60,28) };
+	auto pGrid = m_PropertyMap.at(CUniqueProperty::ZipID(ID_REFRESHTIME));
+	CRect aGridRect = pGrid->GetEditRect();
+	CRect aRect;
+	GetWindowRect(aRect);
+	aGridRect.OffsetRect(-aRect.left, -aRect.top);
+
 	auto& settings = g_Statistics.GetSettings();
 	CString szText;
 	szText.Format(L"%d", settings.m_RealMonitoringRefreshTime);
-	CEditCtrl::Create(this, CUniqueProperty::ZipID(ID_REFRESHTIME), aRect, szText, TRUE);
+	CEditCtrl::Create(this, CUniqueProperty::ZipID(ID_REFRESHTIME), aGridRect, szText, TRUE);
 }
 //******************************************************************************************************
 //******************************************************************************************************
 void CPropertiesWnd::OnBnClickedHistory()
 {
-	//CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_LWF_RECIPE_NAME);
-	CRect aRect{ CPoint(198,134), CSize(60,28) };
+	auto pGrid = m_PropertyMap.at(CUniqueProperty::ZipID(ID_HISTORY));
+	CRect aGridRect = pGrid->GetEditRect();
+	CRect aRect;
+	GetWindowRect(aRect);
+	aGridRect.OffsetRect(-aRect.left, -aRect.top);
+
 	auto& settings = g_Statistics.GetSettings();
 	CString szText;
 	szText.Format(L"%d", settings.m_RealMonitoringHistoryMinutes);
-	CEditCtrl::Create(this, CUniqueProperty::ZipID(ID_HISTORY),aRect, szText, TRUE);
+	CEditCtrl::Create(this, CUniqueProperty::ZipID(ID_HISTORY), aGridRect, szText, TRUE);
 }
 //******************************************************************************************************
 //******************************************************************************************************

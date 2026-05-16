@@ -94,6 +94,16 @@ public:
 		return result;
 	}
 
+	CRect GetEditRect() const
+	{
+		CRect aRect;
+		if (m_pWndInPlace)
+		{
+			m_pWndInPlace->GetWindowRect(aRect);
+		}
+		return aRect;
+	}
+
 };
 
 class CPropertyColorGrid : public CMFCPropertyGridColorProperty, public CUniqueProperty
