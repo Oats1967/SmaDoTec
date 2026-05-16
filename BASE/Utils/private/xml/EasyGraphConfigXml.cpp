@@ -29,10 +29,11 @@ STATIC_KEY( LANGUAGE,"Language")
 STATIC_KEY( LINECONFIG,"LineConfig")
 STATIC_KEY( PRODUCTDATABASE, "ProductDatabase")
 STATIC_KEY(RECORDERDESCRIPTION, "RecorderDescription")
+STATIC_KEY(TKCONFIG, "Touchkeyboard")
 STATIC_KEY( SETTINGS, "Settings")
 STATIC_KEY(DEFAULTFILE, "C:\\EasyGraph\\XXX\\XXX.XXX")
 
-const static int32_t c_HeaderVersion = 1;
+const static int32_t c_HeaderVersion = 2;
 static int32_t g_HeaderVersion = 0;
 
 
@@ -143,6 +144,21 @@ BOOL CEasyGraphConfigXml::Load(const std::string& szfilename)
     {
         g_HeaderVersion = -1;
     }
+
+    result = helper::GetFile(*config, TKCONFIG, szDefaultFile, "xml", field.m_TouckKeyboardConfigFile);
+    if (result)
+    {
+        if (!bDefaultFound)
+        {
+            bDefaultFound = TRUE;
+            szDefaultFile = field.m_TouckKeyboardConfigFile;
+        }
+    }
+    else
+    {
+        g_HeaderVersion = -1;
+    }
+
     doc.Clear();
     if (g_HeaderVersion != c_HeaderVersion)
     {
@@ -177,6 +193,7 @@ BOOL CEasyGraphConfigXml::Save(const std::string& szfilename)
     helper::SetFile(doc, *config, PRODUCTDATABASE, field.m_ProductDatabaseFile);
     helper::SetFile(doc, *config, SETTINGS, field.m_SettingsFile);
     helper::SetFile(doc, *config, RECORDERDESCRIPTION, field.m_RecorderDescriptionFile);
+    helper::SetFile(doc, *config, TKCONFIG, field.m_TouckKeyboardConfigFile);
 
     auto result = doc.SaveFile(szfilename.c_str());
     doc.Clear();

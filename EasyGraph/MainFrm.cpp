@@ -781,7 +781,7 @@ LRESULT CMainFrame::OnSetVisible(WPARAM wParam, LPARAM lParam)
 	return 0L;
 }
 
-LRESULT CMainFrame::OnSetRefreshTime(WPARAM wParam, LPARAM lParam)
+LRESULT CMainFrame::OnSetRefreshTime(WPARAM , LPARAM )
 {
 	uint32_t bEnable = g_Statistics.GetRealMonitoring();
 	if (bEnable)

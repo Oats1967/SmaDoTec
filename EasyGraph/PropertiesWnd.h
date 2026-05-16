@@ -1,58 +1,65 @@
 #pragma once
 
+#include <array>
 #include <map>
+#include <cstdlib>
+#include <utility>
+#include <functional>
 #include "wmuser.h"
 #include "MassflowSelectMap.h"
 
 
 class CUniqueProperty
 {
+	static const uint32_t c_maxSubId = 100;
+
 protected:
-	CWnd* m_pParent;
-	int32_t m_Id;
-	base::eMassflowSelect m_Select;
+	CWnd*    m_pParent;
+	uint32_t m_DlgItemID;
 
-
-	CUniqueProperty(CWnd* pParent = nullptr, const int32_t id = -1, const base::eMassflowSelect select = base::eMassflowSelect::eVIEWMAX) :
+	CUniqueProperty(CWnd* pParent, const uint32_t baseid, const uint32_t subid) :
 		m_pParent { pParent }
-		, m_Id{ id }
-		, m_Select{ select }
+		, m_DlgItemID{ ZipID(baseid, subid) }
 	{}
 
-	BOOL OnClickValue(CPoint point)
+	CUniqueProperty(CWnd* pParent, const uint32_t id) :
+		m_pParent{ pParent }
+		, m_DlgItemID{ id }
+	{}
+
+	CUniqueProperty() :
+		m_pParent{ nullptr }
+		, m_DlgItemID{ 0 }
+	{}
+
+
+public:
+	static uint32_t ZipID(const uint32_t baseid, const uint32_t subid = 0)
 	{
-		BOOL result = FALSE;
-		if (m_pParent && m_pParent->GetSafeHwnd())
-		{
-			m_pParent->SendMessage(WM_NOTIFYCLICK, WPARAM(m_Id), LPARAM(&point));
-			result = TRUE;
-		}
-		return result;
+		return (baseid * c_maxSubId ) + subid;
 	}
 
+	static std::pair <uint32_t, uint32_t>  UnzipID(const uint32_t id)
+	{
+		div_t d = div(_S32(id),_S32(c_maxSubId));
+		return std::make_pair(d.quot, d.rem);
+	}
 
-public:
-	SETGET(const uint32_t, Id);
-	SETGET(const base::eMassflowSelect, Select);
-};
+	SETGET(uint32_t, DlgItemID)
 
-class CPropertySettingsGrid : public CMFCPropertyGridProperty, public CUniqueProperty
-{
-	DECLARE_DYNAMIC(CPropertySettingsGrid)
+	std::pair <uint32_t, uint32_t>  UnzipID() const
+	{	return UnzipID(m_DlgItemID);	}
 
-public:
-	CPropertySettingsGrid(CWnd* pParent, const int32_t id, const CString& strName, const COleVariant& varValue, LPCTSTR lpszDescr = NULL, DWORD_PTR dwData = 0,
-		LPCTSTR lpszEditMask = NULL, LPCTSTR lpszEditTemplate = NULL, LPCTSTR lpszValidChars = NULL) :
-		CMFCPropertyGridProperty(strName, varValue, lpszDescr, dwData, lpszEditMask, lpszEditTemplate, lpszValidChars), 
-		CUniqueProperty(pParent, id)
-	{}
-
-	CPropertySettingsGrid(const CString& strGroupName, DWORD_PTR dwData = 0, BOOL bIsValueList = FALSE) :
-		CMFCPropertyGridProperty(strGroupName, dwData, bIsValueList), CUniqueProperty()
-	{}
-
-	BOOL OnClickValue(UINT uiMsg, CPoint point) override
-	{	return CUniqueProperty::OnClickValue(point);	}
+	uint32_t GetBaseID() const
+	{
+		auto pairID = UnzipID();
+		return pairID.first;
+	}
+	uint32_t GetSubID() const
+	{
+		auto pairID = UnzipID();
+		return pairID.second;
+	}
 
 };
 
@@ -62,19 +69,30 @@ class CPropertyGrid : public CMFCPropertyGridProperty, public CUniqueProperty
 	DECLARE_DYNAMIC(CPropertyGrid)
 
 public:
-	CPropertyGrid(CWnd* pParent, const int32_t id, const base::eMassflowSelect select, const CString& strName, const COleVariant& varValue, LPCTSTR lpszDescr = NULL, DWORD_PTR dwData = 0,
+	CPropertyGrid(CWnd* pParent, const uint32_t id, const CString& strName, const COleVariant& varValue, LPCTSTR lpszDescr = NULL, DWORD_PTR dwData = 0,
 		LPCTSTR lpszEditMask = NULL, LPCTSTR lpszEditTemplate = NULL, LPCTSTR lpszValidChars = NULL) :
 		CMFCPropertyGridProperty(strName, varValue, lpszDescr, dwData, lpszEditMask, lpszEditTemplate, lpszValidChars),
-		CUniqueProperty(pParent, id, select)
+		CUniqueProperty(pParent, id)
 	{}
 
-	CPropertyGrid(CWnd* pParent, const int32_t id, const base::eMassflowSelect select, const CString& strGroupName, DWORD_PTR dwData = 0, BOOL bIsValueList = FALSE) :
-		CMFCPropertyGridProperty(strGroupName, dwData, bIsValueList),
-		CUniqueProperty(pParent, id, select)
+	CPropertyGrid(const CString& strGroupName, DWORD_PTR dwData = 0, BOOL bIsValueList = FALSE) :
+		CMFCPropertyGridProperty(strGroupName, dwData, bIsValueList), CUniqueProperty()
 	{}
+
 
 	BOOL OnClickValue(UINT uiMsg, CPoint point) override
-	{	return CUniqueProperty::OnClickValue(point);	}
+	{
+		BOOL result = FALSE;
+		if (CUniqueProperty::m_pParent && CUniqueProperty::m_pParent->GetSafeHwnd())
+		{
+			result = (m_DlgItemID > 0);
+			if ( result)
+			{
+				CUniqueProperty::m_pParent->SendMessage(WM_NOTIFYCLICK, WPARAM(CUniqueProperty::m_DlgItemID), LPARAM(&point));
+			}
+		}
+		return result;
+	}
 
 };
 
@@ -83,12 +101,11 @@ class CPropertyColorGrid : public CMFCPropertyGridColorProperty, public CUniqueP
 	DECLARE_DYNAMIC(CPropertyColorGrid)
 
 public:
-	CPropertyColorGrid(CWnd* pParent, const int32_t id, const base::eMassflowSelect select, const CString& strName, const COLORREF& color, CPalette* pPalette = NULL, LPCTSTR lpszDescr = NULL) :
+	CPropertyColorGrid(CWnd* pParent, const uint32_t id, const CString& strName, const COLORREF& color, CPalette* pPalette = NULL, LPCTSTR lpszDescr = NULL) :
 		CMFCPropertyGridColorProperty(strName, color, pPalette, lpszDescr),
-		CUniqueProperty(pParent, id, select)
+		CUniqueProperty(pParent, id)
 	{}
 };
-
 
 
 class CPropertiesToolBar : public CMFCToolBar
@@ -120,11 +137,12 @@ public:
 
 protected:
 	CFont m_fntPropList;
-	//CComboBox m_wndObjectCombo;
 	CPropertiesToolBar m_wndToolBar;
 	CMFCPropertyGridCtrl m_wndPropList;
 	int32_t m_LinienColorPos;
 	CMassflowSelectMap c_MassflowSelectMap;
+	const std::map <int32_t, std::function<BOOL()> > m_EditMap;
+	std::map<uint32_t, CPropertyGrid*> m_PropertyMap;
 
 private:
 	void InitPropList();
@@ -132,16 +150,17 @@ private:
 	void OnSetLineWidth(CPropertyGrid* pGrid);
 	void OnSetCategory(CPropertyGrid* pGrid);
 	void OnSetVisible(CPropertyGrid* pGrid);
-	void OnSetRefreshtime(CPropertySettingsGrid* pGrid);
-	void OnSetHistory(CPropertySettingsGrid* pGrid);
+	void OnSetRefreshtime(CPropertyGrid* pGrid);
+	void OnSetHistory(CPropertyGrid* pGrid);
 
 	CPropertyGrid* CreateProperty(const base::eMassflowSelect select);
-	CPropertySettingsGrid* CreateRealTimeMonitoringProperty();
+	CPropertyGrid* CreateRealTimeMonitoringProperty();
 
 	void OnBnClickedRefreshTime();
+	void OnBnClickedHistory();
 
-
-
+	BOOL OnNotifyEditRefreshTime(void);
+	BOOL OnNotifyEditHistory(void);
 
 // Implementierung
 public:

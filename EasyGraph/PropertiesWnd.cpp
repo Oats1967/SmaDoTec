@@ -14,12 +14,17 @@ static char THIS_FILE[]=__FILE__;
 #define new DEBUG_NEW
 #endif
 
-#define ID_LINEWIDTH 1
-#define ID_VISIBLE   2
-#define ID_CATEGORY  3
-#define ID_COLOR	 4
-#define ID_REFRESHTIME	 5
-#define ID_HISTORY	 6
+
+
+enum
+{
+	ID_LINEWIDTH = 1,
+	ID_VISIBLE,
+	ID_CATEGORY,
+	ID_COLOR,
+	ID_REFRESHTIME,
+	ID_HISTORY
+};
 
 struct ItemProperty
 {
@@ -30,11 +35,12 @@ struct ItemProperty
 };
 
 
-IMPLEMENT_DYNAMIC(CPropertySettingsGrid, CMFCPropertyGridProperty)
 IMPLEMENT_DYNAMIC(CPropertyGrid, CMFCPropertyGridProperty)
 IMPLEMENT_DYNAMIC(CPropertyColorGrid, CMFCPropertyGridProperty)
 
 
+#define BINDFUNC(_a, _b, _func) 	{ _a, std::bind(&_b::_func, this) }
+#define EDITITEM(_a, _func) 	BINDFUNC(_a, CPropertiesWnd, _func)
 
 /////////////////////////////////////////////////////////////////////////////
 // CResourceViewBar
@@ -50,6 +56,11 @@ CPropertiesWnd::CPropertiesWnd() noexcept :
 						}
 	, m_nComboHeight{ 0 }
 	, m_LinienColorPos{ 0 }
+	, m_EditMap({
+		EDITITEM(CUniqueProperty::ZipID(ID_REFRESHTIME), OnNotifyEditRefreshTime),
+		EDITITEM(CUniqueProperty::ZipID(ID_HISTORY), OnNotifyEditHistory),
+		})
+
 {
 	VERIFY(m_fntPropList.CreateFont(22, 0, 0, 0, FW_NORMAL,
 		FALSE, FALSE, 0, ANSI_CHARSET,
@@ -116,31 +127,6 @@ void Convert(const COleVariant& val, T& value)
 		ASSERT(FALSE);
 		break;
 	}
-}
-//******************************************************************************************************
-//******************************************************************************************************
-LRESULT CPropertiesWnd::OnNotifyEdit(__in WPARAM wparam, __in LPARAM lParam)
-{
-#if 0
-	if (bValue)
-	{
-		BOOL bModified = FALSE;
-		try
-		{
-			bModified = m_EditMap.at(_S32(id))();
-		}
-		catch (std::out_of_range)
-		{
-			ASSERT(FALSE);
-			LOGERROR("Error");
-		}
-		if (bModified)
-		{
-			PostMessage(WM_TIMER_REFRESH);
-		}
-	}
-#endif
-	return 0L;
 }
 	//*****************************************************************************************************************************************
 //*****************************************************************************************************************************************
@@ -255,38 +241,42 @@ void CPropertiesWnd::OnUpdateProperties2(CCmdUI* /*pCmdUI*/)
 }
 //*****************************************************************************************************************************************
 //*****************************************************************************************************************************************
-CPropertySettingsGrid* CPropertiesWnd::CreateRealTimeMonitoringProperty()
+CPropertyGrid* CPropertiesWnd::CreateRealTimeMonitoringProperty()
 {
 	CString szTemp;
 
 	VERIFY(szTemp.LoadString(IDS_GLOBALSETTINGS));
-	CPropertySettingsGrid* pGroupProp = new CPropertySettingsGrid(szTemp);
+	CPropertyGrid* pGroupProp = new CPropertyGrid(szTemp);
 
 	CString szRealtimeMonitoring;
 	VERIFY(szRealtimeMonitoring.LoadString(IDS_REALTIMEMONITORING));
-	auto* pElRealTime = new CPropertySettingsGrid(szRealtimeMonitoring);
+	auto* pElRealTime = new CPropertyGrid(szRealtimeMonitoring);
 	pGroupProp->AddSubItem(pElRealTime);
 
 	CString szRefreshtime;
 	VERIFY(szRefreshtime.LoadString(IDS_REFRESHTIME_S));
 	CString szRefreshtimeDescr;
 	VERIFY(szRefreshtimeDescr.LoadString(IDS_REFRESHTIME_DESCR));
-	auto* pElPropRefreshTime = new CPropertySettingsGrid(this, ID_REFRESHTIME, szRefreshtime, _T("1"), szRefreshtimeDescr, NULL, NULL, NULL, _T("0123456789"));
+	auto uniqueID = CUniqueProperty::ZipID(_U32(ID_REFRESHTIME));
+	auto* pElPropRefreshTime = new CPropertyGrid(this, uniqueID, _T("1"), szRefreshtimeDescr, NULL, NULL, NULL, _T("0123456789"));
 	auto& rSettings = g_Statistics.GetSettings();
 	szTemp.Format(_T("%d"), rSettings.m_RealMonitoringRefreshTime);
 	pElPropRefreshTime->SetValue(COleVariant(szTemp, VT_BSTR));
 	pElPropRefreshTime->AllowEdit(TRUE);
 	pElRealTime->AddSubItem(pElPropRefreshTime);
+	m_PropertyMap.insert({ uniqueID, pElPropRefreshTime });
 
 	CString szHistory;
 	VERIFY(szHistory.LoadString(IDS_HISTORY_MIN));
 	CString szHistoryDescr;
 	VERIFY(szHistoryDescr.LoadString(IDS_HISTORY_DESCR));
-	auto* pElPropHistory = new CPropertySettingsGrid(this, ID_HISTORY, szHistory, _T("1"), szHistoryDescr, NULL, NULL, NULL, _T("0123456789"));
+	uniqueID = CUniqueProperty::ZipID(_U32(ID_HISTORY));
+	auto* pElPropHistory = new CPropertyGrid(this, uniqueID, szHistory, _T("1"), szHistoryDescr, NULL, NULL, NULL, _T("0123456789"));
 	szTemp.Format(_T("%d"), rSettings.m_RealMonitoringHistoryMinutes);
 	pElPropHistory->SetValue(COleVariant(szTemp, VT_BSTR));
 	pElPropHistory->AllowEdit(TRUE);
 	pElRealTime->AddSubItem(pElPropHistory);
+	m_PropertyMap.insert({ uniqueID, pElRealTime });
 
 	return pGroupProp;
 }
@@ -302,25 +292,28 @@ CPropertyGrid* CPropertiesWnd::CreateProperty(const base::eMassflowSelect select
 	auto it = c_MassflowSelectMap.find(select);
 	ASSERT(it != c_MassflowSelectMap.cend());
 	VERIFY(szTemp.LoadString(it->second));
-	CPropertyGrid* pGroupProp = new CPropertyGrid(this, 0, select, szTemp);
+	CPropertyGrid* pGroupProp = new CPropertyGrid(szTemp);
 
 	VERIFY(szTemp.LoadString(IDS_P_VIEW));
 	VERIFY(szYes.LoadString(IDS_P_YES));
 	VERIFY(szNo.LoadString(IDS_P_NO));
 	VERIFY(szOptions.LoadString(IDS_P_OPTIONS));
 
-	CPropertyGrid* pElProp	 = new CPropertyGrid(this, ID_VISIBLE, select, szTemp, szYes, szOptions);
+	auto uniqueID = CUniqueProperty::ZipID(_U32(ID_VISIBLE), _U32(select));
+	CPropertyGrid* pElProp	 = new CPropertyGrid(this, uniqueID, szTemp, szYes, szOptions);
 	pElProp->AddOption(szYes);
 	pElProp->AddOption(szNo);
 	pElProp->AllowEdit(FALSE);
 	pElProp->SetValue(COleVariant((attrib.m_Visible) ? szYes : szNo, VT_BSTR));
 	pGroupProp->AddSubItem(pElProp);
+	m_PropertyMap.insert({ uniqueID, pElProp });
 
 	CString szLineColor;
 	VERIFY(szLineColor.LoadString(IDS_PW_LINECOLOR));
 	CString szLineColorInfo;
 	VERIFY(szLineColorInfo.LoadString(IDS_PW_LINECOLOR_INFO));
-	CPropertyColorGrid* pColorProp = new CPropertyColorGrid(this, ID_COLOR, select, szLineColor, RGB(210, 192, 254), nullptr, szLineColorInfo);
+	uniqueID = CUniqueProperty::ZipID(_U32(ID_COLOR), _U32(select));
+	CPropertyColorGrid* pColorProp = new CPropertyColorGrid(this, uniqueID, szLineColor, RGB(210, 192, 254), nullptr, szLineColorInfo);
 	pColorProp->EnableOtherButton(_T("Andere..."));
 	pColorProp->EnableAutomaticButton(_T("Standard"), ::GetSysColor(COLOR_3DFACE));
 	pColorProp->SetColor(attrib.m_Color);
@@ -332,7 +325,8 @@ CPropertyGrid* CPropertiesWnd::CreateProperty(const base::eMassflowSelect select
 	VERIFY(szLine.LoadString(IDS_PW_LINE));
 	CString szLineCategoryOptions;
 	VERIFY(szLineCategoryOptions.LoadString(IDS_PW_CATEGORY_OPTIONS));
-	CPropertyGrid* pCategoryProp = new CPropertyGrid(this, ID_CATEGORY, select, szCategory, szLine, szLineCategoryOptions);
+	uniqueID = CUniqueProperty::ZipID(_U32(ID_CATEGORY), _U32(select));
+	CPropertyGrid* pCategoryProp = new CPropertyGrid(this, uniqueID, szCategory, szLine, szLineCategoryOptions);
 	pCategoryProp->AddOption(szLine);
 	CString szFlaeche;
 	VERIFY(szFlaeche.LoadString(IDS_PW_FLAECHE));
@@ -343,7 +337,8 @@ CPropertyGrid* CPropertiesWnd::CreateProperty(const base::eMassflowSelect select
 
 	CString szLinienstaerke;
 	VERIFY(szLinienstaerke.LoadString(IDS_PW_LINIENSTAERKE));
-	CPropertyGrid* pLineWidthProp = new CPropertyGrid(this, ID_LINEWIDTH, select, szLinienstaerke, _T("1"), _T("A numeric value"), NULL, NULL, NULL, _T("0123456789"));
+	uniqueID = CUniqueProperty::ZipID(_U32(ID_LINEWIDTH), _U32(select));
+	CPropertyGrid* pLineWidthProp = new CPropertyGrid(this, uniqueID, szLinienstaerke, _T("1"), _T("A numeric value"), NULL, NULL, NULL, _T("0123456789"));
 	pLineWidthProp->AddOption(_T("1"));
 	pLineWidthProp->AddOption(_T("2"));
 	pLineWidthProp->AddOption(_T("3"));
@@ -385,25 +380,28 @@ void CPropertiesWnd::InitPropList()
 //*****************************************************************************************************************************************
 void CPropertiesWnd::OnSetColor(CPropertyColorGrid* pGrid)
 {
-	auto lineAttrib = g_Statistics.GetLineAttribute(pGrid->GetSelect());
+	auto select = base::eMassflowSelect(pGrid->GetSubID());
+	auto lineAttrib = g_Statistics.GetLineAttribute(select);
 	lineAttrib.m_Color = CBCGPColor(pGrid->GetColor());
-	g_Statistics.SetLineAttribute(pGrid->GetSelect(), lineAttrib);
-	AfxGetMainWnd()->SendMessage(WM_LINECOLOR, WPARAM(pGrid->GetSelect()));
+	g_Statistics.SetLineAttribute(select, lineAttrib);
+	AfxGetMainWnd()->SendMessage(WM_LINECOLOR, WPARAM(select));
 }
 //*****************************************************************************************************************************************
 //*****************************************************************************************************************************************
 void CPropertiesWnd::OnSetLineWidth(CPropertyGrid* pGrid)
 {
-	auto lineAttrib = g_Statistics.GetLineAttribute(pGrid->GetSelect());
+	auto select = base::eMassflowSelect(pGrid->GetSubID());
+	auto lineAttrib = g_Statistics.GetLineAttribute(select);
 	Convert(pGrid->GetValue(), lineAttrib.m_LineWidth);
-	g_Statistics.SetLineAttribute(pGrid->GetSelect(), lineAttrib);
-	AfxGetMainWnd()->SendMessage(WM_LINEWIDTH, WPARAM(pGrid->GetSelect()));
+	g_Statistics.SetLineAttribute(select, lineAttrib);
+	AfxGetMainWnd()->SendMessage(WM_LINEWIDTH, WPARAM(select));
 }
 //*****************************************************************************************************************************************
 //*****************************************************************************************************************************************
 void CPropertiesWnd::OnSetCategory(CPropertyGrid* pGrid)
 {
-	auto lineAttrib = g_Statistics.GetLineAttribute(pGrid->GetSelect());
+	auto select = base::eMassflowSelect(pGrid->GetSubID());
+	auto lineAttrib = g_Statistics.GetLineAttribute(select);
 	COleVariant i = pGrid->GetValue();// get the change value.
 	auto val = pGrid->GetValue();
 	LPVARIANT pVar = (LPVARIANT)val;
@@ -412,14 +410,15 @@ void CPropertiesWnd::OnSetCategory(CPropertyGrid* pGrid)
 	CString szLine;
 	VERIFY(szLine.LoadString(IDS_PW_LINE));
 	lineAttrib.m_Category = ( str1 == szLine) ? base::LineCategory::eLine : base::LineCategory::eArea;
-	g_Statistics.SetLineAttribute(pGrid->GetSelect(), lineAttrib);
-	AfxGetMainWnd()->SendMessage(WM_CATEGORY, WPARAM(pGrid->GetSelect()));
+	g_Statistics.SetLineAttribute(select, lineAttrib);
+	AfxGetMainWnd()->SendMessage(WM_CATEGORY, WPARAM(select));
 }
 //*****************************************************************************************************************************************
 //*****************************************************************************************************************************************
 void CPropertiesWnd::OnSetVisible(CPropertyGrid* pGrid)
 {
-	auto lineAttrib = g_Statistics.GetLineAttribute(pGrid->GetSelect());
+	auto select = base::eMassflowSelect(pGrid->GetSubID());
+	auto lineAttrib = g_Statistics.GetLineAttribute(select);
 	COleVariant i = pGrid->GetValue();// get the change value.
 	auto val = pGrid->GetValue();
 	LPVARIANT pVar = (LPVARIANT)val;
@@ -428,26 +427,26 @@ void CPropertiesWnd::OnSetVisible(CPropertyGrid* pGrid)
 	CString szYes;
 	VERIFY(szYes.LoadString(IDS_P_YES));
 	lineAttrib.m_Visible = (str1 == szYes) ? TRUE : FALSE;
-	g_Statistics.SetLineAttribute(pGrid->GetSelect(), lineAttrib);
-	AfxGetMainWnd()->SendMessage(WM_VISIBLE, WPARAM(pGrid->GetSelect()));
+	g_Statistics.SetLineAttribute(select, lineAttrib);
+	AfxGetMainWnd()->SendMessage(WM_VISIBLE, WPARAM(select));
 }
 //*****************************************************************************************************************************************
 //*****************************************************************************************************************************************
-void CPropertiesWnd::OnSetRefreshtime(CPropertySettingsGrid* pGrid)
+void CPropertiesWnd::OnSetRefreshtime(CPropertyGrid* pGrid)
 {
 	auto settings = g_Statistics.GetSettings();
 	Convert(pGrid->GetValue(), settings.m_RealMonitoringRefreshTime);
 	g_Statistics.SetSettings(settings);
-	AfxGetMainWnd()->SendMessage(WM_REFRESHTIME, WPARAM(pGrid->GetSelect()));
+	AfxGetMainWnd()->SendMessage(WM_REFRESHTIME);
 }
 //*****************************************************************************************************************************************
 //*****************************************************************************************************************************************
-void CPropertiesWnd::OnSetHistory(CPropertySettingsGrid* pGrid)
+void CPropertiesWnd::OnSetHistory(CPropertyGrid* pGrid)
 {
 	auto settings = g_Statistics.GetSettings();
 	Convert(pGrid->GetValue(), settings.m_RealMonitoringHistoryMinutes);
 	g_Statistics.SetSettings(settings);
-	AfxGetMainWnd()->SendMessage(WM_HISTORY, WPARAM(pGrid->GetSelect()));
+	AfxGetMainWnd()->SendMessage(WM_HISTORY);
 }
 //*****************************************************************************************************************************************
 //*****************************************************************************************************************************************
@@ -461,47 +460,39 @@ void CPropertiesWnd::OnSetFocus(CWnd* pOldWnd)
 LRESULT CPropertiesWnd::OnPropertyChanged(__in WPARAM wparam, __in LPARAM lParam)
 {
 	// pProp will have all the variables and info of the active or change property
-	CMFCPropertyGridProperty* pGrid = (CMFCPropertyGridProperty*)lParam;
+	auto pGrid = (CMFCPropertyGridProperty*)lParam;
 	auto pRuntime = pGrid->GetRuntimeClass();
-	if (pRuntime->IsDerivedFrom(RUNTIME_CLASS(CMFCPropertyGridColorProperty)))
+	auto pUnique = dynamic_cast<CUniqueProperty*>(pGrid);
+
+	switch (pUnique->GetBaseID())
 	{
-		CPropertyColorGrid* pUnique = (CPropertyColorGrid*)pGrid;
-		OnSetColor(pUnique);
-	}
-	else if (pRuntime->IsDerivedFrom(RUNTIME_CLASS(CPropertySettingsGrid)))
-	{
-		auto* pUnique = (CPropertySettingsGrid*)pGrid;
-		switch (pUnique->GetId())
-		{
-		case ID_REFRESHTIME:
-			OnSetRefreshtime(pUnique);
-			break;
-		case ID_HISTORY:
-			OnSetHistory(pUnique);
-			break;
-		default:
-			ASSERT(FALSE);
-			break;
-		}
-	}
-	else
-	{
-		auto* pUnique = (CPropertyGrid*)pGrid;
-		switch (pUnique->GetId())
-		{
-		case ID_LINEWIDTH:
-			OnSetLineWidth(pUnique);
-			break;
-		case ID_CATEGORY:
-			OnSetCategory(pUnique);
-			break;
-		case ID_VISIBLE:
-			OnSetVisible(pUnique);
-			break;
-		default:
-			ASSERT(FALSE);
-			break;
-		}
+	case ID_COLOR:
+		ASSERT(pRuntime->IsDerivedFrom(RUNTIME_CLASS(CMFCPropertyGridColorProperty)));
+		OnSetColor(dynamic_cast<CPropertyColorGrid*>(pGrid));
+		break;
+	case ID_REFRESHTIME:
+		ASSERT(pRuntime->IsDerivedFrom(RUNTIME_CLASS(CPropertyGrid)));
+		OnSetRefreshtime(dynamic_cast<CPropertyGrid*>(pGrid));
+		break;
+	case ID_HISTORY:
+		ASSERT(pRuntime->IsDerivedFrom(RUNTIME_CLASS(CPropertyGrid)));
+		OnSetHistory(dynamic_cast<CPropertyGrid*>(pGrid));
+		break;
+	case ID_LINEWIDTH:
+		ASSERT(pRuntime->IsDerivedFrom(RUNTIME_CLASS(CPropertyGrid)));
+		OnSetLineWidth(dynamic_cast<CPropertyGrid*>(pGrid));
+		break;
+	case ID_CATEGORY:
+		ASSERT(pRuntime->IsDerivedFrom(RUNTIME_CLASS(CPropertyGrid)));
+		OnSetCategory(dynamic_cast<CPropertyGrid*>(pGrid));
+		break;
+	case ID_VISIBLE:
+		ASSERT(pRuntime->IsDerivedFrom(RUNTIME_CLASS(CPropertyGrid)));
+		OnSetVisible(dynamic_cast<CPropertyGrid*>(pGrid));
+		break;
+	default:
+		ASSERT(FALSE);
+		break;
 	}
 	return 0;
 }
@@ -510,17 +501,98 @@ LRESULT CPropertiesWnd::OnPropertyChanged(__in WPARAM wparam, __in LPARAM lParam
 void CPropertiesWnd::OnBnClickedRefreshTime()
 {
 	//CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_LWF_RECIPE_NAME);
-
-	//CEditCtrl::Create()
+	CRect aRect{ CPoint(198,105), CSize(60,28) };
+	auto& settings = g_Statistics.GetSettings();
+	CString szText;
+	szText.Format(L"%d", settings.m_RealMonitoringRefreshTime);
+	CEditCtrl::Create(this, CUniqueProperty::ZipID(ID_REFRESHTIME), aRect, szText, TRUE);
 }
-
+//******************************************************************************************************
+//******************************************************************************************************
+void CPropertiesWnd::OnBnClickedHistory()
+{
+	//CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_LWF_RECIPE_NAME);
+	CRect aRect{ CPoint(198,134), CSize(60,28) };
+	auto& settings = g_Statistics.GetSettings();
+	CString szText;
+	szText.Format(L"%d", settings.m_RealMonitoringHistoryMinutes);
+	CEditCtrl::Create(this, CUniqueProperty::ZipID(ID_HISTORY),aRect, szText, TRUE);
+}
 //******************************************************************************************************
 //******************************************************************************************************
 LRESULT CPropertiesWnd::OnNotifyClick(__in WPARAM wparam, __in LPARAM lParam)
 {
-	auto id = _S32(wparam);
-	CPoint p = *((CPoint*)(lParam));
-	return 0;
+	auto id = _U32(wparam);
+	auto pairID = CUniqueProperty::UnzipID(id);
+	auto baseID = pairID.first;
+
+	switch (baseID)
+	{
+	case ID_REFRESHTIME:
+		OnBnClickedRefreshTime();
+		break;
+	case ID_HISTORY:
+		OnBnClickedHistory();
+		break;
+	default:
+		break;
+	}
+	return 0L;
+}
+//******************************************************************************************************
+//******************************************************************************************************
+BOOL CPropertiesWnd::OnNotifyEditRefreshTime(void)
+{
+	auto settings = g_Statistics.GetSettings();
+	auto bModified = CEditCtrl::GetLongAbsModified(settings.m_RealMonitoringRefreshTime);
+	if (bModified)
+	{
+		g_Statistics.SetSettings(settings);
+		auto pGrid = m_PropertyMap.at(CUniqueProperty::ZipID(ID_REFRESHTIME));
+		ASSERT(pGrid);
+		CString szTemp;
+		szTemp.Format(_T("%d"), settings.m_RealMonitoringRefreshTime);
+		pGrid->SetValue(COleVariant(szTemp, VT_BSTR));
+	}
+	return bModified;
+}
+//******************************************************************************************************
+//******************************************************************************************************
+BOOL CPropertiesWnd::OnNotifyEditHistory(void)
+{
+	auto settings = g_Statistics.GetSettings();
+	auto bModified = CEditCtrl::GetLongAbsModified(settings.m_RealMonitoringHistoryMinutes);
+	if (bModified)
+	{
+		g_Statistics.SetSettings(settings);
+		auto pGrid = m_PropertyMap.at(CUniqueProperty::ZipID(ID_HISTORY));
+		ASSERT(pGrid);
+		CString szTemp;
+		szTemp.Format(_T("%d"), settings.m_RealMonitoringRefreshTime);
+		pGrid->SetValue(COleVariant(szTemp, VT_BSTR));
+	}
+	return bModified;
+}
+//******************************************************************************************************
+//******************************************************************************************************
+LRESULT CPropertiesWnd::OnNotifyEdit(__in WPARAM wparam, __in LPARAM lParam)
+{
+	auto bValue = BOOL(lParam);
+	if (bValue)
+	{
+		auto id = _U32(wparam);
+		BOOL bModified = FALSE;
+		try
+		{
+			bModified = m_EditMap.at(_S32(id))();
+		}
+		catch (std::out_of_range)
+		{
+			ASSERT(FALSE);
+			LOGERROR("Error");
+		}
+	}
+	return 0L;
 }
 
 

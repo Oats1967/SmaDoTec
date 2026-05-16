@@ -464,7 +464,12 @@ BOOL CEasyGraphApp::InitInstance()
 	// Loading touchkeyboard ....
 	(void)GetVKBoard64Interface(&g_TKBoard);
 	TKB.TK_SetLanguage(EASYCGRAPHCONFIGFILE.m_Language);
-
+	auto ret = TKB.TK_Open(EASYCGRAPHCONFIGFILE.m_TouckKeyboardConfigFile);
+	if (ret != ITKBoardInterface::TK_OK)
+	{
+		AfxMessageBox(_T("Touchkeyboard cannot be loaded!"), MB_OK | MB_ICONSTOP);
+		return FALSE;
+	}
 
 	// OLE-Bibliotheken initialisieren
 	if (!AfxOleInit())

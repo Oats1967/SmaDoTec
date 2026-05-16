@@ -33,6 +33,7 @@ namespace base
         std::string m_ProductDatabaseFile;
         std::string m_SettingsFile;
         std::string m_RecorderDescriptionFile;
+        std::string m_TouckKeyboardConfigFile;
         eLanguage   m_Language;
 
     public:
@@ -48,7 +49,8 @@ namespace base
             return  ( m_LineConfigFile == cfg.m_LineConfigFile ) &&
                     ( m_ProductDatabaseFile == cfg.m_ProductDatabaseFile ) &&
                     ( m_SettingsFile == cfg.m_SettingsFile ) &&
-                    (m_RecorderDescriptionFile == cfg.m_RecorderDescriptionFile) &&
+                    ( m_RecorderDescriptionFile == cfg.m_RecorderDescriptionFile) &&
+                    ( m_TouckKeyboardConfigFile == cfg.m_TouckKeyboardConfigFile) &&
                     ( m_Language == cfg.m_Language);
         }
 
