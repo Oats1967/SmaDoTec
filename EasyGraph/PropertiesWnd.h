@@ -83,25 +83,37 @@ public:
 	BOOL OnClickValue(UINT uiMsg, CPoint point) override
 	{
 		BOOL result = FALSE;
+		static POINT p{ point };
 		if (CUniqueProperty::m_pParent && CUniqueProperty::m_pParent->GetSafeHwnd())
 		{
 			result = (m_DlgItemID > 0);
 			if ( result)
 			{
-				CUniqueProperty::m_pParent->SendMessage(WM_NOTIFYCLICK, WPARAM(CUniqueProperty::m_DlgItemID), LPARAM(&point));
+				CUniqueProperty::m_pParent->PostMessage(WM_NOTIFYCLICK, WPARAM(CUniqueProperty::m_DlgItemID), LPARAM(&p));
+
 			}
 		}
-		return result;
+		return CMFCPropertyGridProperty::OnClickValue(uiMsg, point);
 	}
 
-	CRect GetEditRect() const
+	BOOL OnEndEdit() override
 	{
-		CRect aRect;
-		if (m_pWndInPlace)
+		BOOL result = FALSE;
+		if (CUniqueProperty::m_pParent && CUniqueProperty::m_pParent->GetSafeHwnd())
 		{
-			m_pWndInPlace->GetWindowRect(aRect);
+			result = (m_DlgItemID > 0);
+			if (result)
+			{
+				CUniqueProperty::m_pParent->PostMessage(WM_NOTIFYENDEDIT, WPARAM(CUniqueProperty::m_DlgItemID));
+			}
 		}
-		return aRect;
+		return CMFCPropertyGridProperty::OnEndEdit();
+	}
+
+
+	BOOL OnEdit(LPPOINT lptClick) override
+	{
+		return CMFCPropertyGridProperty::OnEdit(lptClick);
 	}
 
 };
@@ -151,8 +163,6 @@ protected:
 	CMFCPropertyGridCtrl m_wndPropList;
 	int32_t m_LinienColorPos;
 	CMassflowSelectMap c_MassflowSelectMap;
-	const std::map <int32_t, std::function<BOOL()> > m_EditMap;
-	std::map<uint32_t, CPropertyGrid*> m_PropertyMap;
 
 private:
 	void InitPropList();
@@ -166,11 +176,6 @@ private:
 	CPropertyGrid* CreateProperty(const base::eMassflowSelect select);
 	CPropertyGrid* CreateRealTimeMonitoringProperty();
 
-	void OnBnClickedRefreshTime();
-	void OnBnClickedHistory();
-
-	BOOL OnNotifyEditRefreshTime(void);
-	BOOL OnNotifyEditHistory(void);
 
 // Implementierung
 public:
@@ -190,8 +195,8 @@ protected:
 	afx_msg void OnSetFocus(CWnd* pOldWnd);
 
 	LRESULT OnPropertyChanged(__in WPARAM wparam, __in LPARAM lParam) ;
-	LRESULT OnNotifyEdit(__in WPARAM wparam, __in LPARAM lParam);
 	LRESULT OnNotifyClick(__in WPARAM wparam, __in LPARAM lParam);
+	LRESULT OnNotifyEndEdit(__in WPARAM wparam, __in LPARAM lParam);
 
 	DECLARE_MESSAGE_MAP()
 

@@ -38,9 +38,10 @@ struct ItemProperty
 IMPLEMENT_DYNAMIC(CPropertyGrid, CMFCPropertyGridProperty)
 IMPLEMENT_DYNAMIC(CPropertyColorGrid, CMFCPropertyGridColorProperty)
 
-
+#if 0
 #define BINDFUNC(_a, _b, _func) 	{ _a, std::bind(&_b::_func, this) }
 #define EDITITEM(_a, _func) 	BINDFUNC(_a, CPropertiesWnd, _func)
+#endif
 
 /////////////////////////////////////////////////////////////////////////////
 // CResourceViewBar
@@ -56,11 +57,12 @@ CPropertiesWnd::CPropertiesWnd() noexcept :
 						}
 	, m_nComboHeight{ 0 }
 	, m_LinienColorPos{ 0 }
+#if 0
 	, m_EditMap({
 		EDITITEM(CUniqueProperty::ZipID(ID_REFRESHTIME), OnNotifyEditRefreshTime),
 		EDITITEM(CUniqueProperty::ZipID(ID_HISTORY), OnNotifyEditHistory),
 		})
-
+#endif
 {
 	VERIFY(m_fntPropList.CreateFont(22, 0, 0, 0, FW_NORMAL,
 		FALSE, FALSE, 0, ANSI_CHARSET,
@@ -87,7 +89,7 @@ BEGIN_MESSAGE_MAP(CPropertiesWnd, CDockablePane)
 	ON_WM_SETTINGCHANGE()
 	ON_REGISTERED_MESSAGE(AFX_WM_PROPERTY_CHANGED, OnPropertyChanged)
 	ON_MESSAGE(WM_NOTIFYCLICK, &OnNotifyClick)
-	ON_MESSAGE(WM_NOTIFYEDIT, &OnNotifyEdit)
+	ON_MESSAGE(WM_NOTIFYENDEDIT, &OnNotifyEndEdit)
 END_MESSAGE_MAP()
 
 
@@ -264,7 +266,7 @@ CPropertyGrid* CPropertiesWnd::CreateRealTimeMonitoringProperty()
 	pElPropRefreshTime->SetValue(COleVariant(szTemp, VT_BSTR));
 	pElPropRefreshTime->AllowEdit(TRUE);
 	pElRealTime->AddSubItem(pElPropRefreshTime);
-	m_PropertyMap.insert({ uniqueID, pElPropRefreshTime });
+	//m_PropertyMap.insert({ uniqueID, pElPropRefreshTime });
 
 	CString szHistory;
 	VERIFY(szHistory.LoadString(IDS_HISTORY_MIN));
@@ -276,7 +278,7 @@ CPropertyGrid* CPropertiesWnd::CreateRealTimeMonitoringProperty()
 	pElPropHistory->SetValue(COleVariant(szTemp, VT_BSTR));
 	pElPropHistory->AllowEdit(TRUE);
 	pElRealTime->AddSubItem(pElPropHistory);
-	m_PropertyMap.insert({ uniqueID, pElRealTime });
+	//m_PropertyMap.insert({ uniqueID, pElRealTime });
 
 	return pGroupProp;
 }
@@ -306,7 +308,7 @@ CPropertyGrid* CPropertiesWnd::CreateProperty(const base::eMassflowSelect select
 	pElProp->AllowEdit(FALSE);
 	pElProp->SetValue(COleVariant((attrib.m_Visible) ? szYes : szNo, VT_BSTR));
 	pGroupProp->AddSubItem(pElProp);
-	m_PropertyMap.insert({ uniqueID, pElProp });
+	//m_PropertyMap.insert({ uniqueID, pElProp });
 
 	CString szLineColor;
 	VERIFY(szLineColor.LoadString(IDS_PW_LINECOLOR));
@@ -498,111 +500,34 @@ LRESULT CPropertiesWnd::OnPropertyChanged(__in WPARAM wparam, __in LPARAM lParam
 }
 //******************************************************************************************************
 //******************************************************************************************************
-void CPropertiesWnd::OnBnClickedRefreshTime()
-{
-	//CEditCtrl::GetInput(this, E_TYPCTRL::E_INTCTRL, IDC_LWF_RECIPE_NAME);
-	//CRect aRect{ CPoint(198,205), CSize(60,28) };
-	auto pGrid = m_PropertyMap.at(CUniqueProperty::ZipID(ID_REFRESHTIME));
-	CRect aGridRect = pGrid->GetEditRect();
-	CRect aRect;
-	GetWindowRect(aRect);
-	aGridRect.OffsetRect(-aRect.left, -aRect.top);
-
-	auto& settings = g_Statistics.GetSettings();
-	CString szText;
-	szText.Format(L"%d", settings.m_RealMonitoringRefreshTime);
-	CEditCtrl::Create(this, CUniqueProperty::ZipID(ID_REFRESHTIME), aGridRect, szText, TRUE);
-}
-//******************************************************************************************************
-//******************************************************************************************************
-void CPropertiesWnd::OnBnClickedHistory()
-{
-	auto pGrid = m_PropertyMap.at(CUniqueProperty::ZipID(ID_HISTORY));
-	CRect aGridRect = pGrid->GetEditRect();
-	CRect aRect;
-	GetWindowRect(aRect);
-	aGridRect.OffsetRect(-aRect.left, -aRect.top);
-
-	auto& settings = g_Statistics.GetSettings();
-	CString szText;
-	szText.Format(L"%d", settings.m_RealMonitoringHistoryMinutes);
-	CEditCtrl::Create(this, CUniqueProperty::ZipID(ID_HISTORY), aGridRect, szText, TRUE);
-}
-//******************************************************************************************************
-//******************************************************************************************************
 LRESULT CPropertiesWnd::OnNotifyClick(__in WPARAM wparam, __in LPARAM lParam)
 {
 	auto id = _U32(wparam);
+	
 	auto pairID = CUniqueProperty::UnzipID(id);
 	auto baseID = pairID.first;
-
 	switch (baseID)
 	{
-	case ID_REFRESHTIME:
-		OnBnClickedRefreshTime();
+		case ID_REFRESHTIME:
+		case ID_HISTORY:
+		{
+			CRect aRect;
+			GetWindowRect(aRect);
+			POINT p = *((POINT*)lParam);
+			TKB.TK_ShowLayout(ITKBoardInterface::eLayout::TKL_NUMERIC, ITKBoardInterface::TKPoint(aRect.left + p.x, aRect.top + p.y + (baseID - ID_REFRESHTIME + 2) * 30 ));
+		}
 		break;
-	case ID_HISTORY:
-		OnBnClickedHistory();
-		break;
-	default:
-		break;
+
+		default:
+			break;
 	}
 	return 0L;
 }
 //******************************************************************************************************
 //******************************************************************************************************
-BOOL CPropertiesWnd::OnNotifyEditRefreshTime(void)
+LRESULT CPropertiesWnd::OnNotifyEndEdit(__in WPARAM wparam, __in LPARAM lParam)
 {
-	auto settings = g_Statistics.GetSettings();
-	auto bModified = CEditCtrl::GetLongAbsModified(settings.m_RealMonitoringRefreshTime);
-	if (bModified)
-	{
-		g_Statistics.SetSettings(settings);
-		auto pGrid = m_PropertyMap.at(CUniqueProperty::ZipID(ID_REFRESHTIME));
-		ASSERT(pGrid);
-		CString szTemp;
-		szTemp.Format(_T("%d"), settings.m_RealMonitoringRefreshTime);
-		pGrid->SetValue(COleVariant(szTemp, VT_BSTR));
-	}
-	return bModified;
-}
-//******************************************************************************************************
-//******************************************************************************************************
-BOOL CPropertiesWnd::OnNotifyEditHistory(void)
-{
-	auto settings = g_Statistics.GetSettings();
-	auto bModified = CEditCtrl::GetLongAbsModified(settings.m_RealMonitoringHistoryMinutes);
-	if (bModified)
-	{
-		g_Statistics.SetSettings(settings);
-		auto pGrid = m_PropertyMap.at(CUniqueProperty::ZipID(ID_HISTORY));
-		ASSERT(pGrid);
-		CString szTemp;
-		szTemp.Format(_T("%d"), settings.m_RealMonitoringRefreshTime);
-		pGrid->SetValue(COleVariant(szTemp, VT_BSTR));
-	}
-	return bModified;
-}
-//******************************************************************************************************
-//******************************************************************************************************
-LRESULT CPropertiesWnd::OnNotifyEdit(__in WPARAM wparam, __in LPARAM lParam)
-{
-	auto bValue = BOOL(lParam);
-	if (bValue)
-	{
-		auto id = _U32(wparam);
-		BOOL bModified = FALSE;
-		try
-		{
-			bModified = m_EditMap.at(_S32(id))();
-		}
-		catch (std::out_of_range)
-		{
-			ASSERT(FALSE);
-			LOGERROR("Error");
-		}
-	}
+	TKB.TK_Hide();
+	SetFocus();
 	return 0L;
 }
-
-
