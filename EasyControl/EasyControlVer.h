@@ -20,6 +20,6 @@
 #define SZTITLE         _T("easyControl")
 #define SZVERSION       _T("Version")
 #define SZVERSIONNR     _T("4.0")
-#define RELEASENR		_T("V217")
+#define RELEASENR		_T("V218")
 
 
