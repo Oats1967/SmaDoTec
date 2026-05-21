@@ -303,8 +303,11 @@ int32_t CLCModuleImpl :: execute ()
 			{
 				if (m_LCDosierCount > 0)
 				{
-					StartUp1();
-					m_sStep = 1;
+					auto cellCount = StartUp1();
+					if (cellCount > 0)
+					{
+						m_sStep = 1;
+					}
 				}
 				sleeptime = 1000U;
 			}
@@ -580,11 +583,13 @@ void CLCModuleImpl::CreateStatus(std::string& status) const
 }
 //***********************************************************************************
 //***********************************************************************************
-void CLCModuleImpl :: StartUp1	 (void)
+uint32_t CLCModuleImpl :: StartUp1	 (void)
 {	
-	uint32_t  countMax = 0;
+	static const uint32_t c_MaxFailedCount = 3u;
+	uint32_t  failed = 0;
+	uint32_t  found = 0;
 
-	for ( int32_t index = 0; (index < _S32(m_LCDosierCount)) && (countMax <= 3U); index++)
+	for ( int32_t index = 0; (index < _S32(m_LCDosierCount)); index++)
 	{
 		if ( IsSuspended() || ( ! IsRunning() ) )
 		{
@@ -597,16 +602,22 @@ void CLCModuleImpl :: StartUp1	 (void)
 			if ( ! result )
 			{
 				InitCell(index);
-				countMax++;
+				failed++;
+				if ((failed >= c_MaxFailedCount) && (found > 0))
+				{
+					break;
+				}
 			}
 			else
 			{
-				countMax = 0;
+				failed = 0;
+				found++;
 			}
 		}
 	}
 	m_LastDeactiveCell = GLOBALDOSEMAXCOUNT;
 	m_LastActiveCell.fill(0);
+	return found;
 }
 //***********************************************************************************
 //***********************************************************************************

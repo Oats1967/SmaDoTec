@@ -47,7 +47,7 @@ private:
 private:
     void Init(void);
     void InitContainer(void);
-    void StartUp1(void);
+    uint32_t StartUp1(void);
     int32_t  Run(void);
     void CheckDeactiveCells(void);
     BOOL CheckWeight(base::LC_PRIORITY sPriority, const uint32_t iStart, const uint32_t iCount);

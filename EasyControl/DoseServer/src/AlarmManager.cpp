@@ -195,7 +195,12 @@ void CAlarmManager::ActivateAlarm(const base::eAlarmError ul) const
         Dose_DSVIsAlarm(m_id, ul, &bAlarmExist);
         if ( ! bAlarmExist)
         {
-            Dose_EXPBSetPBAlarm1(TRUE);
+            BOOL bAnyDoseStarted = FALSE;
+            Dose_EXGetAnyDoseStarted(&bAnyDoseStarted);
+            if (bAnyDoseStarted)
+            {
+                Dose_EXPBSetPBAlarm1(TRUE);
+            }
         }
         Dose_DSVSetIOAlarmOutput(m_id, TRUE);
         bActive = TRUE;

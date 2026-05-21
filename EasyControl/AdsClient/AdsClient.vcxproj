@@ -144,13 +144,14 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;ADSCLIENT_EXPORTS;_WINDOWS;_USRDLL;__EASYCONTROL;LOGLEVELFILE="$(ProjectDir)LogLevel.def";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;ADSCLIENT_EXPORTS;_WINDOWS;_USRDLL;__EASYCONTROL;LOGLEVELFILE="$(ProjectDir)LogLevel.def";__SIM_RELEASE;__SIM_SOEMER;__SIM_PESA;__SIM_LAUMAS;__SIM_KTRON;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>C:\DEVELOP\Cplusplus\EasyControl;C:\TwinCAT\AdsApi\TcAdsDll\Include;C:\DEVELOP\Cplusplus\EasyControl\AdsClient\include;C:\DEVELOP\Cplusplus\EasyControl\AdsClient\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WholeProgramOptimization>false</WholeProgramOptimization>
       <DebugInformationFormat>None</DebugInformationFormat>
+      <UndefinePreprocessorDefinitions>__SIM_RELEASE;__SIM_SOEMER;__SIM_PESA;__SIM_LAUMAS;__SIM_KTRON</UndefinePreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
