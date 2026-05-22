@@ -271,6 +271,7 @@ public:
 
     virtual int32_t setDosePBAlarmClear(const int32_t index) = 0;
     virtual int32_t setDosePBAlarmAcknowledge(const int32_t index) = 0;
+    virtual int32_t setDosePBClearAlarm(const int32_t index, const base::eAlarmError id) = 0;
 
     //-----------------------------------------------------------------------------------------------
     // read values

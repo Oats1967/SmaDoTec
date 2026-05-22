@@ -112,9 +112,9 @@ void CAlarmLog::AlarmCheck(const int32_t index, base::eAlarmErrorBits& warnings,
     base::eAlarmErrorBits transstatus;
 
     auto newalarm = alarms & (~lastalarms);
-    auto newwarning = (lastwarnings | warnings);
+    auto newwarning = warnings & (~lastwarnings);
     //transstatus   = lastwarnings & (~warnings);
-    transstatus  = newalarm & newwarning;                            // transition from warning to alarm
+    transstatus  = newalarm & ( warnings | lastwarnings);                            // transition from warning to alarm
 
     Iterate(transstatus, [&index, &transstatus](const base::eAlarmError& item)
         {
@@ -124,11 +124,10 @@ void CAlarmLog::AlarmCheck(const int32_t index, base::eAlarmErrorBits& warnings,
             }
         });
 
-    // alarms     |= transstatus;
-    // lastalarms |= transstatus;
-
     warnings     &= (~transstatus);
     lastwarnings &= (~transstatus);
+    alarms       &= (~transstatus);
+    lastalarms   &= (~transstatus);
 
     AlarmCheck(index, base::eAlarmLevel::eWarning, warnings, lastwarnings);
     AlarmCheck(index, base::eAlarmLevel::eAlarm, alarms, lastalarms);

@@ -171,6 +171,8 @@ void CAlarmManager ::  ClearAlarm	(const base::eAlarmError ul)
     {
         ClearWarningLevel(ul);
         m_AlarmItem[_U32(ul)].ClearAlarm();
+        Dose_DSVDeleteWarning(m_id, ul);
+        Dose_DSVDeleteAlarm(m_id, ul);
     }
 }
 //******************************************************************************************************************************

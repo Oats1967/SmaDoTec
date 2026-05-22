@@ -278,6 +278,7 @@ public:
      int32_t setDosePBClearTotalizer(const int32_t index) override;
 
      int32_t setDosePBAlarmClear(const int32_t index) override;
+     int32_t setDosePBClearAlarm(const int32_t index, const base::eAlarmError id) override;
      int32_t setDosePBAlarmAcknowledge(const int32_t index) override;
 
     //-----------------------------------------------------------------------------------------------

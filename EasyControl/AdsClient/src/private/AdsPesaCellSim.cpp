@@ -262,7 +262,7 @@ int32_t CAdsPesaLoadcellSim::GetWeight(const int32_t index, float32_t* f)
 		ref.init = true;
 		ref.weight = STEPWEIGHT(c_InitWeight, c_Fullload);;
 	}
-#if 1
+#if 0
 	static BOOL bRefillWorks = TRUE;
 	BOOL state = FALSE;
 	if (bRefillWorks)

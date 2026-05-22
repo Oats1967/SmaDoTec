@@ -738,6 +738,14 @@ int32_t CRemoteImpl::setDosePBAlarmClear(const int32_t index)
 }
 //***********************************************************************************************
 //***********************************************************************************************
+int32_t CRemoteImpl::setDosePBClearAlarm(const int32_t index, const base::eAlarmError id)
+{
+    Dose_DSVSetClearWarning(index, id);
+    return Dose_DSVSetClearAlarm(index, id);
+
+}
+//***********************************************************************************************
+//***********************************************************************************************
 int32_t CRemoteImpl::setDosePBCalibStart(const int32_t index) 
 {
     return Dose_DSVPBSetPBCalibStart(index);

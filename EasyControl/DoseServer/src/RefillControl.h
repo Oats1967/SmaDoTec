@@ -27,7 +27,6 @@
 enum class eRefillSteps : uint32_t
 {
     eRefillInit = 0,
-    eRefillStart,
     eRefillRunning,
     eRefillStop
 };

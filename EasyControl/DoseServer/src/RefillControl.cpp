@@ -467,12 +467,12 @@ BOOL CRefillControl :: RefillExecute ( void)
                 {
 					OnRefillStart();
 					m_t0 = m_st;
-					m_sStep  = eRefillSteps::eRefillStart;
+					m_sStep  = eRefillSteps::eRefillRunning;
 				}
 			}
 			break;
 
-		case eRefillSteps::eRefillStart:
+		case eRefillSteps::eRefillRunning:
 			{
 				auto bRefill = ! CheckRefillDone();
 				if ( bRefill )
@@ -483,27 +483,14 @@ BOOL CRefillControl :: RefillExecute ( void)
 					{
 						// Refill
 						SetRefillAlarm(TRUE);
-						m_sStep  = eRefillSteps::eRefillRunning;
+						m_t0 = m_st;
 					}
                 }
 				else
                 {
+					SetRefillAlarm(FALSE);
 					Dose_DSVSetRefillState(m_sID, FALSE) ;
 					SetRefillRequest (FALSE);
-					OnRefillStop();
-					m_sStep = eRefillSteps::eRefillInit;
-				}
-			}
-			break;
-
-		case eRefillSteps::eRefillRunning:
-			{
-				auto bRefill = ! CheckRefillDone();
-				if ( ! bRefill)
-				{
-					SetRefillAlarm(FALSE);
-					Dose_DSVSetRefillState(m_sID, FALSE);
-					SetRefillRequest(FALSE);
 					OnRefillStop();
 					m_sStep = eRefillSteps::eRefillInit;
 				}

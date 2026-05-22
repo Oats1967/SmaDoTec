@@ -255,7 +255,7 @@ LRESULT CEasyControlView::OnLayoutChanged(WPARAM , LPARAM)
 LRESULT CEasyControlView::OnInfoBoxAlarmClear(WPARAM id, LPARAM)
 {
 	AlarmClear(_S32(id));
-	SetNewInfoMessage();
+	//SetNewInfoMessage();
 	return 0L;
 }
 //***********************************************************************************************
@@ -826,15 +826,14 @@ void CEasyControlView :: AlarmClear (int32_t id)
     if (id >= 0)
     {
 		auto& logitem = LOGREF.GetItem(id);
-		if (!logitem.GetChecked())
+		if ( ! logitem.GetChecked())
 		{
 			FlashLightOff();
-			//OnAlarm03Clear();
 			auto item = logitem.GetItem();
 			ASSERT(item >= 0);
 			if (item >= 0)
 			{
-				REMOTEREF.setDosePBAlarmClear(item);
+				REMOTEREF.setDosePBClearAlarm(item, logitem.GetAlarm());
 			}
 		}
     }
