@@ -93,12 +93,12 @@ void CAlarmLog::AlarmCheck(const int32_t index, const base::eAlarmLevel level, c
 {
     if (alarmstatus.allflags != lastalarm.allflags)
     {
-        base::eAlarmErrorBits newstatus;
-        newstatus = alarmstatus & (~lastalarm);
+        //base::eAlarmErrorBits newstatus;
+        auto newstatus = alarmstatus & (~lastalarm);
         CreateLogItems(index, newstatus, level);
 
-        base::eAlarmErrorBits deletestatus;
-        deletestatus = lastalarm & (~alarmstatus);
+        // base::eAlarmErrorBits deletestatus;
+        auto deletestatus = lastalarm & (~alarmstatus);
         CheckLogItems(index, deletestatus, level);
         lastalarm = alarmstatus;
     }
@@ -109,12 +109,12 @@ void CAlarmLog::AlarmCheck(const int32_t index, const base::eAlarmLevel level, c
 void CAlarmLog::AlarmCheck(const int32_t index, base::eAlarmErrorBits& warnings, base::eAlarmErrorBits& lastwarnings, 
                                                 base::eAlarmErrorBits& alarms, base::eAlarmErrorBits& lastalarms)
 {
-    base::eAlarmErrorBits transstatus;
+    //base::eAlarmErrorBits transstatus;
 
     auto newalarm = alarms & (~lastalarms);
-    auto newwarning = warnings & (~lastwarnings);
+    // auto newwarning = warnings & (~lastwarnings);
     //transstatus   = lastwarnings & (~warnings);
-    transstatus  = newalarm & ( warnings | lastwarnings);                            // transition from warning to alarm
+    auto transstatus  = newalarm & lastwarnings;                            // transition from warning to alarm
 
     Iterate(transstatus, [&index, &transstatus](const base::eAlarmError& item)
         {

@@ -91,7 +91,7 @@ void CUserNameDlg::SetUserLevel (const base::utils::eUserClass newUser)
 //*******************************************************************************************************************
 void CUserNameDlg::OnStnClickedBenutzername()
 {
-   	CEditCtrl::CreateFromDlgItem(this, IDC_USERNAME);
+   	CEditCtrl::CreateFromDlgItem(this, IDC_USERNAME, FALSE);
 }
 //*******************************************************************************************************************
 //*******************************************************************************************************************
