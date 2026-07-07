@@ -308,6 +308,10 @@ int32_t CLCModuleImpl :: execute ()
 					{
 						m_sStep = 1;
 					}
+					else
+					{
+						CheckDeactiveCells();
+					}
 				}
 				sleeptime = 1000U;
 			}
