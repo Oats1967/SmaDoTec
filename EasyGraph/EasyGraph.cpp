@@ -467,7 +467,24 @@ BOOL CEasyGraphApp::InitInstance()
 	auto ret = TKB.TK_Open(EASYCGRAPHCONFIGFILE.m_TouckKeyboardConfigFile);
 	if (ret != ITKBoardInterface::TK_OK)
 	{
-		AfxMessageBox(_T("Touchkeyboard cannot be loaded!"), MB_OK | MB_ICONSTOP);
+		switch (ret)
+		{
+		case ITKBoardInterface::TK_NOTOPEN:
+			AfxMessageBox(_T("Touchkeyboard not open!"), MB_OK | MB_ICONSTOP);
+			break;
+		case ITKBoardInterface::TK_OPENFAILED:
+			AfxMessageBox(_T("Touchkeyboard open failed!"), MB_OK | MB_ICONSTOP);
+			break;
+		case ITKBoardInterface::TK_XMLOPENFAILED:
+			AfxMessageBox(_T("Touchkeyboard opening XML-file failed!"), MB_OK | MB_ICONSTOP);
+			break;
+		case ITKBoardInterface::TK_SENDFAILED:
+			AfxMessageBox(_T("Touchkeyboard sending buffer failed!"), MB_OK | MB_ICONSTOP);
+			break;
+		default:
+			AfxMessageBox(_T("Touchkeyboard general failure!"), MB_OK | MB_ICONSTOP);
+			break;
+		};
 		return FALSE;
 	}
 

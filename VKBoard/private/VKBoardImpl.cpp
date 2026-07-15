@@ -140,22 +140,38 @@ int32_t CVKBoardImpl::TK_SendBuffer(const TKBuffer& cBuffer, const uint32_t slee
 //**************************************************************************************************************************************************************
 int32_t CVKBoardImpl::TK_Init()
 {
+    static const int32_t c_retry = 3;
+
+    int32_t result = TK_NOTOPEN;
     if (bVKOpen)
     {
         VKSocket_Close();
         bVKOpen = FALSE;
     }
-    auto iResult = VKSocket_Open();
-    if (iResult != eSocket_OK)
+    eSocketError socketresult = eSocket_NotOpen;
+    for (int32_t k = 0; k < c_retry; k++)
     {
-        return TK_OPENFAILED;
+        socketresult = VKSocket_Open();
+        if (socketresult == eSocket_OK)
+        {
+            break;
+        }
+        base::task::Sleep(3000);
     }
-    bVKOpen = TRUE;
-    bShow = TRUE;
-    TK_SetSize(TK_GetAlphaLayout(),   TKSize(m_TKCfg.m_AlphaSize.Width(), m_TKCfg.m_AlphaSize.Height()));
-    TK_SetSize(TK_GetNumericLayout(), TKSize(m_TKCfg.m_NumericSize.Width(), m_TKCfg.m_NumericSize.Height()));
-    TK_LoadLayout(TK_GetAlphaLayout());
-    return TK_OK;
+    if (socketresult == eSocket_OK)
+    {
+        bVKOpen = TRUE;
+        bShow = TRUE;
+        TK_SetSize(TK_GetAlphaLayout(), TKSize(m_TKCfg.m_AlphaSize.Width(), m_TKCfg.m_AlphaSize.Height()));
+        TK_SetSize(TK_GetNumericLayout(), TKSize(m_TKCfg.m_NumericSize.Width(), m_TKCfg.m_NumericSize.Height()));
+        TK_LoadLayout(TK_GetAlphaLayout());
+        result = TK_OK;
+    }
+    else
+    {
+        result = TK_OPENFAILED;
+    }
+    return result;
 }
 //**************************************************************************************************************************************************************
 //**************************************************************************************************************************************************************
