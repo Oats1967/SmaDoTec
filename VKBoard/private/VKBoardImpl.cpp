@@ -162,6 +162,8 @@ int32_t CVKBoardImpl::TK_Init()
     {
         bVKOpen = TRUE;
         bShow = TRUE;
+        m_aTimer.Readms(m_LastTime);
+        m_LastSleepTime = 3000u;
         TK_SetSize(TK_GetAlphaLayout(), TKSize(m_TKCfg.m_AlphaSize.Width(), m_TKCfg.m_AlphaSize.Height()));
         TK_SetSize(TK_GetNumericLayout(), TKSize(m_TKCfg.m_NumericSize.Width(), m_TKCfg.m_NumericSize.Height()));
         TK_LoadLayout(TK_GetAlphaLayout());
@@ -188,7 +190,7 @@ int32_t CVKBoardImpl::TK_SetSize(const eLayout nLayout, const TKSize& aS)
         uint16_t h = _U16(aS.Height());
 
         TKBuffer cN(C_STX, _C(0x7), _C(TKCommand::eTKSetSize), _C(nLayout), __LOBYTE(w), __HIBYTE(w), __LOBYTE(h), __HIBYTE(h), C_ETX);
-        result = TK_SendBuffer(cN, 200U);
+        result = TK_SendBuffer(cN, 400U);
     }
     return result;
 }
