@@ -32,6 +32,7 @@ class CAdsLineControl : public CAdsWrapperControl
 	AdsSensor::CAdsLineDigitalOutput  m_Release;
 	AdsSensor::CAdsLineDigitalOutput  m_LineSetOperateAuto;
 	AdsSensor::CAdsLineDigitalOutput  m_LineSetOperateService;
+	AdsSensor::CAdsLineDigitalOutput  m_LineSetWatchDog;
 	AdsSensor::CAdsLineDigitalInput   m_AlarmQuit1;
 	AdsSensor::CAdsLineDigitalInput   m_AlarmQuit03;
 	AdsSensor::CAdsLineDigitalInput   m_ExtAlarm;
@@ -59,6 +60,7 @@ public:
 	BOOL LineSetRelease(const BOOL);
 	BOOL LineSetOperateAuto(const BOOL);
 	BOOL LineSetOperateService(const BOOL);
+	BOOL LineSetWatchDog(const BOOL);
 
 	BOOL LineGetAlarmQuit1(BOOL&);
 	BOOL LineGetAlarmQuit03(BOOL&);
@@ -105,6 +107,13 @@ inline BOOL CAdsLineControl::LineSetOperateService(const BOOL value)
 {
 	assert(CBaseClass::IsInit());
 	return m_LineSetOperateService.UpdateState(value);
+}
+//*********************************************************************************************
+//*********************************************************************************************
+inline BOOL CAdsLineControl::LineSetWatchDog(const BOOL value)
+{
+	assert(CBaseClass::IsInit());
+	return m_LineSetWatchDog.UpdateState(value);
 }
 //*********************************************************************************************
 //*********************************************************************************************

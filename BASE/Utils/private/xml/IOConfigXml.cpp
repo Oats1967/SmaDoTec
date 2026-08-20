@@ -38,7 +38,7 @@ STATIC_KEY(AI, ("AI"))
 STATIC_KEY(AO, ("AO"))
 
 
-const static int32_t c_HeaderVersion = 8;
+const static int32_t c_HeaderVersion = 9;
 static int32_t g_HeaderVersion = 0;
 
 using namespace tinyxml2;

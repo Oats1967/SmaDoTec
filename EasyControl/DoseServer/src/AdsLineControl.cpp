@@ -39,6 +39,7 @@ CAdsLineControl::CAdsLineControl() : CAdsWrapperControl(0)
 , m_Release{ AdsClient_LineSetRelease, Dose_EXSetIOLineReleaseOutput }
 , m_LineSetOperateAuto{ AdsClient_LineSetOperateAuto, Dose_EXSetIOOperateAutoOutput }
 , m_LineSetOperateService{ AdsClient_LineSetOperateService, Dose_EXSetIOServiceModeOutput }
+, m_LineSetWatchDog{ AdsClient_LineSetWatchDog, Dose_EXSetIOWatchDogOutput }
 , m_ExtAlarm { AdsClient_LineGetExtAlarm , Dose_EXSetIOExtAlarmInput }
 , m_CustomAlarm { AdsClient_LineGetCustomerAlarm , Dose_EXSetIOCustomerAlarmInput }
 , m_ShutDown { AdsClient_LineGetShutDown, Dose_EXSetIOAlarmShutDownInput }
@@ -51,7 +52,7 @@ CAdsLineControl::CAdsLineControl() : CAdsWrapperControl(0)
 , m_LineGetOperateAuto{ AdsClient_LineGetOperateAuto, Dose_EXSetIOOperateAutoInput }
 , m_LineGetOperateManual{ AdsClient_LineGetOperateManual, Dose_EXSetIOOperateManualInput }
 , m_Container {{ &m_Alarm[0],&m_Alarm[1],&m_Alarm[2],&m_Alarm[3],
-				&m_Release,	&m_AlarmQuit1,	&m_AlarmQuit03,	&m_LineSetOperateAuto,& m_LineSetOperateService,
+				&m_Release,	&m_AlarmQuit1,	&m_AlarmQuit03,	&m_LineSetOperateAuto, &m_LineSetOperateService, &m_LineSetWatchDog,
 				&m_ExtAlarm, &m_CustomAlarm,	&m_ShutDown, &m_WindowsShutDown,	&m_UPSLow,
 				&m_LineGetMF, &m_LineGetSF1, &m_LineGetSF2, &m_LineGetStart, &m_LineGetOperateAuto, &m_LineGetOperateManual	
 				}}

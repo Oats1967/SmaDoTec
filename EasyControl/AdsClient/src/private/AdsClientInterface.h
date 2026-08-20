@@ -138,6 +138,7 @@ public:
     virtual int32_t LineSetMassflow(const float32_t) = 0;
     virtual int32_t LineSetOperateAuto(const BOOL) = 0;
     virtual int32_t LineSetOperateService(const BOOL) = 0;
+    virtual int32_t LineSetWatchDog(const BOOL) = 0;
 
 
     virtual remote::IDeviceInterface* GetProfiBusDevice() = 0;

@@ -140,6 +140,7 @@ IMPL_LINE_DO(CAdsLineImpl, Release, base::eLineDigitalOutputAction::eOutputActio
 IMPL_LINE_DO(CAdsLineImpl, TotalizerPulse, base::eLineDigitalOutputAction::eOutputActionTotalizerPulse)
 IMPL_LINE_DO(CAdsLineImpl, OperateAuto, base::eLineDigitalOutputAction::eOutputActionOperateAuto)
 IMPL_LINE_DO(CAdsLineImpl, OperateService, base::eLineDigitalOutputAction::eOutputActionOperateService)
+IMPL_LINE_DO(CAdsLineImpl, WatchDog, base::eLineDigitalOutputAction::eOutputActionWatchDog)
 
 IMPL_LINE_AI(CAdsLineImpl,Setpoint, base::eLineAnalogInputAction::eInputActionSetpoint)
 IMPL_LINE_AO(CAdsLineImpl,Massflow, base::eLineAnalogOutputAction::eOutputActionMassflow)

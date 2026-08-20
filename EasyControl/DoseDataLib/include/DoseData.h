@@ -174,6 +174,7 @@ DECLARE_DOSEEX(BOOL, IOOperateManualInput)
 DECLARE_DOSEEX(BOOL, IOUPSLowInput)
 DECLARE_DOSEEX(BOOL, IOOperateAutoOutput)			// IO operate auto output
 DECLARE_DOSEEX(BOOL, IOServiceModeOutput)			// IO operate service output
+DECLARE_DOSEEX(BOOL, IOWatchDogOutput)			    // IO WatchDog output
 
 
 DECLARE_DOSEEX(BOOL, ServiceMode)

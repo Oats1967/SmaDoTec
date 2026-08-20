@@ -157,6 +157,7 @@ public:
     int32_t LineSetMassflow(const float32_t) override;
     int32_t LineSetOperateAuto(const BOOL)  override;
     int32_t LineSetOperateService(const BOOL)  override;
+    int32_t LineSetWatchDog(const BOOL)  override;
 
 
     remote::IDeviceInterface* GetProfiBusDevice() override;

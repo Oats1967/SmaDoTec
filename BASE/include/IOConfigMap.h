@@ -173,6 +173,7 @@ namespace base
                    { eLineDigitalOutputAction::eOutputActionTotalizerPulse, "TotalizerPulse" } ,
                    { eLineDigitalOutputAction::eOutputActionOperateAuto, "OperateAuto" },
                    { eLineDigitalOutputAction::eOutputActionOperateService, "OperateService" },
+                   { eLineDigitalOutputAction::eOutputActionWatchDog, "WatchDog" },
                 })
             {
                 assert(_S32(m_Map.size()) == _S32(eLineDigitalOutputAction::eOutputActionMax));

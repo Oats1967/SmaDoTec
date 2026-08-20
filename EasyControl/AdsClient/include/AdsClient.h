@@ -138,6 +138,7 @@ int32_t  AdsClient_LineSetTotalizerPulse(const BOOL);
 int32_t  AdsClient_LineSetMassflow(const float32_t);
 int32_t  AdsClient_LineSetOperateAuto(const BOOL);
 int32_t  AdsClient_LineSetOperateService(const BOOL);
+int32_t  AdsClient_LineSetWatchDog(const BOOL);
 
 
 int32_t  AdsClient_LogoGetPulsCounter(int32_t index, uint32_t& value);

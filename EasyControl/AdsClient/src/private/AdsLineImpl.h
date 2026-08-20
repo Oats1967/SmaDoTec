@@ -177,6 +177,7 @@ public:
 	DECLARE_LINE_DO(Release)
 	DECLARE_LINE_DO(OperateAuto)
 	DECLARE_LINE_DO(OperateService)
+	DECLARE_LINE_DO(WatchDog)
 
 	DECLARE_LINE_AI(Setpoint)
 	DECLARE_LINE_AO(Massflow)

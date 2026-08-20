@@ -43,6 +43,8 @@ IMPLEMENT_INLINE_EX( BOOL, IOOperateManualInput)				// Handbetrieb
 IMPLEMENT_INLINE_EX( BOOL, IOUPSLowInput);	// Totalisator impulse
 IMPLEMENT_INLINE_EX(BOOL, IOOperateAutoOutput)			// IO operate auto output
 IMPLEMENT_INLINE_EX(BOOL, IOServiceModeOutput)			// IO operate service output
+IMPLEMENT_INLINE_EX(BOOL, IOWatchDogOutput)			// IO WatchDog output
+
 
 
 IMPLEMENT_INLINE_EX( BOOL, IOAlarm1QuitInput);			// Alarmquit extern 1

@@ -30,6 +30,7 @@
         \t\tTotalizerPulse   : set pulse every step in kg\n\
         \t\tOperateAuto      : automatic operate mode\n\
         \t\tOperateService   : service operate mode\n\
+        \t\tWatchDog   : WatchDog\n\
         -------------------------------------------------------------------\n\
         Analog input AI\n\
         \t\tNotUsed : analog input not used\n\

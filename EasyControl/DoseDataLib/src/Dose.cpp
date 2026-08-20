@@ -528,6 +528,7 @@ void CDose :: ResetLineItem ()
 	INIT_ITEM(IOOperateManualInput)
 	INIT_ITEM(IOOperateAutoOutput)			// IO operate auto output
 	INIT_ITEM(IOServiceModeOutput);			// IO operate service output
+	INIT_ITEM(IOWatchDogOutput);			// IO operate service output
 
 
 	INIT_ITEM(LineDoseStarted)
@@ -555,6 +556,7 @@ void CDose :: ResetLineItem ()
 	INIT_ITEM(IOUPSLowInput)
 	INIT_ITEM(IOOperateAutoOutput)			// IO operate auto output
 	INIT_ITEM(IOServiceModeOutput);			// IO operate service output
+	INIT_ITEM(IOWatchDogOutput);			// IO operate service output
 
 
 	INIT_ITEM(ExtLineInvSetpointState)
@@ -888,6 +890,8 @@ void CDose :: InitializeLineItem ()
 	INIT_ITEM( IOUPSLowInput)
 	INIT_ITEM(IOOperateAutoOutput)			// IO operate auto output
 	INIT_ITEM(IOServiceModeOutput);			// IO operate service output
+	INIT_ITEM(IOWatchDogOutput);			// IO operate service output
+
 
 	INIT_ITEM(TotalizerAll);
 	INIT_ITEM(TotalizerLine);

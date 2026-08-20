@@ -60,6 +60,7 @@ CLineControl::CLineControl(int32_t id, const base::CLineConfig& rConfig) : CBase
 , m_bIOStartInputLast{ FALSE }
 , m_bLineDoseStarted{ FALSE }
 , m_tUPSLowStart{ 0L }
+, m_WatchDogTime{ 0L }
 , m_bIOAlarm1QuitInputLast{ FALSE }
 , m_bIOAlarm03QuitInputLast{ FALSE }
 , m_bIOAlarmShutDownLast{ FALSE }
@@ -676,6 +677,18 @@ BOOL CLineControl :: Control ()
 	CheckStop();
 	return TRUE;
 }
+//*********************************************************************************************************************
+//*********************************************************************************************************************
+void CLineControl::WatchDog()
+{
+	if (m_st != m_WatchDogTime)
+	{
+		m_WatchDogTime = m_st;
+		BOOL bValue = FALSE;
+		Dose_EXGetIOWatchDogOutput(&bValue);
+		m_AdsClient.LineSetWatchDog(!bValue);
+	}
+}
 //*********************************************************************************************************************************
 //*********************************************************************************************************************************
 BOOL CLineControl :: Execute ()
@@ -696,6 +709,7 @@ BOOL CLineControl :: Execute ()
 		ExecuteAll();
 		CheckAllAlarms();
 		Control();
+		WatchDog();
 	}
 	return result;
 }

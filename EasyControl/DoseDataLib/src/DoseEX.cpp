@@ -52,6 +52,7 @@ IMPLEMENT_DOSEEX(BOOL, IOOperateManualInput)
 IMPLEMENT_DOSEEX(BOOL, IOUPSLowInput)	// Totalisator impulse
 IMPLEMENT_DOSEEX(BOOL, IOOperateAutoOutput)			// IO operate auto output
 IMPLEMENT_DOSEEX(BOOL, IOServiceModeOutput)			// IO operate service output
+IMPLEMENT_DOSEEX(BOOL, IOWatchDogOutput)			// IO operate service output
 
 
 IMPLEMENT_DOSEEX(BOOL, AlarmShutDown)

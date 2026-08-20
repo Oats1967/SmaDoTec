@@ -343,6 +343,8 @@ struct CGlobalLineItem
 	DECLARE_VARIABLE(BOOL,				IOTotalizerPulseOutput)		// Totalisator impulse
 	DECLARE_VARIABLE(BOOL,				IOOperateAutoOutput )		// IO operate auto output
 	DECLARE_VARIABLE(BOOL,				IOServiceModeOutput);		// IO operate service output
+	DECLARE_VARIABLE(BOOL,				IOWatchDogOutput)			// IO WatchDog output
+
 	DECLARE_VARIABLE(BOOL,				IOLineReleaseOutput);		// Was aktuell am Ausgang anliegt
 	DECLARE_VARIABLE(float32_t,			IOLineSetpointInput);		// ext. Liniensollwert
 

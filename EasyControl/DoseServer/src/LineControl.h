@@ -68,6 +68,7 @@ private:
 	BOOL				m_bIOStartInputLast;
 	BOOL				m_bIOAlarmShutDownLast;
 	uint32_t			m_tUPSLowStart;
+	uint32_t			m_WatchDogTime;
 
 private:
 	BOOL GetAlarmShutdown	( void );
@@ -87,6 +88,7 @@ private:
 
 private:
 	BOOL Control(void);
+	void WatchDog(void);
 	void CheckStop(void);
 	BOOL GetClearAlarm(void);
 

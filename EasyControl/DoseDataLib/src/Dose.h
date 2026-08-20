@@ -215,6 +215,7 @@ public:
 	DECLARE_INLINE_EX( BOOL,  IOUPSLowInput)	// Totalisator impulse
 	DECLARE_INLINE_EX( BOOL, IOOperateAutoOutput)			// IO operate auto output
 	DECLARE_INLINE_EX( BOOL, IOServiceModeOutput)			// IO operate service output
+	DECLARE_INLINE_EX(BOOL, IOWatchDogOutput)			// IO operate service output
 
 
 	DECLARE_INLINE_EX( BOOL,  Alarm0State)

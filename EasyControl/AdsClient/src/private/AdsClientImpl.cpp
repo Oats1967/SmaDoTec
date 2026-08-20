@@ -706,6 +706,7 @@ ADS_LINE_DO(Release);
 ADS_LINE_DO(TotalizerPulse);
 ADS_LINE_DO(OperateAuto);
 ADS_LINE_DO(OperateService);
+ADS_LINE_DO(WatchDog);
 
 ADS_LINE_AO(Massflow);
 

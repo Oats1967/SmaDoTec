@@ -126,6 +126,7 @@ namespace base
 		eOutputActionTotalizerPulse,		// Totalizer Impulse
 		eOutputActionOperateAuto,			// Autmatic mode
 		eOutputActionOperateService,			// Manual ( service) mode
+		eOutputActionWatchDog,				// WatchDog
 		eOutputActionMax
 	};
 
