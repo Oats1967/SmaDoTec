@@ -23,6 +23,9 @@ class CEasyGraphApp : public CWinAppEx
 private:
 	CString m_szCMDPath;
 	base::CEasyGraphConfig m_SaveCfg;
+	HANDLE m_hMutex;
+	const CString m_strMutexName = _T("EasyGraphMutex"); // Eindeutiger Name
+
 
 	static time_t m_ProductDatabaseLastModifiedFileTime;
 

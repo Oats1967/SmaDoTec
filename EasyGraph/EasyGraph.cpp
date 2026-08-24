@@ -209,12 +209,12 @@ BOOL CEasyGraphApp::CheckLicence(void)
 	return TRUE;
 }
 
-CEasyGraphApp::CEasyGraphApp() noexcept
+CEasyGraphApp::CEasyGraphApp() noexcept : 
+	m_hMutex { 0}
+	, m_nAppLook{ 0 }
+	, m_bHiColorIcons{ TRUE }
 {
-	m_bHiColorIcons = TRUE;
 	m_bSaveState = g_bSaveState;
-
-	m_nAppLook = 0;
 	// Neustart-Manager unterstützen
 	m_dwRestartManagerSupportFlags = AFX_RESTART_MANAGER_SUPPORT_ALL_ASPECTS;
 #ifdef _MANAGED
@@ -404,6 +404,25 @@ BOOL CEasyGraphApp::SaveSettings(void)
 
 BOOL CEasyGraphApp::InitInstance()
 {
+	// Mutex erstellen
+	m_hMutex = CreateMutex(NULL, FALSE, m_strMutexName);
+
+	if (m_hMutex == NULL)
+	{
+		// Fehler beim Erstellen des Mutex
+		AfxMessageBox(_T("Error creating mutex!"));
+		return FALSE;
+	}
+	auto errorid = GetLastError();
+	// Prüfen, ob der Mutex bereits existiert
+	if (errorid == ERROR_ALREADY_EXISTS)
+	{
+		// Mutex existiert bereits, also beenden
+		AfxMessageBox(_T("Application already running!"));
+		CloseHandle(m_hMutex);
+		return FALSE;
+	}
+
 	// InitCommonControlsEx() ist für Windows XP erforderlich, wenn ein Anwendungsmanifest
 	// die Verwendung von ComCtl32.dll Version 6 oder höher zum Aktivieren
 	// von visuellen Stilen angibt.  Ansonsten treten beim Erstellen von Fenstern Fehler auf.
