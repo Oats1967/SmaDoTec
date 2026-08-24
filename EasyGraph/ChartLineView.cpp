@@ -320,8 +320,8 @@ void CChartLineView::OnUpdateChart()
 	pChart->SetLegendPosition(BCGPChartLayout::LegendPosition::LP_BOTTOM);
 	pChart->EnableDrawLegendShape(FALSE);
 	UpdateScrollBars();
-	pChart->SetDirty(TRUE, TRUE);
-	m_wndChart.SetFocus();
+	//pChart->SetDirty(TRUE, TRUE);
+	//m_wndChart.SetFocus();
 }
 
 void CChartLineView::OnUpdateZoom()
