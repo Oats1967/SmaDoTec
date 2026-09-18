@@ -21,6 +21,8 @@
 #include "BaseControl.h"
 #include "FeederWeightControl.h"
 #include "LwfTareTask.h"
+#include "BASE/Utils/public/MeasuredBuffer.h"
+
 
 
 class CIflControl : public CBaseControl
@@ -35,9 +37,19 @@ class CIflControl : public CBaseControl
 		eNormLevel,
 	};
 
+
+	static constexpr uint32_t IFL_MEASUREBUFFERSIZE = 8U;
+
+	using MassflowControl = base::utils::CMeasuredBuffer<IFL_MEASUREBUFFERSIZE>;
+
+
 	CLwfTareTask			m_TareTask;
 	CFeederWeightControl	m_WeightCtrl;
 	base::math::CPidControl	m_PidControl;
+	base::utils::CWeightPair			m_aLoadCell0;
+	base::utils::CWeightPair			m_aLoadCell1;
+	MassflowControl			m_MassflowCtrl;
+
 
 	BOOL m_bPidParameterChanged;
 	BOOL m_bExternalSetpointChanged;
@@ -52,13 +64,21 @@ class CIflControl : public CBaseControl
 	float32_t m_fSetpoint;
 	float32_t m_fPidPropGainGross;
 	uint32_t m_SampleTime;
+	uint32_t         m_tWeightNext;
 	uint32_t m_tNext;
+	float32_t m_fDeltaMassflow;
 	eSubSteps m_eSubSteps;
 
 private:
 	BOOL Control();
 	void CheckAlarm();
-	BOOL GetWeight();
+	void GetWeight();
+	BOOL UpdateMassflow(void);
+	void MassflowInit(void);
+	BOOL UpdateWeight(void);
+	void InitWeight(void);
+
+
 	BOOL GetChangedSampleInterval();
 	BOOL GetPidParameter();
 	void EnterDefaultLevel();

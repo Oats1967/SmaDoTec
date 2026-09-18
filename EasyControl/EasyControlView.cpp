@@ -545,17 +545,6 @@ void CEasyControlView::DrawItems(CDC* pDC)
 		SetGrafik(i, CDisplayContainer::eDisplayItem::eDoseBaseNominalGrafik);
 		SetGrafik(i, CDisplayContainer::eDisplayItem::eDoseBaseActualGrafik);
 		SetGrafik(i, CDisplayContainer::eDisplayItem::eDoseButtonGrafik);
-#ifdef _DEBUG
-		{
-			auto& aV = dataimage::getDoseDataImage(i);
-			auto& rI = aV.m_Container.GetDisplayItem(CDisplayContainer::eDisplayItem::eDoseProductNameGrafik);
-			auto aA = rI.GetGrafikContext();
-			if (m_bProductNameEnable)
-			{
-				ASSERT((m_bProductNameEnable)?aA:!aA);
-			}
-		}
-#endif
 		if (m_bProductNameEnable) // Ist eigentlich nicht notwendig, weil der GrafikContext == nullptr ist -> s. Layout
 		{
 			SetProductName(i, (!m_ButtonAliveCounter), CDisplayContainer::eDisplayItem::eDoseProductNameGrafik);

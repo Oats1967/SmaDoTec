@@ -104,15 +104,60 @@ BOOL CIflControl::GetPidParameter()
 
 //*************************************************************************************
 //*************************************************************************************
-BOOL CIflControl::GetWeight()
+void CIflControl::GetWeight()
 {
 	auto result = m_WeightCtrl.Update(m_st);
-	Dose_DSVGetLCActualWeight(m_sID, &m_fWeight);
+	if (result)
+	{
+		m_aLoadCell0 = m_WeightCtrl.GetWeight();
+		m_fWeight = m_aLoadCell0.m_fWeight;
+	}
 	Dose_DSVGetLclWeightMinLevel(m_sID, &m_fMinLevel);
 	Dose_DSVGetLclWeightMaxLevel(m_sID, &m_fMaxLevel);
 	m_fNormLevel = (m_fMaxLevel + m_fMinLevel) / 2.0F;
+}
+//*********************************************************************************************
+//*********************************************************************************************
+inline void CIflControl::InitWeight(void)
+{
+	const uint32_t t = __min(2U * m_SampleTime, 20U);
+	m_aLoadCell1 = m_aLoadCell0;
+	m_tWeightNext = m_st + t;
+}
+//*********************************************************************************************
+//*********************************************************************************************
+inline BOOL CIflControl::UpdateWeight(void)
+{
+	BOOL bWeightUpdate = (m_aLoadCell0.m_ulT != m_aLoadCell1.m_ulT) && (m_st >= m_tWeightNext);
+	if (bWeightUpdate)
+	{
+		assert(m_SampleTime >= 2u);
+		m_MassflowCtrl.Add(m_aLoadCell0);
+		m_tWeightNext = m_st + m_SampleTime;
+		m_aLoadCell1 = m_aLoadCell0;
+	}
+	return bWeightUpdate;
+}
+//*********************************************************************************************
+//*********************************************************************************************
+inline void CIflControl::MassflowInit(void)
+{
+	m_MassflowCtrl.Init();
+	m_MassflowCtrl.Add(m_aLoadCell0);
+}
+//*********************************************************************************************
+//*********************************************************************************************
+inline BOOL CIflControl::UpdateMassflow(void)
+{
+	float32_t temp = 0.0F;
+	auto result = m_MassflowCtrl.GetMassflowReal(&temp);
+	if (result)
+	{
+		m_fDeltaMassflow = temp;
+	}
 	return result;
 }
+
 //*******************************************************************************************************
 //*******************************************************************************************************
 BOOL CIflControl::GetChangedSampleInterval(void)
@@ -137,6 +182,8 @@ BOOL CIflControl :: Start(const uint32_t t)
 		Dose_DSVPopPidSampleInterval(m_sID, &m_SampleTime); // [0..1]
 		Dose_DSVPopPidPropGainGross(m_sID, &m_fPidPropGainGross); // [0..1]
 		m_WeightCtrl.SetPriority(base::LC_PRIORITY::LC_PRIORITY_HIGH);
+		InitWeight();
+		MassflowInit();
 		EnterDefaultLevel();
 	}
 	return result;
@@ -234,7 +281,7 @@ void CIflControl::CheckAlarm()
 void CIflControl::EnterMinLevel()
 {
 	m_PidControl.Open(m_fPidPropGainGross * 2.0F, 0.0F, 0.01F);
-	float32_t fError = (m_fNormLevel - m_fWeight);
+	auto fError = m_fDeltaMassflow + ((m_fNormLevel - m_fWeight) * 0.01F);
 	float32_t fD = m_PidControl.Start(m_st, fError);
 	SetLineSetpoint(m_fSetpoint + fD);
 	m_tNext = m_st + m_SampleTime;
@@ -267,8 +314,8 @@ void CIflControl::RunMinLevel()
 	}
 	else if (m_st >= m_tNext)
 	{
-		float32_t fError = (m_fNormLevel - m_fWeight);
-		float32_t fD = m_PidControl.Update(m_st, fError);
+		auto fError  = m_fDeltaMassflow + ((m_fNormLevel - m_fWeight) * 0.01F);
+		auto fD = m_PidControl.Update(m_st, fError);
 		SetLineSetpoint(m_fSetpoint + fD);
 		m_tNext = m_st + m_SampleTime;
 	}
@@ -422,6 +469,13 @@ BOOL CIflControl::Execute()
 	{
 		// Gewicht holen
 		GetWeight();
+
+		result = UpdateWeight();
+		if (result)
+		{
+			UpdateMassflow();
+		}
+
 
 		GetChangedSampleInterval();
 

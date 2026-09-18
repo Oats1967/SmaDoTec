@@ -55,6 +55,7 @@ public:
 
 	//--------------------------------------------------------------------------
 	BOOL GetMassflow(float32_t* pF);
+	BOOL GetMassflowReal(float32_t* pF);
 };
 //************************************************************************************************************
 //************************************************************************************************************
@@ -72,6 +73,21 @@ inline BOOL CMeasuredBuffer<N>::GetMassflow(float32_t* pF)
 			assert(m_dC1 < 0.0);
 			*pF = _F32(fabs(m_dC1 * 3600.0));
 		}
+	}
+	return result;
+}
+//************************************************************************************************************
+//************************************************************************************************************
+template <const int32_t N>
+inline BOOL CMeasuredBuffer<N>::GetMassflowReal(float32_t* pF) // Can be positive or negative
+{
+	assert(pF);
+	*pF = 0.0f;
+	auto tendency = Tendency();
+	auto result = tendency != eTendency::TENDENCY_UNKNOWN;
+	if (result)
+	{
+		*pF = _F32(m_dC1 * 3600.0);
 	}
 	return result;
 }

@@ -24,9 +24,13 @@
 //***********************************************************************************************************
 CDoseProductNameGrafik* CDoseProductNameGrafik::Create(base::eDoseType lTyp, const CRect& rRect)
 {
-	auto pBase = new CDoseProductNameGrafik(rRect);
-	ASSERT(pBase);
-	pBase->SetDoseType(lTyp);
+	CDoseProductNameGrafik* pBase = nullptr;
+	if (lTyp != base::eDoseType::DOSETYPE_NONE)
+	{
+		pBase = new CDoseProductNameGrafik(rRect);
+		ASSERT(pBase);
+		pBase->SetDoseType(lTyp);
+	}
 	return pBase;
 }
 //***********************************************************************************************************
