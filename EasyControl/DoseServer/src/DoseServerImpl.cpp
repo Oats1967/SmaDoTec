@@ -42,15 +42,17 @@
 
 
 
+
 //*************************************************************************************************************
 //*************************************************************************************************************
 CDoseServerImpl::CDoseServerImpl(void) : m_iItems(0)
 , m_bOpen(FALSE)
 , m_pRemoteServer{ nullptr }
 , m_LastErrorCode { ErrorCodes::OK }
+, m_LCModule{ std::make_shared< loadcell::CLCModuleImpl>() }
+, m_RemoteInterface{ std::make_shared<CRemoteImpl>(m_LCModule) }
+, m_pWatchDog{ std::make_shared< CWatchDogThread>() }
 {
-	m_LCModule		  = std::make_shared< loadcell::CLCModuleImpl>();
-	m_RemoteInterface = std::make_shared<CRemoteImpl>(m_LCModule);
 }
 //*************************************************************************************************************
 //*************************************************************************************************************
@@ -60,6 +62,7 @@ CDoseServerImpl::~CDoseServerImpl(void)
 	m_pLogo.reset();
 	m_LCModule.reset();
 	m_RemoteInterface.reset();
+	m_pWatchDog.reset();
 }
 
 //*************************************************************************************************************
@@ -391,6 +394,7 @@ BOOL CDoseServerImpl :: Open	 ( const std::string& _path2DoseServer)
 	}
 	Alloc();
     InitExecute ();
+	m_pWatchDog->Open();
 	m_bOpen = TRUE;
 	return TRUE;
 }
@@ -444,6 +448,11 @@ BOOL CDoseServerImpl :: Close ( void )
 		m_pRemoteServer = nullptr;
 		ReleaseRemoteServer64Interface();
 	}
+	if (m_pWatchDog)
+	{
+		m_pWatchDog->Close();
+	}
+
 	Dose_Save(m_DoseServerConfig.m_path2DataFile);
 	Dose_Close();
 	AdsClient_EnableCommState(FALSE);

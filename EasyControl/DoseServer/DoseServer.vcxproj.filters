@@ -434,6 +434,12 @@
     <ClInclude Include="src\TotalizerPulseThread.h">
       <Filter>Quelldateien\Control\LineControl</Filter>
     </ClInclude>
+    <ClInclude Include="src\AdsWatchDogControl.h">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WatchDogThread.h">
+      <Filter>Quelldateien\Control\LineControl</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\NoiseAlarmControl.cpp">
@@ -642,6 +648,9 @@
     </ClCompile>
     <ClCompile Include="src\EmptyFeederGravTask.cpp">
       <Filter>Quelldateien\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AdsWatchDogControl.cpp">
+      <Filter>Quelldateien\Control\AdsWrapper</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

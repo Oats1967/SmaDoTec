@@ -214,6 +214,7 @@
     <ClInclude Include="src\AdsSensor.h" />
     <ClInclude Include="src\AdsSetpointControl.h" />
     <ClInclude Include="src\AdsTotalizerPulseControl.h" />
+    <ClInclude Include="src\AdsWatchDogControl.h" />
     <ClInclude Include="src\AdsWbfControl.h" />
     <ClInclude Include="src\AdsWrapperControl.h" />
     <ClInclude Include="src\AgitatorControl.h" />
@@ -276,6 +277,7 @@
     <ClInclude Include="src\SyControl.h" />
     <ClInclude Include="src\TotalizerPulseThread.h" />
     <ClInclude Include="src\VolControl.h" />
+    <ClInclude Include="src\WatchDogThread.h" />
     <ClInclude Include="src\WbfControl.h" />
     <ClInclude Include="src\WbfEncoderControl.h" />
     <ClInclude Include="src\WbfTareControl.h" />
@@ -300,6 +302,7 @@
     <ClCompile Include="src\AdsRefillSignalControl.cpp" />
     <ClCompile Include="src\AdsSetpointControl.cpp" />
     <ClCompile Include="src\AdsTotalizerPulseControl.cpp" />
+    <ClCompile Include="src\AdsWatchDogControl.cpp" />
     <ClCompile Include="src\AdsWbfControl.cpp" />
     <ClCompile Include="src\AdsWrapperControl.cpp" />
     <ClCompile Include="src\AlarmManager.cpp" />

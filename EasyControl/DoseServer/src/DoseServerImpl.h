@@ -29,6 +29,8 @@
 #include "include/DoseServerInterface.h"
 #include "include/LCModuleInterface.h"
 #include "LogoControl.h"
+#include "WatchDogThread.h"
+
 
 
 class CLineControl;
@@ -51,7 +53,8 @@ private:
 	std::vector<std::unique_ptr<CDosierer>> m_pDosierer;
 	std::shared_ptr< loadcell::ILCModuleInterface> m_LCModule;
 	std::shared_ptr< remote::IRemoteInterface>	   m_RemoteInterface;
-	remote::IRemoteServerInterface* m_pRemoteServer;
+	std::shared_ptr < CWatchDogThread >		m_pWatchDog;
+	remote::IRemoteServerInterface*			m_pRemoteServer;
 	ErrorCodes m_LastErrorCode;;
 
 

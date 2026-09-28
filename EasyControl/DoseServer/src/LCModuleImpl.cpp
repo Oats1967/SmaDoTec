@@ -744,7 +744,7 @@ LC_ERRORCODE CLCModuleImpl :: RegisterLC (const int32_t index)
 LC_ERRORCODE CLCModuleImpl :: MoveAddress (const int32_t index, int32_t iNew)
 {
 	assert(IsInitialized(index));
-	auto result = AdsClient_LoadCellSetAddress(GetType(index), index, iNew);
+	auto result = AdsClient_LoadCellSetAddress (GetType(index), index, iNew);
 	if (result == ADS_MPM_OK)
 	{
 		// copy type to new address
