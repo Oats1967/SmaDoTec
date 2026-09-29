@@ -483,6 +483,7 @@ int32_t CDoseServerImpl :: execute ( )
 		}
 		m_pLine->Execute();
 		m_pRemoteServer->Update();
+		m_pWatchDog->TriggerWatchDog();
 	}
 	base::task::Sleep(20);
 	return TRUE;

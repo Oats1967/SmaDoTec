@@ -60,7 +60,9 @@ inline BOOL CWatchDogThread ::Open()
 	if (! m_bOpen)
 	{
 		m_AdsClient.Init();
+#ifndef _DEBUG
 		if (m_AdsClient.IsEnabled())
+#endif
 		{
 			(void)CBaseClass::open();
 		}
@@ -77,8 +79,8 @@ inline BOOL CWatchDogThread::Close()
 	{
 		if (CBaseClass::IsOpen())
 		{
-			while (m_Triggered);
 			m_Terminated = true;
+			while (m_Triggered);
 			cv.notify_all();
 			(void)CBaseClass::close();
 		}
@@ -91,10 +93,13 @@ inline BOOL CWatchDogThread::Close()
 //----------------------------------------------------------------------------------------------
 inline void CWatchDogThread::TriggerWatchDog()
 {
-	assert(!m_Terminated);
-	if ( ! m_Triggered )
+	if ( CBaseClass::IsOpen())
 	{
-		cv.notify_all();
+		assert(!m_Terminated);
+		if (!m_Triggered)
+		{
+			cv.notify_all();
+		}
 	}
 }
 //----------------------------------------------------------------------------------------------
@@ -106,18 +111,20 @@ inline int32_t CWatchDogThread::execute()
 		std::chrono::milliseconds ms{ c_TriggerPulse };
 		std::unique_lock<std::mutex> lck(mtx);
 		cv.wait_for(lck, ms);
-		if ( ! m_Terminated)
+		m_Triggered = true;
+		BOOL bSignal = TRUE;
+		for (uint32_t k = 0; k < 2u; k++)
 		{
-			m_Triggered = true;
-			m_AdsClient.SetState(TRUE);
+			if (m_Terminated )
+			{ 
+				m_AdsClient.SetState(FALSE);
+				break;
+			}
+			m_AdsClient.SetState(bSignal);
 			base::task::Sleep(c_TriggerPulse);
-			m_AdsClient.SetState(FALSE);
-			m_Triggered = false;
+			bSignal = !bSignal;
 		}
-		else
-		{
-			//int k = 0;
-		}
+		m_Triggered = false;
 	}
 	else
 	{

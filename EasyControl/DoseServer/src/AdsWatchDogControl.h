@@ -40,7 +40,7 @@ public:
 inline void CAdsWatchDogControl::SetState(BOOL bState)
 {
 	assert(CBaseClass::IsInit());
-	assert(m_Output.GetEnable());
+	//assert(m_Output.GetEnable());
 	m_Output.UpdateState(bState);
 }
 //*********************************************************************************************************************
