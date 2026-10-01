@@ -44,9 +44,6 @@ private:
 	CInfoButton				m_MinLevelInfoButton;
 	CInfoButton				m_MaxLevelInfoButton;
 	CInfoButton				m_HysteresisInfoButton;
-	CInfoButton				m_MinLineSetpointInfoButton;
-	CInfoButton				m_MaxLineSetpointInfoButton;
-	CInfoButton				m_LineSetpointInfoButton;
 	CButtonProductList		m_ProductListName;
 	CMoreLessButton			m_MoreLessButton;
 
@@ -56,9 +53,6 @@ private:
 	float32_t		m_fMinLevel;
 	float32_t		m_fMaxLevel;
 	float32_t		m_fHysteresis;
-	float32_t		m_fMinLineSetpoint;
-	float32_t		m_fMaxLineSetpoint;
-	float32_t		m_fLineSetpoint;
 
 	static BOOL g_ShowLess;
 
@@ -67,9 +61,6 @@ private:
 	BOOL OnNotifyEditMinLevel();
 	BOOL OnNotifyEditMaxLevel();
 	BOOL OnNotifyEditHysteresis();
-	BOOL OnNotifyEditMinLineSetpoint();
-	BOOL OnNotifyEditMaxLineSetpoint();
-	BOOL OnNotifyEditLineSetpoint();
 
 protected:
 	void DoDataExchange(CDataExchange* pDX) override;
@@ -89,16 +80,10 @@ public:
 	afx_msg void OnBnClickedMinLevelInfo();
 	afx_msg void OnBnClickedMaxLevelInfo();
 	afx_msg void OnBnClickedHysteresisInfo();
-	afx_msg void OnBnClickedMinLineSetpointInfo();
-	afx_msg void OnBnClickedMaxLineSetpointInfo();
-	afx_msg void OnBnClickedLineSetpointInfo();
 
 	afx_msg void OnStnClickedMinLevel();
 	afx_msg void OnStnClickedMaxLevel();
 	afx_msg void OnStnClickedHysteresis();
-	afx_msg void OnStnClickedMinLineSetpoint();
-	afx_msg void OnStnClickedMaxLineSetpoint();
-	afx_msg void OnStnClickedLineSetpoint();
 	afx_msg void OnBnClickedControlParamMoreLess();
 
 

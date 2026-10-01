@@ -21,7 +21,6 @@
 #include "BaseControl.h"
 #include "FeederWeightControl.h"
 #include "LwfTareTask.h"
-#include "BASE/Utils/public/MeasuredBuffer.h"
 
 
 
@@ -31,65 +30,57 @@ class CIflControl : public CBaseControl
 
 	enum class eSubSteps : uint32_t
 	{
-		eDefault = 0,
-		eMaxLevel,
-		eMinLevel,
-		eNormLevel,
+		eInit = 0,
+		eMinLevel,		// X <= Min-Level
+		eMinMaxLevel,   // Min <= X <= Max 
+		eMaxLevel,		// X >= Max 
 	};
 
 
 	static constexpr uint32_t IFL_MEASUREBUFFERSIZE = 8U;
-
-	using MassflowControl = base::utils::CMeasuredBuffer<IFL_MEASUREBUFFERSIZE>;
-
 
 	CLwfTareTask			m_TareTask;
 	CFeederWeightControl	m_WeightCtrl;
 	base::math::CPidControl	m_PidControl;
 	base::utils::CWeightPair			m_aLoadCell0;
 	base::utils::CWeightPair			m_aLoadCell1;
-	MassflowControl			m_MassflowCtrl;
 
 
-	BOOL m_bPidParameterChanged;
 	BOOL m_bExternalSetpointChanged;
-	BOOL m_bMinReached;
-	BOOL m_bMaxReached;
-	BOOL m_bMinReachedLast;
-	BOOL m_bMaxReachedLast;
 	float32_t m_fWeight;
 	float32_t m_fMinLevel;
 	float32_t m_fMaxLevel;
-	float32_t m_fNormLevel;
-	float32_t m_fSetpoint;
-	float32_t m_fPidPropGainGross;
+	float32_t m_fActSetpoint;
+	float32_t m_fActMaxSetpoint;
+	float32_t m_fActMinSetpoint;
 	uint32_t m_SampleTime;
-	uint32_t         m_tWeightNext;
+	uint32_t m_tWeightNext;
 	uint32_t m_tNext;
-	float32_t m_fDeltaMassflow;
+	uint32_t m_tMinStart;
+	uint32_t m_tMaxStart;
 	eSubSteps m_eSubSteps;
 
 private:
 	BOOL Control();
 	void CheckAlarm();
 	void GetWeight();
-	BOOL UpdateMassflow(void);
-	void MassflowInit(void);
 	BOOL UpdateWeight(void);
 	void InitWeight(void);
 
 
-	BOOL GetChangedSampleInterval();
-	BOOL GetPidParameter();
-	void EnterDefaultLevel();
+	void GetSampleTime();
+	void EnterInitLevel();
 	void EnterMinLevel();
 	void EnterMaxLevel();
-	void EnterNormLevel();
+	void EnterMinMaxLevel();
 	void RunMinLevel();
 	void RunMaxLevel();
-	void RunNormLevel();
-	void RunDefaultLevel();
+	void RunMinMaxLevel();
+	void RunInitLevel();
 	void SetLineSetpoint(float32_t fSetpoint);
+	float32_t CalSetpoint(const float32_t fX) const;
+	void CalcMinMaxSetpoint(const float32_t fX);
+
 
 protected:
 	BOOL GetLineSetpoint() const override;

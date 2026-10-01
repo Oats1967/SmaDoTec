@@ -392,8 +392,8 @@ public:
 	DECLARE_DOSEDATA(BOOL, LclWeightMaxLevelActive);
 
 	// IFL
-	DECLARE_DOSEDATA(float32_t, IflMinLineSetpoint);			// Oberer Gewichtswert
-	DECLARE_DOSEDATA(float32_t, IflMaxLineSetpoint);			// Oberer Gewichtswert
+	//DECLARE_DOSEDATA(float32_t, IflMinLineSetpoint);			// Oberer Gewichtswert
+	//DECLARE_DOSEDATA(float32_t, IflMaxLineSetpoint);			// Oberer Gewichtswert
 
 
 	// IFS

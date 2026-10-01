@@ -68,7 +68,7 @@ uint32_t CDriveControl::GetActEncoderSpeed() const
 {
 	float32_t fMaxRotationalSpeed = 0.0F;
 	Dose_DSVGetMaxRotationalSpeed(m_sID, &fMaxRotationalSpeed);
-	assert(fMaxRotationalSpeed > 0.0F);
+	// assert(fMaxRotationalSpeed > 0.0F);
 	const uint32_t lMaxRotationalSpeed = _U32(NEXTLONG(fMaxRotationalSpeed));
 	float32_t fEncoder = 0.0f;
 	Dose_DSVGetActualLogoEncoder(m_sID, &fEncoder); // [ 0..1 ]

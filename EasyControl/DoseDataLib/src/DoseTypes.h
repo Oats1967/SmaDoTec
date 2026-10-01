@@ -146,8 +146,8 @@ struct CGlobalDoseItem
 
 
 	// IFL
-	DECLARE_VARIABLE(float32_t, IflMinLineSetpoint);			// Oberer Gewichtswert
-	DECLARE_VARIABLE(float32_t, IflMaxLineSetpoint);			// Oberer Gewichtswert
+	DECLARE_VARIABLE(float32_t, Reserved1);			// Oberer Gewichtswert
+	DECLARE_VARIABLE(float32_t, Reserved2);			// Oberer Gewichtswert
 
 	// IFS
 	DECLARE_VARIABLE(BOOL, IfsSwitchHigh);					// Endschalter Einschneckenextruder oben bzw. �berlauf aktiviert

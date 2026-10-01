@@ -24,24 +24,28 @@
 
 //*************************************************************************************
 //*************************************************************************************
+static float32_t ROUNDSETPOINT(const float32_t f)
+{
+	return (((f) < 10.0F) ? (f) : NEXTLONG(f));
+}
+//*************************************************************************************
+//*************************************************************************************
 CIflControl::CIflControl(int32_t id, loadcell::ILCModuleInterface& rlc) : CBaseClass(id)
 , m_WeightCtrl{ id }
 , m_TareTask{ id }
-, m_bPidParameterChanged{ FALSE }
 , m_bExternalSetpointChanged{ FALSE }
-, m_bMinReached{ FALSE }
-, m_bMaxReached{ FALSE }
-, m_bMinReachedLast{ FALSE }
-, m_bMaxReachedLast{ FALSE }
 , m_fWeight{ 0.0F }
 , m_fMinLevel{ 0.0F }
 , m_fMaxLevel{ 0.0F }
-, m_fNormLevel{ 0.0F }
-, m_fSetpoint{ 0.0F }
-, m_fPidPropGainGross{ 0.0F }
+, m_fActSetpoint{ 0.0F }
+, m_fActMaxSetpoint{ 0.0F }
+, m_fActMinSetpoint{ 0.0F }
 , m_SampleTime{ 1U }
+, m_tWeightNext{ 0 }
 , m_tNext{ 0 }
-, m_eSubSteps { eSubSteps ::eDefault}
+, m_tMinStart{ 0 }
+, m_tMaxStart{ 0 }
+, m_eSubSteps { eSubSteps ::eInit}
 
 {
 	m_WeightCtrl.registerAlarmManager(this->m_aAlarm);
@@ -51,25 +55,10 @@ CIflControl::CIflControl(int32_t id, loadcell::ILCModuleInterface& rlc) : CBaseC
 }
 //*************************************************************************************
 //*************************************************************************************
-void CIflControl::SetLineSetpoint(float32_t fSetpoint)
+inline void CIflControl::SetLineSetpoint(float32_t fSetpoint)
 {
-	const float32_t c_epsilon = 1e-04f;
-
-	float32_t fMinSetpoint;
-	float32_t fMaxSetpoint;
-	Dose_DSVGetIflMinLineSetpoint(m_sID, &fMinSetpoint);
-	Dose_DSVGetIflMaxLineSetpoint(m_sID, &fMaxSetpoint);
-	if (fabs(fMaxSetpoint - 0.0F) < c_epsilon)
-	{
-		fMaxSetpoint = FLT_MAX;
-	}
-
-	fSetpoint = RANGE(fSetpoint, fMinSetpoint, fMaxSetpoint);
 	Dose_EXSetMBLineSetpoint(fSetpoint);
 	Dose_DSVSetActualSetpoint(m_sID, fSetpoint);
-	m_fSetpoint = fSetpoint;
-	m_bPidParameterChanged = FALSE;
-	m_bExternalSetpointChanged = FALSE;
 }
 //*************************************************************************************
 //*************************************************************************************
@@ -91,19 +80,6 @@ BOOL CIflControl::GetLineSetpoint() const
 }
 //*************************************************************************************
 //*************************************************************************************
-BOOL CIflControl::GetPidParameter()
-{
-	BOOL bChanged = FALSE;
-	Dose_DSVGetChangedPidPropGainGross(m_sID, &bChanged); // [0..1]
-	if (bChanged)
-	{
-		Dose_DSVPopPidPropGainGross(m_sID, &m_fPidPropGainGross); // [0..1]
-	}
-	return bChanged;
-}
-
-//*************************************************************************************
-//*************************************************************************************
 void CIflControl::GetWeight()
 {
 	auto result = m_WeightCtrl.Update(m_st);
@@ -114,7 +90,6 @@ void CIflControl::GetWeight()
 	}
 	Dose_DSVGetLclWeightMinLevel(m_sID, &m_fMinLevel);
 	Dose_DSVGetLclWeightMaxLevel(m_sID, &m_fMaxLevel);
-	m_fNormLevel = (m_fMaxLevel + m_fMinLevel) / 2.0F;
 }
 //*********************************************************************************************
 //*********************************************************************************************
@@ -131,46 +106,19 @@ inline BOOL CIflControl::UpdateWeight(void)
 	BOOL bWeightUpdate = (m_aLoadCell0.m_ulT != m_aLoadCell1.m_ulT) && (m_st >= m_tWeightNext);
 	if (bWeightUpdate)
 	{
-		assert(m_SampleTime >= 2u);
-		m_MassflowCtrl.Add(m_aLoadCell0);
+		//assert(m_SampleTime >= 2u);
 		m_tWeightNext = m_st + m_SampleTime;
 		m_aLoadCell1 = m_aLoadCell0;
 	}
 	return bWeightUpdate;
 }
-//*********************************************************************************************
-//*********************************************************************************************
-inline void CIflControl::MassflowInit(void)
-{
-	m_MassflowCtrl.Init();
-	m_MassflowCtrl.Add(m_aLoadCell0);
-}
-//*********************************************************************************************
-//*********************************************************************************************
-inline BOOL CIflControl::UpdateMassflow(void)
-{
-	float32_t temp = 0.0F;
-	auto result = m_MassflowCtrl.GetMassflowReal(&temp);
-	if (result)
-	{
-		m_fDeltaMassflow = temp;
-	}
-	return result;
-}
 
 //*******************************************************************************************************
 //*******************************************************************************************************
-BOOL CIflControl::GetChangedSampleInterval(void)
+void CIflControl::GetSampleTime(void)
 {
-	BOOL bChanged = FALSE;
-
-	Dose_DSVGetChangedPidSampleInterval(m_sID, &bChanged); // [0..1]
-	if (bChanged)
-	{
-		Dose_DSVPopPidSampleInterval(m_sID, &m_SampleTime); // [0..1]
-		m_SampleTime = __max(m_SampleTime, 1U);
-	}
-	return bChanged;
+	Dose_DSVPopPidSampleInterval(m_sID, &m_SampleTime); // [0..1]
+	m_SampleTime = __max(m_SampleTime, 2U);
 }
 //*************************************************************************************
 //*************************************************************************************
@@ -179,12 +127,9 @@ BOOL CIflControl :: Start(const uint32_t t)
     auto result = CBaseClass::Start(t);
     if (result)
     {
-		Dose_DSVPopPidSampleInterval(m_sID, &m_SampleTime); // [0..1]
-		Dose_DSVPopPidPropGainGross(m_sID, &m_fPidPropGainGross); // [0..1]
 		m_WeightCtrl.SetPriority(base::LC_PRIORITY::LC_PRIORITY_HIGH);
 		InitWeight();
-		MassflowInit();
-		EnterDefaultLevel();
+		EnterInitLevel();
 	}
 	return result;
 }
@@ -207,16 +152,10 @@ BOOL CIflControl :: InitExecute ( void)
     auto result = CBaseClass::InitExecute();
     if (result)
     {
-		m_bMinReached = FALSE;
-		m_bMaxReached = FALSE;
-		m_bMinReachedLast = FALSE;
-		m_bMaxReachedLast = FALSE;
-
-		Dose_EXGetLineSetpoint(&m_fSetpoint);
-		Dose_DSVSetActualSetpoint(m_sID, m_fSetpoint);
-		Dose_DSVSetNominalSetpoint(m_sID, m_fSetpoint);
-		Dose_DSVPopPidPropGainGross(m_sID, &m_fPidPropGainGross); // [0..1]
-		Dose_DSVPopPidSampleInterval(m_sID, &m_SampleTime); // [0..1]
+		m_bExternalSetpointChanged = FALSE;
+		Dose_EXGetLineSetpoint(&m_fActSetpoint);
+		Dose_DSVSetActualSetpoint(m_sID, m_fActSetpoint);
+		Dose_DSVSetNominalSetpoint(m_sID, m_fActSetpoint);
 		Dose_DSVSetLclWeightMaxLevelActive(m_sID, FALSE);
 		Dose_DSVSetLclWeightMinLevelActive(m_sID, FALSE);
 		m_WeightCtrl.InitExecute();
@@ -241,83 +180,154 @@ BOOL CIflControl :: ExitExecute ( void)
 //*********************************************************************************************
 void CIflControl::CheckAlarm()
 {
-	if (m_bMinReached)
+	switch (m_eSubSteps)
 	{
-		if (!m_bMinReachedLast)
+	case eSubSteps::eMinLevel:
+	{
+		if (!m_aAlarm.IsAlarm(base::eAlarmError::ERROR_DOSE_LC_MINWEIGHT))
 		{
-			if (!m_aAlarm.IsAlarm(base::eAlarmError::ERROR_DOSE_LC_MINWEIGHT))
-			{
-				m_aAlarm.SetAlarm(m_st, base::eAlarmError::ERROR_DOSE_LC_MINWEIGHT, TRUE, base::eAlarmClass::eWARNTYP);
-			}
+			m_aAlarm.SetAlarm(m_st, base::eAlarmError::ERROR_DOSE_LC_MINWEIGHT, TRUE, base::eAlarmClass::eWARNTYP);
 		}
 	}
-	else
+	break;
+
+	case eSubSteps::eMaxLevel:
+	{
+		if (!m_aAlarm.IsAlarm(base::eAlarmError::ERROR_DOSE_LC_MAXWEIGHT))
+		{
+			m_aAlarm.SetAlarm(m_st, base::eAlarmError::ERROR_DOSE_LC_MAXWEIGHT, TRUE, base::eAlarmClass::eWARNTYP);
+		}
+	}
+	break;
+
+	case eSubSteps::eInit:
+	case eSubSteps::eMinMaxLevel:
 	{
 		m_aAlarm.ClearAlarm(base::eAlarmError::ERROR_DOSE_LC_MINWEIGHT);
-	}
-	m_bMinReachedLast = m_bMinReached;
-
-	if (m_bMaxReached)
-	{
-		if (!m_bMaxReachedLast)
-		{
-			if (!m_aAlarm.IsAlarm(base::eAlarmError::ERROR_DOSE_LC_MAXWEIGHT))
-			{
-				m_aAlarm.SetAlarm(m_st, base::eAlarmError::ERROR_DOSE_LC_MAXWEIGHT, TRUE, base::eAlarmClass::eWARNTYP);
-			}
-		}
-	}
-	else
-	{
 		m_aAlarm.ClearAlarm(base::eAlarmError::ERROR_DOSE_LC_MAXWEIGHT);
 	}
-
-	m_bMaxReachedLast = m_bMaxReached;
+	break;
+	}
 	m_aAlarm.CheckWarningLevel(base::eAlarmError::ERROR_DOSE_LC_MAXWEIGHT);
 	m_aAlarm.CheckWarningLevel(base::eAlarmError::ERROR_DOSE_LC_MINWEIGHT);
 }
 //*************************************************************************************
 //*************************************************************************************
+float32_t CIflControl::CalSetpoint(const float32_t fX) const
+{
+	const float32_t epsilon = 1e-06f;
+
+	const float32_t fMin = m_fActMinSetpoint;
+	const float32_t fMax = m_fActMaxSetpoint;
+	const float32_t xMin = m_fMinLevel;
+	const float32_t xMax = m_fMaxLevel;
+
+	assert(xMin < xMax);
+	assert(fMin > fMax);
+
+	if (_F32(fabs(xMin - xMax) < epsilon))
+	{
+		return m_fActSetpoint;
+	}
+	auto m = (fMin - fMax) / (xMin - xMax);
+	auto b = fMin - m * xMin;
+	auto f = m * fX + b;
+	return ROUNDSETPOINT(f);
+}
+//*************************************************************************************
+//*************************************************************************************
+inline void CIflControl::CalcMinMaxSetpoint(const float32_t fX)
+{
+	m_fActMinSetpoint = ROUNDSETPOINT(1.1F * fX);
+	m_fActMaxSetpoint = ROUNDSETPOINT(0.9F * fX);
+}
+//*************************************************************************************
+//*************************************************************************************
 void CIflControl::EnterMinLevel()
 {
-	m_PidControl.Open(m_fPidPropGainGross * 2.0F, 0.0F, 0.01F);
-	auto fError = m_fDeltaMassflow + ((m_fNormLevel - m_fWeight) * 0.01F);
-	float32_t fD = m_PidControl.Start(m_st, fError);
-	SetLineSetpoint(m_fSetpoint + fD);
-	m_tNext = m_st + m_SampleTime;
+	float32_t fSetpoint = 0.0F;
+
+	m_fActSetpoint = m_fActMinSetpoint;
+	SetLineSetpoint(m_fActSetpoint);
+
+	m_tMinStart = m_st;
+	m_tNext = m_tMinStart + m_SampleTime;
 	m_eSubSteps = eSubSteps::eMinLevel;
 }
 //*************************************************************************************
 //*************************************************************************************
 void CIflControl::RunMinLevel()
 {
-	float32_t fHysteresis = 0.0F;
-	Dose_DSVGetLclWeightHysteresis(m_sID, &fHysteresis);
-
-	if (m_fWeight > m_fMaxLevel)
-	{
-		EnterMaxLevel();
-	}
-	else if (m_fWeight > m_fMinLevel + fHysteresis)
-	{
-		EnterNormLevel();
-	}
-	else if (m_bExternalSetpointChanged)
+	if (m_bExternalSetpointChanged)
 	{
 		m_bExternalSetpointChanged = FALSE;
-		Dose_DSVGetNominalSetpoint(m_sID, &m_fSetpoint);
-		EnterMinLevel();
+		Dose_DSVGetNominalSetpoint(m_sID, &m_fActSetpoint);
+		CalcMinMaxSetpoint(m_fActSetpoint);
+		SetLineSetpoint(m_fActSetpoint);
 	}
-	else if (m_bPidParameterChanged)
+	else
 	{
-		EnterMinLevel();
+		if (m_st >= m_tNext)
+		{
+			if (m_fWeight < m_fMinLevel)
+			{
+				if (m_st >= m_tMinStart + 30u)
+				{
+					m_tMinStart = m_st;
+					CalcMinMaxSetpoint(m_fActSetpoint);
+					m_fActSetpoint = m_fActMinSetpoint;
+					SetLineSetpoint(m_fActSetpoint);
+				}
+			}
+			else if (m_fWeight > m_fMaxLevel)
+			{
+				EnterMaxLevel();
+			}
+			else // m_fMinLevel <= X <= m_fMaxLevel
+			{
+				EnterMinMaxLevel();
+			}
+			m_tNext = m_st + m_SampleTime;
+		}
 	}
-	else if (m_st >= m_tNext)
+}
+//*************************************************************************************
+//*************************************************************************************
+void CIflControl::EnterMinMaxLevel()
+{
+	m_tNext = m_st + m_SampleTime;
+	m_eSubSteps = eSubSteps::eMinLevel;
+}
+//*************************************************************************************
+//*************************************************************************************
+void CIflControl::RunMinMaxLevel()
+{
+	if (m_bExternalSetpointChanged)
 	{
-		auto fError  = m_fDeltaMassflow + ((m_fNormLevel - m_fWeight) * 0.01F);
-		auto fD = m_PidControl.Update(m_st, fError);
-		SetLineSetpoint(m_fSetpoint + fD);
-		m_tNext = m_st + m_SampleTime;
+		m_bExternalSetpointChanged = FALSE;
+		Dose_DSVGetNominalSetpoint(m_sID, &m_fActSetpoint);
+		CalcMinMaxSetpoint(m_fActSetpoint);
+		SetLineSetpoint(m_fActSetpoint);
+	}
+	else
+	{
+		if (m_st >= m_tNext)
+		{
+			if (m_fWeight < m_fMinLevel)
+			{
+				EnterMinLevel();
+			}
+			else if (m_fWeight > m_fMaxLevel)
+			{
+				EnterMaxLevel();
+			}
+			else if (m_st >= m_tNext)
+			{
+				m_fActSetpoint = CalSetpoint(m_fWeight);
+				SetLineSetpoint(m_fActSetpoint);
+			}
+			m_tNext = m_st + m_SampleTime;
+		}
 	}
 }
 
@@ -325,88 +335,40 @@ void CIflControl::RunMinLevel()
 //*************************************************************************************
 void CIflControl::EnterMaxLevel()
 {
+	m_fActSetpoint = 0.0F;
 	SetLineSetpoint(0.0F);
-	m_tNext = m_st + m_SampleTime;
+	m_tMaxStart = m_st;
+	m_tNext		= m_st + m_SampleTime;
+
 	m_eSubSteps = eSubSteps::eMaxLevel;
 }
 //*************************************************************************************
 //*************************************************************************************
 void CIflControl::RunMaxLevel()
 {
-	float32_t fHysteresis = 0.0F;
-	Dose_DSVGetLclWeightHysteresis(m_sID, &fHysteresis);
-	if (m_fWeight < m_fMaxLevel - fHysteresis)
+	if (m_st >= m_tNext)
 	{
-		Dose_DSVGetNominalSetpoint(m_sID, &m_fSetpoint);
-		EnterNormLevel();
-	}
-	else if (m_fWeight < m_fMinLevel)
-	{
-		EnterMinLevel();
-	}
-	else
-	{
-		// do nothing
-	}
-}
-//*************************************************************************************
-//*************************************************************************************
-void CIflControl::EnterNormLevel()
-{
-	static const float32_t fPidIntegralGain = 0.00f;
-	static const float32_t fDifferentialverstaerkung = 0.01f;
-
-	float32_t fPidPropGainGross = 0.0F;
-	Dose_DSVPopPidPropGainGross(m_sID, &fPidPropGainGross); // [0..1]
-	fPidPropGainGross /= 100.0f;
-	m_PidControl.Open(fPidPropGainGross, fPidIntegralGain, fDifferentialverstaerkung);
-	float32_t fError = ( m_fNormLevel - m_fWeight );
-	float32_t fD = m_PidControl.Start(m_st, fError);
-	SetLineSetpoint(m_fSetpoint + fD);
-	m_tNext = m_st + m_SampleTime;
-	m_eSubSteps = eSubSteps::eNormLevel;
-}
-//*************************************************************************************
-//*************************************************************************************
-void CIflControl::RunNormLevel()
-{
-	if (m_fWeight < m_fMinLevel)
-	{
-		EnterMinLevel();
-	}
-	else if (m_fWeight > m_fMaxLevel)
-	{
-		EnterMaxLevel();
-	}
-	else if (m_bExternalSetpointChanged)
-	{
-		m_bExternalSetpointChanged = FALSE;
-		Dose_DSVGetNominalSetpoint(m_sID, &m_fSetpoint);
-		EnterNormLevel();
-	}
-	else if (m_bPidParameterChanged)
-	{
-		EnterNormLevel();
-	}
-	else if (m_st >= m_tNext)
-	{
-		float32_t fError = (m_fNormLevel - m_fWeight);
-		float32_t fD = m_PidControl.Update(m_st, fError);
-		SetLineSetpoint(m_fSetpoint + fD);
+		if (m_fWeight < m_fMinLevel)
+		{
+			// Zeit stoppen
+			m_fActSetpoint = ROUNDSETPOINT(3600.0F / (m_st - m_tMaxStart) * (m_fMaxLevel - m_fMinLevel));
+			CalcMinMaxSetpoint(m_fActSetpoint);
+			EnterMinLevel();
+		}
 		m_tNext = m_st + m_SampleTime;
 	}
 }
 //*************************************************************************************
 //*************************************************************************************
-void CIflControl::EnterDefaultLevel()
+void CIflControl::EnterInitLevel()
 {
-	m_bExternalSetpointChanged = FALSE;
-	Dose_DSVGetNominalSetpoint(m_sID, &m_fSetpoint);
-	m_eSubSteps = eSubSteps::eDefault;
+	Dose_DSVGetNominalSetpoint(m_sID, &m_fActSetpoint);
+	CalcMinMaxSetpoint(m_fActSetpoint);
+	m_eSubSteps = eSubSteps::eInit;
 }
 //*************************************************************************************
 //*************************************************************************************
-void CIflControl::RunDefaultLevel()
+void CIflControl::RunInitLevel()
 {
 	if (m_fWeight < m_fMinLevel)
 	{
@@ -418,7 +380,7 @@ void CIflControl::RunDefaultLevel()
 	}
 	else
 	{
-		EnterNormLevel();
+		EnterMinMaxLevel();
 	}
 }
 //*************************************************************************************
@@ -428,27 +390,27 @@ BOOL CIflControl :: Control ()
 	switch (m_eSubSteps)
 	{
 		default:
-		case eSubSteps::eDefault:
+		case eSubSteps::eInit:
 		{
-			RunDefaultLevel();
-		}
-		break;
-
-		case eSubSteps::eNormLevel:
-		{
-			RunNormLevel();
-		}
-		break;
-
-		case eSubSteps::eMaxLevel:
-		{
-			RunMaxLevel();
+			RunInitLevel();
 		}
 		break;
 
 		case eSubSteps::eMinLevel:
 		{
 			RunMinLevel();
+		}
+		break;
+
+		case eSubSteps::eMinMaxLevel:
+		{
+			RunMinMaxLevel();
+		}
+		break;
+
+		case eSubSteps::eMaxLevel:
+		{
+			RunMaxLevel();
 		}
 		break;
 	}
@@ -467,27 +429,17 @@ BOOL CIflControl::Execute()
 	auto result = CBaseControl::Execute();
 	if (result)
 	{
+		GetSampleTime();
+
 		// Gewicht holen
 		GetWeight();
 
-		result = UpdateWeight();
-		if (result)
-		{
-			UpdateMassflow();
-		}
-
-
-		GetChangedSampleInterval();
+		(void)UpdateWeight();
 
 		BOOL bChanged = GetLineSetpoint();
 		if (bChanged)
 		{
 			m_bExternalSetpointChanged = TRUE;
-		}
-		bChanged = GetPidParameter();
-		if (bChanged)
-		{
-			m_bPidParameterChanged = TRUE;
 		}
 		// Freigabe
 		BOOL bRelease = FALSE;

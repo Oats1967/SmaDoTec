@@ -373,8 +373,8 @@ DECLARE_DOSEDSV(BOOL, LclWeightMinLevelActive);
 DECLARE_DOSEDSV(BOOL, LclWeightMaxLevelActive);
 
 // IFL
-DECLARE_DOSEDSV(float32_t, IflMinLineSetpoint);			// Oberer Gewichtswert
-DECLARE_DOSEDSV(float32_t, IflMaxLineSetpoint);			// Oberer Gewichtswert
+//DECLARE_DOSEDSV(float32_t, Reserved1);			// Oberer Gewichtswert
+//DECLARE_DOSEDSV(float32_t, Reserved2);			// Oberer Gewichtswert
 
 
 // IFS

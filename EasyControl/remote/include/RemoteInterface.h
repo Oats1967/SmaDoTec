@@ -575,12 +575,12 @@ public:
     virtual int32_t getDoseLclWeightHysteresis(const int32_t index, float32_t& value) = 0;
 
     // Min. Linesetpoint IFL
-    virtual int32_t setDoseIflMinLineSetpoint(const int32_t index, const float32_t value) = 0;
-    virtual int32_t getDoseIflMinLineSetpoint(const int32_t index, float32_t& value) = 0;
+    //virtual int32_t setDoseIflMinLineSetpoint(const int32_t index, const float32_t value) = 0;
+    //virtual int32_t getDoseIflMinLineSetpoint(const int32_t index, float32_t& value) = 0;
 
     // Max. Linesetpoint IFL
-    virtual int32_t setDoseIflMaxLineSetpoint(const int32_t index, const float32_t value) = 0;
-    virtual int32_t getDoseIflMaxLineSetpoint(const int32_t index, float32_t& value) = 0;
+    //virtual int32_t setDoseIflMaxLineSetpoint(const int32_t index, const float32_t value) = 0;
+    //virtual int32_t getDoseIflMaxLineSetpoint(const int32_t index, float32_t& value) = 0;
 
     // IFS
     // \brief GainFactor

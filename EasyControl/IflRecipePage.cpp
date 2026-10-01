@@ -41,18 +41,12 @@ BEGIN_MESSAGE_MAP(CIflRecipePage, CDosePage)
 	ON_STN_CLICKED(IDC_IFL_RECIPE_MINLEVEL_EDIT, &CIflRecipePage::OnStnClickedMinLevel)
 	ON_STN_CLICKED(IDC_IFL_RECIPE_MAXLEVEL_EDIT, &CIflRecipePage::OnStnClickedMaxLevel)
 	ON_STN_CLICKED(IDC_IFL_RECIPE_HYSTERESIS_EDIT, &CIflRecipePage::OnStnClickedHysteresis)
-	ON_STN_CLICKED(IDC_IFL_RECIPE_MINSETPOINT_EDIT, &CIflRecipePage::OnStnClickedMinLineSetpoint)
-	ON_STN_CLICKED(IDC_IFL_RECIPE_MAXSETPOINT_EDIT, &CIflRecipePage::OnStnClickedMaxLineSetpoint)
-	ON_STN_CLICKED(IDC_IFL_RECIPE_SETPOINT_EDIT, &CIflRecipePage::OnStnClickedLineSetpoint)
 
 	ON_BN_CLICKED(IDC_IFL_RECIPE_NAME_BT, &CIflRecipePage::OnBnClickedIflNameBt)
 	ON_BN_CLICKED(IDC_IFL_RECIPE_LINE, &CIflRecipePage::OnBnClickedIflLinie)
 	ON_BN_CLICKED(IDC_IFL_RECIPE_MINLEVEL_INFO, &CIflRecipePage::OnBnClickedMinLevelInfo)
 	ON_BN_CLICKED(IDC_IFL_RECIPE_MAXLEVEL_INFO, &CIflRecipePage::OnBnClickedMaxLevelInfo)
 	ON_BN_CLICKED(IDC_IFL_RECIPE_HYSTERESIS_INFO, &CIflRecipePage::OnBnClickedHysteresisInfo)
-	ON_BN_CLICKED(IDC_IFL_RECIPE_MINSETPOINT_INFO, &CIflRecipePage::OnBnClickedMinLineSetpointInfo)
-	ON_BN_CLICKED(IDC_IFL_RECIPE_MAXSETPOINT_INFO, &CIflRecipePage::OnBnClickedMaxLineSetpointInfo)
-	ON_BN_CLICKED(IDC_IFL_RECIPE_SETPOINT_INFO, &CIflRecipePage::OnBnClickedLineSetpointInfo)
 
 	ON_BN_CLICKED(IDC_IFL_RECIPE_CONTROLPARAMETER_MORELESS, &CIflRecipePage::OnBnClickedControlParamMoreLess)
 
@@ -70,9 +64,6 @@ CIflRecipePage::CIflRecipePage(): CDosePage(CIflRecipePage::IDD)
 			EDITITEM(IDC_IFL_RECIPE_MINLEVEL_EDIT,	OnNotifyEditMinLevel),
 			EDITITEM(IDC_IFL_RECIPE_MAXLEVEL_EDIT,	OnNotifyEditMaxLevel),
 			EDITITEM(IDC_IFL_RECIPE_HYSTERESIS_EDIT,	OnNotifyEditHysteresis),
-			EDITITEM(IDC_IFL_RECIPE_MINSETPOINT_EDIT,	OnNotifyEditMinLineSetpoint),
-			EDITITEM(IDC_IFL_RECIPE_MAXSETPOINT_EDIT,	OnNotifyEditMaxLineSetpoint),
-			EDITITEM(IDC_IFL_RECIPE_SETPOINT_EDIT,	OnNotifyEditLineSetpoint),
 
 		})
 		, m_aLocalMode()
@@ -84,9 +75,6 @@ CIflRecipePage::CIflRecipePage(): CDosePage(CIflRecipePage::IDD)
 		, m_fMinLevel{ 0.0F }
 		, m_fMaxLevel{ 0.0F }
 		, m_fHysteresis{ 0.0F }
-		, m_fMinLineSetpoint{ 0.0F }
-		, m_fMaxLineSetpoint{ 0.0F }
-		, m_fLineSetpoint{ 0.0F }
 {}
 //***************************************************************************************
 //***************************************************************************************
@@ -100,18 +88,12 @@ void CIflRecipePage::DoDataExchange(CDataExchange* pDX)
 	DDX_Float(pDX, IDC_IFL_RECIPE_MINLEVEL_EDIT, m_fMinLevel);
 	DDX_Float(pDX, IDC_IFL_RECIPE_MAXLEVEL_EDIT, m_fMaxLevel);
 	DDX_Float(pDX, IDC_IFL_RECIPE_HYSTERESIS_EDIT, m_fHysteresis);
-	DDX_Float(pDX, IDC_IFL_RECIPE_MINSETPOINT_EDIT, m_fMinLineSetpoint);
-	DDX_Float(pDX, IDC_IFL_RECIPE_MAXSETPOINT_EDIT, m_fMaxLineSetpoint);
-	DDX_Float(pDX, IDC_IFL_RECIPE_SETPOINT_EDIT, m_fLineSetpoint);
 	DDX_FloatHR(pDX, IDC_IFL_RECIPE_ACTWEIGHT, m_fActWeight);
 
 	DDX_Control(pDX, IDC_IFL_RECIPE_IMAGE, m_aGrafikContainer);
 	DDX_Control(pDX, IDC_IFL_RECIPE_MINLEVEL_INFO, m_MinLevelInfoButton);
 	DDX_Control(pDX, IDC_IFL_RECIPE_MAXLEVEL_INFO, m_MaxLevelInfoButton);
 	DDX_Control(pDX, IDC_IFL_RECIPE_HYSTERESIS_INFO, m_HysteresisInfoButton);
-	DDX_Control(pDX, IDC_IFL_RECIPE_MINSETPOINT_INFO, m_MinLineSetpointInfoButton);
-	DDX_Control(pDX, IDC_IFL_RECIPE_MAXSETPOINT_INFO, m_MaxLineSetpointInfoButton);
-	DDX_Control(pDX, IDC_IFL_RECIPE_SETPOINT_INFO, m_LineSetpointInfoButton);
 	DDX_Control(pDX, IDC_IFL_RECIPE_NAME_BT, m_ProductListName);
 	DDX_Control(pDX, IDC_IFL_RECIPE_LINE, m_aLocalMode);
 	DDX_Control(pDX, IDC_IFL_RECIPE_CONTROLPARAMETER_MORELESS, m_MoreLessButton);
@@ -183,39 +165,6 @@ BOOL CIflRecipePage::OnNotifyEditHysteresis(void)
 	}
 	return bModified;
 }
-//******************************************************************************************************
-//******************************************************************************************************
-BOOL CIflRecipePage::OnNotifyEditMinLineSetpoint(void)
-{
-	auto bModified = CEditCtrl::GetFloatAbsModified(m_fMinLineSetpoint);
-	if (bModified)
-	{
-		REMOTEREF.setDoseIflMinLineSetpoint(m_sItem, m_fMinLineSetpoint);
-	}
-	return bModified;
-}
-//******************************************************************************************************
-//******************************************************************************************************
-BOOL CIflRecipePage::OnNotifyEditMaxLineSetpoint(void)
-{
-	auto bModified = CEditCtrl::GetFloatAbsModified(m_fMaxLineSetpoint);
-	if (bModified)
-	{
-		REMOTEREF.setDoseIflMaxLineSetpoint(m_sItem, m_fMaxLineSetpoint);
-	}
-	return bModified;
-}
-//******************************************************************************************************
-//******************************************************************************************************
-BOOL CIflRecipePage::OnNotifyEditLineSetpoint(void)
-{
-	auto bModified = CEditCtrl::GetFloatAbsModified(m_fLineSetpoint);
-	if (bModified)
-	{
-		REMOTEREF.setLineSetpoint(m_fLineSetpoint);
-	}
-	return bModified;
-}
 //*****************************************************************************************************
 //*****************************************************************************************************
 LRESULT CIflRecipePage::OnNotifyEdit(WPARAM id, LPARAM bValue)
@@ -261,26 +210,19 @@ void CIflRecipePage::SetControlStyle (void)
 	ENABLE_SHOW_ID(IDC_IFL_RECIPE_LINE, (!bSlaveMode) && (!bStarted), !bSlaveMode);
 
 	ENABLE_ID(IDC_IFL_RECIPE_NAME, bLogin);
-	ENABLE_ID(IDC_IFL_RECIPE_SETPOINT_EDIT, bLogin);
 
 	const BOOL bShowControlParam = !g_ShowLess;
 	ENABLE_SHOW_ID(IDC_IFL_RECIPE_MINLEVEL_EDIT, bLogin, bShowControlParam);
 	ENABLE_SHOW_ID(IDC_IFL_RECIPE_MAXLEVEL_EDIT, bLogin, bShowControlParam);
 	ENABLE_SHOW_ID(IDC_IFL_RECIPE_HYSTERESIS_EDIT, bLogin, bShowControlParam);
-	ENABLE_SHOW_ID(IDC_IFL_RECIPE_MINSETPOINT_EDIT, bLogin, bShowControlParam);
-	ENABLE_SHOW_ID(IDC_IFL_RECIPE_MAXSETPOINT_EDIT, bLogin, bShowControlParam);
 
 	SHOWW_ID(IDC_IFL_RECIPE_MINLEVEL_STATIC, bShowControlParam);
 	SHOWW_ID(IDC_IFL_RECIPE_MAXLEVEL_STATIC, bShowControlParam);
 	SHOWW_ID(IDC_IFL_RECIPE_HYSTERESIS_STATIC, bShowControlParam);
-	SHOWW_ID(IDC_IFL_RECIPE_MINSETPOINT_STATIC, bShowControlParam);
-	SHOWW_ID(IDC_IFL_RECIPE_MAXSETPOINT_STATIC, bShowControlParam);
 
 	SHOWW_ID(IDC_IFL_RECIPE_MINLEVEL_INFO, bShowControlParam);
 	SHOWW_ID(IDC_IFL_RECIPE_MAXLEVEL_INFO, bShowControlParam);
 	SHOWW_ID(IDC_IFL_RECIPE_HYSTERESIS_INFO, bShowControlParam);
-	SHOWW_ID(IDC_IFL_RECIPE_MINSETPOINT_INFO, bShowControlParam);
-	SHOWW_ID(IDC_IFL_RECIPE_MAXSETPOINT_INFO, bShowControlParam);
 
 }
 //*****************************************************************************************************
@@ -294,9 +236,6 @@ BOOL CIflRecipePage::OnUpdateControls (void)
 	REMOTEREF.getDoseLclWeightMaxLevel(m_sItem, m_fMaxLevel);
 	REMOTEREF.getDoseLclWeightMinLevel(m_sItem, m_fMinLevel);
 	REMOTEREF.getDoseLclWeightHysteresis(m_sItem, m_fHysteresis);
-	REMOTEREF.getDoseIflMinLineSetpoint(m_sItem, m_fMinLineSetpoint);
-	REMOTEREF.getDoseIflMaxLineSetpoint(m_sItem, m_fMaxLineSetpoint);
-	REMOTEREF.getLineSetpoint(m_fLineSetpoint);
 
 	REMOTEREF.getDoseLCMeanWeight(m_sItem, m_fActWeight);
 	SetControlStyle();
@@ -314,9 +253,6 @@ BOOL CIflRecipePage::OnInitDialog()
 		INITINFOBUTTON(m_MinLevelInfoButton)
 		INITINFOBUTTON(m_MaxLevelInfoButton)
 		INITINFOBUTTON(m_HysteresisInfoButton)
-		INITINFOBUTTON(m_MinLineSetpointInfoButton)
-		INITINFOBUTTON(m_MaxLineSetpointInfoButton)
-		INITINFOBUTTON(m_LineSetpointInfoButton)
 		INITINFOBUTTON(m_MoreLessButton)
 
 		SetNumberFont(IDC_IFL_RECIPE_NR);
@@ -369,24 +305,6 @@ void CIflRecipePage::OnStnClickedHysteresis()
 }
 //*****************************************************************************************************
 //*****************************************************************************************************
-void CIflRecipePage::OnStnClickedMinLineSetpoint()
-{
-	CEditCtrl::CreateFromDlgItem(this, IDC_IFL_RECIPE_MINSETPOINT_EDIT);
-}
-//*****************************************************************************************************
-//*****************************************************************************************************
-void CIflRecipePage::OnStnClickedMaxLineSetpoint()
-{
-	CEditCtrl::CreateFromDlgItem(this, IDC_IFL_RECIPE_MAXSETPOINT_EDIT);
-}
-//*****************************************************************************************************
-//*****************************************************************************************************
-void CIflRecipePage::OnStnClickedLineSetpoint()
-{
-	CEditCtrl::CreateFromDlgItem(this, IDC_IFL_RECIPE_SETPOINT_EDIT);
-}
-//*****************************************************************************************************
-//*****************************************************************************************************
 HBRUSH CIflRecipePage::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 {
     HBRUSH hbr = CDosePage::OnCtlColor(pDC, pWnd, nCtlColor);
@@ -409,9 +327,6 @@ HBRUSH CIflRecipePage::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 		case IDC_IFL_RECIPE_MINLEVEL_EDIT:
 		case IDC_IFL_RECIPE_MAXLEVEL_EDIT:
 		case IDC_IFL_RECIPE_HYSTERESIS_EDIT:
-		case IDC_IFL_RECIPE_MINSETPOINT_EDIT:
-		case IDC_IFL_RECIPE_MAXSETPOINT_EDIT:
-		case IDC_IFL_RECIPE_SETPOINT_EDIT:
 		case IDC_IFL_RECIPE_ACTWEIGHT_STATIC:
 							{
                                 if ( pWnd->IsWindowEnabled() )
@@ -458,24 +373,6 @@ void CIflRecipePage::OnBnClickedMaxLevelInfo()
 void CIflRecipePage::OnBnClickedHysteresisInfo()
 {
 	CreateHelpInfoBox(IDC_IFL_RECIPE_HYSTERESIS_EDIT, IDS_LCLHYSTERESIS_KG, IDS_INFO_LCHYSTERESIS);
-}
-//**************************************************************************************************************
-//**************************************************************************************************************
-void CIflRecipePage::OnBnClickedMinLineSetpointInfo() 
-{
-	CreateHelpInfoBox(IDC_IFL_RECIPE_MINSETPOINT_EDIT, IDS_MINLINESETPOINT_KGH, IDS_INFO_MINLINESETPOINT);
-}
-//**************************************************************************************************************
-//**************************************************************************************************************
-void CIflRecipePage::OnBnClickedMaxLineSetpointInfo()
-{
-	CreateHelpInfoBox(IDC_IFL_RECIPE_MAXSETPOINT_EDIT, IDS_MAXLINESETPOINT_KGH, IDS_INFO_MAXLINESETPOINT);
-}
-//**************************************************************************************************************
-//**************************************************************************************************************
-void CIflRecipePage::OnBnClickedLineSetpointInfo()
-{
-	CreateHelpInfoBox(IDC_IFL_RECIPE_SETPOINT_EDIT, IDS_LINESETPOINT_KGH, IDS_INFO_LINESETPOINT);
 }
 //**************************************************************************************************************
 //**************************************************************************************************************

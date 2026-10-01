@@ -145,8 +145,8 @@
  IMPLEMENT_EC(BOOL, LclWeightMaxLevelActive);
 
  // IFL
- IMPLEMENT_EC(float32_t, IflMinLineSetpoint);			// Oberer Gewichtswert
- IMPLEMENT_EC(float32_t, IflMaxLineSetpoint);			// Oberer Gewichtswert
+ //IMPLEMENT_EC(float32_t, IflMinLineSetpoint);			// Oberer Gewichtswert
+ //IMPLEMENT_EC(float32_t, IflMaxLineSetpoint);			// Oberer Gewichtswert
 
  // IFS
  IMPLEMENT_EC(BOOL, IfsSwitchHigh);					// Endschalter Einschneckenextruder oben bzw. �berlauf aktiviert

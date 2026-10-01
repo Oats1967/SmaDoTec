@@ -37,7 +37,7 @@ enum class eAlarmError : uint32_t
     ERROR_WBF_BELTLOAD_LOW,					// 6
     ERROR_WBF_BELTLOAD_HIGH,				// 7
     ERROR_DOSE_ENCODER,					    // 8         Drehgeberfehler
-    ERROR_DOSE_ENCODER_SPEED_LOW,		    // 9        Drehgeberfehler low
+    ERROR_DOSE_ENCODER_SPEED_LOW,		    // 9         Drehgeberfehler low
     ERROR_DOSE_ENCODER_SPEED_HIGH,		    // 10        Drehgeberfehler HIGH
     ERROR_DOSE_LC_INVALIDWEIGHT,			// 11
     ERROR_DOSE_LC_MINWEIGHT,                // 12

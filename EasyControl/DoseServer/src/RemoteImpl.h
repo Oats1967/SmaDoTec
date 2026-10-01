@@ -574,6 +574,7 @@ public:
        int32_t setDoseLclWeightHysteresis(const int32_t index, const float32_t value) override;
        int32_t getDoseLclWeightHysteresis(const int32_t index, float32_t& value) override;
 
+#if 0
        // Min. Linesetpoint IFL
        int32_t setDoseIflMinLineSetpoint(const int32_t index, const float32_t value) override;
        int32_t getDoseIflMinLineSetpoint(const int32_t index, float32_t& value) override;
@@ -581,7 +582,7 @@ public:
        // Max. Linesetpoint IFL
        int32_t setDoseIflMaxLineSetpoint(const int32_t index, const float32_t value) override;
        int32_t getDoseIflMaxLineSetpoint(const int32_t index, float32_t& value) override;
-
+#endif
        //**********************************************************************************************
         //! IFS
         //! \brief GainFactor
