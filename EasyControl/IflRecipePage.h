@@ -43,7 +43,8 @@ private:
 	CButtonLocalLine		m_aLocalMode;
 	CInfoButton				m_MinLevelInfoButton;
 	CInfoButton				m_MaxLevelInfoButton;
-	CInfoButton				m_HysteresisInfoButton;
+	CInfoButton				m_AlarmLimitInfoButton;
+	CInfoButton				m_SetpointMaxInfoButton;
 	CButtonProductList		m_ProductListName;
 	CMoreLessButton			m_MoreLessButton;
 
@@ -52,7 +53,10 @@ private:
 	float32_t		m_fActWeight;
 	float32_t		m_fMinLevel;
 	float32_t		m_fMaxLevel;
-	float32_t		m_fHysteresis;
+	float32_t		m_fAlarmLimit;
+	float32_t		m_fSetpointMax;
+	float32_t		m_fMaxLeistung;
+
 
 	static BOOL g_ShowLess;
 
@@ -60,7 +64,8 @@ private:
 	void SetControlStyle (void);
 	BOOL OnNotifyEditMinLevel();
 	BOOL OnNotifyEditMaxLevel();
-	BOOL OnNotifyEditHysteresis();
+	BOOL OnNotifyEditAlarmLimit();
+	BOOL OnNotifyEditSetpointMax();
 
 protected:
 	void DoDataExchange(CDataExchange* pDX) override;
@@ -79,11 +84,14 @@ public:
 	afx_msg void OnStnClickedScale();
 	afx_msg void OnBnClickedMinLevelInfo();
 	afx_msg void OnBnClickedMaxLevelInfo();
-	afx_msg void OnBnClickedHysteresisInfo();
+	afx_msg void OnBnClickedAlarmLimitInfo();
+	afx_msg void OnBnClickedSetpointMaxInfo();
 
 	afx_msg void OnStnClickedMinLevel();
 	afx_msg void OnStnClickedMaxLevel();
-	afx_msg void OnStnClickedHysteresis();
+	afx_msg void OnStnClickedAlarmLimit();
+	afx_msg void OnStnClickedSetpointMax();
+
 	afx_msg void OnBnClickedControlParamMoreLess();
 
 

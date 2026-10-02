@@ -34,6 +34,7 @@ class CIflControl : public CBaseControl
 		eMinLevel,		// X <= Min-Level
 		eMinMaxLevel,   // Min <= X <= Max 
 		eMaxLevel,		// X >= Max 
+		eAlarmLevel,	// X >= Alarm
 	};
 
 
@@ -50,6 +51,8 @@ class CIflControl : public CBaseControl
 	float32_t m_fWeight;
 	float32_t m_fMinLevel;
 	float32_t m_fMaxLevel;
+	float32_t m_fAlarmLimit;
+	float32_t m_fSetpointMax;
 	float32_t m_fActSetpoint;
 	float32_t m_fActMaxSetpoint;
 	float32_t m_fActMinSetpoint;
@@ -72,9 +75,11 @@ private:
 	void EnterInitLevel();
 	void EnterMinLevel();
 	void EnterMaxLevel();
+	void EnterAlarmLevel();
 	void EnterMinMaxLevel();
 	void RunMinLevel();
 	void RunMaxLevel();
+	void RunAlarmLevel();
 	void RunMinMaxLevel();
 	void RunInitLevel();
 	void SetLineSetpoint(float32_t fSetpoint);

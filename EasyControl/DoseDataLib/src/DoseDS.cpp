@@ -92,13 +92,13 @@ IMPLEMENT_DOSEDSV(float32_t, SteepnessMassflow);
 // LCL / IFL
 IMPLEMENT_DOSEDSV(float32_t, LclWeightMinLevel);
 IMPLEMENT_DOSEDSV(float32_t, LclWeightMaxLevel);
-IMPLEMENT_DOSEDSV(float32_t, LclWeightHysteresis);
+IMPLEMENT_DOSEDSV(float32_t, LclWeightAlarmLimit);
 IMPLEMENT_DOSEDSV(BOOL, LclWeightMinLevelActive);
 IMPLEMENT_DOSEDSV(BOOL, LclWeightMaxLevelActive);
 
 // IFL
 //IMPLEMENT_DOSEDSV(float32_t, IflMinLineSetpoint);			// Oberer Gewichtswert
-//IMPLEMENT_DOSEDSV(float32_t, IflMaxLineSetpoint);			// Oberer Gewichtswert
+IMPLEMENT_DOSEDSV(float32_t, IflLineSetpointMax);			// Oberer Gewichtswert
 
 // IFS
 IMPLEMENT_DOSEDSV(BOOL, IfsSwitchHigh);					// Endschalter Einschneckenextruder oben bzw. �berlauf aktiviert

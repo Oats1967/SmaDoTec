@@ -387,13 +387,12 @@ public:
 	// LCL / IFL
 	DECLARE_DOSEDATA(float32_t, LclWeightMinLevel);
 	DECLARE_DOSEDATA(float32_t, LclWeightMaxLevel);
-	DECLARE_DOSEDATA(float32_t, LclWeightHysteresis);
+	DECLARE_DOSEDATA(float32_t, LclWeightAlarmLimit);
 	DECLARE_DOSEDATA(BOOL, LclWeightMinLevelActive);
 	DECLARE_DOSEDATA(BOOL, LclWeightMaxLevelActive);
 
 	// IFL
-	//DECLARE_DOSEDATA(float32_t, IflMinLineSetpoint);			// Oberer Gewichtswert
-	//DECLARE_DOSEDATA(float32_t, IflMaxLineSetpoint);			// Oberer Gewichtswert
+	DECLARE_DOSEDATA(float32_t, IflLineSetpointMax);			// Oberer Gewichtswert
 
 
 	// IFS

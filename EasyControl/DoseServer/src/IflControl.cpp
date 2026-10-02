@@ -37,6 +37,8 @@ CIflControl::CIflControl(int32_t id, loadcell::ILCModuleInterface& rlc) : CBaseC
 , m_fWeight{ 0.0F }
 , m_fMinLevel{ 0.0F }
 , m_fMaxLevel{ 0.0F }
+, m_fAlarmLimit{ 0.0F }
+, m_fSetpointMax{ 0.0F }
 , m_fActSetpoint{ 0.0F }
 , m_fActMaxSetpoint{ 0.0F }
 , m_fActMinSetpoint{ 0.0F }
@@ -57,6 +59,7 @@ CIflControl::CIflControl(int32_t id, loadcell::ILCModuleInterface& rlc) : CBaseC
 //*************************************************************************************
 inline void CIflControl::SetLineSetpoint(float32_t fSetpoint)
 {
+	fSetpoint = ROUNDSETPOINT(fSetpoint);
 	Dose_EXSetMBLineSetpoint(fSetpoint);
 	Dose_DSVSetActualSetpoint(m_sID, fSetpoint);
 }
@@ -90,6 +93,8 @@ void CIflControl::GetWeight()
 	}
 	Dose_DSVGetLclWeightMinLevel(m_sID, &m_fMinLevel);
 	Dose_DSVGetLclWeightMaxLevel(m_sID, &m_fMaxLevel);
+	Dose_DSVGetLclWeightAlarmLimit(m_sID, &m_fAlarmLimit);
+	Dose_DSVGetIflLineSetpointMax(m_sID, &m_fSetpointMax);
 }
 //*********************************************************************************************
 //*********************************************************************************************
@@ -191,7 +196,7 @@ void CIflControl::CheckAlarm()
 	}
 	break;
 
-	case eSubSteps::eMaxLevel:
+	case eSubSteps::eAlarmLevel:
 	{
 		if (!m_aAlarm.IsAlarm(base::eAlarmError::ERROR_DOSE_LC_MAXWEIGHT))
 		{
@@ -200,8 +205,9 @@ void CIflControl::CheckAlarm()
 	}
 	break;
 
-	case eSubSteps::eInit:
+	case eSubSteps::eInit: 
 	case eSubSteps::eMinMaxLevel:
+	case eSubSteps::eMaxLevel:
 	{
 		m_aAlarm.ClearAlarm(base::eAlarmError::ERROR_DOSE_LC_MINWEIGHT);
 		m_aAlarm.ClearAlarm(base::eAlarmError::ERROR_DOSE_LC_MAXWEIGHT);
@@ -232,14 +238,19 @@ float32_t CIflControl::CalSetpoint(const float32_t fX) const
 	auto m = (fMin - fMax) / (xMin - xMax);
 	auto b = fMin - m * xMin;
 	auto f = m * fX + b;
-	return ROUNDSETPOINT(f);
+	return f;
 }
 //*************************************************************************************
 //*************************************************************************************
 inline void CIflControl::CalcMinMaxSetpoint(const float32_t fX)
 {
-	m_fActMinSetpoint = ROUNDSETPOINT(1.1F * fX);
-	m_fActMaxSetpoint = ROUNDSETPOINT(0.9F * fX);
+	float32_t fGain = 0.0F;
+
+	Dose_DSVGetPidPropGainGross(m_sID, &fGain);
+	fGain = RANGE(fGain, 0, 100.0F);
+	fGain /= 100.0F;
+	m_fActMinSetpoint = ((1 + fGain) * fX);
+	m_fActMaxSetpoint = ((1 - fGain) * fX);
 }
 //*************************************************************************************
 //*************************************************************************************
@@ -258,6 +269,8 @@ void CIflControl::EnterMinLevel()
 //*************************************************************************************
 void CIflControl::RunMinLevel()
 {
+	const float32_t c_Hysterese = 0.02F;
+
 	if (m_bExternalSetpointChanged)
 	{
 		m_bExternalSetpointChanged = FALSE;
@@ -279,13 +292,20 @@ void CIflControl::RunMinLevel()
 					SetLineSetpoint(m_fActSetpoint);
 				}
 			}
-			else if (m_fWeight > m_fMaxLevel)
+			else if (m_fWeight >= m_fMaxLevel)
 			{
 				EnterMaxLevel();
 			}
-			else // m_fMinLevel <= X <= m_fMaxLevel
+			else
 			{
-				EnterMinMaxLevel();
+				// Mindestens 100g
+				auto fDelta = __max(0.1F, m_fMinLevel * c_Hysterese);
+				auto fHysterese = m_fMinLevel + fDelta;
+				if (m_fWeight >= fHysterese)
+				{
+					// m_fMinLevel <= X <= m_fMaxLevel
+					EnterMinMaxLevel();
+				}
 			}
 			m_tNext = m_st + m_SampleTime;
 		}
@@ -296,7 +316,7 @@ void CIflControl::RunMinLevel()
 void CIflControl::EnterMinMaxLevel()
 {
 	m_tNext = m_st + m_SampleTime;
-	m_eSubSteps = eSubSteps::eMinLevel;
+	m_eSubSteps = eSubSteps::eMinMaxLevel;
 }
 //*************************************************************************************
 //*************************************************************************************
@@ -317,7 +337,11 @@ void CIflControl::RunMinMaxLevel()
 			{
 				EnterMinLevel();
 			}
-			else if (m_fWeight > m_fMaxLevel)
+			else if (m_fWeight >= m_fAlarmLimit)
+			{
+				EnterAlarmLevel();
+			}
+			else if (m_fWeight >= m_fMaxLevel)
 			{
 				EnterMaxLevel();
 			}
@@ -330,16 +354,14 @@ void CIflControl::RunMinMaxLevel()
 		}
 	}
 }
-
 //*************************************************************************************
 //*************************************************************************************
 void CIflControl::EnterMaxLevel()
 {
-	m_fActSetpoint = 0.0F;
-	SetLineSetpoint(0.0F);
+	m_fActSetpoint = m_fSetpointMax;
+	SetLineSetpoint(m_fActSetpoint);
 	m_tMaxStart = m_st;
 	m_tNext		= m_st + m_SampleTime;
-
 	m_eSubSteps = eSubSteps::eMaxLevel;
 }
 //*************************************************************************************
@@ -351,9 +373,43 @@ void CIflControl::RunMaxLevel()
 		if (m_fWeight < m_fMinLevel)
 		{
 			// Zeit stoppen
-			m_fActSetpoint = ROUNDSETPOINT(3600.0F / (m_st - m_tMaxStart) * (m_fMaxLevel - m_fMinLevel));
+			m_fActSetpoint = (3600.0F / (m_st - m_tMaxStart) * (m_fMaxLevel - m_fMinLevel));
+			m_fActSetpoint -= m_fSetpointMax;
+			float32_t fMaxLeistung = 0.0f;
+			Dose_EXGetMaxLeistung(&fMaxLeistung);
+			m_fActSetpoint = RANGE(0, m_fActSetpoint, fMaxLeistung);
 			CalcMinMaxSetpoint(m_fActSetpoint);
 			EnterMinLevel();
+		} 
+		else if ((m_fSetpointMax > 0.0F) && (m_fWeight >= m_fAlarmLimit))
+		{
+			EnterAlarmLevel();
+		}
+		m_tNext = m_st + m_SampleTime;
+	}
+}
+//*************************************************************************************
+//*************************************************************************************
+void CIflControl::EnterAlarmLevel()
+{
+	m_fActSetpoint = 0;
+	SetLineSetpoint(m_fActSetpoint);
+	m_tNext = m_st + m_SampleTime;
+	m_eSubSteps = eSubSteps::eAlarmLevel;
+}
+//*************************************************************************************
+//*************************************************************************************
+void CIflControl::RunAlarmLevel()
+{
+	const float c_Hysterese = 0.02F; // 2 % vom Alarmlimit
+
+	if (m_st >= m_tNext)
+	{
+		auto fDelta = __max(0.1F, m_fAlarmLimit * c_Hysterese);
+		auto fHysterese = m_fAlarmLimit  - fDelta;
+		if (m_fWeight < fHysterese)
+		{
+			EnterMaxLevel();
 		}
 		m_tNext = m_st + m_SampleTime;
 	}
@@ -374,7 +430,11 @@ void CIflControl::RunInitLevel()
 	{
 		EnterMinLevel();
 	}
-	else if (m_fWeight > m_fMaxLevel)
+	else if (m_fWeight >= m_fAlarmLimit)
+	{
+		EnterAlarmLevel();
+	}
+	else if (m_fWeight >= m_fMaxLevel)
 	{
 		EnterMaxLevel();
 	}
@@ -411,6 +471,12 @@ BOOL CIflControl :: Control ()
 		case eSubSteps::eMaxLevel:
 		{
 			RunMaxLevel();
+		}
+		break;
+
+		case eSubSteps::eAlarmLevel:
+		{
+			RunAlarmLevel();
 		}
 		break;
 	}

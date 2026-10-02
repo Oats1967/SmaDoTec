@@ -2214,15 +2214,27 @@ int32_t CRemoteImpl::getDoseLclWeightMaxLevel(const int32_t index, float32_t& va
 }
 //***********************************************************************************************
 //***********************************************************************************************
-int32_t CRemoteImpl::setDoseLclWeightHysteresis(const int32_t index, const float32_t value)
+int32_t CRemoteImpl::setDoseLclWeightAlarmLimit(const int32_t index, const float32_t value)
 {
-    return Dose_DSVSetLclWeightHysteresis(index, value);
+    return Dose_DSVSetLclWeightAlarmLimit(index, value);
 }
 //***********************************************************************************************
 //***********************************************************************************************
-int32_t CRemoteImpl::getDoseLclWeightHysteresis(const int32_t index, float32_t& value)
+int32_t CRemoteImpl::getDoseLclWeightAlarmLimit(const int32_t index, float32_t& value)
 {
-    return Dose_DSVGetLclWeightHysteresis(index, &value);
+    return Dose_DSVGetLclWeightAlarmLimit(index, &value);
+}
+//***********************************************************************************************
+//***********************************************************************************************
+int32_t CRemoteImpl::setDoseIflLineSetpointMax(const int32_t index, const float32_t value)
+{
+    return Dose_DSVSetIflLineSetpointMax(index, value);
+}
+//***********************************************************************************************
+//***********************************************************************************************
+int32_t CRemoteImpl::getDoseIflLineSetpointMax(const int32_t index, float32_t& value)
+{
+    return Dose_DSVGetIflLineSetpointMax(index, &value);
 }
 #if 0
 //***********************************************************************************************
@@ -2238,18 +2250,6 @@ int32_t CRemoteImpl::setDoseIflMinLineSetpoint(const int32_t index, const float3
 int32_t CRemoteImpl::getDoseIflMinLineSetpoint(const int32_t index, float32_t& value)
 {
     return Dose_DSVGetIflMinLineSetpoint(index, &value);
-}
-//***********************************************************************************************
-//***********************************************************************************************
-int32_t CRemoteImpl::setDoseIflMaxLineSetpoint(const int32_t index, const float32_t value)
-{
-    return Dose_DSVSetIflMaxLineSetpoint(index, value);
-}
-//***********************************************************************************************
-//***********************************************************************************************
-int32_t CRemoteImpl::getDoseIflMaxLineSetpoint(const int32_t index, float32_t& value)
-{
-    return Dose_DSVGetIflMaxLineSetpoint(index, &value);
 }
 #endif
 //***********************************************************************************************
@@ -2408,7 +2408,7 @@ int32_t CRemoteImpl::getDoseDataCache(const int32_t index, base::CDoseDataCache&
     {
         getDoseLclWeightMinLevel(index, cache.m_LclWeightMinLevel);
         getDoseLclWeightMaxLevel(index, cache.m_LclWeightMaxLevel);
-        getDoseLclWeightHysteresis(index, cache.m_LclWeightHysteresis);
+        getDoseLclWeightAlarmLimit(index, cache.m_LclWeightAlarmLimit);
     }
     else
     {

@@ -55,7 +55,7 @@ namespace base
 		uint32_t		 m_lRefillTime;
 		float32_t		 m_LclWeightMinLevel;
 		float32_t		 m_LclWeightMaxLevel;
-		float32_t		 m_LclWeightHysteresis;
+		float32_t		 m_LclWeightAlarmLimit;
 
 
 		BOOL			 m_sMinBeltLoadStatus;
@@ -81,7 +81,7 @@ namespace base
 			, m_lRefillTime(0)
 			, m_LclWeightMinLevel{ 0.0F }
 			, m_LclWeightMaxLevel{ 0.0F }
-			, m_LclWeightHysteresis{ 0.0F }
+			, m_LclWeightAlarmLimit{ 0.0F }
 			, m_sMinBeltLoadStatus(FALSE)
 			, m_eFeedingType(base::eFeedingType::FF_MF)
 			, m_DoseType(base::eDoseType::DOSETYPE_NONE)
@@ -110,7 +110,7 @@ namespace base
 			m_lRefillTime = 0;
 			m_LclWeightMinLevel = 0.0F;
 			m_LclWeightMaxLevel = 0.0F;
-			m_LclWeightHysteresis = 0.0F;
+			m_LclWeightAlarmLimit = 0.0F;
 			m_fBandlastMassflow = 0.0f;
 			m_QMNumber = 0;
 			m_eFeedingType = base::eFeedingType::FF_MF;

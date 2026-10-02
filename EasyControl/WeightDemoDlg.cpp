@@ -2,6 +2,7 @@
 #ifdef __SIM_WEIGHT_GUI
 #include "EasyControl.h"
 #include "WeightDemoDlg.h"
+#include "Utility/EditCtrl.h"
 #include "Utility/MFCMacros.h"
 
 

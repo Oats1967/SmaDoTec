@@ -140,14 +140,14 @@ struct CGlobalDoseItem
 	// LCL/IFL
 	DECLARE_VARIABLE(float32_t, LclWeightMinLevel);
 	DECLARE_VARIABLE(float32_t, LclWeightMaxLevel);
-	DECLARE_VARIABLE(float32_t, LclWeightHysteresis);
+	DECLARE_VARIABLE(float32_t, LclWeightAlarmLimit);
 	DECLARE_VARIABLE(BOOL, LclWeightMinLevelActive);
 	DECLARE_VARIABLE(BOOL, LclWeightMaxLevelActive);
 
 
 	// IFL
+	DECLARE_VARIABLE(float32_t, IflLineSetpointMax);			// Oberer Gewichtswert
 	DECLARE_VARIABLE(float32_t, Reserved1);			// Oberer Gewichtswert
-	DECLARE_VARIABLE(float32_t, Reserved2);			// Oberer Gewichtswert
 
 	// IFS
 	DECLARE_VARIABLE(BOOL, IfsSwitchHigh);					// Endschalter Einschneckenextruder oben bzw. �berlauf aktiviert

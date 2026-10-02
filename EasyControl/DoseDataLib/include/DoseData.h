@@ -368,12 +368,12 @@ DECLARE_DOSEDSV(float32_t, SteepnessMassflow)
 // LCL/IFL
 DECLARE_DOSEDSV(float32_t, LclWeightMinLevel);
 DECLARE_DOSEDSV(float32_t, LclWeightMaxLevel);
-DECLARE_DOSEDSV(float32_t, LclWeightHysteresis);
+DECLARE_DOSEDSV(float32_t, LclWeightAlarmLimit);
 DECLARE_DOSEDSV(BOOL, LclWeightMinLevelActive);
 DECLARE_DOSEDSV(BOOL, LclWeightMaxLevelActive);
 
 // IFL
-//DECLARE_DOSEDSV(float32_t, Reserved1);			// Oberer Gewichtswert
+DECLARE_DOSEDSV(float32_t, IflLineSetpointMax);			// Oberer Gewichtswert
 //DECLARE_DOSEDSV(float32_t, Reserved2);			// Oberer Gewichtswert
 
 
