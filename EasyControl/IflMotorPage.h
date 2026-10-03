@@ -38,14 +38,20 @@ class CIflMotorPage : public CDosePage
 private:
 	const std::map <int32_t, std::function<BOOL()> > m_EditMap;
 	CInfoButton		m_SampleIntervalInfoButton;
+#if 0
 	CInfoButton		m_PidGainInfoButton;
+#endif
 
 	uint32_t	    m_SampleInterval;
+#if 0
 	float32_t	    m_fPidGain;
+#endif
 
 private:
 	void SetControlStyle (void);
+#if 0
 	BOOL OnNotifyEditPidGain();
+#endif
 	BOOL OnNotifyEditSampleTime();
 
 protected:
@@ -57,11 +63,12 @@ public:
 	CIflMotorPage();
 	~CIflMotorPage() override = default;
 
+#if 0
 	afx_msg void OnBnClickedPidGainInfo();
+	afx_msg void OnStnClickedPidGain();
+#endif
 	afx_msg void OnBnClickedSampleTimeInfo();
 	afx_msg void OnStnClickedSampleTime();
-	afx_msg void OnStnClickedPidGain();
-
 
 	LRESULT OnNotifyEdit	(WPARAM w, LPARAM);
 

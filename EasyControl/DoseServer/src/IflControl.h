@@ -21,6 +21,7 @@
 #include "BaseControl.h"
 #include "FeederWeightControl.h"
 #include "LwfTareTask.h"
+#include "BASE/Utils/public/FloatRingBuffer.h""
 
 
 
@@ -40,11 +41,10 @@ class CIflControl : public CBaseControl
 
 	static constexpr uint32_t IFL_MEASUREBUFFERSIZE = 8U;
 
-	CLwfTareTask			m_TareTask;
-	CFeederWeightControl	m_WeightCtrl;
-	base::math::CPidControl	m_PidControl;
-	base::utils::CWeightPair			m_aLoadCell0;
-	base::utils::CWeightPair			m_aLoadCell1;
+	CLwfTareTask				m_TareTask;
+	CFeederWeightControl		m_WeightCtrl;
+	base::utils::CWeightPair	m_aLoadCell0;
+	base::utils::CFloatRingBuffer < 3U> m_WeightBuffer;
 
 
 	BOOL m_bExternalSetpointChanged;
@@ -57,7 +57,6 @@ class CIflControl : public CBaseControl
 	float32_t m_fActSetpoint;
 	BOOL	  m_bAlarmLimitActive;
 	uint32_t m_SampleTime;
-	uint32_t m_tWeightNext;
 	uint32_t m_tNext;
 	eSubSteps m_eSubSteps;
 
@@ -65,7 +64,6 @@ private:
 	BOOL Control();
 	void CheckAlarm();
 	void GetWeight();
-	BOOL UpdateWeight(void);
 	void InitWeight(void);
 	BOOL IsAlarmStep(const float32_t) const;
 

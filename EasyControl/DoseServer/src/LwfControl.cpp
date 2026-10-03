@@ -1564,6 +1564,7 @@ BOOL CLwfControl::InitExecute(void)
 		m_DosePerformanceAlarmCtrl.InitExecute();
 		SetMassflow(0.0f);
 		Dose_DSVSetActualNoise(m_sID, 0.0f);
+		Dose_DSVInitLineAutostart(m_sID, FALSE);
 		m_WeightCtrl.SetPriority(base::LC_PRIORITY::LC_PRIORITY_NORMAL);
 	}
 	return result;

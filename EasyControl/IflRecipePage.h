@@ -23,7 +23,6 @@
 #include "InfoButton.h"
 #include "ButtonLocalLine.h"
 #include "ButtonProductList.h"
-#include "MoreLessButton.h"
 #include "DosePage.h"
 
 
@@ -48,7 +47,6 @@ private:
 	CInfoButton				m_NomSetpointInfoButton;
 	CInfoButton				m_AutostartInfoButton;
 	CButtonProductList		m_ProductListName;
-	CMoreLessButton			m_MoreLessButton;
 	CButton					m_bAutostartButton;
 
 
@@ -101,8 +99,6 @@ public:
 	afx_msg void OnStnClickedAlarmLimit();
 	afx_msg void OnStnClickedSetpointMax();
 	afx_msg void OnStnClickedNomSetpoint();
-
-	afx_msg void OnBnClickedControlParamMoreLess();
 
 
 	LRESULT OnNotifyEdit	(WPARAM w, LPARAM);

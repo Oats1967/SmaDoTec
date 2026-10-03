@@ -31,7 +31,7 @@
 #define EDITITEM(_a, _func) 	BINDFUNC(_a, CIflRecipePage, _func)
 
 
-BOOL CIflRecipePage::g_ShowLess = TRUE;
+
 //***************************************************************************************
 //***************************************************************************************
 BEGIN_MESSAGE_MAP(CIflRecipePage, CDosePage)
@@ -53,9 +53,6 @@ BEGIN_MESSAGE_MAP(CIflRecipePage, CDosePage)
 	ON_BN_CLICKED(IDC_IFL_RECIPE_NOMSETPOINT_INFO, &CIflRecipePage::OnBnClickedNomSetpointInfo)
 	ON_BN_CLICKED(IDC_IFL_RECIPE_AUTOSTART_INFO, &CIflRecipePage::OnBnClickedAutostartInfo)
 	ON_BN_CLICKED(IDC_IFL_RECIPE_AUTORUN_BT, &CIflRecipePage::OnBnClickedAutoStart)
-
-	ON_BN_CLICKED(IDC_IFL_RECIPE_CONTROLPARAMETER_MORELESS, &CIflRecipePage::OnBnClickedControlParamMoreLess)
-
 
 	ON_WM_CTLCOLOR()
 END_MESSAGE_MAP()
@@ -116,7 +113,6 @@ void CIflRecipePage::DoDataExchange(CDataExchange* pDX)
 
 	DDX_Control(pDX, IDC_IFL_RECIPE_NAME_BT, m_ProductListName);
 	DDX_Control(pDX, IDC_IFL_RECIPE_LINE, m_aLocalMode);
-	DDX_Control(pDX, IDC_IFL_RECIPE_CONTROLPARAMETER_MORELESS, m_MoreLessButton);
 
 	DDX_Control(pDX, IDC_IFL_RECIPE_AUTORUN_BT, m_bAutostartButton);
 	
@@ -204,11 +200,19 @@ BOOL CIflRecipePage::OnNotifyEditSetpointMax(void)
 	}
 	else
 	{
-		bModified = BOOL(m_fNomSetpoint != value);
+		bModified = BOOL(m_fSetpointMax != value);
 		if (bModified)
 		{
-			m_fNomSetpoint = value;
+			m_fSetpointMax = value;
 			REMOTEREF.setDoseIflLineSetpointMax(m_sItem, m_fSetpointMax);
+			if (m_fSetpointMax > 0.0F)
+			{
+				if (m_fAlarmLimit <= m_fMaxLevel)
+				{
+					m_fAlarmLimit = m_fMaxLevel + 1.0F;
+					REMOTEREF.setDoseLclWeightAlarmLimit(m_sItem, m_fAlarmLimit);
+				}
+			}
 		}
 	}
 	return bModified;
@@ -282,7 +286,7 @@ void CIflRecipePage::SetControlStyle (void)
 
 	ENABLE_ID(IDC_IFL_RECIPE_NAME, bLogin);
 
-	const BOOL bShowControlParam = !g_ShowLess;
+	const BOOL bShowControlParam = TRUE;
 	const BOOL bShowAlarmLimit	 = BOOL(m_fSetpointMax > 0.0F);
 	ENABLE_SHOW_ID(IDC_IFL_RECIPE_MINLEVEL_EDIT, bLogin, bShowControlParam);
 	ENABLE_SHOW_ID(IDC_IFL_RECIPE_MAXLEVEL_EDIT, bLogin, bShowControlParam);
@@ -325,8 +329,6 @@ BOOL CIflRecipePage::OnUpdateControls (void)
 
 	REMOTEREF.getDoseLCMeanWeight(m_sItem, m_fActWeight);
 	SetControlStyle();
-	m_MoreLessButton.ShowLess(g_ShowLess);
-	m_MoreLessButton.Show();
 	return CDosePage::OnUpdateControls();
 }
 //*****************************************************************************************************
@@ -342,7 +344,6 @@ BOOL CIflRecipePage::OnInitDialog()
 		INITINFOBUTTON(m_SetpointMaxInfoButton)
 		INITINFOBUTTON(m_NomSetpointInfoButton)
 		INITINFOBUTTON(m_AutostartInfoButton)
-		INITINFOBUTTON(m_MoreLessButton)
 
 		SetNumberFont(IDC_IFL_RECIPE_NR);
 		SetValue();
@@ -355,7 +356,6 @@ BOOL CIflRecipePage::OnSetActive()
 {
 	m_ProductListName.Redraw();
 	m_aLocalMode.Redraw();
-	m_MoreLessButton.Redraw();
 	return CDosePage::OnSetActive();
 }
 //*****************************************************************************************************
@@ -502,13 +502,6 @@ void CIflRecipePage::OnBnClickedAutoStart()
 	UpdateData(TRUE);
 	m_bAutostart = m_bAutostartButton.GetCheck();
 	REMOTEREF.setDoseLineAutostart(m_sItem, m_bAutostart);
-}
-//**************************************************************************************************************
-//**************************************************************************************************************
-void CIflRecipePage::OnBnClickedControlParamMoreLess()
-{
-	g_ShowLess = !g_ShowLess;
-	SetValue();
 }
 //***************************************************************************************
 //***************************************************************************************

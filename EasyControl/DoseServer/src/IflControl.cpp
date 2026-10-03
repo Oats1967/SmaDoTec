@@ -49,7 +49,6 @@ CIflControl::CIflControl(int32_t id, loadcell::ILCModuleInterface& rlc) : CBaseC
 , m_bAlarmLimitActive{ FALSE }
 , m_fNomSetpoint{ 0.0F }
 , m_SampleTime{ 1U }
-, m_tWeightNext{ 0 }
 , m_tNext{ 0 }
 , m_eSubSteps { eSubSteps ::eInit}
 
@@ -89,11 +88,16 @@ BOOL CIflControl::GetLineSetpoint() const
 //*************************************************************************************
 void CIflControl::GetWeight()
 {
+	if (m_bExternalSetpointChanged)
+	{
+		InitWeight();
+	}
 	auto result = m_WeightCtrl.Update(m_st);
 	if (result)
 	{
 		m_aLoadCell0 = m_WeightCtrl.GetWeight();
-		m_fWeight = m_aLoadCell0.m_fWeight;
+		m_WeightBuffer.Add(m_aLoadCell0.m_fWeight);
+		m_fWeight = m_WeightBuffer.GetMean();
 	}
 	Dose_DSVGetLclWeightMinLevel(m_sID, &m_fMinLevel);
 	Dose_DSVGetLclWeightMaxLevel(m_sID, &m_fMaxLevel);
@@ -107,24 +111,8 @@ void CIflControl::GetWeight()
 //*********************************************************************************************
 inline void CIflControl::InitWeight(void)
 {
-	const uint32_t t = __min(2U * m_SampleTime, 20U);
-	m_aLoadCell1 = m_aLoadCell0;
-	m_tWeightNext = m_st + t;
+	m_WeightBuffer.Init();
 }
-//*********************************************************************************************
-//*********************************************************************************************
-inline BOOL CIflControl::UpdateWeight(void)
-{
-	BOOL bWeightUpdate = (m_aLoadCell0.m_ulT != m_aLoadCell1.m_ulT) && (m_st >= m_tWeightNext);
-	if (bWeightUpdate)
-	{
-		//assert(m_SampleTime >= 2u);
-		m_tWeightNext = m_st + m_SampleTime;
-		m_aLoadCell1 = m_aLoadCell0;
-	}
-	return bWeightUpdate;
-}
-
 //*******************************************************************************************************
 //*******************************************************************************************************
 void CIflControl::GetSampleTime(void)
@@ -482,16 +470,15 @@ BOOL CIflControl::Execute()
 	{
 		GetSampleTime();
 
-		// Gewicht holen
-		GetWeight();
-
-		(void)UpdateWeight();
-
 		BOOL bChanged = GetLineSetpoint();
 		if (bChanged)
 		{
 			m_bExternalSetpointChanged = TRUE;
 		}
+
+		// Gewicht holen
+		GetWeight();
+
 		// Freigabe
 		BOOL bRelease = FALSE;
 		Dose_DSVGetRelease(m_sID, &bRelease);

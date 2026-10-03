@@ -75,7 +75,6 @@ Alarmpegel Überlauf [kg]
 Nominalsollwert [kg/h]
 Autostart
 Einlauftrichter - IFU
-Steigung [%]
 Gewichtsdemo
 ProductName
 ProductVersion
