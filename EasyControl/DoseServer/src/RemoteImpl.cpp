@@ -2236,22 +2236,30 @@ int32_t CRemoteImpl::getDoseIflLineSetpointMax(const int32_t index, float32_t& v
 {
     return Dose_DSVGetIflLineSetpointMax(index, &value);
 }
-#if 0
 //***********************************************************************************************
 //***********************************************************************************************
-//***********************************************************************************************
-//***********************************************************************************************
-int32_t CRemoteImpl::setDoseIflMinLineSetpoint(const int32_t index, const float32_t value)
+int32_t CRemoteImpl::setDoseIflLineNomSetpoint(const int32_t index, const float32_t value)
 {
-    return Dose_DSVSetIflMinLineSetpoint(index, value);
+    return Dose_DSVSetIflLineNomSetpoint(index, value);
 }
 //***********************************************************************************************
 //***********************************************************************************************
-int32_t CRemoteImpl::getDoseIflMinLineSetpoint(const int32_t index, float32_t& value)
+int32_t CRemoteImpl::getDoseIflLineNomSetpoint(const int32_t index, float32_t& value)
 {
-    return Dose_DSVGetIflMinLineSetpoint(index, &value);
+    return Dose_DSVGetIflLineNomSetpoint(index, &value);
 }
-#endif
+//***********************************************************************************************
+//***********************************************************************************************
+int32_t CRemoteImpl::setDoseLineAutostart(const int32_t index, const BOOL value)
+{
+    return Dose_DSVSetLineAutostart(index, value);
+}
+//***********************************************************************************************
+//***********************************************************************************************
+int32_t CRemoteImpl::getDoseLineAutostart(const int32_t index, BOOL& value)
+{
+    return Dose_DSVGetLineAutostart(index, &value);
+}
 //***********************************************************************************************
 //***********************************************************************************************
 //***********************************************************************************************

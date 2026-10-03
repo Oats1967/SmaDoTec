@@ -53,14 +53,12 @@ class CIflControl : public CBaseControl
 	float32_t m_fMaxLevel;
 	float32_t m_fAlarmLimit;
 	float32_t m_fSetpointMax;
+	float32_t m_fNomSetpoint;
 	float32_t m_fActSetpoint;
-	float32_t m_fActMaxSetpoint;
-	float32_t m_fActMinSetpoint;
+	BOOL	  m_bAlarmLimitActive;
 	uint32_t m_SampleTime;
 	uint32_t m_tWeightNext;
 	uint32_t m_tNext;
-	uint32_t m_tMinStart;
-	uint32_t m_tMaxStart;
 	eSubSteps m_eSubSteps;
 
 private:
@@ -69,6 +67,8 @@ private:
 	void GetWeight();
 	BOOL UpdateWeight(void);
 	void InitWeight(void);
+	BOOL IsAlarmStep(const float32_t) const;
+
 
 
 	void GetSampleTime();
@@ -84,7 +84,7 @@ private:
 	void RunInitLevel();
 	void SetLineSetpoint(float32_t fSetpoint);
 	float32_t CalSetpoint(const float32_t fX) const;
-	void CalcMinMaxSetpoint(const float32_t fX);
+	//void CalcMinMaxSetpoint(const float32_t fX);
 
 
 protected:

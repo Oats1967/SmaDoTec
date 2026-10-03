@@ -42,6 +42,7 @@ BEGIN_MESSAGE_MAP(CIflRecipePage, CDosePage)
 	ON_STN_CLICKED(IDC_IFL_RECIPE_MAXLEVEL_EDIT, &CIflRecipePage::OnStnClickedMaxLevel)
 	ON_STN_CLICKED(IDC_IFL_RECIPE_ALARMLIMIT_EDIT, &CIflRecipePage::OnStnClickedAlarmLimit)
 	ON_STN_CLICKED(IDC_IFL_RECIPE_SETPOINTMAX_EDIT, &CIflRecipePage::OnStnClickedSetpointMax)
+	ON_STN_CLICKED(IDC_IFL_RECIPE_NOMSETPOINT_EDIT, &CIflRecipePage::OnStnClickedNomSetpoint)
 
 	ON_BN_CLICKED(IDC_IFL_RECIPE_NAME_BT, &CIflRecipePage::OnBnClickedIflNameBt)
 	ON_BN_CLICKED(IDC_IFL_RECIPE_LINE, &CIflRecipePage::OnBnClickedIflLinie)
@@ -49,6 +50,9 @@ BEGIN_MESSAGE_MAP(CIflRecipePage, CDosePage)
 	ON_BN_CLICKED(IDC_IFL_RECIPE_MAXLEVEL_INFO, &CIflRecipePage::OnBnClickedMaxLevelInfo)
 	ON_BN_CLICKED(IDC_IFL_RECIPE_ALARMLIMIT_INFO, &CIflRecipePage::OnBnClickedAlarmLimitInfo)
 	ON_BN_CLICKED(IDC_IFL_RECIPE_SETPOINTMAX_INFO, &CIflRecipePage::OnBnClickedSetpointMaxInfo)
+	ON_BN_CLICKED(IDC_IFL_RECIPE_NOMSETPOINT_INFO, &CIflRecipePage::OnBnClickedNomSetpointInfo)
+	ON_BN_CLICKED(IDC_IFL_RECIPE_AUTOSTART_INFO, &CIflRecipePage::OnBnClickedAutostartInfo)
+	ON_BN_CLICKED(IDC_IFL_RECIPE_AUTORUN_BT, &CIflRecipePage::OnBnClickedAutoStart)
 
 	ON_BN_CLICKED(IDC_IFL_RECIPE_CONTROLPARAMETER_MORELESS, &CIflRecipePage::OnBnClickedControlParamMoreLess)
 
@@ -67,13 +71,15 @@ CIflRecipePage::CIflRecipePage(): CDosePage(CIflRecipePage::IDD)
 			EDITITEM(IDC_IFL_RECIPE_MAXLEVEL_EDIT,	OnNotifyEditMaxLevel),
 			EDITITEM(IDC_IFL_RECIPE_ALARMLIMIT_EDIT,	OnNotifyEditAlarmLimit),
 			EDITITEM(IDC_IFL_RECIPE_SETPOINTMAX_EDIT,	OnNotifyEditSetpointMax),
-
+			EDITITEM(IDC_IFL_RECIPE_NOMSETPOINT_EDIT,	OnNotifyEditNomSetpoint),
 		})
 		, m_aLocalMode()
 		, m_MinLevelInfoButton()
 		, m_MaxLevelInfoButton()
 		, m_AlarmLimitInfoButton()
 		, m_SetpointMaxInfoButton()
+		, m_NomSetpointInfoButton()
+		, m_AutostartInfoButton()
 		, m_ProductListName()
 		, m_fActWeight{ 0.0F }
 		, m_fMinLevel{ 0.0F }
@@ -81,6 +87,8 @@ CIflRecipePage::CIflRecipePage(): CDosePage(CIflRecipePage::IDD)
 		, m_fAlarmLimit{ 0.0F }
 		, m_fSetpointMax{ 0.0F }
 		, m_fMaxLeistung{ 0.0F }
+		, m_fNomSetpoint{ 0.0F }
+		, m_bAutostart{ FALSE }
 {}
 //***************************************************************************************
 //***************************************************************************************
@@ -95,6 +103,7 @@ void CIflRecipePage::DoDataExchange(CDataExchange* pDX)
 	DDX_Float(pDX, IDC_IFL_RECIPE_MAXLEVEL_EDIT, m_fMaxLevel);
 	DDX_Float(pDX, IDC_IFL_RECIPE_ALARMLIMIT_EDIT, m_fAlarmLimit);
 	DDX_Float(pDX, IDC_IFL_RECIPE_SETPOINTMAX_EDIT, m_fSetpointMax);
+	DDX_Float(pDX, IDC_IFL_RECIPE_NOMSETPOINT_EDIT, m_fNomSetpoint);
 	DDX_FloatHR(pDX, IDC_IFL_RECIPE_ACTWEIGHT, m_fActWeight);
 
 	DDX_Control(pDX, IDC_IFL_RECIPE_IMAGE, m_aGrafikContainer);
@@ -102,9 +111,15 @@ void CIflRecipePage::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_IFL_RECIPE_MAXLEVEL_INFO, m_MaxLevelInfoButton);
 	DDX_Control(pDX, IDC_IFL_RECIPE_ALARMLIMIT_INFO, m_AlarmLimitInfoButton);
 	DDX_Control(pDX, IDC_IFL_RECIPE_SETPOINTMAX_INFO, m_SetpointMaxInfoButton);
+	DDX_Control(pDX, IDC_IFL_RECIPE_NOMSETPOINT_INFO, m_NomSetpointInfoButton);
+	DDX_Control(pDX, IDC_IFL_RECIPE_AUTOSTART_INFO, m_AutostartInfoButton);
+
 	DDX_Control(pDX, IDC_IFL_RECIPE_NAME_BT, m_ProductListName);
 	DDX_Control(pDX, IDC_IFL_RECIPE_LINE, m_aLocalMode);
 	DDX_Control(pDX, IDC_IFL_RECIPE_CONTROLPARAMETER_MORELESS, m_MoreLessButton);
+
+	DDX_Control(pDX, IDC_IFL_RECIPE_AUTORUN_BT, m_bAutostartButton);
+	
 
 }
 //******************************************************************************************************
@@ -116,7 +131,8 @@ BOOL CIflRecipePage::OnNotifyEditMinLevel(void)
 	auto value = CEditCtrl::GetFloatAbs();
 	if (value > m_fMaxLevel)
 	{
-		ECMessageBox(L"Unzulässiger Wert! Min. Gewicht ist grösser als Max. Gewicht", MB_OK | MB_ICONSTOP);
+		
+		ECMessageBox(IDS_ERROR_IFL_MINGREATERMAXWEIGHT, MB_OK | MB_ICONSTOP);
 	}
 	else
 	{
@@ -138,7 +154,7 @@ BOOL CIflRecipePage::OnNotifyEditMaxLevel(void)
 	auto value = CEditCtrl::GetFloatAbs();
 	if (value < m_fMinLevel )
 	{
-		ECMessageBox(L"Unzulässiger Wert! Max. Gewicht ist kleiner als Min. Gewicht", MB_OK | MB_ICONSTOP);
+		ECMessageBox(IDS_ERROR_IFL_MAXSMALLERMINWEIGHT, MB_OK | MB_ICONSTOP);
 	}
 	else
 	{
@@ -160,7 +176,8 @@ BOOL CIflRecipePage::OnNotifyEditAlarmLimit(void)
 	auto value = CEditCtrl::GetFloatAbs();
 	if (value < m_fMaxLevel)
 	{
-		ECMessageBox(L"Unzulässiger Wert! Alarmpegel ist kleiner als Max. Gewicht", MB_OK | MB_ICONSTOP);
+		
+		ECMessageBox(IDS_ERROR_IFL_ALARMLIMITSMALLERMAXWEIGHT, MB_OK | MB_ICONSTOP);
 	}
 	else
 	{
@@ -183,15 +200,38 @@ BOOL CIflRecipePage::OnNotifyEditSetpointMax(void)
 
 	if (value > m_fMaxLeistung)
 	{
-		ECMessageBox(L"Unzulässiger Wert! Sollwert ist größer als Bezugsgröße!", MB_OK | MB_ICONSTOP);
+		ECMessageBox(IDS_ERROR_IFL_SETPOINTMAXGREATERREFERENCE, MB_OK | MB_ICONSTOP);
 	}
 	else
 	{
-		bModified = BOOL(m_fSetpointMax != value);
+		bModified = BOOL(m_fNomSetpoint != value);
 		if (bModified)
 		{
-			m_fSetpointMax = value;
+			m_fNomSetpoint = value;
 			REMOTEREF.setDoseIflLineSetpointMax(m_sItem, m_fSetpointMax);
+		}
+	}
+	return bModified;
+}
+//******************************************************************************************************
+//******************************************************************************************************
+BOOL CIflRecipePage::OnNotifyEditNomSetpoint(void)
+{
+	BOOL bModified = FALSE;
+
+	auto value = CEditCtrl::GetFloatAbs();
+
+	if (value > m_fMaxLeistung)
+	{
+		ECMessageBox(IDS_ERROR_IFL_NOMSETPOINTGREATERREFERENCE, MB_OK | MB_ICONSTOP);
+	}
+	else
+	{
+		bModified = BOOL(m_fNomSetpoint != value);
+		if (bModified)
+		{
+			m_fNomSetpoint = value;
+			REMOTEREF.setDoseIflLineNomSetpoint(m_sItem, m_fNomSetpoint);
 		}
 	}
 	return bModified;
@@ -248,16 +288,23 @@ void CIflRecipePage::SetControlStyle (void)
 	ENABLE_SHOW_ID(IDC_IFL_RECIPE_MAXLEVEL_EDIT, bLogin, bShowControlParam);
 	ENABLE_SHOW_ID(IDC_IFL_RECIPE_ALARMLIMIT_EDIT, bLogin, bShowControlParam && bShowAlarmLimit);
 	ENABLE_SHOW_ID(IDC_IFL_RECIPE_SETPOINTMAX_EDIT, bLogin, bShowControlParam);
+	ENABLE_SHOW_ID(IDC_IFL_RECIPE_NOMSETPOINT_EDIT, bLogin, bShowControlParam);
+	ENABLE_SHOW_ID(IDC_IFL_RECIPE_AUTORUN_BT, bLogin, bShowControlParam && (!bLocalMode));
+
+	m_bAutostartButton.SetCheck(m_bAutostart);
 
 	SHOWW_ID(IDC_IFL_RECIPE_MINLEVEL_STATIC, bShowControlParam);
 	SHOWW_ID(IDC_IFL_RECIPE_MAXLEVEL_STATIC, bShowControlParam);
 	SHOWW_ID(IDC_IFL_RECIPE_ALARMLIMIT_STATIC, bShowControlParam && bShowAlarmLimit);
 	SHOWW_ID(IDC_IFL_RECIPE_SETPOINTMAX_STATIC, bShowControlParam);
+	SHOWW_ID(IDC_IFL_RECIPE_NOMSETPOINT_STATIC, bShowControlParam);
 
 	SHOWW_ID(IDC_IFL_RECIPE_MINLEVEL_INFO, bShowControlParam);
 	SHOWW_ID(IDC_IFL_RECIPE_MAXLEVEL_INFO, bShowControlParam);
 	SHOWW_ID(IDC_IFL_RECIPE_ALARMLIMIT_INFO, bShowControlParam && bShowAlarmLimit);
 	SHOWW_ID(IDC_IFL_RECIPE_SETPOINTMAX_INFO, bShowControlParam);
+	SHOWW_ID(IDC_IFL_RECIPE_NOMSETPOINT_INFO, bShowControlParam);
+	SHOWW_ID(IDC_IFL_RECIPE_AUTOSTART_INFO, bShowControlParam && (!bLocalMode));
 
 }
 //*****************************************************************************************************
@@ -272,7 +319,9 @@ BOOL CIflRecipePage::OnUpdateControls (void)
 	REMOTEREF.getDoseLclWeightMinLevel(m_sItem, m_fMinLevel);
 	REMOTEREF.getDoseLclWeightAlarmLimit(m_sItem, m_fAlarmLimit);
 	REMOTEREF.getDoseIflLineSetpointMax(m_sItem, m_fSetpointMax);
+	REMOTEREF.getDoseIflLineNomSetpoint(m_sItem, m_fNomSetpoint);
 	REMOTEREF.getLineMaxSetpoint(m_fMaxLeistung);
+	REMOTEREF.getDoseLineAutostart(m_sItem, m_bAutostart);
 
 	REMOTEREF.getDoseLCMeanWeight(m_sItem, m_fActWeight);
 	SetControlStyle();
@@ -291,6 +340,8 @@ BOOL CIflRecipePage::OnInitDialog()
 		INITINFOBUTTON(m_MaxLevelInfoButton)
 		INITINFOBUTTON(m_AlarmLimitInfoButton)
 		INITINFOBUTTON(m_SetpointMaxInfoButton)
+		INITINFOBUTTON(m_NomSetpointInfoButton)
+		INITINFOBUTTON(m_AutostartInfoButton)
 		INITINFOBUTTON(m_MoreLessButton)
 
 		SetNumberFont(IDC_IFL_RECIPE_NR);
@@ -349,6 +400,12 @@ void CIflRecipePage::OnStnClickedSetpointMax()
 }
 //*****************************************************************************************************
 //*****************************************************************************************************
+void CIflRecipePage::OnStnClickedNomSetpoint()
+{
+	CEditCtrl::CreateFromDlgItem(this, IDC_IFL_RECIPE_NOMSETPOINT_EDIT);
+}
+//*****************************************************************************************************
+//*****************************************************************************************************
 HBRUSH CIflRecipePage::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 {
     HBRUSH hbr = CDosePage::OnCtlColor(pDC, pWnd, nCtlColor);
@@ -372,6 +429,7 @@ HBRUSH CIflRecipePage::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 		case IDC_IFL_RECIPE_MAXLEVEL_EDIT:
 		case IDC_IFL_RECIPE_ALARMLIMIT_EDIT:
 		case IDC_IFL_RECIPE_SETPOINTMAX_EDIT:
+		case IDC_IFL_RECIPE_NOMSETPOINT_EDIT:
 		case IDC_IFL_RECIPE_ACTWEIGHT_STATIC:
 							{
                                 if ( pWnd->IsWindowEnabled() )
@@ -424,6 +482,26 @@ void CIflRecipePage::OnBnClickedAlarmLimitInfo()
 void CIflRecipePage::OnBnClickedSetpointMaxInfo()
 {
 	CreateHelpInfoBox(IDC_IFL_RECIPE_SETPOINTMAX_EDIT, IDS_LCLHYSTERESIS_KG, IDS_INFO_LCHYSTERESIS);
+}
+//**************************************************************************************************************
+//**************************************************************************************************************
+void CIflRecipePage::OnBnClickedNomSetpointInfo()
+{
+	CreateHelpInfoBox(IDC_IFL_RECIPE_NOMSETPOINT_EDIT, IDS_IFL_NOMSETPOINT, IDS_INFO_IFL_NOMSETPOINT);
+}
+//**************************************************************************************************************
+//**************************************************************************************************************
+void CIflRecipePage::OnBnClickedAutostartInfo()
+{
+	CreateHelpInfoBox(IDC_IFL_RECIPE_AUTOSTART_INFO, IDS_IFL_AUTOSTART, IDS_INFO_IFL_AUTOSTART);
+}
+//**************************************************************************************************************
+//**************************************************************************************************************
+void CIflRecipePage::OnBnClickedAutoStart()
+{
+	UpdateData(TRUE);
+	m_bAutostart = m_bAutostartButton.GetCheck();
+	REMOTEREF.setDoseLineAutostart(m_sItem, m_bAutostart);
 }
 //**************************************************************************************************************
 //**************************************************************************************************************

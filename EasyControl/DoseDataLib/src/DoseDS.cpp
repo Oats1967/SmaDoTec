@@ -44,6 +44,8 @@ IMPLEMENT_DOSEDSV(uint32_t, StartupRamp);				// StartupRamp
 IMPLEMENT_DOSEDSV(uint32_t, EncoderMonitor);				// RotationalSpeedueberwachung 0 ... 1000
 IMPLEMENT_DOSEDSV(uint32_t, LogoEncoderSampleTime)		// Abtastintervall definiert in Logo
 IMPLEMENT_DOSEDSV(BOOL,		LogoRunControlEnable);		// RunControl Enabled
+IMPLEMENT_DOSEDSV(BOOL,		LineAutostart);					// Autostart
+
 
 IMPLEMENT_DOSEDSV(float32_t, LCCorrectionFactor);		// Korrekturwert Waage
 IMPLEMENT_DOSEDSV(float32_t, LCTaraWeight);				// Taraweight
@@ -97,8 +99,9 @@ IMPLEMENT_DOSEDSV(BOOL, LclWeightMinLevelActive);
 IMPLEMENT_DOSEDSV(BOOL, LclWeightMaxLevelActive);
 
 // IFL
-//IMPLEMENT_DOSEDSV(float32_t, IflMinLineSetpoint);			// Oberer Gewichtswert
+IMPLEMENT_DOSEDSV(float32_t, IflLineNomSetpoint);			// Oberer Gewichtswert
 IMPLEMENT_DOSEDSV(float32_t, IflLineSetpointMax);			// Oberer Gewichtswert
+
 
 // IFS
 IMPLEMENT_DOSEDSV(BOOL, IfsSwitchHigh);					// Endschalter Einschneckenextruder oben bzw. �berlauf aktiviert

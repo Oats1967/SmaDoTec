@@ -591,8 +591,17 @@ BOOL CBaseControl::GetStart(void)
 	{
 		if (! bLocal)
 		{
-			BOOL bLineStarted		= FALSE;
+			BOOL bAnyLineDoseStarted = FALSE;
+			BOOL bLineStarted = FALSE;
+			BOOL bAutostart = FALSE;
+			Dose_DSVGetLineAutostart(m_sID, &bAutostart);
+			if (bAutostart)
+			{
+				Dose_EXGetAnyLineDoseStarted(&bAnyLineDoseStarted);
+			}
 			Dose_EXGetLineStarted(&bLineStarted);
+			bLineStarted |= bAnyLineDoseStarted;
+
 			BOOL bStartDose = FALSE;
 			Dose_EXGetLineDoseWaitStart(m_sID, &bStartDose);
 			if (bLineStarted != m_bLineStartedLast)

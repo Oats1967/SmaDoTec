@@ -91,6 +91,8 @@ struct CGlobalDoseItem
 	DECLARE_VARIABLE(uint32_t,  EncoderMonitor);			// RotationalSpeedueberwachung 0 ... 1000
 	DECLARE_VARIABLE(uint32_t,  LogoEncoderSampleTime)		// Abtastintervall definiert in Logo
 	DECLARE_VARIABLE(BOOL,		LogoRunControlEnable);		// RunControl Enabled
+	DECLARE_VARIABLE(BOOL,		LineAutostart);				// Dosierer automatisch starten, wenn mindestens ein Dosierer gestartet wurde
+
 
 	DECLARE_VARIABLE(float32_t, LCCorrectionFactor);		// Korrekturwert Waage
 	DECLARE_VARIABLE(float32_t, LCTaraWeight);				// Taraweight
@@ -147,7 +149,7 @@ struct CGlobalDoseItem
 
 	// IFL
 	DECLARE_VARIABLE(float32_t, IflLineSetpointMax);			// Oberer Gewichtswert
-	DECLARE_VARIABLE(float32_t, Reserved1);			// Oberer Gewichtswert
+	DECLARE_VARIABLE(float32_t, IflLineNomSetpoint);			// Oberer Gewichtswert
 
 	// IFS
 	DECLARE_VARIABLE(BOOL, IfsSwitchHigh);					// Endschalter Einschneckenextruder oben bzw. �berlauf aktiviert

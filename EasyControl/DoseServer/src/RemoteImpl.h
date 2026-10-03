@@ -577,6 +577,12 @@ public:
        int32_t setDoseIflLineSetpointMax(const int32_t index, const float32_t value) override;
        int32_t getDoseIflLineSetpointMax(const int32_t index, float32_t& value) override;
 
+       int32_t setDoseIflLineNomSetpoint(const int32_t index, const float32_t value) override;
+       int32_t getDoseIflLineNomSetpoint(const int32_t index, float32_t& value) override;
+
+       int32_t setDoseLineAutostart(const int32_t index, const BOOL value) override;
+       int32_t getDoseLineAutostart(const int32_t index, BOOL& value) override;
+
        //**********************************************************************************************
         //! IFS
         //! \brief GainFactor

@@ -635,8 +635,9 @@ void CDose :: InitializeDoseItem (int32_t s)
 	INIT_ITEM(LclWeightMinLevelActive);
 	INIT_ITEM(LclWeightMaxLevelActive);
 
-	//aItem.IflMinLineSetpoint.Init(0.0F);			// Oberer Gewichtswert
+	aItem.IflLineNomSetpoint.Init(0.0F);			// Oberer Gewichtswert
 	aItem.IflLineSetpointMax.Init(100.0F);			// Oberer Gewichtswert
+	INIT_ITEM(IflLineSetpointMax);			// Oberer Gewichtswert
 
 	// IFS / IFL
 	INIT_ITEM(IfsSwitchHigh);					// Endschalter Einschneckenextruder oben bzw. �berlauf aktiviert
@@ -814,6 +815,7 @@ void CDose :: InitializeDoseItem (int32_t s)
 	INIT_ITEM(ModuleRefillEnable);
 	INIT_ITEM(LogoEncoderSampleTime);
 	INIT_ITEM(LogoRunControlEnable);
+	INIT_ITEM(LineAutostart);
 	INIT_ITEM(LogoStartState);
 	INIT_ITEM(ActualLogoEncoder);
 }

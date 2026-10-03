@@ -92,7 +92,7 @@
  IMPLEMENT_EC(uint32_t, EncoderMonitor)
  IMPLEMENT_EC(uint32_t, LogoEncoderSampleTime)		// Abtastintervall definiert in Logo
  IMPLEMENT_EC(BOOL,		LogoRunControlEnable);		// RunControl Enabled
-
+ IMPLEMENT_EC(BOOL,		LineAutostart);		// Starten, wenn mindestens ein Dosierer gestartet ist
 
  IMPLEMENT_EC(float32_t, LCCorrectionFactor);		// Korrekturwert Waage
  IMPLEMENT_EC(float32_t, LCTaraWeight);				// Taraweight
@@ -145,8 +145,8 @@
  IMPLEMENT_EC(BOOL, LclWeightMaxLevelActive);
 
  // IFL
- //IMPLEMENT_EC(float32_t, IflMinLineSetpoint);			// Oberer Gewichtswert
  IMPLEMENT_EC(float32_t, IflLineSetpointMax);			// Oberer Gewichtswert
+ IMPLEMENT_EC(float32_t, IflLineNomSetpoint);			// Oberer Gewichtswert
 
  // IFS
  IMPLEMENT_EC(BOOL, IfsSwitchHigh);					// Endschalter Einschneckenextruder oben bzw. �berlauf aktiviert

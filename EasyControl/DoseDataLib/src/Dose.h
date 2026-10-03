@@ -337,6 +337,8 @@ public:
 	DECLARE_DOSEDATA(uint32_t, EncoderMonitor);				// RotationalSpeedueberwachung 0 ... 1000
 	DECLARE_DOSEDATA(uint32_t, LogoEncoderSampleTime)		// Abtastintervall definiert in Logo
 	DECLARE_DOSEDATA(BOOL,	   LogoRunControlEnable);		// RunControl Enabled
+	DECLARE_DOSEDATA(BOOL,	   LineAutostart);		// Starten, wenn mindestens ein Dosierer gestartet ist
+
 
 	DECLARE_DOSEDATA(float32_t, LCCorrectionFactor);		// Korrekturwert Waage
 	DECLARE_DOSEDATA(float32_t, LCTaraWeight);				// Taraweight
@@ -393,6 +395,7 @@ public:
 
 	// IFL
 	DECLARE_DOSEDATA(float32_t, IflLineSetpointMax);			// Oberer Gewichtswert
+	DECLARE_DOSEDATA(float32_t, IflLineNomSetpoint);			// Oberer Gewichtswert
 
 
 	// IFS

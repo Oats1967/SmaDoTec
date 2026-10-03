@@ -45,8 +45,11 @@ private:
 	CInfoButton				m_MaxLevelInfoButton;
 	CInfoButton				m_AlarmLimitInfoButton;
 	CInfoButton				m_SetpointMaxInfoButton;
+	CInfoButton				m_NomSetpointInfoButton;
+	CInfoButton				m_AutostartInfoButton;
 	CButtonProductList		m_ProductListName;
 	CMoreLessButton			m_MoreLessButton;
+	CButton					m_bAutostartButton;
 
 
 
@@ -56,6 +59,8 @@ private:
 	float32_t		m_fAlarmLimit;
 	float32_t		m_fSetpointMax;
 	float32_t		m_fMaxLeistung;
+	float32_t		m_fNomSetpoint;
+	BOOL			m_bAutostart;
 
 
 	static BOOL g_ShowLess;
@@ -66,6 +71,7 @@ private:
 	BOOL OnNotifyEditMaxLevel();
 	BOOL OnNotifyEditAlarmLimit();
 	BOOL OnNotifyEditSetpointMax();
+	BOOL OnNotifyEditNomSetpoint();
 
 protected:
 	void DoDataExchange(CDataExchange* pDX) override;
@@ -86,11 +92,15 @@ public:
 	afx_msg void OnBnClickedMaxLevelInfo();
 	afx_msg void OnBnClickedAlarmLimitInfo();
 	afx_msg void OnBnClickedSetpointMaxInfo();
+	afx_msg void OnBnClickedNomSetpointInfo();
+	afx_msg void OnBnClickedAutostartInfo();
+	afx_msg void OnBnClickedAutoStart();
 
 	afx_msg void OnStnClickedMinLevel();
 	afx_msg void OnStnClickedMaxLevel();
 	afx_msg void OnStnClickedAlarmLimit();
 	afx_msg void OnStnClickedSetpointMax();
+	afx_msg void OnStnClickedNomSetpoint();
 
 	afx_msg void OnBnClickedControlParamMoreLess();
 

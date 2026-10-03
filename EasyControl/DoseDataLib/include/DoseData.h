@@ -325,6 +325,8 @@ DECLARE_DOSEDSV(uint32_t, StartupRamp)
 DECLARE_DOSEDSV(uint32_t, EncoderMonitor)
 DECLARE_DOSEDSV(uint32_t, LogoEncoderSampleTime)
 DECLARE_DOSEDSV(BOOL,     LogoRunControlEnable);		// RunControl Enabled
+DECLARE_DOSEDSV(BOOL,	  LineAutostart);		// Starten, wenn mindestens ein Dosierer gestartet ist
+
 
 DECLARE_DOSEDSV(float32_t, AlarmNoiseLimit)
 DECLARE_DOSEDSV(uint32_t, AlarmReactionDelay)
@@ -374,7 +376,7 @@ DECLARE_DOSEDSV(BOOL, LclWeightMaxLevelActive);
 
 // IFL
 DECLARE_DOSEDSV(float32_t, IflLineSetpointMax);			// Oberer Gewichtswert
-//DECLARE_DOSEDSV(float32_t, Reserved2);			// Oberer Gewichtswert
+DECLARE_DOSEDSV(float32_t, IflLineNomSetpoint);			// Oberer Gewichtswert
 
 
 // IFS
