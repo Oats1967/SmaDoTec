@@ -570,6 +570,7 @@ inline void  CLCModuleImpl::SetWeight(const int32_t index, const float32_t value
     std::lock_guard<std::mutex> rLock(m_Container);
     auto& cell = m_Container.get(index);
     cell.fWeight = value;
+    cell.ulTime = getTimeMs();
     cell.eStatus = base::LC_STATUS::LC_STATUS_OK;
 }
 #endif

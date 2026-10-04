@@ -167,7 +167,7 @@ BOOL CWeightDemoDlg::OnNotifyEditStep()
 BOOL CWeightDemoDlg::OnNotifyEditWeight()
 {
 	auto value = _F32(CEditCtrl::GetFloat());
-	BOOL bModified = (value != m_fWeight);
+	BOOL bModified = TRUE; //  (value != m_fWeight);
 	if (bModified)
 	{
 		m_fWeight = value;

@@ -73,7 +73,6 @@ Tara
 Sollwert bei Max. Gewicht [kg]
 Alarmpegel Überlauf [kg]
 Nominalsollwert [kg/h]
-Autostart
 Einlauftrichter - IFU
 Gewichtsdemo
 ProductName
@@ -141,11 +140,7 @@ Translation
 ..\\Ressource\\AnyViewerDown.png
 Progress
 SmaDoTec GmbH
-Unzulässiger Wert! Nominaler Sollwert ist größer als Bezugsgröße
-Autostart
-Nominalsollwert
-Die IFL-Sollwertregelung startet, sobald mindestens ein Dosierer gestartet wurde
-Der Nominalsollwert wird eingestellt, wenn der Gewichtswert unter das Min-Gewicht fällt
+Unzulässiger Wert! Nominalsollwert kleiner als Sollwert bei Max.Gewicht
 Batch timeout
 Tara
 Loss in weight batcher - LWB

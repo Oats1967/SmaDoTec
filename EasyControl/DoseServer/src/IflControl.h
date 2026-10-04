@@ -21,7 +21,7 @@
 #include "BaseControl.h"
 #include "FeederWeightControl.h"
 #include "LwfTareTask.h"
-#include "BASE/Utils/public/FloatRingBuffer.h""
+#include "BASE/Utils/public/FloatRingBuffer.h"
 
 
 
@@ -44,10 +44,10 @@ class CIflControl : public CBaseControl
 	CLwfTareTask				m_TareTask;
 	CFeederWeightControl		m_WeightCtrl;
 	base::utils::CWeightPair	m_aLoadCell0;
+	base::utils::CWeightPair	m_aLoadCell1;
 	base::utils::CFloatRingBuffer < 3U> m_WeightBuffer;
 
 
-	BOOL m_bExternalSetpointChanged;
 	float32_t m_fWeight;
 	float32_t m_fMinLevel;
 	float32_t m_fMaxLevel;
@@ -63,13 +63,13 @@ class CIflControl : public CBaseControl
 private:
 	BOOL Control();
 	void CheckAlarm();
-	void GetWeight();
+	void GetParameter();;
 	void InitWeight(void);
+	BOOL GetWeight();
 	BOOL IsAlarmStep(const float32_t) const;
 
 
 
-	void GetSampleTime();
 	void EnterInitLevel();
 	void EnterMinLevel();
 	void EnterMaxLevel();
@@ -82,16 +82,16 @@ private:
 	void RunInitLevel();
 	void SetLineSetpoint(float32_t fSetpoint);
 	float32_t CalSetpoint(const float32_t fX) const;
-	//void CalcMinMaxSetpoint(const float32_t fX);
 
 
 protected:
-	BOOL GetLineSetpoint() const override;
+	// BOOL GetLineSetpoint() const override;
 
 public:
 	CIflControl(int32_t id, loadcell::ILCModuleInterface& rlc);
 	~CIflControl(void) override = default;
 
+	BOOL GetValidSetpoint(void) override;
 	BOOL Execute			( void ) override;
 	BOOL InitExecute		( void ) override;
 	BOOL ExitExecute		( void ) override;

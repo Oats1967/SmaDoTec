@@ -39,7 +39,6 @@ BOOL CIflControl::IsAlarmStep(const float32_t fX) const
 CIflControl::CIflControl(int32_t id, loadcell::ILCModuleInterface& rlc) : CBaseClass(id)
 , m_WeightCtrl{ id }
 , m_TareTask{ id }
-, m_bExternalSetpointChanged{ FALSE }
 , m_fWeight{ 0.0F }
 , m_fMinLevel{ 0.0F }
 , m_fMaxLevel{ 0.0F }
@@ -68,57 +67,41 @@ inline void CIflControl::SetLineSetpoint(float32_t fSetpoint)
 }
 //*************************************************************************************
 //*************************************************************************************
-BOOL CIflControl::GetLineSetpoint() const
+void CIflControl::GetParameter()
 {
-	const float32_t c_epsilon = 1e-04F;
-
-	float32_t fNewSetpoint = 0.0F;
-	float32_t fSaveSetpoint = 0.0F;
-	Dose_EXGetLineSetpoint(&fNewSetpoint);
-	Dose_DSVGetActualSetpoint(m_sID, &fSaveSetpoint);
-	BOOL bChanged = _F32(fabs(fNewSetpoint - fSaveSetpoint)) > c_epsilon;
-	if (bChanged)
-	{
-		Dose_DSVSetNominalSetpoint(m_sID, fNewSetpoint);
-		Dose_DSVSetActualSetpoint(m_sID, fNewSetpoint);
-	}
-	return bChanged;
-}
-//*************************************************************************************
-//*************************************************************************************
-void CIflControl::GetWeight()
-{
-	if (m_bExternalSetpointChanged)
-	{
-		InitWeight();
-	}
-	auto result = m_WeightCtrl.Update(m_st);
-	if (result)
-	{
-		m_aLoadCell0 = m_WeightCtrl.GetWeight();
-		m_WeightBuffer.Add(m_aLoadCell0.m_fWeight);
-		m_fWeight = m_WeightBuffer.GetMean();
-	}
 	Dose_DSVGetLclWeightMinLevel(m_sID, &m_fMinLevel);
 	Dose_DSVGetLclWeightMaxLevel(m_sID, &m_fMaxLevel);
 	Dose_DSVGetLclWeightAlarmLimit(m_sID, &m_fAlarmLimit);
 	Dose_DSVGetIflLineSetpointMax(m_sID, &m_fSetpointMax);
 	Dose_DSVGetIflLineNomSetpoint(m_sID, &m_fNomSetpoint);
 	m_bAlarmLimitActive = BOOL(m_fSetpointMax > 0.0F);
-
+	Dose_DSVPopPidSampleInterval(m_sID, &m_SampleTime); // [0..1]
+	m_SampleTime = __max(m_SampleTime, 2U);
+}
+//*************************************************************************************
+//*************************************************************************************
+BOOL CIflControl::GetWeight()
+{
+	BOOL bWeightUpdate = FALSE;
+	auto result = m_WeightCtrl.Update(m_st);
+	if (result)
+	{
+		m_aLoadCell0 = m_WeightCtrl.GetWeight();
+		bWeightUpdate = (m_aLoadCell0.m_ulT != m_aLoadCell1.m_ulT);
+		if (bWeightUpdate)
+		{
+			m_WeightBuffer.Add(m_aLoadCell0.m_fWeight);
+			m_fWeight = m_WeightBuffer.GetMean();
+			m_aLoadCell1 = m_aLoadCell0;
+		}
+	}
+	return bWeightUpdate;
 }
 //*********************************************************************************************
 //*********************************************************************************************
 inline void CIflControl::InitWeight(void)
 {
 	m_WeightBuffer.Init();
-}
-//*******************************************************************************************************
-//*******************************************************************************************************
-void CIflControl::GetSampleTime(void)
-{
-	Dose_DSVPopPidSampleInterval(m_sID, &m_SampleTime); // [0..1]
-	m_SampleTime = __max(m_SampleTime, 2U);
 }
 //*************************************************************************************
 //*************************************************************************************
@@ -152,7 +135,6 @@ BOOL CIflControl :: InitExecute ( void)
     auto result = CBaseClass::InitExecute();
     if (result)
     {
-		m_bExternalSetpointChanged = FALSE;
 		Dose_EXGetLineSetpoint(&m_fActSetpoint);
 		Dose_DSVSetActualSetpoint(m_sID, m_fActSetpoint);
 		Dose_DSVSetNominalSetpoint(m_sID, m_fActSetpoint);
@@ -250,42 +232,31 @@ void CIflControl::EnterMinLevel()
 void CIflControl::RunMinLevel()
 {
 	const float32_t c_Hysterese = 0.02F;
+	// Mindestens 100g
+	const auto fDelta = __max(0.1F, m_fMinLevel * c_Hysterese);
+	const auto fHysterese = m_fMinLevel + fDelta;
 
-	if (m_bExternalSetpointChanged)
+	if (m_st >= m_tNext)
 	{
-		m_bExternalSetpointChanged = FALSE;
-		Dose_DSVGetNominalSetpoint(m_sID, &m_fActSetpoint);
-		SetLineSetpoint(m_fActSetpoint);
-	}
-	else
-	{
-		if (m_st >= m_tNext)
+		if (m_fWeight < m_fMinLevel)
 		{
-			if (m_fWeight < m_fMinLevel)
-			{
-				// Do nothing
-			}
-			else if (IsAlarmStep(m_fWeight))
-			{
-				EnterAlarmLevel();
-			}
-			else if (m_fWeight >= m_fMaxLevel)
-			{
-				EnterMaxLevel();
-			}
-			else
-			{
-				// Mindestens 100g
-				auto fDelta = __max(0.1F, m_fMinLevel * c_Hysterese);
-				auto fHysterese = m_fMinLevel + fDelta;
-				if (m_fWeight >= fHysterese)
-				{
-					// m_fMinLevel <= X <= m_fMaxLevel
-					EnterMinMaxLevel();
-				}
-			}
-			m_tNext = m_st + m_SampleTime;
+			// Do nothing
 		}
+		else if (IsAlarmStep(m_fWeight))
+		{
+			EnterAlarmLevel();
+		}
+		else if (m_fWeight >= m_fMaxLevel)
+		{
+			EnterMaxLevel();
+		}
+		else if (m_fWeight >= fHysterese)
+		{
+			// m_fMinLevel <= X <= m_fMaxLevel
+			EnterMinMaxLevel();
+		}
+
+		m_tNext = m_st + m_SampleTime;
 	}
 }
 //*************************************************************************************
@@ -301,35 +272,26 @@ void CIflControl::EnterMinMaxLevel()
 //*************************************************************************************
 void CIflControl::RunMinMaxLevel()
 {
-	if (m_bExternalSetpointChanged)
+	if (m_st >= m_tNext)
 	{
-		m_bExternalSetpointChanged = FALSE;
-		Dose_DSVGetNominalSetpoint(m_sID, &m_fActSetpoint);
-		SetLineSetpoint(m_fActSetpoint);
-	}
-	else
-	{
-		if (m_st >= m_tNext)
+		if (m_fWeight < m_fMinLevel)
 		{
-			if (m_fWeight < m_fMinLevel)
-			{
-				EnterMinLevel();
-			}
-			else if (IsAlarmStep(m_fWeight))
-			{
-				EnterAlarmLevel();
-			}
-			else if (m_fWeight >= m_fMaxLevel)
-			{
-				EnterMaxLevel();
-			}
-			else if (m_st >= m_tNext)
-			{
-				m_fActSetpoint = CalSetpoint(m_fWeight);
-				SetLineSetpoint(m_fActSetpoint);
-			}
-			m_tNext = m_st + m_SampleTime;
+			EnterMinLevel();
 		}
+		else if (IsAlarmStep(m_fWeight))
+		{
+			EnterAlarmLevel();
+		}
+		else if (m_fWeight >= m_fMaxLevel)
+		{
+			EnterMaxLevel();
+		}
+		else 
+		{
+			m_fActSetpoint = CalSetpoint(m_fWeight);
+			SetLineSetpoint(m_fActSetpoint);
+		}
+		m_tNext = m_st + m_SampleTime;
 	}
 }
 //*************************************************************************************
@@ -346,15 +308,19 @@ void CIflControl::EnterMaxLevel()
 void CIflControl::RunMaxLevel()
 {
 	const float32_t c_Hysterese = 0.02F;
+	const auto fDelta = __max(0.1F, m_fMaxLevel * c_Hysterese);
+	const auto fHysterese = m_fMaxLevel - fDelta;
 
 	if (m_st >= m_tNext)
 	{
-		auto fDelta = __max(0.1F, m_fMaxLevel * c_Hysterese);
-		auto fHysterese = m_fMaxLevel - fDelta;
-		if (m_fWeight < fHysterese)
+		if (m_fWeight < m_fMinLevel)
+		{
+			EnterMinLevel();
+		}
+		else if (m_fWeight < fHysterese)
 		{
 			EnterMinMaxLevel();
-		} 
+		}
 		else if (IsAlarmStep(m_fWeight))
 		{
 			EnterAlarmLevel();
@@ -376,12 +342,20 @@ void CIflControl::EnterAlarmLevel()
 void CIflControl::RunAlarmLevel()
 {
 	const float c_Hysterese = 0.02F; // 2 % vom Alarmlimit
+	const auto fDelta = __max(0.1F, m_fAlarmLimit * c_Hysterese);
+	const auto fHysterese = m_fAlarmLimit - fDelta;
 
 	if (m_st >= m_tNext)
 	{
-		auto fDelta = __max(0.1F, m_fAlarmLimit * c_Hysterese);
-		auto fHysterese = m_fAlarmLimit  - fDelta;
-		if (m_fWeight < fHysterese)
+		if (m_fWeight < m_fMinLevel)
+		{
+			EnterMinLevel();
+		}
+		else if (m_fWeight < m_fMaxLevel)
+		{
+			EnterMinMaxLevel();
+		}
+		else if (m_fWeight < fHysterese)
 		{
 			EnterMaxLevel();
 		}
@@ -460,6 +434,12 @@ BOOL CIflControl :: Control ()
 }
 //*************************************************************************************
 //*************************************************************************************
+BOOL CIflControl::GetValidSetpoint(void)
+{
+	return TRUE;
+}
+//*************************************************************************************
+//*************************************************************************************
 BOOL CIflControl::Execute()
 {
 	assert(IsInit());
@@ -468,16 +448,10 @@ BOOL CIflControl::Execute()
 	auto result = CBaseControl::Execute();
 	if (result)
 	{
-		GetSampleTime();
-
-		BOOL bChanged = GetLineSetpoint();
-		if (bChanged)
-		{
-			m_bExternalSetpointChanged = TRUE;
-		}
-
 		// Gewicht holen
-		GetWeight();
+		GetParameter();
+
+		(void)GetWeight();
 
 		// Freigabe
 		BOOL bRelease = FALSE;

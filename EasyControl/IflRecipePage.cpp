@@ -159,6 +159,11 @@ BOOL CIflRecipePage::OnNotifyEditMaxLevel(void)
 		{
 			m_fMaxLevel = value;
 			REMOTEREF.setDoseLclWeightMaxLevel(m_sItem, m_fMaxLevel);
+			if (m_fMaxLevel >= m_fAlarmLimit)
+			{
+				m_fAlarmLimit = m_fMaxLevel + 1.0F;
+				REMOTEREF.setDoseLclWeightAlarmLimit(m_sItem, m_fAlarmLimit);
+			}
 		}
 	}
 	return bModified;
@@ -198,6 +203,10 @@ BOOL CIflRecipePage::OnNotifyEditSetpointMax(void)
 	{
 		ECMessageBox(IDS_ERROR_IFL_SETPOINTMAXGREATERREFERENCE, MB_OK | MB_ICONSTOP);
 	}
+	else if (value >= m_fNomSetpoint)
+	{
+		ECMessageBox(IDS_ERROR_IFL_NOMSETPOINTSMALLERSETPOINTMAX, MB_OK | MB_ICONSTOP);
+	}
 	else
 	{
 		bModified = BOOL(m_fSetpointMax != value);
@@ -228,6 +237,10 @@ BOOL CIflRecipePage::OnNotifyEditNomSetpoint(void)
 	if (value > m_fMaxLeistung)
 	{
 		ECMessageBox(IDS_ERROR_IFL_NOMSETPOINTGREATERREFERENCE, MB_OK | MB_ICONSTOP);
+	}
+	else if (value <= m_fSetpointMax)
+	{
+		ECMessageBox(IDS_ERROR_IFL_NOMSETPOINTSMALLERSETPOINTMAX, MB_OK | MB_ICONSTOP);
 	}
 	else
 	{
@@ -475,13 +488,13 @@ void CIflRecipePage::OnBnClickedMaxLevelInfo()
 //**************************************************************************************************************
 void CIflRecipePage::OnBnClickedAlarmLimitInfo()
 {
-	CreateHelpInfoBox(IDC_IFL_RECIPE_ALARMLIMIT_EDIT, IDS_LCLHYSTERESIS_KG, IDS_INFO_LCHYSTERESIS);
+		CreateHelpInfoBox(IDC_IFL_RECIPE_ALARMLIMIT_EDIT, IDS_IFL_SETPOINTMAX, IDS_INFO_IFL_SETPOINTMAX);
 }
 //**************************************************************************************************************
 //**************************************************************************************************************
 void CIflRecipePage::OnBnClickedSetpointMaxInfo()
 {
-	CreateHelpInfoBox(IDC_IFL_RECIPE_SETPOINTMAX_EDIT, IDS_LCLHYSTERESIS_KG, IDS_INFO_LCHYSTERESIS);
+	CreateHelpInfoBox(IDC_IFL_RECIPE_SETPOINTMAX_EDIT, IDS_IFL_SETPOINTMAX, IDS_INFO_IFL_SETPOINTMAX);
 }
 //**************************************************************************************************************
 //**************************************************************************************************************
