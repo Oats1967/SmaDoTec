@@ -49,9 +49,11 @@ public:
 inline BOOL CDeviceHandler::Open(const std::string& filename)
 {
     assert(!m_bOpen);
-    m_bOpen = m_pDeviceInterface->Open(filename);
-#ifdef _DEBUG
+
+ #ifdef _DEBUG
     m_bOpen = TRUE;
+#else
+    m_bOpen = m_pDeviceInterface->Open(filename);
 #endif
     if ( m_bOpen)
     {

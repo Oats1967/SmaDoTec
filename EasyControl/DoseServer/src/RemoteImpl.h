@@ -570,7 +570,8 @@ public:
        int32_t setDoseLclWeightMaxLevel(const int32_t index, const float32_t value) override;
        int32_t getDoseLclWeightMaxLevel(const int32_t index, float32_t& value) override;
 
-       // Hysteresis LCL
+       //**********************************************************************************************
+       //  IFL
        int32_t setDoseLclWeightAlarmLimit(const int32_t index, const float32_t value) override;
        int32_t getDoseLclWeightAlarmLimit(const int32_t index, float32_t& value) override;
 

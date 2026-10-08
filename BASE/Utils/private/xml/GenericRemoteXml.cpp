@@ -393,7 +393,7 @@ void CGenericRemoteXml::ReadBlockArray(const XMLElement& config, BlockDescriptor
     else
     {
         auto vT = SlpitAttributes(attriblist);
-        assert(vT.m_Elements > 1);
+        assert(vT.m_Elements >= 1);
         if (vT.m_Elements == 0)
         {
             LOGERROR("invalid number of elements !")

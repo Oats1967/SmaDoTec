@@ -488,19 +488,19 @@ void CIflRecipePage::OnBnClickedMaxLevelInfo()
 //**************************************************************************************************************
 void CIflRecipePage::OnBnClickedAlarmLimitInfo()
 {
-		CreateHelpInfoBox(IDC_IFL_RECIPE_ALARMLIMIT_EDIT, IDS_IFL_SETPOINTMAX, IDS_INFO_IFL_SETPOINTMAX);
+		CreateHelpInfoBox(IDC_IFL_RECIPE_ALARMLIMIT_EDIT, IDS_IFL_ALARMLIMIT_KG, IDS_INFO_IFL_ALARMLIMIT);
 }
 //**************************************************************************************************************
 //**************************************************************************************************************
 void CIflRecipePage::OnBnClickedSetpointMaxInfo()
 {
-	CreateHelpInfoBox(IDC_IFL_RECIPE_SETPOINTMAX_EDIT, IDS_IFL_SETPOINTMAX, IDS_INFO_IFL_SETPOINTMAX);
+	CreateHelpInfoBox(IDC_IFL_RECIPE_SETPOINTMAX_EDIT, IDS_IFL_SETPOINTMAX_KGH, IDS_INFO_IFL_SETPOINTMAX);
 }
 //**************************************************************************************************************
 //**************************************************************************************************************
 void CIflRecipePage::OnBnClickedNomSetpointInfo()
 {
-	CreateHelpInfoBox(IDC_IFL_RECIPE_NOMSETPOINT_EDIT, IDS_IFL_NOMSETPOINT, IDS_INFO_IFL_NOMSETPOINT);
+	CreateHelpInfoBox(IDC_IFL_RECIPE_NOMSETPOINT_EDIT, IDS_IFL_NOMSETPOINT_KGH, IDS_INFO_IFL_NOMSETPOINT);
 }
 //**************************************************************************************************************
 //**************************************************************************************************************

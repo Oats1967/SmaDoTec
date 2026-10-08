@@ -423,8 +423,9 @@ void CGenericList<T>::Extract(UnaryPred  func)
 			{
 				if (i != index)
 				{
-					m_ItemList[index++] = m_ItemList[i];
+					m_ItemList[index] = m_ItemList[i];
 				}
+				index++;
 			}
 		}
 		m_ItemList.resize(index);

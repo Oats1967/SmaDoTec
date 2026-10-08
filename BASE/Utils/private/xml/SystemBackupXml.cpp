@@ -116,6 +116,14 @@ STATIC_K(IfsSetpointOverflow);
 STATIC_K(IfsDebounceMax);
 STATIC_K(IfsDebounceMin);
 
+STATIC_K(LclWeightMinLevel);
+STATIC_K(LclWeightMaxLevel);
+STATIC_K(LclWeightAlarmLimit);
+STATIC_K(IflLineSetpointMax);
+STATIC_K(IflLineNomSetpoint);
+STATIC_K(IflLineAutostart);
+
+
 STATIC_K(SteepnessMassflow);
 STATIC_K(EmptyFeederRuntime);
 STATIC_K(EmptyFeederSpeed);
@@ -298,6 +306,15 @@ void CSystemBackupXml::SetEntry(const int32_t , const base::DoseBackupConfig& cf
         SETKEY(doseel, IfsDebounceMax);
         SETKEY(doseel, IfsDebounceMin);
     }
+    else if (__ISIFLTYPE(cfg.DoseType))
+    {
+        SETKEY(doseel, LclWeightMinLevel);
+        SETKEY(doseel, LclWeightMaxLevel);
+        SETKEY(doseel, LclWeightAlarmLimit);
+        SETKEY(doseel, IflLineSetpointMax);
+        SETKEY(doseel, IflLineNomSetpoint);
+        SETKEY(doseel, IflLineAutostart);
+    }
 
     SETKEY(doseel, SteepnessMassflow);
     SETKEY(doseel, EmptyFeederRuntime);
@@ -421,7 +438,15 @@ void CSystemBackupXml::GetEntry(const tinyxml2::XMLElement& doseelement, base::D
         GETNUMBER(doseelement, IfsDebounceMax);
         GETNUMBER(doseelement, IfsDebounceMin);
     }
-
+    else  if (__ISIFLTYPE(cfg.DoseType))
+    {
+        GETNUMBER(doseelement, LclWeightMinLevel);
+        GETNUMBER(doseelement, LclWeightMaxLevel);
+        GETNUMBER(doseelement, LclWeightAlarmLimit);
+        GETNUMBER(doseelement, IflLineSetpointMax);
+        GETNUMBER(doseelement, IflLineNomSetpoint);
+        GETNUMBER(doseelement, IflLineAutostart);
+    }
 
     GETNUMBER(doseelement, SteepnessMassflow);
     GETNUMBER(doseelement, EmptyFeederRuntime);

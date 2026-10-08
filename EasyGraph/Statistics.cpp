@@ -213,10 +213,10 @@ void CStatistics::CalcTotalizerQMNUmber(void)
 				auto& rLasttime = std::get<0>(hit->second);
 				COleDateTimeSpan difftime = rTime - rLasttime;
 #if _DEBUG
-				uint32_t seconds = difftime.GetSeconds();
+				uint32_t seconds = difftime.GetTotalSeconds();
 				float32_t massflow = rRecItem.Get(base::eMassflowSelect::eVIEWMASSFLOW, index);
 #endif
-				float32_t fTot = rRecItem.Get(base::eMassflowSelect::eVIEWMASSFLOW, index) * _F32(difftime.GetSeconds());
+				float32_t fTot = rRecItem.Get(base::eMassflowSelect::eVIEWMASSFLOW, index) * _F32(difftime.GetTotalSeconds());
 				std::get<1>(hit->second) += fTot;
 				rLasttime = rTime;
 			}
@@ -252,7 +252,7 @@ void CStatistics::CalcTotalizerFeeder(void)
 			{
 				auto& rLasttime = std::get<0>(hit->second);
 				COleDateTimeSpan difftime = rTime - rLasttime;
-				float32_t fTot = rRecItem.Get(base::eMassflowSelect::eVIEWMASSFLOW, index) * _F32(difftime.GetSeconds());
+				float32_t fTot = rRecItem.Get(base::eMassflowSelect::eVIEWMASSFLOW, index) * _F32(difftime.GetTotalSeconds());
 				std::get<1>(hit->second) += fTot;
 				rLasttime = rTime;
 			}

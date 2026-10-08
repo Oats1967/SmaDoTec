@@ -432,6 +432,13 @@ void CSettingsRecipePage::ExportDataItem( base::CSystemBackup& rSystem)
 		REMOTEREF.getIfsSetpointOverflow(k, rItem.IfsSetpointOverflow);
 		REMOTEREF.getIfsDebounceMax(k, rItem.IfsDebounceMax);
 		REMOTEREF.getIfsDebounceMin(k, rItem.IfsDebounceMin);
+
+		REMOTEREF.getDoseLclWeightMinLevel(k, rItem.LclWeightMinLevel);
+		REMOTEREF.getDoseLclWeightMaxLevel(k, rItem.LclWeightMaxLevel);
+		REMOTEREF.getDoseLclWeightAlarmLimit(k, rItem.LclWeightAlarmLimit);
+		REMOTEREF.getDoseIflLineSetpointMax(k, rItem.IflLineSetpointMax);
+		REMOTEREF.getDoseIflLineNomSetpoint(k, rItem.IflLineNomSetpoint);
+		REMOTEREF.getDoseLineAutostart(k, rItem.IflLineAutostart);
 	}
 }
 
@@ -537,6 +544,12 @@ void CSettingsRecipePage::ImportDataItem(const base::CSystemBackup& rSystem)
 		REMOTEREF.setIfsDebounceMax(k, rItem.IfsDebounceMax);
 		REMOTEREF.setIfsDebounceMin(k, rItem.IfsDebounceMin);
 
+		REMOTEREF.setDoseLclWeightMinLevel(k, rItem.LclWeightMinLevel);
+		REMOTEREF.setDoseLclWeightMaxLevel(k, rItem.LclWeightMaxLevel);
+		REMOTEREF.setDoseLclWeightAlarmLimit(k, rItem.LclWeightAlarmLimit);
+		REMOTEREF.setDoseIflLineSetpointMax(k, rItem.IflLineSetpointMax);
+		REMOTEREF.setDoseIflLineNomSetpoint(k, rItem.IflLineNomSetpoint);
+		REMOTEREF.setDoseLineAutostart(k, rItem.IflLineAutostart);
 	}
 }
 

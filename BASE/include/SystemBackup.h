@@ -149,13 +149,21 @@ namespace base
 		//IFS
 		float32_t IfsReduceFactor;			// Pegel ist �ber Max, Sollwert wird um Reducefaktor verringert
 		float32_t IfsGainFactor;			// Pegel ist unter Min gefallen, Sollwert wird um Gainfactor erh�ht
-		uint32_t IfsFeederOverflowTimeOut;	// Zeit, bis der Zustand "Feeder Überlauf" erkannt wird. ( Überfüttert )
-		uint32_t IfsFeederEmptyTimeOut;		// Zeit, bis der Zustand "Feeder leer" erkannt wird.
-		uint32_t IfsStepTimeGain;		    // Zeitintervall in Sekunden bis der Sollwert erhöht wird.
-		uint32_t IfsStepTimeReduce;		    // Zeitintervall in Sekunden bis der Sollwert verringert wird.
+		uint32_t  IfsFeederOverflowTimeOut;	// Zeit, bis der Zustand "Feeder Überlauf" erkannt wird. ( Überfüttert )
+		uint32_t  IfsFeederEmptyTimeOut;		// Zeit, bis der Zustand "Feeder leer" erkannt wird.
+		uint32_t  IfsStepTimeGain;		    // Zeitintervall in Sekunden bis der Sollwert erhöht wird.
+		uint32_t  IfsStepTimeReduce;		    // Zeitintervall in Sekunden bis der Sollwert verringert wird.
 		float32_t IfsSetpointOverflow;		// Neuer Sollwert bei Erreichen von Overflow
-		uint32_t IfsDebounceMax;			// Debounce Max / High
-		uint32_t IfsDebounceMin;			// Debounce Min / Low
+		uint32_t  IfsDebounceMax;			// Debounce Max / High
+		uint32_t  IfsDebounceMin;			// Debounce Min / Low
+
+		//Ifl
+		float32_t LclWeightMinLevel;
+		float32_t LclWeightMaxLevel;
+		float32_t LclWeightAlarmLimit;
+		float32_t IflLineSetpointMax;
+		float32_t IflLineNomSetpoint;
+		BOOL	  IflLineAutostart;
 
 		// VOL
 		// ICP

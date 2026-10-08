@@ -71,8 +71,6 @@ Integral Control Port Batcher - ICB
 Rampeneigenschaften
 Tara
 Sollwert bei Max. Gewicht [kg]
-Alarmpegel Überlauf [kg]
-Nominalsollwert [kg/h]
 Einlauftrichter - IFU
 Gewichtsdemo
 ProductName
@@ -140,7 +138,6 @@ Translation
 ..\\Ressource\\AnyViewerDown.png
 Progress
 SmaDoTec GmbH
-Unzulässiger Wert! Nominalsollwert kleiner als Sollwert bei Max.Gewicht
 Batch timeout
 Tara
 Loss in weight batcher - LWB
