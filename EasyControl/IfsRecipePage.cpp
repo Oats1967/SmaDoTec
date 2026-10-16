@@ -49,6 +49,8 @@ BEGIN_MESSAGE_MAP(CIfsRecipePage, CDosePage)
 	ON_BN_CLICKED(IDC_IFS_RECIPE_TIMESTEPGAIN_INFO, &CIfsRecipePage::OnBnClickedIfsStepTimeGainInfo)
 	ON_BN_CLICKED(IDC_IFS_RECIPE_TIMESTEPREDUCE_INFO, &CIfsRecipePage::OnBnClickedIfsStepTimeReduceInfo)
 	ON_BN_CLICKED(IDC_IFS_RECIPE_SETPOINTOVERFLOW_INFO, &CIfsRecipePage::OnBnClickedIfsSetpointOverflowInfo)
+	ON_BN_CLICKED(IDC_IFS_RECIPE_AUTOSTART_INFO, &CIfsRecipePage::OnBnClickedAutostartInfo)
+	ON_BN_CLICKED(IDC_IFS_RECIPE_AUTORUN_BT, &CIfsRecipePage::OnBnClickedAutoStart)
 
 	ON_WM_CTLCOLOR()
 END_MESSAGE_MAP()
@@ -68,12 +70,15 @@ CIfsRecipePage::CIfsRecipePage(): CDosePage(CIfsRecipePage::IDD)
 		})
 		, m_GainFactorInfoButton()
 		, m_ReduceFactorInfoButton()
+		, m_AutostartInfoButton()
 		, m_ProductListName()
 		, m_GainFactor{ 0 }
 		, m_ReduceFactor{ 0 }
 		, m_StepTimeGain{ 0 }
 		, m_StepTimeReduce{ 0 }
 		, m_SetpointOverflow{ 0 }
+		, m_bAutostart{ FALSE }
+
 {}
 //***************************************************************************************
 //***************************************************************************************
@@ -96,7 +101,11 @@ void CIfsRecipePage::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_IFS_RECIPE_TIMESTEPGAIN_INFO, m_StepTimeGainInfoButton);
 	DDX_Control(pDX, IDC_IFS_RECIPE_TIMESTEPREDUCE_INFO, m_StepTimeReduceInfoButton);
 	DDX_Control(pDX, IDC_IFS_RECIPE_SETPOINTOVERFLOW_INFO, m_SetpointOverflowInfoButton);
+	DDX_Control(pDX, IDC_IFS_RECIPE_AUTOSTART_INFO, m_AutostartInfoButton);
 	DDX_Control(pDX, IDC_IFS_RECIPE_NAME_BT, m_ProductListName);
+	DDX_Control(pDX, IDC_IFS_RECIPE_AUTORUN_BT, m_bAutostartButton);
+
+
 }
 //***************************************************************************************
 //***************************************************************************************
@@ -144,6 +153,9 @@ void CIfsRecipePage::SetControlStyle (void)
 	ENABLE_ID(IDC_IFS_RECIPE_TIMESTEPGAIN_EDIT, bLogin);
 	ENABLE_ID(IDC_IFS_RECIPE_TIMESTEPREDUCE_EDIT, bLogin);
 	ENABLE_ID(IDC_IFS_RECIPE_SETPOINTOVERFLOW_EDIT, bLogin);
+
+	m_bAutostartButton.SetCheck(m_bAutostart);
+
 }
 //*****************************************************************************************************
 //*****************************************************************************************************
@@ -158,6 +170,8 @@ BOOL CIfsRecipePage::OnUpdateControls (void)
 	REMOTEREF.getIfsStepTimeGain(m_sItem, m_StepTimeGain);
 	REMOTEREF.getIfsStepTimeReduce(m_sItem, m_StepTimeReduce);
 	REMOTEREF.getIfsSetpointOverflow(m_sItem, m_SetpointOverflow);
+	REMOTEREF.getDoseLineAutostart(m_sItem, m_bAutostart);
+
 
 	SetControlStyle();
 	return CDosePage::OnUpdateControls();
@@ -174,6 +188,8 @@ BOOL CIfsRecipePage::OnInitDialog()
 		INITINFOBUTTON(m_StepTimeGainInfoButton);
 		INITINFOBUTTON(m_StepTimeReduceInfoButton);
 		INITINFOBUTTON(m_SetpointOverflowInfoButton);
+		INITINFOBUTTON(m_AutostartInfoButton)
+
 
 		SetNumberFont(IDC_IFS_RECIPE_NR);
 		SetValue();
@@ -376,6 +392,19 @@ void CIfsRecipePage::OnBnClickedIfsStepTimeReduceInfo()
 void CIfsRecipePage::OnBnClickedIfsSetpointOverflowInfo()
 {
 	CreateHelpInfoBox(IDC_IFS_RECIPE_SETPOINTOVERFLOW_EDIT, IDS_IFS_SETPOINTOVERFLOW_KGH, IDS_INFO_IFS_SETPOINTOVERFLOW);
+}//**************************************************************************************************************
+//**************************************************************************************************************
+void CIfsRecipePage::OnBnClickedAutostartInfo()
+{
+	CreateHelpInfoBox(IDC_IFS_RECIPE_AUTOSTART_INFO, IDS_IFL_AUTOSTART, IDS_INFO_IFL_AUTOSTART);
+}
+//**************************************************************************************************************
+//**************************************************************************************************************
+void CIfsRecipePage::OnBnClickedAutoStart()
+{
+	UpdateData(TRUE);
+	m_bAutostart = m_bAutostartButton.GetCheck();
+	REMOTEREF.setDoseLineAutostart(m_sItem, m_bAutostart);
 }
 
 

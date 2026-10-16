@@ -534,6 +534,14 @@ BOOL CBatchControl::InitExecute(void)
 	auto result = CBaseControl::InitExecute();
 	if ( result)
 	{
+#if _DEBUG
+		{
+		BOOL bTemp = FALSE;
+		Dose_DSVGetLineAutostart(m_sID, &bTemp);
+		assert(!bTemp);
+		}
+#endif
+
 		if (m_pRefillCtrl)
 		{
 			m_pRefillCtrl->InitExecute();
@@ -549,6 +557,7 @@ BOOL CBatchControl::InitExecute(void)
 
 		Dose_DSVSetBatchStarted(m_sID, FALSE);
 		Dose_DSVSetBatchFinished(m_sID, FALSE);
+
 		AdsClient_DoseSetBatchFinished(m_sID, FALSE);
 
 		m_DriveCtrl.InitExecute();

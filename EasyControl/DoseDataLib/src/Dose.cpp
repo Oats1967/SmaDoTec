@@ -329,6 +329,11 @@ void CDose :: ResetDoseItem (int32_t n)
 		}
 	}
 
+	if  (! ((__ISIFLTYPE(aItem.DoseType.Get()) || __ISIFSTYPE(aItem.DoseType.Get()) )))
+	{
+		INIT_ITEM(LineAutostart);
+	}
+
 	ResetCalibDoseItem(n);
 
     if (__ISWBMTYPE(aItem.DoseType.Get()))

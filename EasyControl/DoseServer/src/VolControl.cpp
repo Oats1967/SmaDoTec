@@ -151,6 +151,14 @@ BOOL CVolControl :: InitExecute ( void)
 	auto result = CBaseControl :: InitExecute ();
 	if (result)
 	{
+#if _DEBUG
+		{
+			BOOL bTemp = FALSE;
+			Dose_DSVGetLineAutostart(m_sID, &bTemp);
+			assert(!bTemp);
+		}
+#endif
+
 		m_bSetpointChanged = FALSE;
 		m_bDosePerformanceChanged = FALSE;
 		m_fActualSetpoint = 0.0f;

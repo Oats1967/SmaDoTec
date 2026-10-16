@@ -503,6 +503,14 @@ BOOL CWbmControl :: InitExecute ( void)
 	auto result = CBaseControl :: InitExecute ();
 	if (result)
 	{
+#if _DEBUG
+		{
+			BOOL bTemp = FALSE;
+			Dose_DSVGetLineAutostart(m_sID, &bTemp);
+			assert(!bTemp);
+		}
+#endif
+
 		m_fWeight = 0.0f;
 		m_fMassflow = 0.0f;
 		m_bStartupDelay = FALSE;

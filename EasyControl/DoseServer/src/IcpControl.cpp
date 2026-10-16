@@ -122,6 +122,14 @@ BOOL CIcpControl :: InitExecute ( void)
 	auto result = CBaseControl :: InitExecute ();
 	if (result)
 	{
+#if _DEBUG
+		{
+			BOOL bTemp = FALSE;
+			Dose_DSVGetLineAutostart(m_sID, &bTemp);
+			assert(!bTemp);
+		}
+#endif
+
 		m_bLeistungChanged = FALSE;
 		m_bMaxSetpointChanged = FALSE;
 		m_bSteepnessMassflowChanged = FALSE;
@@ -136,6 +144,7 @@ BOOL CIcpControl :: InitExecute ( void)
 		m_DriveCtrl.InitExecute();
 		m_MassflowAlarmCtrl.InitExecute();
 		SetMassflow(0.0f);
+
 	}
 	return result;
 }

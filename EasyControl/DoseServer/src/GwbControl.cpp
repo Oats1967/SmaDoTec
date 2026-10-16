@@ -80,6 +80,14 @@ BOOL CGwbControl::InitExecute(void)
 	auto result = CWeightBatchControl::InitExecute();
 	if (result)
 	{
+#if _DEBUG
+		{
+			BOOL bTemp = FALSE;
+			Dose_DSVGetLineAutostart(m_sID, &bTemp);
+			assert(!bTemp);
+		}
+#endif
+
 		m_ExtWeightCtrl.SetID(-1);
 		ScaleInit();
 	}

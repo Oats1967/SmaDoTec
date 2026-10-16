@@ -45,7 +45,12 @@ private:
 	CInfoButton				m_StepTimeGainInfoButton;
 	CInfoButton				m_StepTimeReduceInfoButton;
 	CInfoButton				m_SetpointOverflowInfoButton;
+	CInfoButton				m_AutostartInfoButton;
+
 	CButtonProductList		m_ProductListName;
+	CButton					m_bAutostartButton;
+
+
 
 
 	float32_t  m_GainFactor;
@@ -53,6 +58,7 @@ private:
 	uint32_t  m_StepTimeGain;
 	uint32_t  m_StepTimeReduce;
 	float32_t  m_SetpointOverflow;
+	BOOL			m_bAutostart;
 
 
 private:
@@ -87,6 +93,9 @@ public:
 	afx_msg void OnBnClickedIfsStepTimeGainInfo();
 	afx_msg void OnBnClickedIfsStepTimeReduceInfo();
 	afx_msg void OnBnClickedIfsSetpointOverflowInfo();
+	afx_msg void OnBnClickedAutostartInfo();
+	afx_msg void OnBnClickedAutoStart();
+
 
 	LRESULT OnNotifyEdit	(WPARAM , LPARAM);
 	LRESULT OnIfsSettingClosed		(WPARAM, LPARAM);

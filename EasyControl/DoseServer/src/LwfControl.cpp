@@ -1521,6 +1521,15 @@ BOOL CLwfControl::InitExecute(void)
 	if ( result)
 	{
 		LOGFUNCTION
+
+#if _DEBUG
+		{
+		BOOL bTemp = FALSE;
+		Dose_DSVGetLineAutostart(m_sID, &bTemp);
+		assert(!bTemp);
+		}
+#endif
+
 		m_AdsClient.Init();
 		m_EmptyFeederTask.InitExecute();
 		m_RefillCtrl.InitExecute();
@@ -1564,8 +1573,9 @@ BOOL CLwfControl::InitExecute(void)
 		m_DosePerformanceAlarmCtrl.InitExecute();
 		SetMassflow(0.0f);
 		Dose_DSVSetActualNoise(m_sID, 0.0f);
-		Dose_DSVInitLineAutostart(m_sID, FALSE);
 		m_WeightCtrl.SetPriority(base::LC_PRIORITY::LC_PRIORITY_NORMAL);
+
+
 	}
 	return result;
 }

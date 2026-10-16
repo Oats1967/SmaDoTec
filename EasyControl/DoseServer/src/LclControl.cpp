@@ -49,6 +49,14 @@ BOOL CLclControl :: InitExecute ( void)
 	auto result = CBaseControl :: InitExecute ();
 	if (result)
 	{
+#if _DEBUG
+		{
+			BOOL bTemp = FALSE;
+			Dose_DSVGetLineAutostart(m_sID, &bTemp);
+			assert(!bTemp);
+		}
+#endif
+
 		m_bMinReached		= FALSE;
 		m_bMaxReached		= FALSE;
 		m_bMinReachedLast	= FALSE;
@@ -59,6 +67,7 @@ BOOL CLclControl :: InitExecute ( void)
 		Dose_DSVSetLclWeightMinLevelActive(m_sID, FALSE);
 		m_WeightCtrl.Start(m_st);
 		m_aAlarm.Start(m_st);
+
 	}
 	return result;
 }

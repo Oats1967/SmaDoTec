@@ -752,6 +752,14 @@ BOOL CPidControl :: InitExecute ( void)
 	auto result = CBaseControl :: InitExecute ();
 	if (result)
 	{
+#if _DEBUG
+		{
+			BOOL bTemp = FALSE;
+			Dose_DSVGetLineAutostart(m_sID, &bTemp);
+			assert(!bTemp);
+		}
+#endif
+
 		m_tRegelNext = 0;
 		m_bStartupDelay = FALSE;
 		m_tRegelNext = 0L;

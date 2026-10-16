@@ -945,6 +945,14 @@ BOOL CWbfControl :: InitExecute ( void)
 	auto result = CBaseControl :: InitExecute ();
 	if (result)
 	{
+#if _DEBUG
+		{
+			BOOL bTemp = FALSE;
+			Dose_DSVGetLineAutostart(m_sID, &bTemp);
+			assert(!bTemp);
+		}
+#endif
+
 		m_fActualSetpoint = 0.0f;
 		m_fLastLeistung = 0.0f;
 		m_fPidPropGainGross = 0.0f;
