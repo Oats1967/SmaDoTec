@@ -39,8 +39,6 @@ class CIflControl : public CBaseControl
 	};
 
 
-	static constexpr uint32_t IFL_MEASUREBUFFERSIZE = 8U;
-
 	CLwfTareTask				m_TareTask;
 	CFeederWeightControl		m_WeightCtrl;
 	base::utils::CWeightPair	m_aLoadCell0;

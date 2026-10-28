@@ -64,6 +64,7 @@ inline void CIflControl::SetLineSetpoint(float32_t fSetpoint)
 	fSetpoint = ROUNDSETPOINT(fSetpoint);
 	Dose_EXSetMBLineSetpoint(fSetpoint);
 	Dose_DSVSetActualSetpoint(m_sID, fSetpoint);
+	Dose_DSVSetNominalSetpoint(m_sID, fSetpoint);
 }
 //*************************************************************************************
 //*************************************************************************************

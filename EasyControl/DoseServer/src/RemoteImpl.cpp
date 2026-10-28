@@ -1025,7 +1025,7 @@ static int32_t getGeneralProcessStatus(const int32_t index, base::ProcessStatus&
         Dose_DSVGetBatchFinished(index, &bTemp);
         rlStatus.flags.batchFinished = bTemp;
     }
-    else if (__ISLCLTYPE(type))
+    else if (__ISLCLTYPE(type) || __ISIFLTYPE(type))
     {
         // 29 : Slave mode
         Dose_DSVGetLclWeightMinLevelActive(index, &bTemp);

@@ -18,6 +18,8 @@
 #pragma once
 
 #include "ModuleSetpointControl.h"
+#include "BASE/Utils/public/FloatRingBuffer.h"
+
 
 
 class CModuleLineSetpointControl : public CModuleSetpointControl
@@ -25,11 +27,21 @@ class CModuleLineSetpointControl : public CModuleSetpointControl
 	using CBaseClass = CModuleSetpointControl;
 
 private:
+	static const uint32_t c_CheckHystereseCounter = 20u;
+
+	base::utils::CFloatRingBuffer < c_CheckHystereseCounter / 4U> m_SetpointHistory;
+	uint32_t m_SetpointHistoryCounter;
+
+private:
+	BOOL CalcLineSetpoint(float32_t fOldSetpoint, float32_t *fNewSetpoint);
+	BOOL SetLineSetpoint(float32_t fNewLineSetpoint);
+	void Init();
+	void ResetHistoryBuffer();
+	void Control(void);
+
+private:
 	static BOOL IsValidDose(const int32_t index);
-	static BOOL SetLineSetpoint	( float32_t fNewLineSetpoint);
 	static void CalcMassflow		(void);
-	static void Control			(void);
-	static void Init();
 
 	CModuleLineSetpointControl() = delete;
 

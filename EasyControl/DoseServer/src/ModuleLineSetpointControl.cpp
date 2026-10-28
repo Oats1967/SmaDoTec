@@ -23,14 +23,27 @@
 //*************************************************************************************
 //*************************************************************************************
 CModuleLineSetpointControl::CModuleLineSetpointControl(int32_t id) : CBaseClass(id)
+, m_SetpointHistoryCounter{ 0 }
 {
     Init();
+}
+//*************************************************************************************
+//*************************************************************************************
+void CModuleLineSetpointControl::ResetHistoryBuffer()
+{
+    if (m_SetpointHistoryCounter > 0)
+    {
+        m_SetpointHistoryCounter = 0u;
+        m_SetpointHistory.Init();
+    }
 }
 //*************************************************************************************
 //*************************************************************************************
 void CModuleLineSetpointControl::Init()
 {
     Dose_EXInitLineMassflow(0.0F);
+    m_SetpointHistoryCounter = 0u;
+    m_SetpointHistory.Init();
 }
 //*************************************************************************************
 //*************************************************************************************
@@ -47,22 +60,24 @@ BOOL CModuleLineSetpointControl::IsValidDose(const int32_t index)
     }
     return bLineMode;
 }
-
 //*************************************************************************************
 //*************************************************************************************
-BOOL CModuleLineSetpointControl::SetLineSetpoint(float32_t fNewLineSetpoint)
+BOOL CModuleLineSetpointControl::CalcLineSetpoint(const float32_t fOldLineSetpoint, float32_t *pfNewLineSetpoint)
 {
     const float32_t c_epsilon = 1e-04F;
 
     float32_t fMaxLeistung = 0.0f;
     Dose_EXGetMaxLeistung(&fMaxLeistung);
-    fNewLineSetpoint = RANGE(fNewLineSetpoint, 0.0F, fMaxLeistung);
 
-    float32_t fOldLineSetpoint = 0.0f;
-    Dose_EXGetLineSetpoint(&fOldLineSetpoint);
+    assert(pfNewLineSetpoint);
+    auto fNewLineSetpoint = RANGE(*pfNewLineSetpoint, 0.0F, fMaxLeistung);
 
     float32_t fTotband = 0.0f;
     Dose_EXGetMinTotband(&fTotband);
+
+    auto IsChanged = [] ( const float32_t fNew, const float32_t fOld, const float32_t delta) {
+        return BOOL(_F32(fabs(fNew - fOld)) > delta);
+    };
 
     if ((fTotband > 0.0F) && (fNewLineSetpoint < fTotband))
     {
@@ -70,34 +85,79 @@ BOOL CModuleLineSetpointControl::SetLineSetpoint(float32_t fNewLineSetpoint)
     }
     else
     {
-        float32_t fHysterese = 0.0f;
-        Dose_EXGetHysterese(&fHysterese);
-        if (fHysterese > 0.0F)
+        uint32_t lFilter = 0L;
+        Dose_EXGetFilterung(&lFilter);
+        if (lFilter > 0)
         {
-            const float32_t epsilon = __max(c_epsilon, fHysterese);
-            if (_F32(fabs(fNewLineSetpoint - fOldLineSetpoint)) < epsilon)
+            lFilter = RANGE(lFilter, 0, 100);
+            const float32_t cFilter = _F32(lFilter) * 0.01f;
+            fNewLineSetpoint = cFilter * fNewLineSetpoint + (1.0f - cFilter) * fOldLineSetpoint;
+        }
+        auto bChanged = IsChanged(fNewLineSetpoint, fOldLineSetpoint, c_epsilon);
+        if (bChanged)
+        {
+            // Wert hat sich tatsächlich geändert
+            float32_t fHysterese = 0.0f;
+            Dose_EXGetHysterese(&fHysterese);
+            if (fHysterese > 0.0F)
             {
-                //  innerhalb der Hysterese
-                uint32_t lFilter = 0L;
-                Dose_EXGetFilterung(&lFilter);
-                if (lFilter > 0)
+                if ( ! IsChanged(fNewLineSetpoint, fOldLineSetpoint, fHysterese) )
                 {
-                    lFilter = RANGE(lFilter, 0, 100);
-                    const float32_t cFilter = _F32(lFilter) * 0.01f;
-                    fNewLineSetpoint = cFilter * fNewLineSetpoint + (1.0f - cFilter) * fOldLineSetpoint;
+                    // Sollwert hat sich geändert, aber innerhalb der Hysterese
+                    m_SetpointHistory.Add(fNewLineSetpoint);
+                    m_SetpointHistoryCounter++;
+                    if (m_SetpointHistoryCounter > c_CheckHystereseCounter)
+                    {
+                        // 10 x Immer innerhalb Hysterese, Ist Mittelwert deutlich vom fOldLineSetpoint
+                        m_SetpointHistoryCounter = 0;
+
+                        const float32_t c_Limit = __max((fHysterese / 3.0F), 1.0F);
+                        // Mindestens 1 kg
+                        auto fMeanLineSetpoint = m_SetpointHistory.GetMean();
+
+                        if ( IsChanged(fMeanLineSetpoint, fOldLineSetpoint, c_Limit))
+                        {
+                            // Sollwert nachziehen auf den Mittelwert
+                            fNewLineSetpoint = fMeanLineSetpoint;
+                        }
+                        else
+                        {
+                            // belassen
+                            fNewLineSetpoint = fOldLineSetpoint;
+                        }
+                    }
+                    else
+                    {
+                        // belassen
+                        fNewLineSetpoint = fOldLineSetpoint;
+                    }
                 }
                 else
                 {
-                    fNewLineSetpoint = fOldLineSetpoint;
+                    ResetHistoryBuffer();
                 }
+            }
+            else
+            {
+                ResetHistoryBuffer();
             }
         }
     }
-    BOOL bChanged = _F32(fabs(fNewLineSetpoint - fOldLineSetpoint)) > c_epsilon;
+    *pfNewLineSetpoint = fNewLineSetpoint;
+    return IsChanged(fNewLineSetpoint, fOldLineSetpoint, c_epsilon);
+}
+//*************************************************************************************
+//*************************************************************************************
+BOOL CModuleLineSetpointControl::SetLineSetpoint(float32_t fNewLineSetpoint)
+{
+    const float32_t c_epsilon = 1e-04F;
+
+    float32_t fOldLineSetpoint = 0.0F;
+    Dose_EXGetLineSetpoint(&fOldLineSetpoint);
+    auto bChanged = CalcLineSetpoint(fOldLineSetpoint, &fNewLineSetpoint);
     if (bChanged)
     {
         Dose_EXSetLineSetpoint(fNewLineSetpoint);
-
         //*************************************************
         float32_t fPercentage = 0.0f;
         Dose_EXGetRegeneratPercentage(&fPercentage);
