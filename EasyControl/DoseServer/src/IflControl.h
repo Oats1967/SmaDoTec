@@ -52,6 +52,7 @@ class CIflControl : public CBaseControl
 	float32_t m_fAlarmLimit;
 	float32_t m_fSetpointMax;
 	float32_t m_fNomSetpoint;
+	float32_t m_fNomSetpointSave;
 	float32_t m_fActSetpoint;
 	BOOL	  m_bAlarmLimitActive;
 	uint32_t m_SampleTime;

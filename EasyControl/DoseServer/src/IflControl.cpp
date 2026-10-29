@@ -47,6 +47,7 @@ CIflControl::CIflControl(int32_t id, loadcell::ILCModuleInterface& rlc) : CBaseC
 , m_fActSetpoint{ 0.0F }
 , m_bAlarmLimitActive{ FALSE }
 , m_fNomSetpoint{ 0.0F }
+, m_fNomSetpointSave{ 0.0F }
 , m_SampleTime{ 1U }
 , m_tNext{ 0 }
 , m_eSubSteps { eSubSteps ::eInit}
@@ -222,7 +223,7 @@ float32_t CIflControl::CalSetpoint(const float32_t fX) const
 //*************************************************************************************
 void CIflControl::EnterMinLevel()
 {
-	m_fActSetpoint = m_fNomSetpoint;
+	m_fNomSetpointSave = m_fActSetpoint = m_fNomSetpoint;
 	SetLineSetpoint(m_fActSetpoint);
 
 	m_tNext = m_st + m_SampleTime;
@@ -239,9 +240,13 @@ void CIflControl::RunMinLevel()
 
 	if (m_st >= m_tNext)
 	{
-		if (m_fWeight < m_fMinLevel)
+		if (( m_fWeight < m_fMinLevel) )
 		{
-			// Do nothing
+			if (m_fNomSetpointSave != m_fNomSetpoint)
+			{
+				// Do nothing
+				EnterMinLevel();
+			}
 		}
 		else if (IsAlarmStep(m_fWeight))
 		{
@@ -256,7 +261,6 @@ void CIflControl::RunMinLevel()
 			// m_fMinLevel <= X <= m_fMaxLevel
 			EnterMinMaxLevel();
 		}
-
 		m_tNext = m_st + m_SampleTime;
 	}
 }

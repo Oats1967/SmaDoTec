@@ -50,7 +50,7 @@ inline BOOL CDeviceHandler::Open(const std::string& filename)
 {
     assert(!m_bOpen);
 
- #ifdef _DEBUG
+ #if 0 // def _DEBUG
     m_bOpen = TRUE;
 #else
     m_bOpen = m_pDeviceInterface->Open(filename);
