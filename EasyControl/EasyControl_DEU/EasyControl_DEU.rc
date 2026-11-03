@@ -3377,6 +3377,8 @@ STRINGTABLE
 BEGIN
     IDR_ALARMARCHIVEFRAME   "\nEasyControl\nEasyControl\n\n\nEasyControl.Document\nEasyControl.Document"
     IDR_DIAGRAMFRAME        "\nDiagram\nDiagram\nDiagram\nDiagram\nDiagram.Document\nDiagram.Document"
+    IDS_ERROR_LINE_FILTERTIMETOTBAND 
+                            "Bitte beachten Sie, dass bei einem positiven Filterwert das Totband nicht null sein darf!"
     IDR_MAINFRAME           "EasyControl"
     IDR_OVERVIEWFRAME       "\nEasyControl\n\n\nEasyControl.Document\nEasyControl.Document"
     IDR_RECIPEFRAME         "\nRezeptur\n\n\nRezeptur.Document\nRezeptur.Document"

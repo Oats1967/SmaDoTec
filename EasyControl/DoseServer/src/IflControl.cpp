@@ -66,6 +66,7 @@ inline void CIflControl::SetLineSetpoint(float32_t fSetpoint)
 	Dose_EXSetMBLineSetpoint(fSetpoint);
 	Dose_DSVSetActualSetpoint(m_sID, fSetpoint);
 	Dose_DSVSetNominalSetpoint(m_sID, fSetpoint);
+	m_fActSetpoint = fSetpoint;
 }
 //*************************************************************************************
 //*************************************************************************************
@@ -223,9 +224,8 @@ float32_t CIflControl::CalSetpoint(const float32_t fX) const
 //*************************************************************************************
 void CIflControl::EnterMinLevel()
 {
-	m_fNomSetpointSave = m_fActSetpoint = m_fNomSetpoint;
-	SetLineSetpoint(m_fActSetpoint);
-
+	SetLineSetpoint(m_fNomSetpoint);
+	m_fNomSetpointSave = m_fNomSetpoint;
 	m_tNext = m_st + m_SampleTime;
 	m_eSubSteps = eSubSteps::eMinLevel;
 }
@@ -268,8 +268,8 @@ void CIflControl::RunMinLevel()
 //*************************************************************************************
 void CIflControl::EnterMinMaxLevel()
 {
-	m_fActSetpoint = CalSetpoint(m_fWeight);
-	SetLineSetpoint(m_fActSetpoint);
+	auto fActSetpoint = CalSetpoint(m_fWeight);
+	SetLineSetpoint(fActSetpoint);
 	m_tNext = m_st + m_SampleTime;
 	m_eSubSteps = eSubSteps::eMinMaxLevel;
 }
@@ -293,8 +293,8 @@ void CIflControl::RunMinMaxLevel()
 		}
 		else 
 		{
-			m_fActSetpoint = CalSetpoint(m_fWeight);
-			SetLineSetpoint(m_fActSetpoint);
+			auto fActSetpoint = CalSetpoint(m_fWeight);
+			SetLineSetpoint(fActSetpoint);
 		}
 		m_tNext = m_st + m_SampleTime;
 	}
@@ -303,8 +303,7 @@ void CIflControl::RunMinMaxLevel()
 //*************************************************************************************
 void CIflControl::EnterMaxLevel()
 {
-	m_fActSetpoint = m_fSetpointMax;
-	SetLineSetpoint(m_fActSetpoint);
+	SetLineSetpoint(m_fSetpointMax);
 	m_tNext		= m_st + m_SampleTime;
 	m_eSubSteps = eSubSteps::eMaxLevel;
 }
@@ -337,8 +336,7 @@ void CIflControl::RunMaxLevel()
 //*************************************************************************************
 void CIflControl::EnterAlarmLevel()
 {
-	m_fActSetpoint = 0;
-	SetLineSetpoint(m_fActSetpoint);
+	SetLineSetpoint(0.0F);
 	m_tNext = m_st + m_SampleTime;
 	m_eSubSteps = eSubSteps::eAlarmLevel;
 }

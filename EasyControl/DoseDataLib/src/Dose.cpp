@@ -568,6 +568,11 @@ void CDose :: ResetLineItem ()
 	INIT_ITEM(ExtLineSetpointState)		// Save state
 	INIT_ITEM(UPSLowInputState)					// UPS low
 
+	if ((aItem.Filterung.Get() > 0) && (aItem.MinTotband.Get() <= 0.0F))
+	{
+		assert(FALSE);
+		aItem.MinTotband.Init(1.0F);
+	}
 	base::utils::baseZeroMemory(aItem.AlarmCfg);
 }
 //******************************************************************************************

@@ -18,6 +18,7 @@
 
 #include "stdafx.h"
 #include "EasyControl.h"
+#include "ECMessageBox.h"
 #include "LineSetpointLineDlg.h"
 #include "Utility/MFCMacros.h"
 #include "Utility/EditCtrl.h"
@@ -150,6 +151,11 @@ BOOL CLineSetpointLineDlg::OnNotifyEditNominalFilterTime()
 	auto bModified = CEditCtrl::GetLongAbsRangeModified(m_FilterTime, 0, 100U);
 	if (bModified)
 	{
+		if ((m_FilterTime > 0) && (m_MinTotBand <= 0.0F))
+		{
+			ECMessageBox(L"Bitte beachten Sie, dass bei einem positiven Filterwert das Totband nicht null sein darf !", MB_OK | MB_ICONSTOP);
+			REMOTEREF.setLineMinTotband(m_MinTotBand + 1.0F);
+		}
 		REMOTEREF.setLineFilterTime(m_FilterTime);
 	}
 	return bModified;

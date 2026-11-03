@@ -44,6 +44,8 @@ STATIC_K(MinTotband)
 STATIC_K(FilterTime)
 STATIC_K(ExtSetpointScale)
 STATIC_K(ExtSetpointOffset)
+STATIC_K(ExtSetpointEnable)
+STATIC_K(ExtSetpointInversEnable)
 STATIC_K(RampStep);
 STATIC_K(RampDelay);
 STATIC_K(TotalizerPulseStep);
@@ -223,7 +225,8 @@ void CSystemBackupXml::SetEntry(const base::CLineBackupConfig& cfg, tinyxml2::XM
     SETKEY(linel, RampDelay);
     SETKEY(linel, TotalizerPulseStep);
     SETKEY(linel, TotalizerPulseDuration);
-
+    SETKEY_MAP(linel, c_YesNoMap, ExtSetpointEnable);
+    SETKEY_MAP(linel, c_YesNoMap, ExtSetpointInversEnable);
 }
 //*********************************************************************************************************************
 //*********************************************************************************************************************
@@ -358,6 +361,8 @@ void CSystemBackupXml::SetEntry(const int32_t , const base::DoseBackupConfig& cf
      GETNUMBER(lineel, RampDelay);
      GETNUMBER(lineel, TotalizerPulseStep);
      GETNUMBER(lineel, TotalizerPulseDuration);
+     GETNUMBER_MAP(lineel, c_YesNoMap, ExtSetpointEnable);
+     GETNUMBER_MAP(lineel, c_YesNoMap, ExtSetpointInversEnable);
  }
 
 //*********************************************************************************************************************

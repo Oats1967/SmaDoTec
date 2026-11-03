@@ -36,14 +36,7 @@
 BEGIN_MESSAGE_MAP(CIflMotorPage, CDosePage)
 	ON_MESSAGE(WM_NOTIFYEDIT, OnNotifyEdit)
 	ON_STN_CLICKED(IDC_IFL_MOTOR_PIDSAMPLEINTERVAL_EDIT, &CIflMotorPage::OnStnClickedSampleTime)
-#if 0
-	ON_STN_CLICKED(IDC_IFL_MOTOR_PROPGAIN_EDIT, &CIflMotorPage::OnStnClickedPidGain)
-#endif
 	ON_BN_CLICKED(IDC_IFL_MOTOR_PIDSAMPLEINTERVAL_INFO, &CIflMotorPage::OnBnClickedSampleTimeInfo)
-#if 0
-	ON_BN_CLICKED(IDC_IFL_MOTOR_PROPGAIN_INFO, &CIflMotorPage::OnBnClickedPidGainInfo)
-#endif
-
 	ON_WM_CTLCOLOR()
 END_MESSAGE_MAP()
 //***************************************************************************************
@@ -53,20 +46,11 @@ IMPLEMENT_DYNAMIC(CIflMotorPage, CDosePage)
 //***************************************************************************************
 CIflMotorPage::CIflMotorPage(): CDosePage(CIflMotorPage::IDD) 
 	, m_EditMap({
-#if 0
-			EDITITEM(IDC_IFL_MOTOR_PROPGAIN_EDIT,	OnNotifyEditPidGain),
-#endif
 			EDITITEM(IDC_IFL_MOTOR_PIDSAMPLEINTERVAL_EDIT,	OnNotifyEditSampleTime),
 
 		})
 		, m_SampleIntervalInfoButton()
-#if 0
-		, m_PidGainInfoButton()
-#endif
 		, m_SampleInterval(0L)
-#if 0
-		, m_fPidGain{ 0.0F }
-#endif
 {}
 //***************************************************************************************
 //***************************************************************************************
@@ -76,30 +60,10 @@ void CIflMotorPage::DoDataExchange(CDataExchange* pDX)
 
 	DDX_Text(pDX, IDC_IFL_MOTOR_NR, m_lNr);
 	DDX_Text(pDX, IDC_IFL_MOTOR_TITLE, m_szTitle);
-#if 0
-	DDX_Float(pDX, IDC_IFL_MOTOR_PROPGAIN_EDIT, m_fPidGain);
-#endif
 	DDX_Text(pDX, IDC_IFL_MOTOR_PIDSAMPLEINTERVAL_EDIT, m_SampleInterval);
-
 	DDX_Control(pDX, IDC_IFL_MOTOR_IMAGE, m_aGrafikContainer);
-#if 0
-	DDX_Control(pDX, IDC_IFL_MOTOR_PROPGAIN_INFO, m_PidGainInfoButton);
-#endif
 	DDX_Control(pDX, IDC_IFL_MOTOR_PIDSAMPLEINTERVAL_INFO, m_SampleIntervalInfoButton);
 }
-#if 0
-//******************************************************************************************************
-//******************************************************************************************************
-BOOL CIflMotorPage::OnNotifyEditPidGain(void)
-{
-	auto bModified =CEditCtrl::GetFloatAbsRangeModified(m_fPidGain, 0.0F, 10000.0F);
-	if (bModified)
-	{
-		REMOTEREF.setDosePidPropGainGross(m_sItem, m_fPidGain);
-	}
-	return bModified;
-}
-#endif
 //******************************************************************************************************
 //******************************************************************************************************
 BOOL CIflMotorPage::OnNotifyEditSampleTime(void)
@@ -144,9 +108,6 @@ void CIflMotorPage::SetControlStyle (void)
 		bLogin = (USERRIGHTSREF.IsAktUserPermitted(base::utils::eUserCategory::LOGIN_CONTROLSETTINGS));
 	}
 	ENABLE_ID(IDC_IFL_MOTOR_PIDSAMPLEINTERVAL_EDIT, bLogin);
-#if 0
-	ENABLE_ID(IDC_IFL_MOTOR_PROPGAIN_EDIT, bLogin);
-#endif
 }
 //*****************************************************************************************************
 //*****************************************************************************************************
@@ -157,9 +118,6 @@ BOOL CIflMotorPage::OnUpdateControls (void)
 		return FALSE;
 	}
 	REMOTEREF.getPidSampleInterval(m_sItem, m_SampleInterval);
-#if 0
-	REMOTEREF.getDosePidPropGainGross(m_sItem, m_fPidGain);
-#endif
 	SetControlStyle();
 	return CDosePage::OnUpdateControls();
 }
@@ -171,9 +129,6 @@ BOOL CIflMotorPage::OnInitDialog()
 	if (result)
 	{
 		INITINFOBUTTON(m_SampleIntervalInfoButton)
-#if 0
-		INITINFOBUTTON(m_PidGainInfoButton)
-#endif
 
 		SetNumberFont(IDC_IFL_MOTOR_NR);
 		SetValue();
@@ -186,14 +141,6 @@ void CIflMotorPage::OnStnClickedSampleTime()
 {
 	CEditCtrl::CreateFromDlgItem(this, IDC_IFL_MOTOR_PIDSAMPLEINTERVAL_EDIT);
 }
-#if 0
-//*****************************************************************************************************
-//*****************************************************************************************************
-void CIflMotorPage::OnStnClickedPidGain()
-{
-	CEditCtrl::CreateFromDlgItem(this, IDC_IFL_MOTOR_PROPGAIN_EDIT);
-}
-#endif
 //*****************************************************************************************************
 //*****************************************************************************************************
 HBRUSH CIflMotorPage::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
@@ -215,9 +162,6 @@ HBRUSH CIflMotorPage::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 
 
 		case IDC_IFL_MOTOR_PIDSAMPLEINTERVAL_EDIT:
-#if 0
-		case IDC_IFL_MOTOR_PROPGAIN_EDIT:
-#endif
 			{
                                 if ( pWnd->IsWindowEnabled() )
                                 {
@@ -242,12 +186,6 @@ HBRUSH CIflMotorPage::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 }
 //**************************************************************************************************************
 //**************************************************************************************************************
-#if 0
-void CIflMotorPage::OnBnClickedPidGainInfo()
-{
-	CreateHelpInfoBox(IDC_IFL_MOTOR_PROPGAIN_EDIT, IDS_PROPGAIN_P, IDS_INFO_PROPGAIN);
-}
-#endif
 //**************************************************************************************************************
 //**************************************************************************************************************
 void CIflMotorPage::OnBnClickedSampleTimeInfo()

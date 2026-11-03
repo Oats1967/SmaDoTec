@@ -53,6 +53,9 @@ namespace base
 		uint32_t  RampDelay;
 		float32_t TotalizerPulseStep;
 		uint32_t  TotalizerPulseDuration;
+		BOOL	  ExtSetpointEnable;
+		BOOL	  ExtSetpointInversEnable;
+
 
 		CLineBackupConfig();
 	};
@@ -75,6 +78,9 @@ namespace base
 		, RampDelay(0)
 		, TotalizerPulseStep(0.0F)
 		, TotalizerPulseDuration(0)
+		, ExtSetpointEnable(FALSE)
+		, ExtSetpointInversEnable(FALSE)
+
 	{}
 	//--------------------------------------------------------------------------------------------------------------------
 	//--------------------------------------------------------------------------------------------------------------------
@@ -246,6 +252,13 @@ namespace base
 	, IfsSetpointOverflow{ 0.0F }
 	, IfsDebounceMax{ 0 }
 	, IfsDebounceMin{ 0 }
+	, LclWeightMinLevel{ 0 }
+	, LclWeightMaxLevel{ 0 }
+	, LclWeightAlarmLimit{ 0 }
+	, IflLineSetpointMax{ 0 }
+	, IflLineNomSetpoint{ 0 }
+	, IflLineAutostart{ FALSE }
+
 	, SteepnessMassflow { 0.0F }
 	, EmptyFeederRuntime { 0 }
 	, EmptyFeederSpeed { 0.0F }

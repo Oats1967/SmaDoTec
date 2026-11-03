@@ -341,6 +341,11 @@ void CSettingsRecipePage::ExportDataItem( base::CSystemBackup& rSystem)
 
 	{
 		auto& rLine = rSystem.m_Line;
+		base::LineProcessStatus processstatus;
+		REMOTEREF.getLineProcessStatus(processstatus);
+		rLine.ExtSetpointEnable			= (processstatus.flags.StateExtlineSetpoint != FALSE);
+		rLine.ExtSetpointInversEnable   = (processstatus.flags.StateExtLineInvSetpoint != FALSE);
+
 		REMOTEREF.getLineMaxSetpoint(rLine.MaxSetpoint);
 		REMOTEREF.getLineRecipeName(rLine.RecipeName);
 		REMOTEREF.getLineRecipeQMNumber(rLine.QMNumber);
@@ -466,6 +471,8 @@ void CSettingsRecipePage::ImportDataItem(const base::CSystemBackup& rSystem)
 		REMOTEREF.setLineFilterTime(rLine.FilterTime);
 		REMOTEREF.setLineExtSetpointScale(rLine.ExtSetpointScale);
 		REMOTEREF.setLineExtSetpointOffset(rLine.ExtSetpointOffset);
+		REMOTEREF.setLineExtSetpointEnable(rLine.ExtSetpointEnable);
+		REMOTEREF.setLineExtSetpointInversEnable(rLine.ExtSetpointInversEnable);
 		REMOTEREF.setLineRampStep(rLine.RampStep);
 		REMOTEREF.setLineRampDelay(rLine.RampDelay);
 		REMOTEREF.setLineTotalizerPulseStep(rLine.TotalizerPulseStep);
