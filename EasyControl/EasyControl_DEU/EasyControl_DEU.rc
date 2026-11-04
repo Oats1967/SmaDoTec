@@ -3266,6 +3266,7 @@ IDB_ANYVIEWER_DOWN      PNG                     "..\\Ressource\\AnyViewerDown.pn
 
 STRINGTABLE
 BEGIN
+    IDS_UPDATEOPENERROR     "Fehler beim Öffnen der Updatedatei!"
     IDS_UPDATERESTART       "Bitte ggf. USB-Stick entfernen und EasyControl normal beenden. Änderungen sind erst nach einem Systemneustart aktiv!"
     IDS_UPDATESAVEERROR     "Fehler beim Zwischenspeichern der Updatedatei!"
     IDS_USERREALLYDELETE    "wirklich löschen?"
@@ -3377,8 +3378,7 @@ STRINGTABLE
 BEGIN
     IDR_ALARMARCHIVEFRAME   "\nEasyControl\nEasyControl\n\n\nEasyControl.Document\nEasyControl.Document"
     IDR_DIAGRAMFRAME        "\nDiagram\nDiagram\nDiagram\nDiagram\nDiagram.Document\nDiagram.Document"
-    IDS_ERROR_LINE_FILTERTIMETOTBAND 
-                            "Bitte beachten Sie, dass bei einem positiven Filterwert das Totband nicht null sein darf!"
+    IDS_ERROR_LINE_INVALIDINPUT "Ungültige Eingabe!"
     IDR_MAINFRAME           "EasyControl"
     IDR_OVERVIEWFRAME       "\nEasyControl\n\n\nEasyControl.Document\nEasyControl.Document"
     IDR_RECIPEFRAME         "\nRezeptur\n\n\nRezeptur.Document\nRezeptur.Document"
@@ -3386,6 +3386,31 @@ END
 
 STRINGTABLE
 BEGIN
+    IDS_ERROR_LC_INCOMPATIBLE_TYPES 
+                            "Konfigurierte Wägezelle ist inkompatibel!"
+    IDS_ERROR_LC_NEWBUSADDRESS "Wägezelle an neuer Busadresse verfügbar!"
+    IDS_ERROR_LC_NO_DEFINITION "Keine Wägezelle detektiert!"
+    IDS_ERROR_LC_NO_SCALE   "Keine Wägezelle verfügbar !"
+    IDS_ERROR_LC_SRC_BUSY   "Wägezelle an Zieladresse bereits belegt!"
+    IDS_ERROR_LINE_FILTERTIMETOTBAND 
+                            "Bitte beachten Sie, dass bei einem positiven Filterwert das Totband nicht null sein darf!"
+    IDS_ERROR_LOGINPERMISSION 
+                            "Sie haben keine ausreichende Berechtigung für diese Aktion. \n Bitte wenden Sie sich an Ihren Administrator!"
+    IDS_ERROR_MINMAXWEIGHT  "Ungültige Gewichtsbegrenzung! Werte werden automatisch angepasst!"
+    IDS_ERROR_MISSING_LOADCELL "Keine Wägezelle angeschlossen!"
+    IDS_ERROR_MPMSETSENORTADRESSE "Fehler beim Setzen der Sensoradresse!"
+    IDS_ERROR_PBORDER       "Ungültige Profibusliste!"
+    IDS_ERROR_PRODUCTDATABASE_LOAD "Fehler beim Laden der Produktdatenbank!"
+    IDS_ERROR_PRODUCTDATABASE_SAVE 
+                            "Fehler beim Speichern der Produktdatenbank!"
+    IDS_ERROR_PRODUCTNAME_EXIST "Produktname existiert bereits !"
+    IDS_ERROR_QMNUMBER_EXIST "QM-Nummer existiert bereits !"
+    IDS_ERROR_RECIPEOPEN    "Fehler beim Öffnen der Rezeptur!"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_ICPTITLE            "Interface Control Port - ICP"
     IDS_IDLEMESSAGEEASYCONTROL "EasyControl 4.0"
     IDS_IFLTITLE            "Einlauftrichter - Messwaage"
     IDS_IFL_ALARMLIMIT_KG   "Alarmpegel Überlauf [kg]"
@@ -3401,11 +3426,39 @@ BEGIN
     IDS_IFS_TIMESTEPREDUCE_S "Zeitintervall Sollwertabnahme [s]"
     IDS_IFUSTITLE           "Unterfütterter Einlauftrichter - Begrenzungsschalter"
     IDS_IFX_GAINFACTOR      "Steigerung"
-    IDS_IFX_REDUCEFACTOR    "Drosselung"
 END
 
 STRINGTABLE
 BEGIN
+    IDS_IFX_REDUCEFACTOR    "Drosselung"
+    IDS_INFO_ALARMERROR_BATCH_TIMEOUT 
+                            "Ist die Batchoperation nach Ablauf einer vorgegebenen Zeit noch nicht beendet, so wird der entsprechende Alarm ausgelöst."
+    IDS_INFO_ALARMERROR_CALIB_GENERAL "*** todo ***"
+    IDS_INFO_ALARMERROR_CALIB_INVALIDSETUP "*** todo ***"
+    IDS_INFO_ALARMERROR_CALIB_LOADCELL "*** todo ***"
+    IDS_INFO_ALARMERROR_CALIB_REFILLACTIVE "*** todo ***"
+    IDS_INFO_ALARMERROR_CALIB_RELEASEFAILED "*** todo ***"
+    IDS_INFO_ALARMERROR_DOSE_ALARMSTOP "Stoppt den Dosierer beim Alarm"
+    IDS_INFO_ALARMERROR_DOSE_CONTROLERROR "*** todo ***"
+    IDS_INFO_ALARMERROR_DOSE_DOSEPERFORMANCE 
+                            "Unterschreitet oder überschreitet die aktuelle Dosierperformanz die kalibrierte Dosierperformanz um den prozentualen Schwellwert, so wird der Alarm Dosierperformanz niedrig bzw. hoch ausgelöst."
+    IDS_INFO_ALARMERROR_DOSE_DOSEPERFORMANCE_HIGH 
+                            "Überschreitet die aktuelle Dosierperformanz die Initialdosierperformanz um einen Schwellwert, dann wird der Alarm Dosierperformanz hoch ausgelöst."
+    IDS_INFO_ALARMERROR_DOSE_DOSEPERFORMANCE_LOW 
+                            "Unterschreitet die aktuelle Dosierperformanz die Initialdosierperformanz um einen Schwellwert, dann wird der Alarm Dosierperformanz tief ausgelöst."
+    IDS_INFO_ALARMERROR_DOSE_DRIVECOMMAND_HIGH 
+                            "Überschreitet der Stellbefehl diesen Schwellwert, so wird der entsprechende Alarm ausgelöst."
+    IDS_INFO_ALARMERROR_DOSE_DRIVECOMMAND_LOW 
+                            "Unterschreitet der Stellbefehl diesen Schwellwert, so wird der entsprechende Alarm ausgelöst."
+    IDS_INFO_ALARMERROR_DOSE_DRIVEERROR 
+                            "Störung am Frequenzumrichter Antrieb ( Schnecke )"
+    IDS_INFO_ALARMERROR_DOSE_DRIVEERRORPADDLE 
+                            "Störung am Frequenzumrichter Rührwerk oder Paddelantrieb."
+END
+
+STRINGTABLE
+BEGIN
+    IDS_INFO_ALARMERROR_LINE_UPS_ALARM "USV Batterieladezustand niedrig"
     IDS_INFO_ALARMERROR_LWF_REFILLALARMLIMIT "*** todo ***"
     IDS_INFO_ALARMERROR_TARE_GENERAL "*** todo ***"
     IDS_INFO_ALARMERROR_TARE_LOADCELL "*** todo ***"
@@ -3423,11 +3476,11 @@ BEGIN
     IDS_INFO_CATEGORY_FL    "Um bei einem bestimmten Alarm die Blitzlampe einzuschalten, muss in dieser Spalte ein Häkchen gesetzt werden."
     IDS_INFO_CATEGORY_HS    "Um bei einem bestimmten Alarm den gesamten Dosierprozeß  zu beenden und den Ausgang L2 zu setzen, muss in dieser Spalte ein Häkchen gesetzt werden."
     IDS_INFO_CATEGORY_RA    "Soll bei einem Nachfüllalarm zusätzlich der Linienausgang L3 gesetzt werden, muss in dieser Spalte ein Häkchen gesetzt werden."
-    IDS_INFO_CATEGORY_S     "Um bei einem bestimmten Alarm den Dosierer zu stoppen, muss in dieser Spalte ein Häkchen gesetzt werden."
 END
 
 STRINGTABLE
 BEGIN
+    IDS_INFO_CATEGORY_S     "Um bei einem bestimmten Alarm den Dosierer zu stoppen, muss in dieser Spalte ein Häkchen gesetzt werden."
     IDS_INFO_CORRECTIONFACTOR 
                             "Mit dem Korrekturfaktor wird der Gewichtswert auf das tatsächliche Gewicht linear skaliert. Der Korrekturfaktor sollte standardmäßig immer auf 1 stehen und nur im Notfall (Messzelle defekt) verändert werden"
     IDS_INFO_DEBOUNCE       "Die Entprellung verhindert, dass zusätzliche Aktivierungen oder langsame Funktionen zu oft ausgelöst werden. Die Entprellzeit definiert die Zeit, die ein konstantes Signal mindestens anliegen muss."
@@ -3447,7 +3500,36 @@ BEGIN
     IDS_INFO_IFL_NOMSETPOINT 
                             "Der Nominalsollwert wird eingestellt, wenn der Gewichtswert unter das Min-Gewicht fällt."
     IDS_INFO_IFL_SETPOINTMAX "Sollwert beim Erreichen des Max. Gewichts"
+END
+
+STRINGTABLE
+BEGIN
     IDS_INFO_IFS_GAINFACTOR "Dieser Wert legt fest, um wieviel der Sollwert nach jedem Zeitintervall angehoben wird"
+    IDS_INFO_IFS_REDUCEFACTOR 
+                            "Dieser Wert legt fest, um wieviel der Sollwert nach jedem Zeitintervall verringert wird."
+    IDS_INFO_IFS_SETPOINTOVERFLOW 
+                            "Dieser Wert definiert den neuen Sollwert bei Überlauf."
+    IDS_INFO_IFS_TIMESTEPGAIN 
+                            "Dieser Wert legt das Zeitintervall fest, wann der Sollwert wieder zunimmt."
+    IDS_INFO_IFS_TIMESTEPREDUCE 
+                            "Dieser Wert legt das Zeitintervall fest, wann der Sollwert wieder verringert wird."
+    IDS_INFO_LCHYSTERESIS   "Die Hysterese verzögert den Umschaltvorgang bzw. das Verlassen des Min- bzw. Maxzustands um x kg."
+    IDS_INFO_LCLMAXLEVEL    "Das Max. Gewicht definiert die obere Gewichtsgrenze. Beim Erreichen dieser Schwelle wird auf den minimalen Liniensollwert umgeschaltet."
+    IDS_INFO_LCLMINLEVEL    "Das Min. Gewicht definiert die untere Gewichtsgrenze."
+    IDS_INFO_LINESETPOINT   "Hier geben Sie den neuen Liniensollwert ein."
+    IDS_INFO_LINE_FILTERTIME_P 
+                            "Innerhalb der Hysterese wird der neue Liniensollwert als gleitender Mittelwert aus dem aktuellen und dem zuvor gebildeten Sollwert berechnet. Die Filterung definiert den prozentualen Anteil des aktuellen Sollwerts an der Mittelwertbildung. Beträgt dieser Anteil 0 %, so entspricht der neue Sollwert dem letzten. Beträgt der Anteil hingegen 100 %, wird ausschließlich der aktuelle Sollwert zum neuen Sollwert. Die Filterung ist dann von Bedeutung, wenn der Liniensollwert leichten Schwankungen unterliegt, beispielsweise bei einem analogen Eingangssignal."
+    IDS_INFO_LINE_HYSTERESIS_KGH 
+                            "Beträgt die Differenz aus aktuellem und zuvor gebildetem Liniensollwert weniger als die Hysterese, so wird der alte Sollwert zum neuen bzw. der Liniensollwert ändert sich nicht."
+    IDS_INFO_LINE_MAXSETPOINT_KGH 
+                            "Die Bezugsgröße definiert den oberen Referenzwert in kg/h bei einem analogen Signal von 10 V. Sie ist für die Umwandlung des analogen Eingangssignals zur Berechnung des Liniensollwerts bzw. für die Ausgabe des Liniendurchsatzes als analoges Stellsignal notwendig."
+    IDS_INFO_LINE_MINTOTBAND_KGH 
+                            "Wenn der aktuelle Liniensollwert das minimale Totband unterschreitet, wird der neu berechnete Liniensollwert auf 0 gesetzt. Der Liniensollwert muss also das minimale Totband überschreiten, damit die Dosierungen effektiv starten können."
+    IDS_INFO_LINE_RAMPDELAY_S 
+                            "Die Verzögerung definiert die Verzögerungszeit bevor bei gedrückter Taste ein neuer Sollwertsprung ausgelöst wird."
+    IDS_INFO_LINE_RAMPSTEP_KGH 
+                            "Die Schrittweite definiert den Sollwertsprung beim Betätigen der Rampentaste."
+    IDS_INFO_LINE_SCALE_P   "Die Skalierung ist die Angabe eines Faktors in Prozent zur Skalierung des analogen Eingangssignals."
 END
 
 STRINGTABLE
@@ -3480,36 +3562,7 @@ END
 
 STRINGTABLE
 BEGIN
-    IDS_INFO_IFS_REDUCEFACTOR 
-                            "Dieser Wert legt fest, um wieviel der Sollwert nach jedem Zeitintervall verringert wird."
-    IDS_INFO_IFS_SETPOINTOVERFLOW 
-                            "Dieser Wert definiert den neuen Sollwert bei Überlauf."
-    IDS_INFO_IFS_TIMESTEPGAIN 
-                            "Dieser Wert legt das Zeitintervall fest, wann der Sollwert wieder zunimmt."
-    IDS_INFO_IFS_TIMESTEPREDUCE 
-                            "Dieser Wert legt das Zeitintervall fest, wann der Sollwert wieder verringert wird."
-    IDS_INFO_LCHYSTERESIS   "Die Hysterese verzögert den Umschaltvorgang bzw. das Verlassen des Min- bzw. Maxzustands um x kg."
-    IDS_INFO_LCLMAXLEVEL    "Das Max. Gewicht definiert die obere Gewichtsgrenze. Beim Erreichen dieser Schwelle wird auf den minimalen Liniensollwert umgeschaltet."
-    IDS_INFO_LCLMINLEVEL    "Das Min. Gewicht definiert die untere Gewichtsgrenze."
-    IDS_INFO_LINESETPOINT   "Hier geben Sie den neuen Liniensollwert ein."
-    IDS_INFO_LINE_FILTERTIME_P 
-                            "Innerhalb der Hysterese wird der neue Liniensollwert als gleitender Mittelwert aus dem aktuellen und dem zuvor gebildeten Sollwert berechnet. Die Filterung definiert den prozentualen Anteil des aktuellen Sollwerts an der Mittelwertbildung. Beträgt dieser Anteil 0 %, so entspricht der neue Sollwert dem letzten. Beträgt der Anteil hingegen 100 %, wird ausschließlich der aktuelle Sollwert zum neuen Sollwert. Die Filterung ist dann von Bedeutung, wenn der Liniensollwert leichten Schwankungen unterliegt, beispielsweise bei einem analogen Eingangssignal."
-    IDS_INFO_LINE_HYSTERESIS_KGH 
-                            "Beträgt die Differenz aus aktuellem und zuvor gebildetem Liniensollwert weniger als die Hysterese, so wird der alte Sollwert zum neuen bzw. der Liniensollwert ändert sich nicht."
-    IDS_INFO_LINE_MAXSETPOINT_KGH 
-                            "Die Bezugsgröße definiert den oberen Referenzwert in kg/h bei einem analogen Signal von 10 V. Sie ist für die Umwandlung des analogen Eingangssignals zur Berechnung des Liniensollwerts bzw. für die Ausgabe des Liniendurchsatzes als analoges Stellsignal notwendig."
-    IDS_INFO_LINE_MINTOTBAND_KGH 
-                            "Wenn der aktuelle Liniensollwert das minimale Totband unterschreitet, wird der neu berechnete Liniensollwert auf 0 gesetzt. Der Liniensollwert muss also das minimale Totband überschreiten, damit die Dosierungen effektiv starten können."
-    IDS_INFO_LINE_RAMPDELAY_S 
-                            "Die Verzögerung definiert die Verzögerungszeit bevor bei gedrückter Taste ein neuer Sollwertsprung ausgelöst wird."
-    IDS_INFO_LINE_RAMPSTEP_KGH 
-                            "Die Schrittweite definiert den Sollwertsprung beim Betätigen der Rampentaste."
-    IDS_INFO_LINE_SCALE_P   "Die Skalierung ist die Angabe eines Faktors in Prozent zur Skalierung des analogen Eingangssignals."
     IDS_INFO_MASSFLOWFILTER "Der Istwertfilter definiert die Gewichtung mit der ein neuer Messwert in die gesamte Istwertberechnung einfliesst."
-END
-
-STRINGTABLE
-BEGIN
     IDS_INFO_MAXDRIVECOMMAND 
                             "Der Max. Stellschritt definiert die maximal zulässige Änderung des Stellbefehls bei einem Regelschritt."
     IDS_INFO_MAXLINESETPOINT 
@@ -3532,41 +3585,41 @@ BEGIN
     IDS_INFO_REFILLLIMITMIN "Wird beim Dosieren die Grenze 'Min.Nachfüllgrenze' unterschritten, so wird der automatische Nachfüllvorgang aktiviert."
     IDS_INFO_REFILLRELEASE  "Die Nachfüllfreigabe definiert, ob die automatische Nachfüllung grundsätzlich gestartet werden kann.\nIst die Nachfüllfreigabe nicht eingeschaltet, findet keine Nachfüllung mehr statt und der Dosierer läuft leer.\nWenn  ein roter Punkt auf der Schaltfläche erscheint, wird die Nachfüllfreigabe über ein externes Digitalsignal festgelegt."
     IDS_INFO_REFILLSTART    "started den Nachfüllvorgang bis der maximale Nachfüllgrenze erreicht wurde oder die Nachfüllzeit abgelaufen ist."
+END
+
+STRINGTABLE
+BEGIN
     IDS_INFO_REFILLSWITCHDELAY 
                             "Die Umschaltverzögerung definiert die Zeit, die nach dem Erreichen des 'Max.Nachfüllgrenze' gewartet wird, bis der Dosierer wieder in den gravimetrischen Betrieb übergeht."
+    IDS_INFO_REFILLTIME     "Die Nachfülldauer definiert die maximale Zeit, die für den Nachfüllvorgang erlaubt ist. Nach erfolglosem Ablauf der Zeit wird ein Nachfüllalarm ausgelöst."
+    IDS_INFO_STARTUPDELAY   "Die Startverzögerung verzögert das Anlaufen des Dosierers nach der Freigabe."
+    IDS_INFO_STEEPNESSMASSFLOW 
+                            "Die Istwertkorrektur beschreibt einen Faktor, mit dem der analoge Rückgabewert angepasst wird."
+    IDS_INFO_SWITCHPOINT    "Der Umschaltpunkt definiert die verbleibende Chargenmenge in kg bevor von Grobstrom auf Feinstrom umgeschaltet wird."
+    IDS_INFO_TODO           "*** ToDo ***"
+    IDS_INFO_TOTALIZERIMPULSE_IMPULSE 
+                            "Die Impulsdauer definiert, wie lange ein Impuls am Digitalausgang anstehen soll."
+    IDS_INFO_TOTALIZERIMPULSE_STEP 
+                            "Die Schrittweite definiert, bei welchem Totalisatorsprung ein neuer Impuls am Digitalausgang erzeugt wird."
+    IDS_INFO_VOLEMPTYFEEDERSTART 
+                            "Dieser Parameter legt fest, nach welcher Zeit der Alarm 'Dosierer leer' ausgelöst wird."
+    IDS_INPUTERROR_HYSTERESISHIGH "Unzulässige Eingabe! Hysterese zu groß !"
+    IDS_INPUTERROR_MINGREATERMAX 
+                            "Unzulässige Eingabe ! Der Min-Wert ist größer als der Max-Wert."
+    IDS_INPUTERROR_MINGROESSERMAX 
+                            "Bitte beachten: Min.Nachfüllgrenze  ist größer als Max.Nachfüllgrenze!"
+    IDS_INPUTERROR_MINMINGROESSERMAX 
+                            "Bitte beachten: Alarm-Pegel ist größer Max.Nachfüllgrenze!"
+    IDS_INPUTERROR_MINMINGROESSERMIN 
+                            "Bitte beachten: Alarm-Pegel ist größer Min.Nachfüllgrenze!"
+    IDS_INVALIDUPDATEEXT    "Ungültige Dateiendung!"
+    IDS_LANGCHINESE         "Chinesisch"
 END
 
 STRINGTABLE
 BEGIN
-    IDS_INFO_ALARMERROR_BATCH_TIMEOUT 
-                            "Ist die Batchoperation nach Ablauf einer vorgegebenen Zeit noch nicht beendet, so wird der entsprechende Alarm ausgelöst."
-    IDS_INFO_ALARMERROR_CALIB_GENERAL "*** todo ***"
-    IDS_INFO_ALARMERROR_CALIB_INVALIDSETUP "*** todo ***"
-    IDS_INFO_ALARMERROR_CALIB_LOADCELL "*** todo ***"
-    IDS_INFO_ALARMERROR_CALIB_REFILLACTIVE "*** todo ***"
-    IDS_INFO_ALARMERROR_CALIB_RELEASEFAILED "*** todo ***"
-    IDS_INFO_ALARMERROR_DOSE_ALARMSTOP "Stoppt den Dosierer beim Alarm"
-    IDS_INFO_ALARMERROR_DOSE_CONTROLERROR "*** todo ***"
-    IDS_INFO_ALARMERROR_DOSE_DOSEPERFORMANCE 
-                            "Unterschreitet oder überschreitet die aktuelle Dosierperformanz die kalibrierte Dosierperformanz um den prozentualen Schwellwert, so wird der Alarm Dosierperformanz niedrig bzw. hoch ausgelöst."
-    IDS_INFO_ALARMERROR_DOSE_DOSEPERFORMANCE_HIGH 
-                            "Überschreitet die aktuelle Dosierperformanz die Initialdosierperformanz um einen Schwellwert, dann wird der Alarm Dosierperformanz hoch ausgelöst."
-    IDS_INFO_ALARMERROR_DOSE_DOSEPERFORMANCE_LOW 
-                            "Unterschreitet die aktuelle Dosierperformanz die Initialdosierperformanz um einen Schwellwert, dann wird der Alarm Dosierperformanz tief ausgelöst."
-    IDS_INFO_ALARMERROR_DOSE_DRIVECOMMAND_HIGH 
-                            "Überschreitet der Stellbefehl diesen Schwellwert, so wird der entsprechende Alarm ausgelöst."
-    IDS_INFO_ALARMERROR_DOSE_DRIVECOMMAND_LOW 
-                            "Unterschreitet der Stellbefehl diesen Schwellwert, so wird der entsprechende Alarm ausgelöst."
-    IDS_INFO_ALARMERROR_DOSE_DRIVEERROR 
-                            "Störung am Frequenzumrichter Antrieb ( Schnecke )"
-    IDS_INFO_ALARMERROR_DOSE_DRIVEERRORPADDLE 
-                            "Störung am Frequenzumrichter Rührwerk oder Paddelantrieb."
     IDS_INFO_ALARMERROR_DOSE_DRIVEERRORREFILLFEEDER 
                             "Störung am Frequenzumrichter Vordosierer"
-END
-
-STRINGTABLE
-BEGIN
     IDS_INFO_ALARMERROR_DOSE_ENCODER 
                             "Dieser Alarm wird angezeigt, wenn der Dosierer in den Stop-Modus versetzt wurde. Der Stop-Modus wird ausgelöst durch ein Unterschreiten des Wertes Drehzahlmonitor [pm]."
     IDS_INFO_ALARMERROR_DOSE_ENCODER_SPEED_HIGH 
@@ -3594,34 +3647,11 @@ BEGIN
                             "Überschreitet der Istwert diesen Schwellwert, so wird der entsprechende Alarm ausgelöst."
     IDS_INFO_ALARMERROR_DOSE_MASSFLOW_LOW 
                             "Unterschreitet der Istwert diesen Schwellwert, so wird der entsprechende Alarm ausgelöst."
+END
+
+STRINGTABLE
+BEGIN
     IDS_INFO_ALARMERROR_DOSE_MOTORLOAD "Bitte Motorkabel prüfen."
-END
-
-STRINGTABLE
-BEGIN
-    IDS_ERROR_LC_INCOMPATIBLE_TYPES 
-                            "Konfigurierte Wägezelle ist inkompatibel!"
-    IDS_ERROR_LC_NEWBUSADDRESS "Wägezelle an neuer Busadresse verfügbar!"
-    IDS_ERROR_LC_NO_DEFINITION "Keine Wägezelle detektiert!"
-    IDS_ERROR_LC_NO_SCALE   "Keine Wägezelle verfügbar !"
-    IDS_ERROR_LC_SRC_BUSY   "Wägezelle an Zieladresse bereits belegt!"
-    IDS_ERROR_LOGINPERMISSION 
-                            "Sie haben keine ausreichende Berechtigung für diese Aktion. \n Bitte wenden Sie sich an Ihren Administrator!"
-    IDS_ERROR_MINMAXWEIGHT  "Ungültige Gewichtsbegrenzung! Werte werden automatisch angepasst!"
-    IDS_ERROR_MISSING_LOADCELL "Keine Wägezelle angeschlossen!"
-    IDS_ERROR_MPMSETSENORTADRESSE "Fehler beim Setzen der Sensoradresse!"
-    IDS_ERROR_PBORDER       "Ungültige Profibusliste!"
-    IDS_ERROR_PRODUCTDATABASE_LOAD "Fehler beim Laden der Produktdatenbank!"
-    IDS_ERROR_PRODUCTDATABASE_SAVE 
-                            "Fehler beim Speichern der Produktdatenbank!"
-    IDS_ERROR_PRODUCTNAME_EXIST "Produktname existiert bereits !"
-    IDS_ERROR_QMNUMBER_EXIST "QM-Nummer existiert bereits !"
-    IDS_ERROR_RECIPEOPEN    "Fehler beim Öffnen der Rezeptur!"
-    IDS_ERROR_RECIPESPEICHERN "Fehler beim Speichern der Rezeptur!"
-END
-
-STRINGTABLE
-BEGIN
     IDS_INFO_ALARMERROR_DOSE_NOISELIMIT 
                             "Die Rauschgrenze definiert die Obergrenze um wieviel Prozent der reale Gewichtswert bzw. Istwert vom Erwartungswert abweichen darf bevor ein Alarm ausgelöst wird."
     IDS_INFO_ALARMERROR_DOSE_REACTIONDELAY 
@@ -3645,35 +3675,50 @@ BEGIN
                             "Dieser Alarm wird angezeigt, wenn über einen definierten Zeitraum der obere Begrenzungssensor aktiviert ist."
     IDS_INFO_ALARMERROR_LINE_CUSTOMER_ALARM "Kundenalarm aktiv"
     IDS_INFO_ALARMERROR_LINE_EXT_ALARM "Externer Linieneingang aktiv"
-    IDS_INFO_ALARMERROR_LINE_UPS_ALARM "USV Batterieladezustand niedrig"
 END
 
 STRINGTABLE
 BEGIN
-    IDS_INFO_REFILLTIME     "Die Nachfülldauer definiert die maximale Zeit, die für den Nachfüllvorgang erlaubt ist. Nach erfolglosem Ablauf der Zeit wird ein Nachfüllalarm ausgelöst."
-    IDS_INFO_STARTUPDELAY   "Die Startverzögerung verzögert das Anlaufen des Dosierers nach der Freigabe."
-    IDS_INFO_STEEPNESSMASSFLOW 
-                            "Die Istwertkorrektur beschreibt einen Faktor, mit dem der analoge Rückgabewert angepasst wird."
-    IDS_INFO_SWITCHPOINT    "Der Umschaltpunkt definiert die verbleibende Chargenmenge in kg bevor von Grobstrom auf Feinstrom umgeschaltet wird."
-    IDS_INFO_TODO           "*** ToDo ***"
-    IDS_INFO_TOTALIZERIMPULSE_IMPULSE 
-                            "Die Impulsdauer definiert, wie lange ein Impuls am Digitalausgang anstehen soll."
-    IDS_INFO_TOTALIZERIMPULSE_STEP 
-                            "Die Schrittweite definiert, bei welchem Totalisatorsprung ein neuer Impuls am Digitalausgang erzeugt wird."
-    IDS_INFO_VOLEMPTYFEEDERSTART 
-                            "Dieser Parameter legt fest, nach welcher Zeit der Alarm 'Dosierer leer' ausgelöst wird."
-    IDS_INPUTERROR_HYSTERESISHIGH "Unzulässige Eingabe! Hysterese zu groß !"
-    IDS_INPUTERROR_MINGREATERMAX 
-                            "Unzulässige Eingabe ! Der Min-Wert ist größer als der Max-Wert."
-    IDS_INPUTERROR_MINGROESSERMAX 
-                            "Bitte beachten: Min.Nachfüllgrenze  ist größer als Max.Nachfüllgrenze!"
-    IDS_INPUTERROR_MINMINGROESSERMAX 
-                            "Bitte beachten: Alarm-Pegel ist größer Max.Nachfüllgrenze!"
-    IDS_INPUTERROR_MINMINGROESSERMIN 
-                            "Bitte beachten: Alarm-Pegel ist größer Min.Nachfüllgrenze!"
-    IDS_INVALIDUPDATEEXT    "Ungültige Dateiendung!"
-    IDS_LANGCHINESE         "Chinesisch"
+    IDS_ERROR_RECIPESPEICHERN "Fehler beim Speichern der Rezeptur!"
+    IDS_ERROR_RECORDERERROR "Fehler beim Schreiben der Recorderdatei!"
+    IDS_ERROR_RECORDERINTERVAL "Intervall muss zwischen 5 und 3600 liegen!"
+    IDS_ERROR_REGISTERERROR "Fehler beim Registrieren der Messzelle!"
+    IDS_ERROR_REGISTERRESET "Fehler beim Ausschalten der Reset-Funktion!"
+    IDS_ERROR_REGISTERWRITEPROTECTIONCLOSE 
+                            "EEprom-Schreibschutzschalter schliessen und OK drücken!"
+    IDS_ERROR_REGISTERWRITEPROTECTIONOFF 
+                            "Fehler beim Abschalten des EEPROM-Schreibschutzes!"
+    IDS_ERROR_REGISTERWRITEPROTECTIONON 
+                            "Fehler beim Einschalten des EEPROM-Schreibschutzes!"
+    IDS_ERROR_REGISTERWRITEPROTECTIONOPEN 
+                            "EEprom-Schreibschutzschalter öffnen und OK drücken!"
+    IDS_ERROR_SAVE_ALARMCONFIG "Fehler beim Speichern der Alarmkonfiguration!"
+    IDS_ERROR_TARE_ILLEGAL_MEASURETIME "Ungültige Messzeit!"
+    IDS_ERROR_TARE_LOADCELL "Fehler beim Tarieren der Waage!"
+    IDS_ERROR_TARE_STARTED  "Tarierung kann nicht getartet werden!"
+    IDS_ERROR_TARE_TIMETOOSHORT "Tarierzeit zu gering!"
+    IDS_ERROR_USERLISTSAVE  "Fehler beim Speichern der Benutzerliste!"
+    IDS_EXTSETPOINT_ACTSETPOINT_KGH "Akt. ext. Liniensollwert [kg/h]"
+END
+
+STRINGTABLE
+BEGIN
     IDS_LANGDUTCH           "Niederländisch"
+    IDS_LANGENGLISH         "Englisch"
+    IDS_LANGFRENCH          "Französisch"
+    IDS_LANGGERMAN          "Deutsch"
+    IDS_LANGGREEK           "Griechisch"
+    IDS_LANGHUNGARIAN       "Ungarisch"
+    IDS_LANGITALIAN         "Italienisch"
+    IDS_LANGPOLISH          "Polnisch"
+    IDS_LANGRUSSIAN         "Russisch"
+    IDS_LANGSPANISH         "Spanisch"
+    IDS_LANGTURKISH         "Türkisch"
+    IDS_LANGUKRAINIAN       "Ukrainisch"
+    IDS_LANUAGEREADERROR    "Keine Sprache feststellbar!"
+    IDS_LANUAGEUPDATE       "Die neue Sprache wird mit dem nächsten Programmstart aktiviert!"
+    IDS_LCLHYSTERESIS_KG    "Hysterese [kg]"
+    IDS_LCLMAXLEVEL_KG      "Max. Gewicht [kg]"
 END
 
 STRINGTABLE
@@ -3857,22 +3902,22 @@ END
 
 STRINGTABLE
 BEGIN
-    IDS_LANGENGLISH         "Englisch"
-    IDS_LANGFRENCH          "Französisch"
-    IDS_LANGGERMAN          "Deutsch"
-    IDS_LANGGREEK           "Griechisch"
-    IDS_LANGHUNGARIAN       "Ungarisch"
-    IDS_LANGITALIAN         "Italienisch"
-    IDS_LANGPOLISH          "Polnisch"
-    IDS_LANGRUSSIAN         "Russisch"
-    IDS_LANGSPANISH         "Spanisch"
-    IDS_LANGTURKISH         "Türkisch"
-    IDS_LANGUKRAINIAN       "Ukrainisch"
-    IDS_LANUAGEREADERROR    "Keine Sprache feststellbar!"
-    IDS_LANUAGEUPDATE       "Die neue Sprache wird mit dem nächsten Programmstart aktiviert!"
-    IDS_LCLHYSTERESIS_KG    "Hysterese [kg]"
-    IDS_LCLMAXLEVEL_KG      "Max. Gewicht [kg]"
     IDS_LCLMINLEVEL_KG      "Min. Gewicht [kg]"
+    IDS_LCLTITLE            "Einzelplatz - Waage"
+    IDS_LESS                "weniger..."
+    IDS_LEVEL0              "Level 0"
+    IDS_LEVEL1              "Level 1"
+    IDS_LEVEL2              "Level 2"
+    IDS_LEVEL3              "Level 3"
+    IDS_LEVEL4              "Level 4"
+    IDS_LEVELCUSTOMIZED     "Benutzerdefiniert"
+    IDS_LICENCEFAILED       "Keine gültige Lizenz!"
+    IDS_LINEBATCHSIZE       "Linienbatchgröße"
+    IDS_LINEBATCHSIZE_KG    "Linienbatchgröße [kg]"
+    IDS_LINESETPOINT        "Liniensollwert"
+    IDS_LINESETPOINT_KGH    "Liniensollwert [kg/h]"
+    IDS_LINE_EXTSETPOINT_OFFSET "Offset [+/- 0..10V]"
+    IDS_LINE_FILTERTIME_P   "Filterung [%]"
 END
 
 STRINGTABLE
@@ -3907,46 +3952,7 @@ END
 
 STRINGTABLE
 BEGIN
-    IDS_LCLTITLE            "Einzelplatz - Waage"
-    IDS_LESS                "weniger..."
-    IDS_LEVEL0              "Level 0"
-    IDS_LEVEL1              "Level 1"
-    IDS_LEVEL2              "Level 2"
-    IDS_LEVEL3              "Level 3"
-    IDS_LEVEL4              "Level 4"
-    IDS_LEVELCUSTOMIZED     "Benutzerdefiniert"
-    IDS_LICENCEFAILED       "Keine gültige Lizenz!"
-    IDS_LINEBATCHSIZE       "Linienbatchgröße"
-    IDS_LINEBATCHSIZE_KG    "Linienbatchgröße [kg]"
-    IDS_LINESETPOINT        "Liniensollwert"
-    IDS_LINESETPOINT_KGH    "Liniensollwert [kg/h]"
-    IDS_LINE_EXTSETPOINT_OFFSET "Offset [+/- 0..10V]"
-    IDS_LINE_FILTERTIME_P   "Filterung [%]"
     IDS_LINE_HYSTERESIS_KGH "Hysterese [kg/h]"
-END
-
-STRINGTABLE
-BEGIN
-    IDS_FEEDEREMPTYSTOP     "Leerfahren beenden"
-    IDS_FEEDERTYPE          "Dosierereinzug"
-    IDS_FEHLER              "Fehler"
-    IDS_FINESTREAM_P        "Feinstrom [%]"
-    IDS_FINESTREAM_SPEED    "Feinstrom"
-    IDS_FINESTREAM_SPEED_P  "Feinstrom [%]"
-    IDS_GATEFILTER          "Torfilter"
-    IDS_GATEFILTER_P        "Torfilter [%]"
-    IDS_GRAFIK              "Diagram"
-    IDS_GROSSSTREAM_P       "Grobstrom [%]"
-    IDS_GROSSSTREAM_SPEED   "Grobstrom"
-    IDS_GROSSSTREAM_SPEED_P "Grobstrom [%]"
-    IDS_GWBTITLE            "Gain in weight batcher - GWB"
-    IDS_ICBTITLE            "Integral control port batcher - ICB"
-    IDS_ICPALARM            "ICP-Alarme"
-    IDS_ICPTITLE            "Interface Control Port - ICP"
-END
-
-STRINGTABLE
-BEGIN
     IDS_LINE_MAXSETPOINT_KGH "Bezugsgröße [kg/h]"
     IDS_LINE_MINTOTBAND_KGH "Min. Totband [kg/h]"
     IDS_LINE_RAMPDELAY_S    "Verzögerung [s]"
@@ -3962,11 +3968,31 @@ BEGIN
     IDS_LOGINNO             "Nein"
     IDS_LOGINPERMISSION_ALARMEINSTELLUNGEN "Alarmeinstellungen ändern"
     IDS_LOGINPERMISSION_ALARMTHRESHOLDS "Alarmgrenzen ändern"
-    IDS_LOGINPERMISSION_ANLAGENMAXSETPOINT "Anlagenbezugsgröße ändern"
 END
 
 STRINGTABLE
 BEGIN
+    IDS_FEEDEREMPTYSTART    "Leerfahren"
+    IDS_FEEDEREMPTYSTOP     "Leerfahren beenden"
+    IDS_FEEDERTYPE          "Dosierereinzug"
+    IDS_FEHLER              "Fehler"
+    IDS_FINESTREAM_P        "Feinstrom [%]"
+    IDS_FINESTREAM_SPEED    "Feinstrom"
+    IDS_FINESTREAM_SPEED_P  "Feinstrom [%]"
+    IDS_GATEFILTER          "Torfilter"
+    IDS_GATEFILTER_P        "Torfilter [%]"
+    IDS_GRAFIK              "Diagram"
+    IDS_GROSSSTREAM_P       "Grobstrom [%]"
+    IDS_GROSSSTREAM_SPEED   "Grobstrom"
+    IDS_GROSSSTREAM_SPEED_P "Grobstrom [%]"
+    IDS_GWBTITLE            "Gain in weight batcher - GWB"
+    IDS_ICBTITLE            "Integral control port batcher - ICB"
+    IDS_ICPALARM            "ICP-Alarme"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_LOGINPERMISSION_ANLAGENMAXSETPOINT "Anlagenbezugsgröße ändern"
     IDS_LOGINPERMISSION_DOSEPERFORMANCEAENDERN "Dosierperformanz ändern"
     IDS_LOGINPERMISSION_DOSIERTYPENEINSTELLUNGEN "Dosiertyp ändern"
     IDS_LOGINPERMISSION_DOSIERUNGENAKTIVIEREN "Dosiereigenschaften aktivieren"
@@ -3983,11 +4009,11 @@ BEGIN
     IDS_LOGINPERMISSION_PROGRAMMBEENDEN "Programm beenden"
     IDS_LOGINPERMISSION_RECIPEAKTIVIEREN "Rezeptur aktivieren"
     IDS_LOGINPERMISSION_RECIPEBEARBEITEN "Rezeptur bearbeiten"
-    IDS_LOGINPERMISSION_RECIPELOESCHEN "Rezeptur löschen"
 END
 
 STRINGTABLE
 BEGIN
+    IDS_LOGINPERMISSION_RECIPELOESCHEN "Rezeptur löschen"
     IDS_LOGINPERMISSION_RECIPEOEFFNEN "Rezeptur öffnen"
     IDS_LOGINPERMISSION_RECIPESPEICHERN "Rezeptur speichern"
     IDS_LOGINPERMISSION_REGLERPARAMETEREINSTELLUNGEN "Regelparameter ändern"
@@ -4003,11 +4029,11 @@ BEGIN
     IDS_LOGINPERMISSION_VERBRAUCHNULLEN "Totalisator nullen"
     IDS_LOGINUNKNOWNUSER    "Benutzername unbekannt"
     IDS_LOGINYES            "Ja"
-    IDS_LOKALBETRIEB        "Lokalbetrieb"
 END
 
 STRINGTABLE
 BEGIN
+    IDS_LOKALBETRIEB        "Lokalbetrieb"
     IDS_LWBTITLE            "Loss in weight batcher - LWB"
     IDS_LWPALARM            "LWP-Alarme"
     IDS_LWPTITLE            "Differentialdosierwaage - LWP"
@@ -4022,11 +4048,11 @@ BEGIN
     IDS_MAXDRIVECOMMAND_P   "Max. Stellschritt [%]"
     IDS_MAXLINESETPOINT_KGH "Max. Liniensollwert [kg/h]"
     IDS_MAXROTSPEED         "Max. Drehzahl"
-    IDS_MAXROTSPEED_UPM     "Max. Drehzahl [U/min]"
 END
 
 STRINGTABLE
 BEGIN
+    IDS_MAXROTSPEED_UPM     "Max. Drehzahl [U/min]"
     IDS_MAXSETPOINT         "Bezugsgröße"
     IDS_MAXSETPOINT_KGH     "Bezugsgröße [kg/h]"
     IDS_MEASURETIME_S       "Messzeit [s]"
@@ -4043,11 +4069,11 @@ BEGIN
     IDS_MORE                "mehr ..."
     IDS_NO                  "Nein"
     IDS_NOISE               "Rauschindex"
-    IDS_OK                  "OK"
 END
 
 STRINGTABLE
 BEGIN
+    IDS_OK                  "OK"
     IDS_OPEN_FILE           "Rezeptur öffnen ..."
     IDS_OVERRUNCOMPENSATION_KG "Nachlaufkompensation [kg]"
     IDS_OVERVIEW            "Übersicht"
@@ -4063,11 +4089,11 @@ BEGIN
     IDS_PROTOCOL_OPENMODBUS "OpenModbus TCP"
     IDS_PROTOCOL_PROFIBUS   "ProfiBus Protokoll"
     IDS_PROTOCOL_PROFINET   "ProfiNet Protokoll"
-    IDS_PROTOCOL_S7SNAP     "S7-Protokoll ( Version 2.0 )"
 END
 
 STRINGTABLE
 BEGIN
+    IDS_PROTOCOL_S7SNAP     "S7-Protokoll ( Version 2.0 )"
     IDS_PROTOCOL_SIMULATOR  "Simulator"
     IDS_QUERYREALLYEMPTYFEEDER "Leerfahren wirklich starten ?"
     IDS_QUERY_ALARMLISTACCEPT "Alarmkonfiguration übernehmen?"
@@ -4085,12 +4111,12 @@ BEGIN
     IDS_QUERY_OVERWRITE     "überschreiben?"
     IDS_QUERY_RECIPEAKTIVIERENERRORCONFIGURATION 
                             "Die Rezeptur passt nicht zur aktuellen Anlagenkonfiguration!"
-    IDS_QUERY_RECIPEAKTIVIERENERRORDIMENSION 
-                            "Die Rezeptur passt nicht zur aktuellen Anlagendimension!"
 END
 
 STRINGTABLE
 BEGIN
+    IDS_QUERY_RECIPEAKTIVIERENERRORDIMENSION 
+                            "Die Rezeptur passt nicht zur aktuellen Anlagendimension!"
     IDS_QUERY_RECIPE_ACTIVATE "Rezeptur wirklich aktivieren?"
     IDS_QUERY_TARASTART     "Tarierung wirklich aktualisieren?"
     IDS_QUERY_TARASTOP      "Automatische Tarierung abbrechen?"
@@ -4108,11 +4134,11 @@ BEGIN
     IDS_RECIPEPAGEFILTER    "EasyControl Update-Dateien (*.etu)|*.etu|EasyControl System-Dateien (*.ets)|*.ets|Recorder-Dateien (*.eta)|*.eta|Log-Dateien (*.etl)|*.etl|Rezeptur-Dateien (*.etr)|*.etr||"""
     IDS_RECIPE_OEFFNEN      "Rezeptur öffnen..."
     IDS_RECIPE_SPEICHERN_UNTER "Rezeptur speichern unter ..."
-    IDS_RECORDER_START      "Datenaufzeichnung starten ?"
 END
 
 STRINGTABLE
 BEGIN
+    IDS_RECORDER_START      "Datenaufzeichnung starten ?"
     IDS_RECORDER_STOP       "Datenaufzeichnung beenden ?"
     IDS_REFILLHEADER        "Nachfüllgrenzen"
     IDS_REFILLLIMITALARM_KG "Alarmpegel [kg]"
@@ -4128,11 +4154,11 @@ BEGIN
     IDS_REMOTENETWORKACTIVE "Netzwerkeinstellungen sind erst nach einem Systemneustart aktiv!"
     IDS_REMOTENETWORKSAVEERROR "Fehler beim Speichern der Netzwerkadresse!"
     IDS_REMOTEPAGEACTIVE    "Einstellungen sind erst beim nächsten Programmstart aktiv!"
-    IDS_ROTSPEED            "Drehzahl"
 END
 
 STRINGTABLE
 BEGIN
+    IDS_ROTSPEED            "Drehzahl"
     IDS_ROTSPEED_UPM        "Drehzahl [U/min]"
     IDS_RUN                 "RUN"
     IDS_SAVEDSUCCESSFULLY   "erfolgreich gespeichert!"
@@ -4150,11 +4176,11 @@ BEGIN
     IDS_SETTINGS_PRODUCTLIST "Produktliste"
     IDS_SETTINGS_RECIPE     "Sprachauswahl"
     IDS_SETTINGS_REMOTE     "Remotekonfiguration"
-    IDS_SETTINGS_USER       "Benutzereinstellungen"
 END
 
 STRINGTABLE
 BEGIN
+    IDS_SETTINGS_USER       "Benutzereinstellungen"
     IDS_SHOWLESS            "Weniger Eingaben"
     IDS_SHOWMORE            "Weitere Eingaben"
     IDS_SPEICHERN           "speichern"
@@ -4173,11 +4199,11 @@ BEGIN
                             "Änderungen bei den Benutzerrechten übernehmen?"
     IDS_SYSTEM_ALARMCFG_ACCEPT_SETTINGS 
                             "Einstellungen für alle Dosierer übernehmen?"
-    IDS_SYSTEM_QUERY_CHANGED "Änderungen übernehmen?"
 END
 
 STRINGTABLE
 BEGIN
+    IDS_SYSTEM_QUERY_CHANGED "Änderungen übernehmen?"
     IDS_SYSTEM_REMOTEPROTOCOL_CHANGED 
                             "Remoteeinstellungen sind erst nach einem Neustart aktiv!"
     IDS_TABELLE             "Tabelle"
@@ -4194,31 +4220,6 @@ BEGIN
     IDS_TOTALIZER_RESET     "Totalisator nullen"
     IDS_TOTALTOTALISATOR    "Gesamttotalisator"
     IDS_UPDATEEXISTERROR    "Datei existiert bereits ... trotzdem überschreiben?"
-    IDS_UPDATEOPENERROR     "Fehler beim Öffnen der Updatedatei!"
-END
-
-STRINGTABLE
-BEGIN
-    IDS_ERROR_RECORDERERROR "Fehler beim Schreiben der Recorderdatei!"
-    IDS_ERROR_RECORDERINTERVAL "Intervall muss zwischen 5 und 3600 liegen!"
-    IDS_ERROR_REGISTERERROR "Fehler beim Registrieren der Messzelle!"
-    IDS_ERROR_REGISTERRESET "Fehler beim Ausschalten der Reset-Funktion!"
-    IDS_ERROR_REGISTERWRITEPROTECTIONCLOSE 
-                            "EEprom-Schreibschutzschalter schliessen und OK drücken!"
-    IDS_ERROR_REGISTERWRITEPROTECTIONOFF 
-                            "Fehler beim Abschalten des EEPROM-Schreibschutzes!"
-    IDS_ERROR_REGISTERWRITEPROTECTIONON 
-                            "Fehler beim Einschalten des EEPROM-Schreibschutzes!"
-    IDS_ERROR_REGISTERWRITEPROTECTIONOPEN 
-                            "EEprom-Schreibschutzschalter öffnen und OK drücken!"
-    IDS_ERROR_SAVE_ALARMCONFIG "Fehler beim Speichern der Alarmkonfiguration!"
-    IDS_ERROR_TARE_ILLEGAL_MEASURETIME "Ungültige Messzeit!"
-    IDS_ERROR_TARE_LOADCELL "Fehler beim Tarieren der Waage!"
-    IDS_ERROR_TARE_STARTED  "Tarierung kann nicht getartet werden!"
-    IDS_ERROR_TARE_TIMETOOSHORT "Tarierzeit zu gering!"
-    IDS_ERROR_USERLISTSAVE  "Fehler beim Speichern der Benutzerliste!"
-    IDS_EXTSETPOINT_ACTSETPOINT_KGH "Akt. ext. Liniensollwert [kg/h]"
-    IDS_FEEDEREMPTYSTART    "Leerfahren"
 END
 
 STRINGTABLE

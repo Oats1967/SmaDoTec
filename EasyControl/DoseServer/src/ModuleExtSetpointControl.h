@@ -29,7 +29,6 @@ class CModuleExtSetpointControl : public base::CStatemachine<>
 private:
 	const base::CModuleExternalSetpointConfig& c_Config;
 	CAdsExtSetpointControl m_AdsClient;
-	float32_t   m_fSetpointMean;
 	BOOL		m_bIOLineInvSetpointEnableInputLast;
 	BOOL		m_bIOLineSetpointEnableInputLast;
 

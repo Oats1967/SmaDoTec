@@ -120,10 +120,27 @@ BOOL CLineSetpointLineDlg::OnNotifyEditMaxSetpoint()
 //***********************************************************************************************
 BOOL CLineSetpointLineDlg::OnNotifyEditMinTotband()
 {
+	auto fSave = m_MinTotBand;
+
 	auto bModified = CEditCtrl::GetFloatAbsModified(m_MinTotBand);
 	if (bModified)
 	{
-		REMOTEREF.setLineMinTotband(m_MinTotBand);
+		if (m_MinTotBand >= m_MaxSetpoint)
+		{
+			ECMessageBox(IDS_ERROR_LINE_INVALIDINPUT, MB_OK | MB_ICONSTOP);
+			m_MinTotBand = fSave;
+			bModified = FALSE;
+		}
+		else
+		{
+			if ((m_FilterTime > 0) && (m_MinTotBand <= 0.0F))
+			{
+				ECMessageBox(IDS_ERROR_LINE_FILTERTIMETOTBAND, MB_OK | MB_ICONINFORMATION);
+				m_MinTotBand = 1.0F;
+				REMOTEREF.setLineMinTotband(m_MinTotBand);
+			}
+			REMOTEREF.setLineMinTotband(m_MinTotBand);
+		}
 	}
 	return bModified;
 
@@ -132,15 +149,21 @@ BOOL CLineSetpointLineDlg::OnNotifyEditMinTotband()
 //***********************************************************************************************
 BOOL CLineSetpointLineDlg::OnNotifyEditHysteresis()
 {
+	float32_t fSave = m_Hysteresis;
+
 	auto bModified = CEditCtrl::GetFloatAbsModified(m_Hysteresis);
 	if (bModified)
 	{
-		if (m_Hysteresis == 0.0F)
+		if (m_Hysteresis >= m_MaxSetpoint)
 		{
-			m_FilterTime = 0;
+			ECMessageBox(IDS_ERROR_LINE_INVALIDINPUT, MB_OK | MB_ICONSTOP);
+			m_Hysteresis = fSave;
+			bModified = FALSE;
 		}
-		ENABLE_ID(IDC_LINE_LINESETPOINT_FILTERTIME_EDIT, BOOL(m_Hysteresis > 0.0F));
-		REMOTEREF.setLineRampHysteresis(m_Hysteresis);
+		else
+		{
+			REMOTEREF.setLineRampHysteresis(m_Hysteresis);
+		}
 	}
 	return bModified;
 }
@@ -153,8 +176,9 @@ BOOL CLineSetpointLineDlg::OnNotifyEditNominalFilterTime()
 	{
 		if ((m_FilterTime > 0) && (m_MinTotBand <= 0.0F))
 		{
-			ECMessageBox(L"Bitte beachten Sie, dass bei einem positiven Filterwert das Totband nicht null sein darf !", MB_OK | MB_ICONSTOP);
-			REMOTEREF.setLineMinTotband(m_MinTotBand + 1.0F);
+			ECMessageBox(IDS_ERROR_LINE_FILTERTIMETOTBAND, MB_OK | MB_ICONINFORMATION);
+			m_MinTotBand = 1.0F;
+			REMOTEREF.setLineMinTotband(m_MinTotBand);
 		}
 		REMOTEREF.setLineFilterTime(m_FilterTime);
 	}
@@ -209,7 +233,7 @@ BOOL CLineSetpointLineDlg::OnInitDialog()
 		ENABLE_SHOW_ID(IDC_LINE_LINESETPOINT_MAXSETPOINT_EDIT, bLineGeneralEnable && bMaxSetpointPermission, bLineGeneralShow)
 		SHOWW_ID(IDC_LINE_LINESETPOINT_MAXSETPOINT_STATIC, bLineGeneralShow)
 		SHOWW_ID(IDC_LINE_LINESETPOINT_MAXSETPOINT_INFO, bLineGeneralShow)
-		ENABLE_SHOW_ID(IDC_LINE_LINESETPOINT_FILTERTIME_EDIT, bLineGeneralEnable && (m_Hysteresis > 0.0F), bLineGeneralShow);
+		ENABLE_SHOW_ID(IDC_LINE_LINESETPOINT_FILTERTIME_EDIT, bLineGeneralEnable , bLineGeneralShow);
 		SHOWW_ID(IDC_LINE_LINESETPOINT_FILTERTIME_STATIC, bLineGeneralShow);
 		SHOWW_ID(IDC_LINE_LINESETPOINT_FILTERTIME_INFO, bLineGeneralShow);
 	}

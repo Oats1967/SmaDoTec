@@ -24,6 +24,8 @@
 //*************************************************************************************
 CModuleLineSetpointControl::CModuleLineSetpointControl(int32_t id) : CBaseClass(id)
 , m_SetpointHistoryCounter{ 0 }
+, m_fLastLineSetpoint{ 0.0f }
+, m_bLastLineSetpoint{ FALSE }
 {
     Init();
 }
@@ -62,89 +64,112 @@ BOOL CModuleLineSetpointControl::IsValidDose(const int32_t index)
 }
 //*************************************************************************************
 //*************************************************************************************
-BOOL CModuleLineSetpointControl::CalcLineSetpoint(const float32_t fOldLineSetpoint, float32_t *pfNewLineSetpoint)
+BOOL CModuleLineSetpointControl::CalcLineSetpoint(float32_t fOldLineSetpoint, float32_t* pfNewLineSetpoint)
 {
     const float32_t c_epsilon = 1e-04F;
 
+    auto IsChanged = [](const float32_t fNew, const float32_t fOld, const float32_t delta) {
+        return BOOL(_F32(fabs(fNew - fOld)) > delta);
+    };
+
     float32_t fMaxLeistung = 0.0f;
+    BOOL bNewValue = FALSE;
+
     Dose_EXGetMaxLeistung(&fMaxLeistung);
 
     assert(pfNewLineSetpoint);
     auto fNewLineSetpoint = RANGE(*pfNewLineSetpoint, 0.0F, fMaxLeistung);
 
-    float32_t fTotband = 0.0f;
-    Dose_EXGetMinTotband(&fTotband);
-
-    auto IsChanged = [] ( const float32_t fNew, const float32_t fOld, const float32_t delta) {
-        return BOOL(_F32(fabs(fNew - fOld)) > delta);
-    };
-
-    if ((fTotband > 0.0F) && (fNewLineSetpoint < fTotband))
+    auto bChanged = IsChanged(fNewLineSetpoint, fOldLineSetpoint, c_epsilon);
+    if ( bChanged)
     {
-        fNewLineSetpoint = 0.0f;
-    }
-    else
-    {
-        uint32_t lFilter = 0L;
-        Dose_EXGetFilterung(&lFilter);
-        if (lFilter > 0)
+        float32_t fTotband = 0.0f;
+        Dose_EXGetMinTotband(&fTotband);
+
+        if (fNewLineSetpoint < fTotband + c_epsilon)
         {
-            lFilter = RANGE(lFilter, 0, 100);
-            const float32_t cFilter = _F32(lFilter) * 0.01f;
-            fNewLineSetpoint = cFilter * fNewLineSetpoint + (1.0f - cFilter) * fOldLineSetpoint;
+            // Innerhalb des Totbandes -> Alles auf 0 setzen
+            fNewLineSetpoint = 0.0f;
+            bNewValue = TRUE;
         }
-        auto bChanged = IsChanged(fNewLineSetpoint, fOldLineSetpoint, c_epsilon);
-        if (bChanged)
+        else
         {
-            // Wert hat sich tatsächlich geändert
+            // Wert innerhalb der Hysterese
             float32_t fHysterese = 0.0f;
             Dose_EXGetHysterese(&fHysterese);
             if (fHysterese > 0.0F)
             {
-                if ( ! IsChanged(fNewLineSetpoint, fOldLineSetpoint, fHysterese) )
+                bChanged = IsChanged(fNewLineSetpoint, fOldLineSetpoint, fHysterese);
+                if (bChanged)
                 {
-                    // Sollwert hat sich geändert, aber innerhalb der Hysterese
-                    m_SetpointHistory.Add(fNewLineSetpoint);
-                    m_SetpointHistoryCounter++;
-                    if (m_SetpointHistoryCounter > c_CheckHystereseCounter)
-                    {
-                        // 10 x Immer innerhalb Hysterese, Ist Mittelwert deutlich vom fOldLineSetpoint
-                        m_SetpointHistoryCounter = 0;
-
-                        const float32_t c_Limit = __max((fHysterese / 3.0F), 1.0F);
-                        // Mindestens 1 kg
-                        auto fMeanLineSetpoint = m_SetpointHistory.GetMean();
-
-                        if ( IsChanged(fMeanLineSetpoint, fOldLineSetpoint, c_Limit))
-                        {
-                            // Sollwert nachziehen auf den Mittelwert
-                            fNewLineSetpoint = fMeanLineSetpoint;
-                        }
-                        else
-                        {
-                            // belassen
-                            fNewLineSetpoint = fOldLineSetpoint;
-                        }
-                    }
-                    else
-                    {
-                        // belassen
-                        fNewLineSetpoint = fOldLineSetpoint;
-                    }
+                    // Grösser als Hysterese -> Sollwertsprung
+                    bNewValue = TRUE;
                 }
                 else
                 {
-                    ResetHistoryBuffer();
-                }
+                    // Innerhalb der Hysterese -> Filterung ?
+                    uint32_t lFilter = 0L;
+                    Dose_EXGetFilterung(&lFilter);
+
+                    bChanged = TRUE;
+                    if (lFilter > 0)
+                    {
+                        if (m_bLastLineSetpoint)
+                        {
+                            lFilter = RANGE(lFilter, 0, 100);
+                            const float32_t cFilter = _F32(lFilter) * 0.01f;
+                            fNewLineSetpoint = cFilter * fNewLineSetpoint + (1.0f - cFilter) * m_fLastLineSetpoint;
+                        }
+                        m_fLastLineSetpoint = fNewLineSetpoint;
+                        m_bLastLineSetpoint = TRUE;
+                        bChanged = IsChanged(fNewLineSetpoint, fOldLineSetpoint, c_epsilon);
+                    }
+                    if (bChanged)
+                    {
+                        // Sollwert hat sich geändert, aber innerhalb der Hysterese
+                        m_SetpointHistory.Add(fNewLineSetpoint);
+                        m_SetpointHistoryCounter++;
+                        if (m_SetpointHistoryCounter > c_CheckHystereseCounter)
+                        {
+                            // 10 x Immer innerhalb Hysterese, Ist Mittelwert deutlich vom fOldLineSetpoint
+                            const float32_t c_Limit = __max((fHysterese / 3.0F), 1.0F);
+                            // Mindestens 1 kg
+                            auto fMeanLineSetpoint = m_SetpointHistory.GetMean();
+
+                            bChanged = IsChanged(fMeanLineSetpoint, fOldLineSetpoint, c_Limit);
+                            if ( bChanged )
+                            {
+                                // Sollwert nachziehen auf den Mittelwert
+                                fNewLineSetpoint = fMeanLineSetpoint;
+                                bNewValue = TRUE;
+                            }
+                            else
+                            {
+                                m_SetpointHistoryCounter = 0;
+                            }
+                        }
+                    }
+                } // else
             }
             else
             {
-                ResetHistoryBuffer();
+                // Hysterese == 0
+                bNewValue = TRUE;
             }
-        }
+        } // else
+    } // else
+    if (bNewValue)
+    {
+        m_fLastLineSetpoint = fNewLineSetpoint;
+        m_bLastLineSetpoint = FALSE;
+        ResetHistoryBuffer();
+    }
+    else
+    {
+        fNewLineSetpoint = fOldLineSetpoint;
     }
     *pfNewLineSetpoint = fNewLineSetpoint;
-    return IsChanged(fNewLineSetpoint, fOldLineSetpoint, c_epsilon);
+    return bNewValue;
 }
 //*************************************************************************************
 //*************************************************************************************

@@ -25,7 +25,6 @@
 CModuleExtSetpointControl::CModuleExtSetpointControl(int32_t id, const base::CModuleExternalSetpointConfig& cfg) : CBaseClass(id)
 , c_Config{ cfg }
 , m_AdsClient{}
-, m_fSetpointMean{ 0.0f }
 , m_bIOLineInvSetpointEnableInputLast{ FALSE }
 , m_bIOLineSetpointEnableInputLast{ FALSE }
 {	
@@ -47,7 +46,6 @@ BOOL CModuleExtSetpointControl::InitExecute(void)
     {
         m_AdsClient.Init();
 
-        m_fSetpointMean = 0.0f;
         Dose_EXInitExtLineInvSetpointState(c_Config.GetExtInvSetpoint());
         Dose_EXGetIOLineSetpointEnableInput(&m_bIOLineSetpointEnableInputLast);
         Dose_EXGetIOLineInvSetpointEnableInput(&m_bIOLineInvSetpointEnableInputLast);
@@ -150,17 +148,11 @@ BOOL CModuleExtSetpointControl::Execute()
         m_AdsClient.UpdateState();
 
         CheckExtLineInvSetpointState();
-        m_fSetpointMean = GetExtLineSetpoint();
-        BOOL bChanged = FALSE;
-        Dose_EXGetChangedExtLineSetpointState(&bChanged);
-        if (bChanged)
+        auto bExtLineSetpoint = CheckExtLineSetpointState();
+        auto fSetpoint = GetExtLineSetpoint();
+        if (bExtLineSetpoint)
         {
-            Dose_EXSetChangedExtLineSetpointState(FALSE);
-        }
-        result = CheckExtLineSetpointState();
-        if (result)
-        {
-            Dose_EXSetMBLineSetpoint(m_fSetpointMean);
+            Dose_EXSetMBLineSetpoint(fSetpoint);
         }
     }
     return result;

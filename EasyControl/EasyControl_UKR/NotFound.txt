@@ -138,6 +138,7 @@ Translation
 ..\\Ressource\\AnyViewerDown.png
 Progress
 SmaDoTec GmbH
+Ungültige Eingabe
 Batch timeout
 Tara
 Loss in weight batcher - LWB

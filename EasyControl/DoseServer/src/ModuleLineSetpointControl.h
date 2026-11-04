@@ -31,6 +31,8 @@ private:
 
 	base::utils::CFloatRingBuffer < c_CheckHystereseCounter / 4U> m_SetpointHistory;
 	uint32_t m_SetpointHistoryCounter;
+	float32_t m_fLastLineSetpoint;
+	BOOL      m_bLastLineSetpoint;
 
 private:
 	BOOL CalcLineSetpoint(float32_t fOldSetpoint, float32_t *fNewSetpoint);
