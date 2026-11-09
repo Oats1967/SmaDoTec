@@ -37,6 +37,21 @@ static LPCSTR ws = " \t\n\r\f\v";
 
 //*********************************************************************************************************************
 //*********************************************************************************************************************
+static std::string MakeFilename(const std::string& szPath, const std::string& szfilename)
+{
+    return szPath + "\\" + szfilename;
+}
+//*********************************************************************************************************************
+//*********************************************************************************************************************
+static BOOL IsEmpty(LPCSTR _name)
+{    return BOOL(_name[0] == '\0'); };
+//*********************************************************************************************************************
+//*********************************************************************************************************************
+static BOOL IsEqual(LPCSTR n1, LPCSTR n2) 
+{    return BOOL(strcmp(n1, n2) == 0); };
+
+//*********************************************************************************************************************
+//*********************************************************************************************************************
 std::string& rtrim(std::string& s, LPCSTR t)
 {
     // trim from end of string (right)
@@ -212,16 +227,11 @@ std::string GetPath(const std::string& szfilename)
 
     _splitpath_s(LPCSTR(szfilename.c_str()), fdrive, fdir, fname, fext);
     _makepath_s(path_buffer, fdrive, fdir, "","");
+    path_buffer[sizeof(path_buffer) - 1] = '\0';
     assert(path_buffer[0] != '\0');
     std::string szPath{ path_buffer };
     rtrim(szPath, "\\");
     return szPath;
-}
-//*********************************************************************************************************************
-//*********************************************************************************************************************
-std::string MakeFilename(const std::string& szPath, const std::string& szfilename)
-{
-    return szPath + "\\" + szfilename;
 }
 //*********************************************************************************************************************
 //*********************************************************************************************************************
@@ -238,13 +248,6 @@ void makeLocalPath(const std::string& _rootPath, std::string& szfilename, BOOL p
 
     _splitpath_s(LPCSTR(szfilename.c_str()), fdrive, fdir, fname, fext);
     _splitpath_s(LPCSTR(_rootPath.c_str()), rdrive, rdir, rname, rext);
-
-    auto IsEmpty = [](LPCSTR name) {
-    return BOOL(name[0] == '\0');
-    };
-    auto IsEqual = [](LPCSTR n1, LPCSTR n2) {
-        return BOOL(strcmp(n1, n2) == 0);
-    };
 
     std::string szrdir{ rdir };
     assert(IsEmpty(rext));
@@ -285,12 +288,6 @@ void makeAbsolutePath(const std::string& _rootPath, std::string& szfilename)
 
     _splitpath_s(LPCSTR(szfilename.c_str()), fdrive, fdir, fname, fext);
 
-    auto IsEmpty = [](LPCSTR name) {
-        return BOOL(name[0] == '\0');
-    };
-    auto IsEqual = [](LPCSTR n1, LPCSTR n2) {
-        return BOOL(strcmp(n1, n2) == 0);
-    };
 
     std::string szfdir{ fdir };
     rtrim(szfdir, "\\");
