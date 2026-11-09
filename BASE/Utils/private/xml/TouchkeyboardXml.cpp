@@ -140,7 +140,7 @@ BOOL CTouchkeyboardXml::Load(const std::string& szfilename)
         return Save(szfilename);
     }
     auto& field = Get();
-    result = helper::GetFileParent(*config, TOUCHKEYBOARD, "EXE", field.szKeyboardName);
+    result = helper::GetFileRoot(*config, TOUCHKEYBOARD, field.szKeyboardName);
     if (!result)
     {
         assert(FALSE);
@@ -176,7 +176,7 @@ BOOL CTouchkeyboardXml::Save(const std::string& szfilename)
 
     auto field = Get();
     field.makeLocalPath();
-    helper::SetPathRoot(doc, *config, TOUCHKEYBOARD, field.szKeyboardName);
+    helper::SetFileRoot(doc, *config, TOUCHKEYBOARD, field.szKeyboardName);
     SetEntry(doc, *config, NUMERIC, field.m_NumericSize, field.m_NumericPos);
     SetEntry(doc, *config, ALPHA, field.m_AlphaSize, field.m_AlphaPos);
 

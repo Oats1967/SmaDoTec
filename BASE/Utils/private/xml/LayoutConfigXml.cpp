@@ -238,6 +238,8 @@ BOOL CLayoutConfigXml::Load(const std::string& szfilename)
     {
         std::string sTemp;
         base::CCustomerLogoConfig customerLogo;
+        customerLogo.m_RootPath = helper::GetPath(szfilename);
+
         result = helper::GetFileRoot(*node, PNG,  customerLogo.m_CustomerLogoPNG);
         if (! result)
         {
@@ -450,6 +452,7 @@ BOOL CLayoutConfigXml::Save(const std::string& szfilename)
         assert(keyNode);
         customerLogo.makeLocalPath();
         helper::SetFileRoot(doc, *keyNode, PNG, customerLogo.m_CustomerLogoPNG);
+        location(*keyNode, customerLogo.m_Location);
     }
     {
         auto keyNode = config->InsertEndChild(doc.NewElement(LOGO));
