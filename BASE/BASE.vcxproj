@@ -50,7 +50,7 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>NotSet</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -173,6 +173,7 @@
     <ClCompile Include="src\SimpleParser.cpp" />
     <ClCompile Include="Task\private\Task.cpp" />
     <ClCompile Include="Task\private\ThreadModul.cpp" />
+    <ClCompile Include="Utils\private\FileHelper.cpp" />
     <ClCompile Include="Utils\private\GatefilterCalculator.cpp" />
     <ClCompile Include="Utils\private\GenericRemoteHandler.cpp" />
     <ClCompile Include="Utils\private\GenericTime.cpp" />

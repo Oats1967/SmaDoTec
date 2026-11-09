@@ -22,6 +22,7 @@
 #include "BASE/utils/private/xml/HelperXml.h"
 #include "BASE/Utils/public/xml/EasyControlConfigXml.h"
 #include "Logger/include/Logger.h"
+#include "BASE/utils/public/FileHelper.h"
 
 
 STATIC_KEY( HEADERVERSION, "Version")
@@ -57,7 +58,7 @@ STATIC_KEY( ROOTFOLDER, "Root")
 
 
 
-const static int32_t c_HeaderVersion = 3;
+const static int32_t c_HeaderVersion = 5;
 static int32_t g_HeaderVersion = 0;
 
 
@@ -210,7 +211,13 @@ BOOL CEasyControlConfigXml::Save(const std::string& szfilename)
     helper::SetFileRoot(doc, *config, DIAGRAMCONFIG, field.m_DiagramConfigFile);
     helper::SetFileRoot(doc, *config, TKCONFIG, field.m_TouckKeyboardConfigFile);
     helper::SetFileRoot(doc, *config, USERCONFIG, field.m_UserConfigFile);
+
+
+    BOOL bSet = base::utils::SetFileProperties(szfilename, base::utils::eReadNormal);
+    assert(bSet);
     auto result = doc.SaveFile(szfilename.c_str());
+    bSet = base::utils::SetFileProperties(szfilename, base::utils::eReadOnly);
+    assert(bSet);
     doc.Clear();
     return (result == XML_SUCCESS);
 };

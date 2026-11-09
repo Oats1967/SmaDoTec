@@ -109,7 +109,7 @@ BOOL GetString(const XMLElement& element, LPCSTR symbol, std::string& name)
         }
     }
     return result;
-}
+} 
 //*********************************************************************************************************************
 //*********************************************************************************************************************
 BOOL GetNumber(const XMLElement& element, LPCSTR symbol, uint32_t& value)
