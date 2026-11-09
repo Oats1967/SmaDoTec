@@ -35,9 +35,6 @@ namespace helper
 {
 static LPCSTR ws = " \t\n\r\f\v";
 
-STATIC_KEY(FILENAME, "File")
-STATIC_KEY(PATH, "Path")
-
 //*********************************************************************************************************************
 //*********************************************************************************************************************
 std::string& rtrim(std::string& s, LPCSTR t)
@@ -205,74 +202,239 @@ xmlentry ReadAttribList(const XMLElement& config, const BOOL bUpper)
 }
 //*********************************************************************************************************************
 //*********************************************************************************************************************
-BOOL GetFile(tinyxml2::XMLNode& config, LPCSTR symbol, const std::string& _rootfilename, const std::string& _extfilename, std::string& szfilename)
+std::string GetPath(const std::string& szfilename)
 {
-    BOOL result = FALSE;
+    char path_buffer[_MAX_PATH];
+    char fdrive[_MAX_DRIVE];
+    char fdir[_MAX_DIR];
+    char fname[_MAX_FNAME];
+    char fext[_MAX_EXT];
 
-    auto node = config.FirstChildElement(symbol);
-    if (node)
+    _splitpath_s(LPCSTR(szfilename.c_str()), fdrive, fdir, fname, fext);
+    _makepath_s(path_buffer, fdrive, fdir, "","");
+    path_buffer[sizeof(path_buffer) - 1] = 0;
+    return std::string(path_buffer);
+}
+//*********************************************************************************************************************
+//*********************************************************************************************************************
+std::string MakeFilename(const std::string& szPath, const std::string& szfilename)
+{
+    return szPath + "\\" + szfilename;
+}
+//*********************************************************************************************************************
+//*********************************************************************************************************************
+#if 0
+static void CheckPath(LPCSTR symbol, const std::string& _rootfilename, LPCSTR _extfilename, std::string& szfilename)
+{
+    char path_buffer[_MAX_PATH];
+    char fdrive[_MAX_DRIVE];
+    char fdir[_MAX_DIR];
+    char fname[_MAX_FNAME];
+    char fext[_MAX_EXT];
+
+    auto IsEmpty = [](LPCSTR name) {
+        return BOOL(name[0] == '\0');
+    };
+    _splitpath_s(LPCSTR(szfilename.c_str()), fdrive, fdir, fname, fext);
+    if (IsEmpty(fdrive) || IsEmpty(fdir) || IsEmpty(fname) || IsEmpty(fext))
     {
-        result = helper::GetString(*node, FILENAME, szfilename);
-        if (result)
-        {
-            LOGDEBUG("Reading .." << symbol << " = " << szfilename);
-        }
-    }
-    if (!result)
-    {
-        assert(FALSE);
-        LOGERROR("Error in Xml-file: " << szfilename << " " << symbol);
+        char rdrive[_MAX_DRIVE];
+        char rdir[_MAX_DIR];
+        char rname[_MAX_FNAME];
+        char rext[_MAX_EXT];
 
-        char path_buffer[_MAX_PATH];
-        char drive[_MAX_DRIVE];
-        char dir[_MAX_DIR];
-        char fname[_MAX_FNAME];
-        char ext[_MAX_EXT];
+        _splitpath_s(LPCSTR(_rootfilename.c_str()), rdrive, rdir, rname, rext);
 
-        _splitpath_s(LPCSTR(_rootfilename.c_str()), drive, dir, fname, ext);
-        _makepath_s(path_buffer, drive, dir, symbol, _extfilename.c_str());
+        LPCSTR pdrive = IsEmpty(fdrive) ? rdrive : fdrive;
+        LPCSTR pdir   = IsEmpty(fdir)   ? rdir   : fdir;
+        LPCSTR pname  = IsEmpty(fname)  ? symbol : fname;
+        LPCSTR pext   = IsEmpty(fext)   ? _extfilename : fext;
+        _makepath_s(path_buffer, pdrive, pdir, pname, pext);
         path_buffer[sizeof(path_buffer) - 1] = 0;
         szfilename = path_buffer;
     }
+}
+//*********************************************************************************************************************
+//*********************************************************************************************************************
+void DecodePath(const std::string& _rootfilename, std::string& szfilename)
+{
+    char path_buffer[_MAX_PATH];
+    char fdrive[_MAX_DRIVE];
+    char fdir[_MAX_DIR];
+    char fname[_MAX_FNAME];
+    char fext[_MAX_EXT];
+    char rdrive[_MAX_DRIVE];
+    char rdir[_MAX_DIR];
+    char rname[_MAX_FNAME];
+    char rext[_MAX_EXT];
+
+    _splitpath_s(LPCSTR(szfilename.c_str()), fdrive, fdir, fname, fext);
+    _splitpath_s(LPCSTR(_rootfilename.c_str()), rdrive, rdir, rname, rext);
+
+    auto IsEqual = [](LPCSTR n1, LPCSTR n2) {
+        return BOOL(strcmp(n1, n2) == 0);
+    };
+
+    if (IsEqual(fdir, CROOT) )
+    {
+        _makepath_s(path_buffer, rdrive, rdir, rname, fext);
+        path_buffer[sizeof(path_buffer) - 1] = 0;
+        szfilename = path_buffer;
+    }
+}
+//*********************************************************************************************************************
+//*********************************************************************************************************************
+void CodePath(const std::string& _rootfilename, std::string& szfilename)
+{
+    char fdrive[_MAX_DRIVE];
+    char fdir[_MAX_DIR];
+    char fname[_MAX_FNAME];
+    char fext[_MAX_EXT];
+    char rdrive[_MAX_DRIVE];
+    char rdir[_MAX_DIR];
+    char rname[_MAX_FNAME];
+    char rext[_MAX_EXT];
+
+    _splitpath_s(LPCSTR(szfilename.c_str()), fdrive, fdir, fname, fext);
+    _splitpath_s(LPCSTR(_rootfilename.c_str()), rdrive, rdir, rname, rext);
+
+    auto IsEqual = [](LPCSTR n1, LPCSTR n2) {
+        return BOOL(strcmp(n1, n2) == 0);
+    };
+
+    if (IsEqual(fdir, rdir) &&
+        IsEqual(fdrive, rdrive))
+    {
+        {
+            szfilename = std::string(ROOT) + std::string("\\") + std::string(fname) + std::string(fext);
+        }
+    }
+}
+#endif
+//*********************************************************************************************************************
+//*********************************************************************************************************************
+void makeLocalPath(const std::string& _rootPath, std::string& szfilename, BOOL pred)
+{
+    char fdrive[_MAX_DRIVE];
+    char fdir[_MAX_DIR];
+    char fname[_MAX_FNAME];
+    char fext[_MAX_EXT];
+    char rdrive[_MAX_DRIVE];
+    char rdir[_MAX_DIR];
+    char rname[_MAX_FNAME];
+    char rext[_MAX_EXT];
+
+    _splitpath_s(LPCSTR(szfilename.c_str()), fdrive, fdir, fname, fext);
+    _splitpath_s(LPCSTR(_rootPath.c_str()), rdrive, rdir, rname, rext);
+
+    auto IsEqual = [](LPCSTR n1, LPCSTR n2) {
+        return BOOL(strcmp(n1, n2) == 0);
+    };
+
+    if (IsEqual(fdrive, rdrive) && IsEqual(fdir, rdir))
+    {
+        std::string szFile = std::string(fname) + '.' + std::string(fext);
+        if (! pred )
+        {
+            szfilename = MakeFilename(CROOT, szFile);
+        }
+        else
+        {
+            szfilename = szFile;
+        }
+    }
+}
+//*********************************************************************************************************************
+//*********************************************************************************************************************
+void makeAbsolutePath(const std::string& _rootPath, std::string& szfilename)
+{
+    char fdrive[_MAX_DRIVE];
+    char fdir[_MAX_DIR];
+    char fname[_MAX_FNAME];
+    char fext[_MAX_EXT];
+
+    _splitpath_s(LPCSTR(szfilename.c_str()), fdrive, fdir, fname, fext);
+
+    auto IsEmpty = [](LPCSTR name) {
+        return BOOL(name[0] == '\0');
+    };
+    auto IsEqual = [](LPCSTR n1, LPCSTR n2) {
+        return BOOL(strcmp(n1, n2) == 0);
+    };
+
+    std::string szFile = std::string(fname) + '.' + std::string(fext);
+    if (IsEmpty(fdrive) || IsEqual(fdir, CROOT)) // Drive ist nicht definiert => Schon local
+    {
+        assert(IsEmpty(fdir));
+        szfilename = MakeFilename(_rootPath, szFile);
+    }
+}
+//*********************************************************************************************************************
+//*********************************************************************************************************************
+BOOL GetFileRoot(tinyxml2::XMLElement& config, LPCSTR symbol, std::string& szfilename)
+{
+    BOOL result = helper::GetString(config, symbol, szfilename);
+    if (result)
+    {
+        LOGDEBUG("Reading .." << symbol << " = " << szfilename);
+    }
+    if ( ! result)
+    {
+        LOGERROR("notfound .." << symbol);
+    }
     return result;
 }
+ //*********************************************************************************************************************
 //*********************************************************************************************************************
-//*********************************************************************************************************************
-void SetFile(tinyxml2::XMLDocument& doc, tinyxml2::XMLNode& config, LPCSTR symbol, const std::string& szfilename)
-{
-    auto keyel = config.InsertEndChild(doc.NewElement(symbol));
-    auto fileel = keyel->InsertEndChild(doc.NewElement(FILENAME));
-    fileel->ToElement()->SetText(szfilename.c_str());
-}
-//*********************************************************************************************************************
-//*********************************************************************************************************************
-BOOL GetPath(tinyxml2::XMLNode& config, LPCSTR symbol, const std::string& _default, std::string& szPath)
+BOOL GetFileParent(tinyxml2::XMLNode& config, LPCSTR parentnode, LPCSTR symbol,  std::string& szfilename)
 {
     BOOL result = FALSE;
 
-    auto node = config.FirstChildElement(symbol);
+    auto node = config.FirstChildElement(parentnode);
     if (node)
     {
-        result = helper::GetString(*node, PATH, szPath);
-        if (result)
-        {
-            LOGDEBUG("Reading .." << symbol << " = " << PATH);
-        }
-    }
-    if (!result)
-    {
-        assert(FALSE);
-        szPath = _default;
+        result = GetFileRoot(*node, symbol,szfilename);
     }
     return result;
 }
 //*********************************************************************************************************************
 //*********************************************************************************************************************
-void SetPath(tinyxml2::XMLDocument& doc, tinyxml2::XMLNode& config, LPCSTR symbol, const std::string& szfilename)
+BOOL GetPathRoot(tinyxml2::XMLElement& config, LPCSTR symbol, std::string& szPath)
 {
-    auto keyel = config.InsertEndChild(doc.NewElement(symbol));
-    auto fileel = keyel->InsertEndChild(doc.NewElement(PATH));
+    return GetFileRoot(config, symbol, szPath);
+}
+//*********************************************************************************************************************
+//*********************************************************************************************************************
+BOOL GetPathParent(tinyxml2::XMLNode& config, LPCSTR parentnode, LPCSTR symbol, std::string& szPath)
+{
+    return GetFileParent(config, parentnode, symbol, szPath);
+}
+
+//*********************************************************************************************************************
+//*********************************************************************************************************************
+void SetFileRoot(tinyxml2::XMLDocument& doc, tinyxml2::XMLNode& config, LPCSTR symbol, const std::string& szfilename)
+{
+    auto fileel = config.InsertEndChild(doc.NewElement(symbol));
     fileel->ToElement()->SetText(szfilename.c_str());
+}
+//*********************************************************************************************************************
+//*********************************************************************************************************************
+void SetFileParent(tinyxml2::XMLDocument& doc, tinyxml2::XMLNode& config, LPCSTR parent, LPCSTR symbol, const std::string& szfilename)
+{
+    auto fileel = config.InsertEndChild(doc.NewElement(parent));
+    SetFileRoot(doc, *fileel, symbol, szfilename);
+}
+//*********************************************************************************************************************
+//*********************************************************************************************************************
+void SetPathRoot(tinyxml2::XMLDocument& doc, tinyxml2::XMLNode& config, LPCSTR symbol, const std::string& szfilename)
+{
+    SetFileRoot(doc, config, symbol, szfilename);
+}
+//*********************************************************************************************************************
+//*********************************************************************************************************************
+void SetPathParent(tinyxml2::XMLDocument& doc, tinyxml2::XMLNode& config, LPCSTR parent, LPCSTR symbol, const std::string& szfilename)
+{
+    SetFileParent(doc, config, parent, symbol, szfilename);
 }
 
 

@@ -29,6 +29,7 @@ namespace base
     class CEasyGraphConfig
     {
     public:
+        std::string m_RootPath;
         std::string m_LineConfigFile;
         std::string m_ProductDatabaseFile;
         std::string m_SettingsFile;
@@ -55,9 +56,35 @@ namespace base
         }
 
         BOOL operator != (const CEasyGraphConfig& cfg) const
+        {    return ! operator == (cfg);       }
+
+        void makeLocalPath()
         {
-            return ! operator == (cfg);
+            assert(!m_RootPath.empty());
+            if (!m_RootPath.empty())
+            {
+                base::xml::helper::makeLocalPath(m_RootPath, m_LineConfigFile);
+                base::xml::helper::makeLocalPath(m_RootPath, m_ProductDatabaseFile);
+                base::xml::helper::makeLocalPath(m_RootPath, m_SettingsFile);
+                base::xml::helper::makeLocalPath(m_RootPath, m_RecorderDescriptionFile);
+                base::xml::helper::makeLocalPath(m_RootPath, m_TouckKeyboardConfigFile);
+            }
         }
+
+        void makeAbsolutePath()
+        {
+            assert(!m_RootPath.empty());
+            if (!m_RootPath.empty())
+            {
+                base::xml::helper::makeAbsolutePath(m_RootPath, m_LineConfigFile);
+                base::xml::helper::makeAbsolutePath(m_RootPath, m_ProductDatabaseFile);
+                base::xml::helper::makeAbsolutePath(m_RootPath, m_SettingsFile);
+                base::xml::helper::makeAbsolutePath(m_RootPath, m_RecorderDescriptionFile);
+                base::xml::helper::makeAbsolutePath(m_RootPath, m_TouckKeyboardConfigFile);
+            }
+        }
+
+
 
     };
 

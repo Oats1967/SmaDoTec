@@ -389,7 +389,6 @@ BOOL CDoseServerImpl :: Open	 ( const std::string& _path2DoseServer)
 		{
 			LOGERROR("cannot open remoteserver = " << m_DoseServerConfig.m_path2RemoteServer);
 			m_LastErrorCode = ErrorCodes::RemoteServer_OpenError;
-			//return FALSE;
 		}
 	}
 	Alloc();

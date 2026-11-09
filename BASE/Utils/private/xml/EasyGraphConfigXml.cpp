@@ -28,10 +28,11 @@ STATIC_KEY( CONFIGURATION,"EasyGraph")
 STATIC_KEY( LANGUAGE,"Language")
 STATIC_KEY( LINECONFIG,"LineConfig")
 STATIC_KEY( PRODUCTDATABASE, "ProductDatabase")
-STATIC_KEY(RECORDERDESCRIPTION, "RecorderDescription")
-STATIC_KEY(TKCONFIG, "Touchkeyboard")
+STATIC_KEY( RECORDERDESCRIPTION, "RecorderDescription")
+STATIC_KEY( TKCONFIG, "Touchkeyboard")
 STATIC_KEY( SETTINGS, "Settings")
-STATIC_KEY(DEFAULTFILE, "C:\\EasyGraph\\XXX\\XXX.XXX")
+STATIC_KEY(ROOTFOLDER, "Root")
+
 
 const static int32_t c_HeaderVersion = 2;
 static int32_t g_HeaderVersion = 0;
@@ -87,78 +88,41 @@ BOOL CEasyGraphConfigXml::Load(const std::string& szfilename)
         field.m_Language = base::eLanguage::eGERMAN;
     }
 
-    std::string szDefaultFile{ DEFAULTFILE };
-    BOOL bDefaultFound = FALSE;
-    result = helper::GetFile(*config, LINECONFIG, szDefaultFile, "xml", field.m_LineConfigFile);
-    if (result)
+    BOOL bNewVersion = helper::GetFileRoot(*config, ROOTFOLDER, field.m_RootPath);
+    if (! bNewVersion)
     {
-        if (!bDefaultFound)
+        result = helper::GetFileParent(*config, LINECONFIG, helper::CFILE, field.m_LineConfigFile);
+        result = helper::GetFileParent(*config, PRODUCTDATABASE, helper::CFILE,  field.m_ProductDatabaseFile) & result;
+        result = helper::GetFileParent(*config, SETTINGS, helper::CFILE, field.m_SettingsFile) & result;
+        result = helper::GetFileParent(*config, RECORDERDESCRIPTION, helper::CFILE, field.m_RecorderDescriptionFile) & result;
+        result = helper::GetFileParent(*config, TKCONFIG, helper::CFILE, field.m_TouckKeyboardConfigFile) & result;
+        field.m_RootPath = helper::GetPath(field.m_SettingsFile);
+
+        assert(result);
+#if _DEBUG
+        assert(result);
+        if (!result)
         {
-            bDefaultFound = TRUE;
-            szDefaultFile = field.m_LineConfigFile;
+            LOGERROR("Error reading old EasyGraphConfig.xml file!");
         }
+#endif
+        g_HeaderVersion = -1;
     }
     else
     {
-        g_HeaderVersion = -1;
+        result = helper::GetFileRoot(*config, LINECONFIG, field.m_LineConfigFile);
+        result = helper::GetFileRoot(*config, PRODUCTDATABASE, field.m_ProductDatabaseFile) & result;
+        result = helper::GetFileRoot(*config, SETTINGS, field.m_SettingsFile) & result;
+        result = helper::GetFileRoot(*config, RECORDERDESCRIPTION, field.m_RecorderDescriptionFile) & result;
+        result = helper::GetFileRoot(*config, TKCONFIG, field.m_TouckKeyboardConfigFile) & result;
     }
+    field.makeLocalPath();
+    field.makeAbsolutePath();
 
-    result = helper::GetFile(*config, PRODUCTDATABASE, szDefaultFile, "xml", field.m_ProductDatabaseFile);
-    if (result)
-    {
-        if (!bDefaultFound)
-        {
-            bDefaultFound = TRUE;
-            szDefaultFile = field.m_ProductDatabaseFile;
-        }
-    }
-    else
+    if (!result)
     {
         g_HeaderVersion = -1;
     }
-
-    result = helper::GetFile(*config, SETTINGS, szDefaultFile, "xml", field.m_SettingsFile);
-    if (result)
-    {
-        if (!bDefaultFound)
-        {
-            bDefaultFound = TRUE;
-            szDefaultFile = field.m_SettingsFile;
-        }
-    }
-    else
-    {
-        g_HeaderVersion = -1;
-    }
-
-    result = helper::GetFile(*config, RECORDERDESCRIPTION, szDefaultFile, "xml", field.m_RecorderDescriptionFile);
-    if (result)
-    {
-        if (!bDefaultFound)
-        {
-            bDefaultFound = TRUE;
-            szDefaultFile = field.m_RecorderDescriptionFile;
-        }
-    }
-    else
-    {
-        g_HeaderVersion = -1;
-    }
-
-    result = helper::GetFile(*config, TKCONFIG, szDefaultFile, "xml", field.m_TouckKeyboardConfigFile);
-    if (result)
-    {
-        if (!bDefaultFound)
-        {
-            bDefaultFound = TRUE;
-            szDefaultFile = field.m_TouckKeyboardConfigFile;
-        }
-    }
-    else
-    {
-        g_HeaderVersion = -1;
-    }
-
     doc.Clear();
     if (g_HeaderVersion != c_HeaderVersion)
     {
@@ -183,17 +147,18 @@ BOOL CEasyGraphConfigXml::Save(const std::string& szfilename)
         config->InsertEndChild(doc.NewComment(szHeader));
     }
 
-    const auto& field = Get();
+    auto field = Get(); // Make Copy
 
     // language
     auto keyel = config->InsertEndChild(doc.NewElement(LANGUAGE));
     keyel->ToElement()->SetText(m_LanguageMap.get(field.m_Language).c_str());
 
-    helper::SetFile(doc, *config, LINECONFIG, field.m_LineConfigFile);
-    helper::SetFile(doc, *config, PRODUCTDATABASE, field.m_ProductDatabaseFile);
-    helper::SetFile(doc, *config, SETTINGS, field.m_SettingsFile);
-    helper::SetFile(doc, *config, RECORDERDESCRIPTION, field.m_RecorderDescriptionFile);
-    helper::SetFile(doc, *config, TKCONFIG, field.m_TouckKeyboardConfigFile);
+    field.makeLocalPath();
+    helper::SetFileRoot(doc, *config, LINECONFIG, field.m_LineConfigFile);
+    helper::SetFileRoot(doc, *config, PRODUCTDATABASE, field.m_ProductDatabaseFile);
+    helper::SetFileRoot(doc, *config, SETTINGS, field.m_SettingsFile);
+    helper::SetFileRoot(doc, *config, RECORDERDESCRIPTION, field.m_RecorderDescriptionFile);
+    helper::SetFileRoot(doc, *config, TKCONFIG, field.m_TouckKeyboardConfigFile);
 
     auto result = doc.SaveFile(szfilename.c_str());
     doc.Clear();

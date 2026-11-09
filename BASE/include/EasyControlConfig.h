@@ -22,6 +22,7 @@
 #include <string>
 #include "BASE/types.h"
 #include "BASE/include/Language.h"
+#include "BASE/utils/private/xml/HelperXml.h"
 
 namespace base
 {
@@ -29,6 +30,7 @@ namespace base
     class CEasyControlConfig
     {
     public:
+        std::string m_RootPath;
         std::string m_RecorderConfigFile;
         std::string m_RecorderDescriptionFile;
         std::string m_RecipePath;
@@ -59,7 +61,6 @@ namespace base
                     ( m_AlarmLogPath == cfg.m_AlarmLogPath ) && 
                     ( m_DoseServerFile == cfg.m_DoseServerFile) &&
                     ( m_SystemAlarmFile == cfg.m_SystemAlarmFile) &&
-                    // ( m_SystemConfigFile == cfg.m_SystemConfigFile) &&
                     ( m_LayoutConfigFile == cfg.m_LayoutConfigFile) &&
                     ( m_UserConfigFile == cfg.m_UserConfigFile) &&
                     ( m_TouckKeyboardConfigFile == cfg.m_TouckKeyboardConfigFile) &&
@@ -72,6 +73,45 @@ namespace base
         {
             return ! operator == (cfg);
         }
+
+        void makeAbsolutePath()
+        {
+            assert(!m_RootPath.empty());
+            if (!m_RootPath.empty())
+            {
+                base::xml::helper::makeAbsolutePath(m_RootPath, m_RecorderConfigFile);
+                base::xml::helper::makeAbsolutePath(m_RootPath, m_RecorderDescriptionFile);
+                base::xml::helper::makeAbsolutePath(m_RootPath, m_RecipePath);
+                base::xml::helper::makeAbsolutePath(m_RootPath, m_AlarmLogPath);
+                base::xml::helper::makeAbsolutePath(m_RootPath, m_DoseServerFile);
+                base::xml::helper::makeAbsolutePath(m_RootPath, m_SystemAlarmFile);
+                base::xml::helper::makeAbsolutePath(m_RootPath, m_LayoutConfigFile);
+                base::xml::helper::makeAbsolutePath(m_RootPath, m_UserConfigFile);
+                base::xml::helper::makeAbsolutePath(m_RootPath, m_TouckKeyboardConfigFile);
+                base::xml::helper::makeAbsolutePath(m_RootPath, m_DiagramConfigFile);
+                base::xml::helper::makeAbsolutePath(m_RootPath, m_ProductDatabaseFile);
+            }
+        }
+
+        void makeLocalPath()
+        {
+            assert(!m_RootPath.empty());
+            if (!m_RootPath.empty())
+            {
+                base::xml::helper::makeLocalPath(m_RootPath, m_RecorderConfigFile, TRUE);
+                base::xml::helper::makeLocalPath(m_RootPath, m_RecorderDescriptionFile, TRUE);
+                base::xml::helper::makeLocalPath(m_RootPath, m_RecipePath, TRUE);
+                base::xml::helper::makeLocalPath(m_RootPath, m_AlarmLogPath, TRUE);
+                base::xml::helper::makeLocalPath(m_RootPath, m_DoseServerFile, TRUE);
+                base::xml::helper::makeLocalPath(m_RootPath, m_SystemAlarmFile, TRUE);
+                base::xml::helper::makeLocalPath(m_RootPath, m_LayoutConfigFile, TRUE);
+                base::xml::helper::makeLocalPath(m_RootPath, m_UserConfigFile, TRUE);
+                base::xml::helper::makeLocalPath(m_RootPath, m_TouckKeyboardConfigFile, TRUE);
+                base::xml::helper::makeLocalPath(m_RootPath, m_DiagramConfigFile, TRUE);
+                base::xml::helper::makeLocalPath(m_RootPath, m_ProductDatabaseFile, TRUE);
+            }
+        }
+
 
     };
 

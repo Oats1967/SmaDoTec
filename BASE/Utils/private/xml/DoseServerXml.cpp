@@ -33,7 +33,8 @@ STATIC_KEY(IOCONFIG, "IOConfig")
 STATIC_KEY(LINECONFIG, "LineConfig")
 
 
-const static int32_t c_HeaderVersion = 1;
+
+const static int32_t c_HeaderVersion = 2;
 static int32_t g_HeaderVersion = 0;
 
 using namespace tinyxml2;
@@ -69,16 +70,27 @@ BOOL CDoseServerXml::Load(const std::string& szfilename)
     }
 
     auto& field = Get();
-    result  = helper::GetFile(*config, DATAFILE, szfilename, "edb", field.m_path2DataFile);
-    result  = helper::GetFile(*config, SYSTEMCONFIG, szfilename, "xml", field.m_path2SystemConfig) & result;
-    result  = helper::GetFile(*config, REMOTESERVER, szfilename, "xml", field.m_path2RemoteServer) & result;
-    result  = helper::GetFile(*config, LOGOCONFIG, szfilename, "xml", field.m_path2LogoFile) & result;
-    result  = helper::GetFile(*config, IOCONFIG, szfilename, "xml", field.m_path2IOConfig) & result;
-    result  = helper::GetFile(*config, LINECONFIG, szfilename, "xml", field.m_path2LineConfig) & result;
-    if ( ! result )
+    BOOL bNewVersion = helper::GetFileRoot(*config, DATAFILE, field.m_path2DataFile);
+    if ( ! bNewVersion )
     {
-         g_HeaderVersion = -1;
+        g_HeaderVersion = -1;
+        result = helper::GetFileParent(*config, DATAFILE, helper::CFILE,  field.m_path2DataFile);
+        result = helper::GetFileParent(*config, SYSTEMCONFIG, helper::CFILE, field.m_path2SystemConfig) & result;
+        result = helper::GetFileParent(*config, REMOTESERVER, helper::CFILE, field.m_path2RemoteServer) & result;
+        result = helper::GetFileParent(*config, LOGOCONFIG, helper::CFILE, field.m_path2LogoFile) & result;
+        result = helper::GetFileParent(*config, IOCONFIG, helper::CFILE, field.m_path2IOConfig) & result;
+        result = helper::GetFileParent(*config, LINECONFIG, helper::CFILE, field.m_path2LineConfig) & result;
     }
+    else
+    {
+        result = helper::GetFileRoot(*config, SYSTEMCONFIG, field.m_path2SystemConfig);
+        result = helper::GetFileRoot(*config, REMOTESERVER, field.m_path2RemoteServer) & result;
+        result = helper::GetFileRoot(*config, LOGOCONFIG, field.m_path2LogoFile) & result;
+        result = helper::GetFileRoot(*config, IOCONFIG, field.m_path2IOConfig) & result;
+        result = helper::GetFileRoot(*config, LINECONFIG, field.m_path2LineConfig) & result;
+    }
+    field.m_RootPath = helper::GetPath(szfilename);
+    field.makeAbsolutePath();
     doc.Clear();
     if (g_HeaderVersion != c_HeaderVersion)
     {
@@ -96,14 +108,15 @@ BOOL CDoseServerXml::Save(const std::string& szfilename)
     auto header = config->InsertEndChild(doc.NewElement(HEADERVERSION));
     header->ToElement()->SetText(c_HeaderVersion);
 
-    const auto& field = Get();
+    auto copy = Get(); // make copy
     // Datafile
-    helper::SetFile(doc, *config, DATAFILE, field.m_path2DataFile);
-    helper::SetFile(doc, *config, SYSTEMCONFIG, field.m_path2SystemConfig);
-    helper::SetFile(doc, *config, REMOTESERVER, field.m_path2RemoteServer);
-    helper::SetFile(doc, *config, LOGOCONFIG, field.m_path2LogoFile);
-    helper::SetFile(doc, *config, IOCONFIG, field.m_path2IOConfig);
-    helper::SetFile(doc, *config, LINECONFIG, field.m_path2LineConfig);
+    copy.makeLocalPath();
+    helper::SetFileRoot(doc, *config, DATAFILE, copy.m_path2DataFile);
+    helper::SetFileRoot(doc, *config, SYSTEMCONFIG, copy.m_path2SystemConfig);
+    helper::SetFileRoot(doc, *config, REMOTESERVER, copy.m_path2RemoteServer);
+    helper::SetFileRoot(doc, *config, LOGOCONFIG, copy.m_path2LogoFile);
+    helper::SetFileRoot(doc, *config, IOCONFIG, copy.m_path2IOConfig);
+    helper::SetFileRoot(doc, *config, LINECONFIG, copy.m_path2LineConfig);
     auto result = doc.SaveFile(szfilename.c_str());
     doc.Clear();
     return (result == XML_SUCCESS);

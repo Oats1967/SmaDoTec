@@ -21,6 +21,8 @@
 #include "BASE/types.h"
 #include "BASE/include/Point.h"
 #include "BASE/include/Size.h"
+#include "BASE/utils/private/xml/HelperXml.h"
+
 
 namespace base
 {
@@ -32,6 +34,7 @@ namespace base
         INTPOINT m_AlphaPos;
         INTPOINT m_NumericPos;
         std::string szKeyboardName;
+        std::string m_RootPath;
 
     public:
         CTouchkeyboardConfig() :   m_NumericSize{  }
@@ -39,6 +42,25 @@ namespace base
                                  , m_AlphaPos   {  }
                                  , m_NumericPos {  }
         {}
+
+        void makeLocalPath()
+        {
+            assert(!m_RootPath.empty());
+            if (!m_RootPath.empty())
+            {
+                base::xml::helper::makeLocalPath(m_RootPath, szKeyboardName);
+            }
+        }
+
+        void makeAbsolutePath()
+        {
+            assert(!m_RootPath.empty());
+            if (!m_RootPath.empty())
+            {
+                base::xml::helper::makeAbsolutePath(m_RootPath, szKeyboardName);
+            }
+        }
+
     };
 
 };

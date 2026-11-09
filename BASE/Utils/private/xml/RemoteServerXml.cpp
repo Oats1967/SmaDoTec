@@ -96,14 +96,14 @@ BOOL CRemoteServerXml::Load(const std::string& szfilename)
         }
         else
         {
-            result = helper::GetString(*pp, DEVICE, field.m_DevicePath);
+            result = helper::GetFileRoot(*pp, DEVICE, field.m_DevicePath);
             if ( ! result)
             {
                 assert(FALSE);
                 LOGERROR("Error in Xml-file: " << szfilename << " " << DEVICE);
                 g_HeaderVersion = -1;
             }
-            result = helper::GetString(*pp, TABLE, field.m_TablePath);
+            result = helper::GetFileRoot(*pp, TABLE,  field.m_TablePath);
             if ( ! result)
             {
                 assert(FALSE);
@@ -111,6 +111,9 @@ BOOL CRemoteServerXml::Load(const std::string& szfilename)
                 g_HeaderVersion = -1;
             }
         }
+        field.m_RootPath = helper::GetPath(szfilename);
+        field.makeLocalPath();
+        field.makeAbsolutePath();
     }
     doc.Clear();
     if (g_HeaderVersion != c_HeaderVersion)
@@ -136,16 +139,15 @@ BOOL CRemoteServerXml::Save(const std::string& szfilename)
         };
         config->InsertEndChild(doc.NewComment(szHeader));
     }
-    const auto& cfg = Get();
+    auto cfg = Get();
     auto key = config->InsertEndChild(doc.NewElement(PROTOCOL));
     key->ToElement()->SetText(m_RemoteProtocolMap.get(cfg.m_Protocol).c_str());
     if (cfg.m_Protocol != RemoteServerProtocol::REMOTE_PROTOCOL_NONE)
     {
+        cfg.makeLocalPath();
         auto pp = config->InsertEndChild(doc.NewElement(PROPERTY));
-        auto dv = pp->InsertEndChild(doc.NewElement(DEVICE));
-        dv->ToElement()->SetText(cfg.m_DevicePath.c_str());
-        auto tb = pp->InsertEndChild(doc.NewElement(TABLE));
-        tb->ToElement()->SetText(cfg.m_TablePath.c_str());
+        helper::SetFileRoot(doc, *pp, DEVICE, cfg.m_DevicePath);
+        helper::SetFileRoot(doc, *pp, TABLE, cfg.m_TablePath);
     }
     auto result = doc.SaveFile(szfilename.c_str());
     doc.Clear();

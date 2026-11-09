@@ -238,15 +238,12 @@ BOOL CLayoutConfigXml::Load(const std::string& szfilename)
     {
         std::string sTemp;
         base::CCustomerLogoConfig customerLogo;
-        result = helper::GetString(*node, PNG, sTemp);
-        if (result)
-        {
-            customerLogo.m_CustomerLogoPNG = sTemp;
-        }
-        else
+        result = helper::GetFileRoot(*node, PNG,  customerLogo.m_CustomerLogoPNG);
+        if (! result)
         {
             assert(FALSE);
             LOGERROR("Not found customer logo PNG-file : " << PNG);
+            g_HeaderVersion = -1;
         }
         if (result)
         {
@@ -260,6 +257,7 @@ BOOL CLayoutConfigXml::Load(const std::string& szfilename)
                 LOGERROR("Error customer logo location");
                 g_HeaderVersion = -1;
             }
+            customerLogo.makeAbsolutePath();
             field.SetCustomerLogo(customerLogo);
         }
     }
@@ -415,7 +413,7 @@ BOOL CLayoutConfigXml::Save(const std::string& szfilename)
     keyel->ToElement()->SetText(c_YesNoMap.get(field.GetRefillButtonEnable()).c_str());
 
     // CustomerLogo
-    const auto& customerLogo = field.GetCustomerLogo();
+    auto customerLogo = field.GetCustomerLogo();
 
     auto location = [&doc](tinyxml2::XMLNode& keyNode, const base::IPoint& aP) {
         auto keyel = keyNode.InsertEndChild(doc.NewElement(LOCATION));
@@ -450,9 +448,8 @@ BOOL CLayoutConfigXml::Save(const std::string& szfilename)
     {
         auto keyNode = config->InsertEndChild(doc.NewElement(CUSTOMERLOGO));
         assert(keyNode);
-        keyel = keyNode->InsertFirstChild(doc.NewElement(PNG));
-        keyel->ToElement()->SetText(customerLogo.m_CustomerLogoPNG.c_str());
-        location(*keyNode, customerLogo.m_Location);
+        customerLogo.makeLocalPath();
+        helper::SetFileRoot(doc, *keyNode, PNG, customerLogo.m_CustomerLogoPNG);
     }
     {
         auto keyNode = config->InsertEndChild(doc.NewElement(LOGO));

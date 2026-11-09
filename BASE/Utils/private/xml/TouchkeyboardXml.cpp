@@ -33,7 +33,7 @@ STATIC_KEY(HEIGHT, "Height")
 STATIC_KEY(WIDTH, "Width")
 STATIC_KEY(X, "X")
 STATIC_KEY(Y, "Y")
-STATIC_KEY(DefaultKeyboardName, "C:\\EasyControl\\VKTouchKb64.exe")
+STATIC_KEY(DEFAULTKEYBOARD, "C:\\EasyControl\\SmaDoTecKeyboard\\VirtualKeyboard.exe")
 
 
 const static int32_t c_HeaderVersion = 3;
@@ -136,18 +136,19 @@ BOOL CTouchkeyboardXml::Load(const std::string& szfilename)
         field.m_AlphaSize = INTSIZE(80, 80);
         field.m_NumericPos = INTPOINT(0, 0);
         field.m_NumericSize = INTSIZE(80, 80);
-        field.szKeyboardName = DefaultKeyboardName;
+        field.szKeyboardName = DEFAULTKEYBOARD;
         return Save(szfilename);
     }
     auto& field = Get();
-    result = helper::GetString(*config, TOUCHKEYBOARD, field.szKeyboardName);
+    result = helper::GetFileParent(*config, TOUCHKEYBOARD, "EXE", field.szKeyboardName);
     if (!result)
     {
         assert(FALSE);
         LOGERROR("Error in Xml-file: " << szfilename << " " << TOUCHKEYBOARD);
-        field.szKeyboardName = DefaultKeyboardName;
+        field.szKeyboardName = DEFAULTKEYBOARD;
     }
-
+    field.m_RootPath = helper::GetPath(szfilename);
+    field.makeAbsolutePath();
     auto rPair = GetEntry(*config, NUMERIC);
     field.m_NumericSize = rPair.first;
     field.m_NumericPos = rPair.second;
@@ -173,12 +174,11 @@ BOOL CTouchkeyboardXml::Save(const std::string& szfilename)
     auto header = config->InsertEndChild(doc.NewElement(HEADERVERSION));
     header->ToElement()->SetText(c_HeaderVersion);
 
-    const auto& item = Get();
-    auto file = config->InsertEndChild(doc.NewElement(TOUCHKEYBOARD));
-    file->ToElement()->SetText(item.szKeyboardName.c_str());
-   
-    SetEntry(doc, *config, NUMERIC, item.m_NumericSize, item.m_NumericPos);
-    SetEntry(doc, *config, ALPHA, item.m_AlphaSize, item.m_AlphaPos);
+    auto field = Get();
+    field.makeLocalPath();
+    helper::SetPathRoot(doc, *config, TOUCHKEYBOARD, field.szKeyboardName);
+    SetEntry(doc, *config, NUMERIC, field.m_NumericSize, field.m_NumericPos);
+    SetEntry(doc, *config, ALPHA, field.m_AlphaSize, field.m_AlphaPos);
 
     auto result = doc.SaveFile(szfilename.c_str());
     doc.Clear();

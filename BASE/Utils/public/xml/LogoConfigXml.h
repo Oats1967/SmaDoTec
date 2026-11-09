@@ -54,7 +54,7 @@ private:
 public:
 	CLogoConfigXml(const CLogoConfig& _Config) : XmlContainer(_Config), m_SaveLocking { eLogoLocking ::eLockingNone }
 	{}
-	CLogoConfigXml()  = default;
+	CLogoConfigXml() = default;
 	~CLogoConfigXml() override = default;
 
 	BOOL Load(const std::string& _szPath2Device) final;

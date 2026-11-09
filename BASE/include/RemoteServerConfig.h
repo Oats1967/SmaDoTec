@@ -22,12 +22,15 @@
 #include <string>
 #include "BASE/types.h"
 #include "BASE/include/RemoteConfig.h"
+#include "BASE/utils/private/xml/HelperXml.h"
+
 
 namespace base
 {
     class CRemoteServerConfig
     {
     public:
+        std::string m_RootPath;
         std::string m_DevicePath;
         std::string m_TablePath;
         RemoteServerProtocol m_Protocol;
@@ -35,6 +38,27 @@ namespace base
         CRemoteServerConfig() : m_Protocol(RemoteServerProtocol::REMOTE_PROTOCOL_NONE)
         {}
         ~CRemoteServerConfig() = default;
+
+        void makeLocalPath()
+        {
+            assert(!m_RootPath.empty());
+            if (!m_RootPath.empty())
+            {
+                base::xml::helper::makeLocalPath(m_RootPath, m_DevicePath);
+                base::xml::helper::makeLocalPath(m_RootPath, m_TablePath);
+            }
+        }
+        void makeAbsolutePath()
+        {
+            assert(!m_RootPath.empty());
+            if (!m_RootPath.empty())
+            {
+                base::xml::helper::makeAbsolutePath(m_RootPath, m_DevicePath);
+                base::xml::helper::makeAbsolutePath(m_RootPath, m_TablePath);
+            }
+        }
+
+
     };
 };
 

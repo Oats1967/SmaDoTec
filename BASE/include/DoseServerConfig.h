@@ -19,6 +19,7 @@
 
 #include <string>
 #include "BASE/types.h"
+#include "BASE/utils/private/xml/HelperXml.h"
 
 
 namespace base
@@ -26,6 +27,7 @@ namespace base
     class CDoseServerConfig
     {
     public:
+        std::string m_RootPath;
         std::string m_path2SystemConfig;
         std::string m_path2RemoteServer;
         std::string m_path2DataFile;
@@ -35,6 +37,36 @@ namespace base
 
         CDoseServerConfig() = default;
         ~CDoseServerConfig() = default;
+
+        void makeLocalPath()
+        {
+            assert(!m_RootPath.empty());
+            if (! m_RootPath.empty())
+            {
+                base::xml::helper::makeLocalPath(m_RootPath, m_path2SystemConfig);
+                base::xml::helper::makeLocalPath(m_RootPath, m_path2RemoteServer);
+                base::xml::helper::makeLocalPath(m_RootPath, m_path2DataFile);
+                base::xml::helper::makeLocalPath(m_RootPath, m_path2LogoFile);
+                base::xml::helper::makeLocalPath(m_RootPath, m_path2IOConfig);
+                base::xml::helper::makeLocalPath(m_RootPath, m_path2LineConfig);
+            }
+        }
+
+        void makeAbsolutePath()
+        {
+            assert(!m_RootPath.empty());
+            if (! m_RootPath.empty())
+            {
+                base::xml::helper::makeAbsolutePath(m_RootPath, m_path2SystemConfig);
+                base::xml::helper::makeAbsolutePath(m_RootPath, m_path2RemoteServer);
+                base::xml::helper::makeAbsolutePath(m_RootPath, m_path2DataFile);
+                base::xml::helper::makeAbsolutePath(m_RootPath, m_path2LogoFile);
+                base::xml::helper::makeAbsolutePath(m_RootPath, m_path2IOConfig);
+                base::xml::helper::makeAbsolutePath(m_RootPath, m_path2LineConfig);
+            }
+        }
+
     };
+
 };
 

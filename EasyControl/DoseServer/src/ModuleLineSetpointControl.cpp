@@ -68,7 +68,7 @@ BOOL CModuleLineSetpointControl::CalcLineSetpoint(float32_t fOldLineSetpoint, fl
 {
     const float32_t c_epsilon = 1e-04F;
 
-    auto IsChanged = [](const float32_t fNew, const float32_t fOld, const float32_t delta) {
+    auto IsGreater = [](const float32_t fNew, const float32_t fOld, const float32_t delta) {
         return BOOL(_F32(fabs(fNew - fOld)) > delta);
     };
 
@@ -80,7 +80,7 @@ BOOL CModuleLineSetpointControl::CalcLineSetpoint(float32_t fOldLineSetpoint, fl
     assert(pfNewLineSetpoint);
     auto fNewLineSetpoint = RANGE(*pfNewLineSetpoint, 0.0F, fMaxLeistung);
 
-    auto bChanged = IsChanged(fNewLineSetpoint, fOldLineSetpoint, c_epsilon);
+    auto bChanged = IsGreater(fNewLineSetpoint, fOldLineSetpoint, c_epsilon);
     if ( bChanged)
     {
         float32_t fTotband = 0.0f;
@@ -99,7 +99,7 @@ BOOL CModuleLineSetpointControl::CalcLineSetpoint(float32_t fOldLineSetpoint, fl
             Dose_EXGetHysterese(&fHysterese);
             if (fHysterese > 0.0F)
             {
-                bChanged = IsChanged(fNewLineSetpoint, fOldLineSetpoint, fHysterese);
+                bChanged = IsGreater(fNewLineSetpoint, fOldLineSetpoint, fHysterese);
                 if (bChanged)
                 {
                     // Grösser als Hysterese -> Sollwertsprung
@@ -122,7 +122,7 @@ BOOL CModuleLineSetpointControl::CalcLineSetpoint(float32_t fOldLineSetpoint, fl
                         }
                         m_fLastLineSetpoint = fNewLineSetpoint;
                         m_bLastLineSetpoint = TRUE;
-                        bChanged = IsChanged(fNewLineSetpoint, fOldLineSetpoint, c_epsilon);
+                        bChanged = IsGreater(fNewLineSetpoint, fOldLineSetpoint, c_epsilon);
                     }
                     if (bChanged)
                     {
@@ -136,7 +136,7 @@ BOOL CModuleLineSetpointControl::CalcLineSetpoint(float32_t fOldLineSetpoint, fl
                             // Mindestens 1 kg
                             auto fMeanLineSetpoint = m_SetpointHistory.GetMean();
 
-                            bChanged = IsChanged(fMeanLineSetpoint, fOldLineSetpoint, c_Limit);
+                            bChanged = IsGreater(fMeanLineSetpoint, fOldLineSetpoint, c_Limit);
                             if ( bChanged )
                             {
                                 // Sollwert nachziehen auf den Mittelwert

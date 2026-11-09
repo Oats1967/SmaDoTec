@@ -27,25 +27,37 @@
 STATIC_KEY( HEADERVERSION, "Version")
 STATIC_KEY( CONFIGURATION,"EasyControl")
 STATIC_KEY( LANGUAGE,"Language")
-STATIC_KEY( RECORDERCONFIG,"RecorderConfig")
-STATIC_KEY( RECORDERDESCRIPTION, "RecorderDescription")
 STATIC_KEY( ACTIVE,"Active")
 STATIC_KEY( RECIPE,"Recipe")
+STATIC_KEY( RECORDERCONFIG, "RecorderConfig")
+STATIC_KEY( RECORDERCONFIGXML, "RecorderConfig.xml")
+STATIC_KEY( RECORDERDESCRIPTION, "RecorderDescription")
+STATIC_KEY( RECORDERDESCRIPTIONXML, "RecorderDescription.xml")
 STATIC_KEY( ALARMLOG,"AlarmLog")
+STATIC_KEY( ALARMLOGXML, "AlarmLog.xml")
 STATIC_KEY( DOSESERVER,"DoseServer")
+STATIC_KEY( DOSESERVERXML, "DoseServer.xml")
 STATIC_KEY( SYSTEMALARM,"SystemAlarm")
+STATIC_KEY( SYSTEMALARMXML, "SystemAlarm.xml")
 STATIC_KEY( LAYOUTCONFIG,"LayoutConfig")
+STATIC_KEY( LAYOUTCONFIGXML, "LayoutConfig.xml")
 STATIC_KEY( TKCONFIG,"Touchkeyboard")
+STATIC_KEY( TKCONFIGXML, "Touchkeyboard.xml")
 STATIC_KEY( USERCONFIG,"UserConfig")
+STATIC_KEY( USERCONFIGUSR, "UserConfig.usr")
 STATIC_KEY( DIAGRAMCONFIG, "DiagramConfig")
-STATIC_KEY(PRODUCTDATABASE, "ProductDatabase")
-STATIC_KEY(DEFAULTFILE, "C:\\EasyControl\\XXX\\XXX.XXX")
-STATIC_KEY(DEFAULRECIPETPATH, "C:\\EasyControl\\data\\recipe")
-STATIC_KEY(DEFAULTLOGPATH, "C:\\EasyControl\\data\\logs")
-STATIC_KEY(DEFAULTPRODUCTDATABASEFILE, "C:\\EasyControl\\data\\ProductDatabase.xml")
+STATIC_KEY( DIAGRAMCONFIGXML, "DiagramConfig.xml")
+STATIC_KEY( PRODUCTDATABASE, "ProductDatabase")
+STATIC_KEY( PRODUCTDATABASEXML, "ProductDatabase.xml")
+STATIC_KEY( DEFAULRECIPETPATH, "C:\\EasyControl\\data\\recipe")
+STATIC_KEY( DEFAULTLOGPATH, "C:\\EasyControl\\data\\logs")
+STATIC_KEY( ROOTFOLDER, "Root")
 
 
-const static int32_t c_HeaderVersion = 1;
+
+
+
+const static int32_t c_HeaderVersion = 2;
 static int32_t g_HeaderVersion = 0;
 
 
@@ -98,137 +110,61 @@ BOOL CEasyControlConfigXml::Load(const std::string& szfilename)
         LOGERROR("Not found : " << LANGUAGE << " using default = GERMAN");
         field.m_Language = base::eLanguage::eGERMAN;
     }
-    std::string szDefaultFile{ DEFAULTFILE };
-    BOOL bDefaultFound = FALSE;
-    result = helper::GetFile(*config, RECORDERCONFIG, szDefaultFile, "xml", field.m_RecorderConfigFile);
-    if ( result)
+    BOOL bNewversion = helper::GetPathRoot(*config, ROOTFOLDER, field.m_RootPath);
+    if ( ! bNewversion)
     {
-        if ( ! bDefaultFound)
-        {
-            bDefaultFound = TRUE;
-            szDefaultFile = field.m_RecorderConfigFile;
-        }
-    }
-    else
-    {
-        g_HeaderVersion = -1;
-    }
-    result = helper::GetFile(*config, RECORDERDESCRIPTION, szDefaultFile, "xml", field.m_RecorderDescriptionFile);
-    if (result)
-    {
-        if ( ! bDefaultFound)
-        {
-            bDefaultFound = TRUE;
-            szDefaultFile = field.m_RecorderDescriptionFile;
-        }
-    }
-    else
-    {
-        g_HeaderVersion = -1;
-    }
+        assert(FALSE);
+        LOGERROR("Detected old EasyGraphConfig.xml file!");
 
-    result = helper::GetPath(*config, RECIPE, DEFAULRECIPETPATH, field.m_RecipePath);
-    if (! result)
-    {
+        //field.m_RootPath = szRootPath;
+        result = helper::GetFileParent(*config, DOSESERVER, helper::CFILE, field.m_DoseServerFile);
+        result = helper::GetFileParent(*config, RECORDERCONFIG, helper::CFILE, field.m_RecorderConfigFile) & result;
+        result = helper::GetFileParent(*config, RECORDERDESCRIPTION, helper::CFILE, field.m_RecorderDescriptionFile) & result;
+        result = helper::GetPathParent(*config, RECIPE, helper::CPATH, field.m_RecipePath) & result;
+        result = helper::GetPathParent(*config, ALARMLOG, helper::CPATH, field.m_AlarmLogPath) & result;
+        result = helper::GetFileParent(*config, SYSTEMALARM, helper::CFILE, field.m_SystemAlarmFile) & result;
+        result = helper::GetFileParent(*config, LAYOUTCONFIG, helper::CFILE, field.m_LayoutConfigFile) & result;
+        result = helper::GetFileParent(*config, PRODUCTDATABASE, helper::CFILE, field.m_ProductDatabaseFile) & result;
+        result = helper::GetFileParent(*config, DIAGRAMCONFIG, helper::CFILE, field.m_DiagramConfigFile) & result;
+        result = helper::GetFileParent(*config, TKCONFIG, helper::CFILE, field.m_TouckKeyboardConfigFile) & result;
+        result = helper::GetFileParent(*config, USERCONFIG, helper::CFILE, field.m_UserConfigFile) & result;
+        field.m_RootPath = helper::GetPath(field.m_DoseServerFile);
+        assert(result);
+        field.makeLocalPath();
+#if _DEBUG
+        assert(result);
+        if (!result)
+        {
+            LOGERROR("Error reading old EasyControlConfig.xml file!");
+        }
+#endif
         g_HeaderVersion = -1;
     }
-    result = helper::GetPath(*config, ALARMLOG, DEFAULTLOGPATH, field.m_AlarmLogPath);
-    if (!result)
+    else
     {
-        g_HeaderVersion = -1;
+        result = helper::GetFileRoot(*config, RECORDERCONFIG, field.m_RecorderConfigFile);
+        result = helper::GetFileRoot(*config, RECORDERDESCRIPTION, field.m_RecorderDescriptionFile) & result;
+        result = helper::GetPathRoot(*config, RECIPE, field.m_RecipePath) & result;
+        result = helper::GetPathRoot(*config, ALARMLOG, field.m_AlarmLogPath) & result;
+        result = helper::GetFileRoot(*config, DOSESERVER, field.m_DoseServerFile) & result;
+        result = helper::GetFileRoot(*config, SYSTEMALARM, field.m_SystemAlarmFile) & result;
+        result = helper::GetFileRoot(*config, LAYOUTCONFIG, field.m_LayoutConfigFile) & result;
+        result = helper::GetFileRoot(*config, PRODUCTDATABASE, field.m_ProductDatabaseFile) & result;
+        result = helper::GetFileRoot(*config, DIAGRAMCONFIG, field.m_DiagramConfigFile) & result;
+        result = helper::GetFileRoot(*config, TKCONFIG, field.m_TouckKeyboardConfigFile) & result;
+        result = helper::GetFileRoot(*config, USERCONFIG, field.m_UserConfigFile) & result;
+#if _DEBUG
+        assert(result);
+        if (!result)
+        {
+            LOGERROR("Error reading EasyControlConfig.xml file!");
+        }
+#endif
     }
+    field.makeLocalPath();
+    field.makeAbsolutePath();
 
-    result = helper::GetFile(*config, DOSESERVER, szDefaultFile, "xml", field.m_DoseServerFile);
-    if (result)
-    {
-        if (!bDefaultFound)
-        {
-            bDefaultFound = TRUE;
-            szDefaultFile = field.m_DoseServerFile;
-        }
-    }
-    else
-    {
-        g_HeaderVersion = -1;
-    }
-
-    result = helper::GetFile(*config, SYSTEMALARM, szDefaultFile, "xml", field.m_SystemAlarmFile);
-    if (result)
-    {
-        if (!bDefaultFound)
-        {
-            bDefaultFound = TRUE;
-            szDefaultFile = field.m_SystemAlarmFile;
-        }
-    }
-    else
-    {
-        g_HeaderVersion = -1;
-    }
-
-    result = helper::GetFile(*config, LAYOUTCONFIG, szDefaultFile, "xml", field.m_LayoutConfigFile);
-    if (result)
-    {
-        if (!bDefaultFound)
-        {
-            bDefaultFound = TRUE;
-            szDefaultFile = field.m_LayoutConfigFile;
-        }
-    }
-    else
-    {
-        g_HeaderVersion = -1;
-    }
-
-    result = helper::GetFile(*config, TKCONFIG, szDefaultFile, "xml", field.m_TouckKeyboardConfigFile);
-    if (result)
-    {
-        if (!bDefaultFound)
-        {
-            bDefaultFound = TRUE;
-            szDefaultFile = field.m_TouckKeyboardConfigFile;
-        }
-    }
-    else
-    {
-        g_HeaderVersion = -1;
-    }
-    result = helper::GetFile(*config, USERCONFIG, szDefaultFile, "usr", field.m_UserConfigFile);
-    if (result)
-    {
-        if (!bDefaultFound)
-        {
-            bDefaultFound = TRUE;
-            szDefaultFile = field.m_UserConfigFile;
-        }
-    }
-    else
-    {
-        g_HeaderVersion = -1;
-    }
-    result = helper::GetFile(*config, DIAGRAMCONFIG, szDefaultFile, "xml", field.m_DiagramConfigFile);
-    if (result)
-    {
-        if (!bDefaultFound)
-        {
-            bDefaultFound = TRUE;
-            szDefaultFile = field.m_DiagramConfigFile;
-        }
-    }
-    else
-    {
-        g_HeaderVersion = -1;
-    }
-    result = helper::GetFile(*config, PRODUCTDATABASE, szDefaultFile, "xml", field.m_ProductDatabaseFile);
-    if (result)
-    {
-        if (!bDefaultFound)
-        {
-            bDefaultFound = TRUE;
-            szDefaultFile = field.m_ProductDatabaseFile;
-        }
-    }
-    else
+    if ( ! result)
     {
         g_HeaderVersion = -1;
     }
@@ -257,23 +193,24 @@ BOOL CEasyControlConfigXml::Save(const std::string& szfilename)
         config->InsertEndChild(doc.NewComment(szHeader));
     }
 
-    const auto& field = Get();
+    auto field = Get(); // Make Copy
     // language
     auto keyel = config->InsertEndChild(doc.NewElement(LANGUAGE));
     keyel->ToElement()->SetText(m_LanguageMap.get(field.m_Language).c_str());
 
-    helper::SetFile(doc, *config, RECORDERCONFIG, field.m_RecorderConfigFile);
-    helper::SetFile(doc, *config, RECORDERDESCRIPTION, field.m_RecorderDescriptionFile);
-    helper::SetPath(doc, *config, RECIPE, field.m_RecipePath);
-    helper::SetPath(doc, *config, ALARMLOG, field.m_AlarmLogPath);
-    helper::SetFile(doc, *config, DOSESERVER, field.m_DoseServerFile);
-    helper::SetFile(doc, *config, SYSTEMALARM, field.m_SystemAlarmFile);
-    helper::SetFile(doc, *config, LAYOUTCONFIG, field.m_LayoutConfigFile);
-    helper::SetFile(doc, *config, PRODUCTDATABASE, field.m_ProductDatabaseFile);
-    helper::SetFile(doc, *config, DIAGRAMCONFIG, field.m_DiagramConfigFile);
-    helper::SetFile(doc, *config, TKCONFIG, field.m_TouckKeyboardConfigFile);
-    helper::SetFile(doc, *config, USERCONFIG, field.m_UserConfigFile);
-
+    field.makeLocalPath();
+    helper::SetPathRoot(doc, *config, ROOTFOLDER, field.m_RootPath);
+    helper::SetFileRoot(doc, *config, RECORDERCONFIG, field.m_RecorderConfigFile);
+    helper::SetFileRoot(doc, *config, RECORDERDESCRIPTION, field.m_RecorderDescriptionFile);
+    helper::SetPathRoot(doc, *config, RECIPE, field.m_RecipePath);
+    helper::SetPathRoot(doc, *config, ALARMLOG, field.m_AlarmLogPath);
+    helper::SetFileRoot(doc, *config, DOSESERVER, field.m_DoseServerFile);
+    helper::SetFileRoot(doc, *config, SYSTEMALARM, field.m_SystemAlarmFile);
+    helper::SetFileRoot(doc, *config, LAYOUTCONFIG, field.m_LayoutConfigFile);
+    helper::SetFileRoot(doc, *config, PRODUCTDATABASE, field.m_ProductDatabaseFile);
+    helper::SetFileRoot(doc, *config, DIAGRAMCONFIG, field.m_DiagramConfigFile);
+    helper::SetFileRoot(doc, *config, TKCONFIG, field.m_TouckKeyboardConfigFile);
+    helper::SetFileRoot(doc, *config, USERCONFIG, field.m_UserConfigFile);
     auto result = doc.SaveFile(szfilename.c_str());
     doc.Clear();
     return (result == XML_SUCCESS);

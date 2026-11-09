@@ -17,32 +17,58 @@
 //------------------------------------------------------------------------------------
 #pragma once
 
+#include <string>
 #include "BASE/Base.h"
 #include "BASE/include/GPoint.h"
 #include "BASE/include/GRect.h"
+#include "BASE/utils/private/xml/HelperXml.h"
+
 
 
 
 namespace base
 {
-struct CCustomerLogoConfig
+class CCustomerLogoConfig
 {
-    std::string m_CustomerLogoPNG;
-    IPoint      m_Location;
+public:
+    std::string     m_RootPath;
+    std::string     m_CustomerLogoPNG;
+    IPoint          m_Location;
     BOOL m_bInit = FALSE;
 
-    BOOL operator == (const CCustomerLogoConfig& cfg) const
+
+        BOOL operator == (const CCustomerLogoConfig& cfg) const
     {
         return (m_CustomerLogoPNG == cfg.m_CustomerLogoPNG) &&
             (m_Location == cfg.m_Location);
     }
+
     BOOL operator != (const CCustomerLogoConfig& cfg) const
     {  return !(*this == cfg);   }
 
-    CCustomerLogoConfig() : m_CustomerLogoPNG()
+    CCustomerLogoConfig() : m_RootPath()
+        , m_CustomerLogoPNG()
         , m_Location()
         , m_bInit{ FALSE }
     {}
+
+    void makeLocalPath()
+    {
+        //assert(!m_RootPath.empty());
+        if (!m_RootPath.empty())
+        {
+            base::xml::helper::makeLocalPath(m_RootPath, m_CustomerLogoPNG);
+        }
+    }
+
+    void makeAbsolutePath()
+    {
+        //assert(!m_RootPath.empty());
+        if (!m_RootPath.empty())
+        {
+            base::xml::helper::makeAbsolutePath(m_RootPath, m_CustomerLogoPNG);
+        }
+    }
 };
 
 
