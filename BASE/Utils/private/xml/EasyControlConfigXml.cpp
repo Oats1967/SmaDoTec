@@ -57,7 +57,7 @@ STATIC_KEY( ROOTFOLDER, "Root")
 
 
 
-const static int32_t c_HeaderVersion = 2;
+const static int32_t c_HeaderVersion = 3;
 static int32_t g_HeaderVersion = 0;
 
 
@@ -114,7 +114,7 @@ BOOL CEasyControlConfigXml::Load(const std::string& szfilename)
     if ( ! bNewversion)
     {
         assert(FALSE);
-        LOGERROR("Detected old EasyGraphConfig.xml file!");
+        LOGERROR("Detected old EasyControlConfig.xml file!");
 
         //field.m_RootPath = szRootPath;
         result = helper::GetFileParent(*config, DOSESERVER, helper::CFILE, field.m_DoseServerFile);
@@ -130,7 +130,6 @@ BOOL CEasyControlConfigXml::Load(const std::string& szfilename)
         result = helper::GetFileParent(*config, USERCONFIG, helper::CFILE, field.m_UserConfigFile) & result;
         field.m_RootPath = helper::GetPath(field.m_DoseServerFile);
         assert(result);
-        field.makeLocalPath();
 #if _DEBUG
         assert(result);
         if (!result)

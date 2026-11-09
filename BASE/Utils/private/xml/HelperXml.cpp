@@ -212,8 +212,10 @@ std::string GetPath(const std::string& szfilename)
 
     _splitpath_s(LPCSTR(szfilename.c_str()), fdrive, fdir, fname, fext);
     _makepath_s(path_buffer, fdrive, fdir, "","");
-    path_buffer[sizeof(path_buffer) - 1] = 0;
-    return std::string(path_buffer);
+    assert(path_buffer[0] != '\0');
+    std::string szPath{ path_buffer };
+    rtrim(szPath, "\\");
+    return szPath;
 }
 //*********************************************************************************************************************
 //*********************************************************************************************************************
@@ -221,96 +223,6 @@ std::string MakeFilename(const std::string& szPath, const std::string& szfilenam
 {
     return szPath + "\\" + szfilename;
 }
-//*********************************************************************************************************************
-//*********************************************************************************************************************
-#if 0
-static void CheckPath(LPCSTR symbol, const std::string& _rootfilename, LPCSTR _extfilename, std::string& szfilename)
-{
-    char path_buffer[_MAX_PATH];
-    char fdrive[_MAX_DRIVE];
-    char fdir[_MAX_DIR];
-    char fname[_MAX_FNAME];
-    char fext[_MAX_EXT];
-
-    auto IsEmpty = [](LPCSTR name) {
-        return BOOL(name[0] == '\0');
-    };
-    _splitpath_s(LPCSTR(szfilename.c_str()), fdrive, fdir, fname, fext);
-    if (IsEmpty(fdrive) || IsEmpty(fdir) || IsEmpty(fname) || IsEmpty(fext))
-    {
-        char rdrive[_MAX_DRIVE];
-        char rdir[_MAX_DIR];
-        char rname[_MAX_FNAME];
-        char rext[_MAX_EXT];
-
-        _splitpath_s(LPCSTR(_rootfilename.c_str()), rdrive, rdir, rname, rext);
-
-        LPCSTR pdrive = IsEmpty(fdrive) ? rdrive : fdrive;
-        LPCSTR pdir   = IsEmpty(fdir)   ? rdir   : fdir;
-        LPCSTR pname  = IsEmpty(fname)  ? symbol : fname;
-        LPCSTR pext   = IsEmpty(fext)   ? _extfilename : fext;
-        _makepath_s(path_buffer, pdrive, pdir, pname, pext);
-        path_buffer[sizeof(path_buffer) - 1] = 0;
-        szfilename = path_buffer;
-    }
-}
-//*********************************************************************************************************************
-//*********************************************************************************************************************
-void DecodePath(const std::string& _rootfilename, std::string& szfilename)
-{
-    char path_buffer[_MAX_PATH];
-    char fdrive[_MAX_DRIVE];
-    char fdir[_MAX_DIR];
-    char fname[_MAX_FNAME];
-    char fext[_MAX_EXT];
-    char rdrive[_MAX_DRIVE];
-    char rdir[_MAX_DIR];
-    char rname[_MAX_FNAME];
-    char rext[_MAX_EXT];
-
-    _splitpath_s(LPCSTR(szfilename.c_str()), fdrive, fdir, fname, fext);
-    _splitpath_s(LPCSTR(_rootfilename.c_str()), rdrive, rdir, rname, rext);
-
-    auto IsEqual = [](LPCSTR n1, LPCSTR n2) {
-        return BOOL(strcmp(n1, n2) == 0);
-    };
-
-    if (IsEqual(fdir, CROOT) )
-    {
-        _makepath_s(path_buffer, rdrive, rdir, rname, fext);
-        path_buffer[sizeof(path_buffer) - 1] = 0;
-        szfilename = path_buffer;
-    }
-}
-//*********************************************************************************************************************
-//*********************************************************************************************************************
-void CodePath(const std::string& _rootfilename, std::string& szfilename)
-{
-    char fdrive[_MAX_DRIVE];
-    char fdir[_MAX_DIR];
-    char fname[_MAX_FNAME];
-    char fext[_MAX_EXT];
-    char rdrive[_MAX_DRIVE];
-    char rdir[_MAX_DIR];
-    char rname[_MAX_FNAME];
-    char rext[_MAX_EXT];
-
-    _splitpath_s(LPCSTR(szfilename.c_str()), fdrive, fdir, fname, fext);
-    _splitpath_s(LPCSTR(_rootfilename.c_str()), rdrive, rdir, rname, rext);
-
-    auto IsEqual = [](LPCSTR n1, LPCSTR n2) {
-        return BOOL(strcmp(n1, n2) == 0);
-    };
-
-    if (IsEqual(fdir, rdir) &&
-        IsEqual(fdrive, rdrive))
-    {
-        {
-            szfilename = std::string(ROOT) + std::string("\\") + std::string(fname) + std::string(fext);
-        }
-    }
-}
-#endif
 //*********************************************************************************************************************
 //*********************************************************************************************************************
 void makeLocalPath(const std::string& _rootPath, std::string& szfilename, BOOL pred)
@@ -327,14 +239,32 @@ void makeLocalPath(const std::string& _rootPath, std::string& szfilename, BOOL p
     _splitpath_s(LPCSTR(szfilename.c_str()), fdrive, fdir, fname, fext);
     _splitpath_s(LPCSTR(_rootPath.c_str()), rdrive, rdir, rname, rext);
 
+    auto IsEmpty = [](LPCSTR name) {
+    return BOOL(name[0] == '\0');
+    };
     auto IsEqual = [](LPCSTR n1, LPCSTR n2) {
         return BOOL(strcmp(n1, n2) == 0);
     };
 
-    if (IsEqual(fdrive, rdrive) && IsEqual(fdir, rdir))
+    std::string szrdir{ rdir };
+    assert(IsEmpty(rext));
+    if (IsEmpty(rext))
     {
-        std::string szFile = std::string(fname) + '.' + std::string(fext);
-        if (! pred )
+        szrdir += std::string(rname);
+    }
+    rtrim(szrdir, "\\");
+
+    std::string szfdir{ fdir };
+    if (IsEmpty(fext))
+    {
+        szfdir += std::string(fname);
+    }
+    rtrim(szfdir, "\\");
+
+    if (IsEqual(fdrive, rdrive) && IsEqual(szfdir.c_str(), szrdir.c_str()))
+    {
+        std::string szFile = std::string(fname) + std::string(fext);
+        if ( pred )
         {
             szfilename = MakeFilename(CROOT, szFile);
         }
@@ -362,10 +292,13 @@ void makeAbsolutePath(const std::string& _rootPath, std::string& szfilename)
         return BOOL(strcmp(n1, n2) == 0);
     };
 
-    std::string szFile = std::string(fname) + '.' + std::string(fext);
-    if (IsEmpty(fdrive) || IsEqual(fdir, CROOT)) // Drive ist nicht definiert => Schon local
+    std::string szfdir{ fdir };
+    rtrim(szfdir, "\\");
+    std::string szrdir{ CROOT };
+
+    std::string szFile = std::string(fname) + std::string(fext);
+    if ( IsEmpty(szfdir.c_str()) || IsEqual(szfdir.c_str(), szrdir.c_str())) // Drive ist nicht definiert => Schon local
     {
-        assert(IsEmpty(fdir));
         szfilename = MakeFilename(_rootPath, szFile);
     }
 }

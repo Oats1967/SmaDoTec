@@ -29,7 +29,7 @@ STATIC_KEY(CONFIGURATION, "RemoteServer")
 STATIC_KEY(PROTOCOL, "Protocol")
 STATIC_KEY(PROPERTY, "Property")
 
-const static int32_t c_HeaderVersion = 1;
+const static int32_t c_HeaderVersion = 2;
 static int32_t g_HeaderVersion = 0;
 
 

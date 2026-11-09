@@ -40,7 +40,7 @@ STATIC_KEY( BARCHART, "BarChart")
 STATIC_KEY( LINEBOX, "LineBox")
 
 
-const static int32_t c_HeaderVersion = 1;
+const static int32_t c_HeaderVersion = 2;
 static int32_t g_HeaderVersion = 0;
 
 
