@@ -49,11 +49,11 @@ BOOL CLogoControl::InitExecute()
     {
         m_refmap.clear();
         std::for_each(m_LogoDose.begin(), m_LogoDose.end(), [](SLogoDose& item) { item.Init();  });
-        m_RingBuffer.Init();
         uint32_t maxItems = 0;
         System_GetDosierItems(&maxItems);
         for (int32_t index = 0; index < _S32(maxItems); index++)
         {
+            m_RingBuffer[index].Init();
 #if _DEBUG
             uint32_t uTemp = 0;
             BOOL bTemp = FALSE;
@@ -115,7 +115,7 @@ void CLogoControl::RunControlAnalogInput(const int32_t index)
             rLogoItem.m_running         = FALSE;
             rLogoItem.m_timeStamp       = m_st;
             Dose_DSVSetActualLogoEncoder(index, 0.0F);
-            m_RingBuffer.Init();
+            m_RingBuffer[index].Init();
         }
     }
     else
@@ -153,8 +153,8 @@ void CLogoControl::RunControlAnalogInput(const int32_t index)
                 rLogoItem.m_timeStamp = m_st;
                 float32_t value = 0.0F;
                 Dose_DSVGetIOEncoderSpeedInput(index, &value);
-                m_RingBuffer.Add(value);
-                Dose_DSVSetActualLogoEncoder(index, m_RingBuffer.GetMax());
+                m_RingBuffer[index].Add(value);
+                Dose_DSVSetActualLogoEncoder(index, m_RingBuffer[index].GetMax());
             }
         }
     }

@@ -70,7 +70,7 @@ class CLogoControl : public base::CTimerStatemachine<>
     base::CLogoConfig                         m_config;
     std::array<SLogoDose, GLOBALDOSEMAXCOUNT> m_LogoDose;
     std::map<const std::string, BOOL> m_refmap;
-    base::utils::CFloatRingBuffer<2> m_RingBuffer;
+    base::utils::CFloatRingBuffer<3> m_RingBuffer[GLOBALDOSEMAXCOUNT];
 
 private:
     void RunControlAnalogInput(const int32_t index);
