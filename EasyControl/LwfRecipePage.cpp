@@ -240,10 +240,10 @@ void CLwfRecipePage::SetControlStyle (void)
 		SHOWW_ID(IDC_LWF_RECIPE_VOLUMETRIC, TRUE);
 		const BOOL bVolumetricExtern = processstatus.flags.volumetricext;
 		m_aVolGrav.SetInputExt(bVolumetricExtern);
-		m_aVolGrav.Enable(bLogin && (!bVolumetricExtern));
-		m_aVolGrav.EnableWindow((!bVolumetricExtern));
 		m_aVolGrav.SetCheck(bVolumetric);
+		m_aVolGrav.Enable(bLogin && (!bVolumetricExtern));
 		m_aVolGrav.Show();
+		//m_aVolGrav.EnableWindow((!bVolumetricExtern));
 	}
 	else
 	{
